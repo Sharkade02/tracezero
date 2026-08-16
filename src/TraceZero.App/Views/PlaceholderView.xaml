@@ -1,0 +1,31 @@
+<UserControl x:Class="TraceZero.App.Views.PlaceholderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="600" d:DesignWidth="900"
+             d:DataContext="{d:DesignInstance vm:PageViewModelBase}">
+
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,24">
+            <TextBlock Text="{Binding IconGlyph}" FontSize="28" VerticalAlignment="Center" Margin="0,0,12,0" />
+            <TextBlock Text="{Binding Title}" Style="{StaticResource Text.Headline}" VerticalAlignment="Center" />
+        </StackPanel>
+
+        <Border Grid.Row="1" Style="{StaticResource Card}" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Module en cours de construction"
+                           Style="{StaticResource Text.Title}" Margin="0,0,0,8" />
+                <TextBlock Style="{StaticResource Text.Subtle}" TextWrapping="Wrap"
+                           Text="Cette page sera connectée au moteur dans une phase ultérieure. Aucune donnée affichée ici n'est réelle tant que le module n'est pas livré." />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

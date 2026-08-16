@@ -1,0 +1,39 @@
+# .NET build output
+bin/
+obj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+*.user
+*.suo
+.vs/
+
+# Rider / VS Code
+.idea/
+.vscode/
+
+# Test / coverage
+[Tt]est[Rr]esults/
+coverage/
+*.trx
+*.coverage
+
+# Publish / packaging output
+publish/
+artifacts/
+*.nupkg
+*.msix
+*.appx
+
+# Local user data / logs (never commit runtime artifacts)
+*.log
+logs/
+
+# Licensing private key — never commit
+docs/licensing/*PRIVATE*
+*.private.pem
+
+# OS
+Thumbs.db
+Desktop.ini

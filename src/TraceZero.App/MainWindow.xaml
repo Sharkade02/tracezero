@@ -1,0 +1,83 @@
+<Window x:Class="TraceZero.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance vm:ShellViewModel}"
+        Title="TraceZero" Height="760" Width="1200" MinHeight="640" MinWidth="1000"
+        Icon="/TraceZero.App;component/Assets/logo.png"
+        Background="{DynamicResource Brush.Window.Background}"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI Variable, Segoe UI">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="240" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Barre latérale -->
+        <Border Grid.Column="0" Background="{DynamicResource Brush.Sidebar.Background}"
+                BorderBrush="{DynamicResource Brush.Card.Border}" BorderThickness="0,0,1,0">
+            <DockPanel LastChildFill="True" Margin="0,16">
+
+                <!-- Marque -->
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="20,4,20,20">
+                    <Image Source="/TraceZero.App;component/Assets/logo.png" Width="30" Height="30"
+                           Margin="0,0,10,0" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
+                    <TextBlock Text="TraceZero" FontSize="20" FontWeight="Bold"
+                               Foreground="{DynamicResource Brush.Text.Primary}" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <!-- Zone basse : Soutenir + bascule de thème -->
+                <StackPanel DockPanel.Dock="Bottom" Margin="0,12,0,0">
+                    <ItemsControl ItemsSource="{Binding FooterPages}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="Nav" Style="{StaticResource NavButton}"
+                                             IsChecked="{Binding IsSelected, Mode=OneWay}"
+                                             Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                             CommandParameter="{Binding}"
+                                             AutomationProperties.Name="{Binding Title}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding IconGlyph}" FontSize="16" Width="26" />
+                                        <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </RadioButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Button Content="◑  Basculer le thème" Style="{StaticResource SecondaryButton}"
+                            Command="{Binding ToggleThemeCommand}" Margin="12,8,12,0"
+                            HorizontalContentAlignment="Left" />
+                </StackPanel>
+
+                <!-- Navigation principale -->
+                <ItemsControl DockPanel.Dock="Top" ItemsSource="{Binding PrimaryPages}"
+                              KeyboardNavigation.TabNavigation="Cycle">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton GroupName="Nav" Style="{StaticResource NavButton}"
+                                         IsChecked="{Binding IsSelected, Mode=OneWay}"
+                                         Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                         CommandParameter="{Binding}"
+                                         AutomationProperties.Name="{Binding Title}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding IconGlyph}" FontSize="16" Width="26" />
+                                    <TextBlock Text="{Binding Title}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </DockPanel>
+        </Border>
+
+        <!-- Zone de contenu -->
+        <ContentControl Grid.Column="1" Content="{Binding Current}"
+                        Focusable="False" Margin="0" />
+    </Grid>
+</Window>

@@ -1,0 +1,20 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Palette claire. Mêmes clés que Dark.xaml pour permettre le basculement à chaud. -->
+    <SolidColorBrush x:Key="Brush.Window.Background" Color="#F3F4F6" />
+    <SolidColorBrush x:Key="Brush.Sidebar.Background" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.Card.Background" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.Card.Border" Color="#E5E7EB" />
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="#111827" />
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="#6B7280" />
+    <SolidColorBrush x:Key="Brush.Accent" Color="#2563EB" />
+    <SolidColorBrush x:Key="Brush.Accent.Foreground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="Brush.Risk.Safe" Color="#16A34A" />
+    <SolidColorBrush x:Key="Brush.Risk.Privacy" Color="#D97706" />
+    <SolidColorBrush x:Key="Brush.Risk.Review" Color="#DC2626" />
+    <SolidColorBrush x:Key="Brush.Nav.Selected.Background" Color="#EFF6FF" />
+    <SolidColorBrush x:Key="Brush.Nav.Selected.Foreground" Color="#2563EB" />
+    <SolidColorBrush x:Key="Brush.Control.Hover" Color="#F3F4F6" />
+
+</ResourceDictionary>

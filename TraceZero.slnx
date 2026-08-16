@@ -1,0 +1,26 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/TraceZero.App/TraceZero.App.csproj" />
+    <Project Path="src/TraceZero.Application/TraceZero.Application.csproj" />
+    <Project Path="src/TraceZero.Browsers/TraceZero.Browsers.csproj" />
+    <Project Path="src/TraceZero.Domain/TraceZero.Domain.csproj" />
+    <Project Path="src/TraceZero.Engine/TraceZero.Engine.csproj" />
+    <Project Path="src/TraceZero.Persistence/TraceZero.Persistence.csproj" />
+    <Project Path="src/TraceZero.Storage/TraceZero.Storage.csproj" />
+    <Project Path="src/TraceZero.Updater/TraceZero.Updater.csproj" />
+    <Project Path="src/TraceZero.Windows/TraceZero.Windows.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/TraceZero.Browsers.Tests/TraceZero.Browsers.Tests.csproj" />
+    <Project Path="tests/TraceZero.Domain.Tests/TraceZero.Domain.Tests.csproj" />
+    <Project Path="tests/TraceZero.Engine.Tests/TraceZero.Engine.Tests.csproj" />
+    <Project Path="tests/TraceZero.IntegrationTests/TraceZero.IntegrationTests.csproj" />
+    <Project Path="tests/TraceZero.PerformanceTests/TraceZero.PerformanceTests.csproj" />
+    <Project Path="tests/TraceZero.SafetyTests/TraceZero.SafetyTests.csproj" />
+    <Project Path="tests/TraceZero.Windows.Tests/TraceZero.Windows.Tests.csproj" />
+  </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/TraceZero.RuleValidator/TraceZero.RuleValidator.csproj" />
+    <Project Path="tools/TraceZero.TestDataGenerator/TraceZero.TestDataGenerator.csproj" />
+  </Folder>
+</Solution>

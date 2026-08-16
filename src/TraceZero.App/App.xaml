@@ -1,0 +1,49 @@
+<Application x:Class="TraceZero.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+             xmlns:views="clr-namespace:TraceZero.App.Views">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Le dictionnaire de thème (Light/Dark) est inséré à l'exécution par ThemeManager. -->
+                <ResourceDictionary Source="/TraceZero.App;component/Themes/Shared.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Localisation de vue par type de ViewModel. -->
+            <DataTemplate DataType="{x:Type vm:DashboardViewModel}">
+                <views:DashboardView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:CleanupViewModel}">
+                <views:CleanupView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:PrivacyViewModel}">
+                <views:PrivacyView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:BrowsersViewModel}">
+                <views:BrowsersView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DiskSpaceViewModel}">
+                <views:DiskSpaceView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DuplicatesViewModel}">
+                <views:DuplicatesView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:ApplicationsViewModel}">
+                <views:ApplicationsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:AutomationViewModel}">
+                <views:AutomationView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:HistoryViewModel}">
+                <views:HistoryView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
+                <views:SettingsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SupporterViewModel}">
+                <views:SupporterView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
