@@ -17,11 +17,15 @@ façon fiable, est listée ici avec son état honnête.
 
 ## Phase 3 — Nettoyage Windows
 
-- **`C:\Windows\Temp` et caches sous `C:\Windows`** — `PLANNED`. Volontairement exclus des règles par
-  défaut : `ISafePathValidator` refuse tout chemin sous le répertoire Windows (sécurité). Leur
-  nettoyage nécessitera une élévation (`TraceZero.Elevated.exe`, Phase 20) et une liste
-  d'autorisation dédiée revalidée côté helper. En attendant, on ne cible que des emplacements sous le
-  profil utilisateur (`AppData\Local`), tous autorisés par la validation.
+- **`C:\Windows\Temp`** — ✅ **Résolu en Phase 20**. Le nettoyage standard (`ISafePathValidator`) refuse
+  toujours tout chemin sous le répertoire Windows ; le nettoyage de `C:\Windows\Temp` passe désormais
+  par le helper élevé `TraceZero.Elevated.exe`, qui applique sa **propre** liste d'autorisation dédiée
+  (`ElevatedSafePathValidator`, n'autorisant QUE les descendants stricts de `%SystemRoot%\Temp`) et
+  revalide chaque fichier. Exposé dans **Paramètres → Nettoyage avancé**. L'app principale reste non
+  élevée. Le nettoyage standard continue de ne cibler que le profil utilisateur (`AppData\Local`).
+- **Autres caches sous `C:\Windows`** (hors `Temp`) — `PLANNED`. Non couverts : chaque emplacement
+  supplémentaire devra être ajouté explicitement à la liste d'autorisation dédiée du helper, avec sa
+  propre justification (jamais de nettoyage générique sous `C:\Windows`).
 - **`windows.user-temp`** applique un âge minimum de 1 h pour éviter de supprimer des fichiers
   temporaires en cours d'utilisation ; les fichiers verrouillés sont de toute façon ignorés, jamais
   forcés.

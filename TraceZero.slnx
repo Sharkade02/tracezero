@@ -4,6 +4,7 @@
     <Project Path="src/TraceZero.Application/TraceZero.Application.csproj" />
     <Project Path="src/TraceZero.Browsers/TraceZero.Browsers.csproj" />
     <Project Path="src/TraceZero.Domain/TraceZero.Domain.csproj" />
+    <Project Path="src/TraceZero.Elevated/TraceZero.Elevated.csproj" />
     <Project Path="src/TraceZero.Engine/TraceZero.Engine.csproj" />
     <Project Path="src/TraceZero.Persistence/TraceZero.Persistence.csproj" />
     <Project Path="src/TraceZero.Storage/TraceZero.Storage.csproj" />

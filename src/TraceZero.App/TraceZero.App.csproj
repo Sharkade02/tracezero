@@ -9,6 +9,8 @@
     <ProjectReference Include="..\TraceZero.Storage\TraceZero.Storage.csproj" />
     <ProjectReference Include="..\TraceZero.Persistence\TraceZero.Persistence.csproj" />
     <ProjectReference Include="..\TraceZero.Updater\TraceZero.Updater.csproj" />
+    <!-- Helper élevé (Phase 20) : copié à côté de l'app (exe + dll + deps + runtimeconfig). -->
+    <ProjectReference Include="..\TraceZero.Elevated\TraceZero.Elevated.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -27,7 +27,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 17 | Supporter / PWYW | DONE | 4 ✅ | Page Soutenir (PWYW 10/19/29/49 + autre), `ILicenseService` validation RSA-SHA256 locale hors ligne, activation/désactivation, clé privée jamais embarquée |
 | 18 | Updater | NOT_STARTED | — | |
 | 19 | Installateur / Portable | NOT_STARTED | — | |
-| 20 | Élévation de privilèges | NOT_STARTED | — | `TraceZero.Elevated.exe` |
+| 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
 | 21 | Localisation | NOT_STARTED | — | fr/en/de/es |
 | 22 | Accessibilité | NOT_STARTED | — | |
 | 23 | Performance | NOT_STARTED | — | |
@@ -126,6 +126,22 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 Accueil · Nettoyage · Confidentialité · Navigateurs · Espace disque · Doublons · Applications ·
 Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeholder.
 
+- **Phase 20 — Élévation de privilèges** (§30) : helper séparé `TraceZero.Elevated.exe`
+  (`net10.0-windows`, manifeste `requireAdministrator`, surface minimale, s'arrête après action).
+  L'application principale ne demande jamais l'élévation. IPC contrôlé : le client
+  (`ElevatedOperationClient`, Windows) lance le helper via le verbe `runas` (invite UAC), transmet une
+  **commande structurée** (`ElevatedRequest`, ensemble fermé d'opérations) par fichier JSON et lit la
+  réponse (`ElevatedResult`) ; un refus UAC est signalé sans planter. Le helper **ne fait jamais
+  confiance au client** : il revalide chaque chemin via `ElevatedSafePathValidator` (nouvelle autorité
+  « refus par défaut » n'autorisant QUE les descendants stricts d'une racine élevée dédiée), résout
+  lui-même la liste d'autorisation (`%SystemRoot%\Temp`), refuse protocole/opération inconnus, journalise
+  sous `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (déféré Phase 3),
+  exposé dans **Paramètres → Nettoyage avancé**. Cœur `ElevatedTempCleaner` testable (jamais de suivi de
+  jonction, âge minimum, fichier verrouillé jamais forcé, racine préservée). Tests : validateur élevé
+  (autorise un descendant strict, refuse la racine elle-même / chemins Windows arbitraires / traversal /
+  wildcard / UNC / racine de volume / liste vide), nettoyeur, exécuteur (refus protocole/opération
+  inconnus + résolution de la liste dédiée). **93 tests au total.**
+
 ### Prochaine étape
 Backend/qualité : Phase 7 (backup/restauration), Phase 13 (Software Updater), Phase 18 (Updater
-signé), Phase 19 (installateur/portable/MSIX), Phase 20 (helper d'élévation), Phase 21 (localisation).
+signé), Phase 19 (installateur/portable/MSIX), Phase 21 (localisation).

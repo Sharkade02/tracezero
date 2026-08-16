@@ -3,10 +3,12 @@ using TraceZero.Application.Apps;
 using TraceZero.Application.Automation;
 using TraceZero.Application.Cleaning;
 using TraceZero.Application.Disk;
+using TraceZero.Application.Elevation;
 using TraceZero.Application.Privacy;
 using TraceZero.Windows.Apps;
 using TraceZero.Windows.Automation;
 using TraceZero.Windows.Disk;
+using TraceZero.Windows.Elevation;
 using TraceZero.Windows.Privacy;
 using TraceZero.Windows.RecycleBin;
 
@@ -33,6 +35,9 @@ public static class WindowsServiceCollectionExtensions
 
         // Automatisation via le Planificateur de tâches (§15).
         services.AddSingleton<IAutomationService, AutomationService>();
+
+        // Élévation à la demande via le helper séparé (Phase 20, §30) — jamais admin par défaut.
+        services.AddSingleton<IElevatedOperationService, ElevatedOperationClient>();
 
         return services;
     }

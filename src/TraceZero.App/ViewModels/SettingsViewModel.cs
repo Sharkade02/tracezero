@@ -3,7 +3,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Win32;
 using TraceZero.App.Services;
+using TraceZero.Application.Elevation;
 using TraceZero.Application.Exclusions;
+using TraceZero.Domain.Common;
+using TraceZero.Domain.Elevation;
 using TraceZero.Domain.Exclusions;
 
 namespace TraceZero.App.ViewModels;
@@ -30,11 +33,16 @@ public sealed partial class SettingsViewModel : PageViewModelBase
 {
     private readonly IThemeService _themeService;
     private readonly IExclusionStore _exclusionStore;
+    private readonly IElevatedOperationService _elevatedService;
 
-    public SettingsViewModel(IThemeService themeService, IExclusionStore exclusionStore)
+    public SettingsViewModel(
+        IThemeService themeService,
+        IExclusionStore exclusionStore,
+        IElevatedOperationService elevatedService)
     {
         _themeService = themeService;
         _exclusionStore = exclusionStore;
+        _elevatedService = elevatedService;
         _themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(IsDarkTheme));
         ReloadExclusions();
     }
@@ -104,4 +112,46 @@ public sealed partial class SettingsViewModel : PageViewModelBase
 
         HasExclusions = Exclusions.Count > 0;
     }
+
+    // ── Nettoyage avancé nécessitant l'élévation (Phase 20, §30) ──────────────────────────────
+
+    /// <summary>Message d'état du dernier nettoyage élevé (vide au repos).</summary>
+    [ObservableProperty]
+    private string _elevatedStatus = string.Empty;
+
+    [ObservableProperty]
+    private bool _isElevatedBusy;
+
+    /// <summary>
+    /// Nettoie <c>C:\Windows\Temp</c> via le helper élevé. L'app n'est jamais admin : l'appel déclenche
+    /// l'invite UAC, puis le helper valide, agit et s'arrête. Un refus UAC est signalé sans planter.
+    /// </summary>
+    [RelayCommand(CanExecute = nameof(CanRunElevated))]
+    private async Task CleanWindowsTempAsync()
+    {
+        IsElevatedBusy = true;
+        ElevatedStatus = "Élévation en cours (autorisez l'invite Windows)…";
+        CleanWindowsTempCommand.NotifyCanExecuteChanged();
+
+        try
+        {
+            var result = await _elevatedService.RunAsync(new ElevatedRequest
+            {
+                Operation = ElevatedOperation.CleanWindowsTemp,
+            });
+
+            ElevatedStatus = result.Success
+                ? $"Nettoyé : {ByteSize.Format(result.BytesFreed)} libérés " +
+                  $"({result.ActionsSucceeded} fichiers" +
+                  (result.ActionsFailed > 0 ? $", {result.ActionsFailed} ignorés/verrouillés" : string.Empty) + ")."
+                : result.ErrorMessage ?? "Échec du nettoyage élevé.";
+        }
+        finally
+        {
+            IsElevatedBusy = false;
+            CleanWindowsTempCommand.NotifyCanExecuteChanged();
+        }
+    }
+
+    private bool CanRunElevated() => !IsElevatedBusy;
 }
