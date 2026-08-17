@@ -21,6 +21,15 @@ public interface IDriverHealthService
 }
 
 /// <summary>
+/// Informations sur la mémoire installée (RAM), en lecture seule via WMI. N'expose que ce que Windows
+/// rapporte ; les timings/latences ne sont pas disponibles sans accès matériel bas niveau.
+/// </summary>
+public interface IMemoryInfoService
+{
+    MemoryReport GetMemory();
+}
+
+/// <summary>
 /// Impact des programmes au démarrage, mesuré par Windows (Phase 28). Lit le journal
 /// « Diagnostics-Performance » (lecture seule) ; peut être vide si la donnée est indisponible
 /// (droits insuffisants ou aucun démarrage récent mesuré).

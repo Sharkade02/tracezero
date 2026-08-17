@@ -45,6 +45,44 @@ public sealed class DiskHealthRowViewModel
     public bool HasWarning => WarningText is not null;
 }
 
+/// <summary>Ligne d'un module de mémoire (RAM).</summary>
+public sealed class MemoryModuleRowViewModel
+{
+    public MemoryModuleRowViewModel(MemoryModule module)
+    {
+        Slot = module.Slot;
+        Model = string.IsNullOrWhiteSpace(module.PartNumber)
+            ? module.Manufacturer ?? Localizer.Get("Mem.UnknownModel")
+            : module.PartNumber!;
+        CapacityText = ByteSize.Format(module.CapacityBytes);
+        TypeText = module.Type switch
+        {
+            MemoryType.Ddr5 => "DDR5",
+            MemoryType.Ddr4 => "DDR4",
+            MemoryType.Ddr3 => "DDR3",
+            _ => Localizer.Get("Health.UnknownMedia"),
+        };
+
+        // Fréquence réelle, avec la nominale si elle diffère.
+        var configured = module.ConfiguredSpeedMhz > 0 ? module.ConfiguredSpeedMhz : module.RatedSpeedMhz;
+        SpeedText = module.RatedSpeedMhz > 0 && module.RatedSpeedMhz != configured
+            ? Localizer.Format("Mem.SpeedWithRated", configured, module.RatedSpeedMhz)
+            : $"{configured} MHz";
+
+        VoltageText = module.VoltageMillivolts > 0
+            ? (module.VoltageMillivolts / 1000.0).ToString("0.00", System.Globalization.CultureInfo.CurrentCulture) + " V"
+            : string.Empty;
+    }
+
+    public string Slot { get; }
+    public string Model { get; }
+    public string CapacityText { get; }
+    public string TypeText { get; }
+    public string SpeedText { get; }
+    public string VoltageText { get; }
+    public bool HasVoltage => !string.IsNullOrEmpty(VoltageText);
+}
+
 /// <summary>Ligne d'impact au démarrage mesuré.</summary>
 public sealed class StartupImpactRowViewModel
 {
@@ -70,12 +108,17 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
 {
     private readonly IDiskHealthService _diskHealth;
     private readonly IStartupImpactService _startupImpact;
+    private readonly IMemoryInfoService _memoryInfo;
     private bool _loaded;
 
-    public SystemHealthViewModel(IDiskHealthService diskHealth, IStartupImpactService startupImpact)
+    public SystemHealthViewModel(
+        IDiskHealthService diskHealth,
+        IStartupImpactService startupImpact,
+        IMemoryInfoService memoryInfo)
     {
         _diskHealth = diskHealth;
         _startupImpact = startupImpact;
+        _memoryInfo = memoryInfo;
     }
 
     public override string Title => TraceZero.App.Services.Localizer.Get("Nav.SystemHealth");
@@ -87,6 +130,17 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
     public ObservableCollection<DiskHealthRowViewModel> Disks { get; } = [];
 
     public ObservableCollection<StartupImpactRowViewModel> Impacts { get; } = [];
+
+    public ObservableCollection<MemoryModuleRowViewModel> Memory { get; } = [];
+
+    [ObservableProperty]
+    private bool _hasMemory;
+
+    [ObservableProperty]
+    private string _memorySummaryText = string.Empty;
+
+    [ObservableProperty]
+    private string _xmpText = string.Empty;
 
     [ObservableProperty]
     private bool _isLoading;
@@ -137,11 +191,59 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
                     ? Localizer.Get("Impact.None")
                     : Localizer.Get("Impact.Measured");
 
+            var memory = await Task.Run(() => _memoryInfo.GetMemory());
+            Memory.Clear();
+            foreach (var module in memory.Modules)
+            {
+                Memory.Add(new MemoryModuleRowViewModel(module));
+            }
+
+            HasMemory = Memory.Count > 0;
+            if (HasMemory)
+            {
+                MemorySummaryText = Localizer.Format(
+                    "Mem.Summary",
+                    ByteSize.Format(memory.TotalCapacityBytes),
+                    memory.UsedSlots,
+                    memory.TotalSlots,
+                    memory.MaxCapacityBytes > 0 ? ByteSize.Format(memory.MaxCapacityBytes) : "?");
+                XmpText = InferXmp(memory);
+            }
+
             _loaded = true;
         }
         finally
         {
             IsLoading = false;
         }
+    }
+
+    /// <summary>
+    /// Inférence honnête du profil de performance (XMP/EXPO) : si un module tourne au-dessus de la
+    /// fréquence de base JEDEC de son type, un profil est probablement actif. Ce n'est **pas** une lecture
+    /// du SPD (impossible sans accès matériel bas niveau) — c'est une déduction, présentée comme telle.
+    /// </summary>
+    private static string InferXmp(MemoryReport memory)
+    {
+        var known = memory.Modules.Where(m => m.Type != MemoryType.Unknown).ToList();
+        if (known.Count == 0)
+        {
+            return Localizer.Get("Mem.XmpUnknown");
+        }
+
+        var active = known.Any(m =>
+        {
+            var speed = m.ConfiguredSpeedMhz > 0 ? m.ConfiguredSpeedMhz : m.RatedSpeedMhz;
+            var jedecBase = m.Type switch
+            {
+                MemoryType.Ddr5 => 4800,
+                MemoryType.Ddr4 => 2133,
+                MemoryType.Ddr3 => 1333,
+                _ => int.MaxValue,
+            };
+            return speed > jedecBase;
+        });
+
+        return active ? Localizer.Get("Mem.XmpActive") : Localizer.Get("Mem.XmpInactive");
     }
 }

@@ -18,6 +18,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -93,8 +94,59 @@
             </StackPanel>
         </Border>
 
+        <!-- Mémoire (RAM) -->
+        <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,0,0,16">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource SystemHealth.Memory}" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
+
+                <TextBlock Text="{DynamicResource SystemHealth.NoMemory}"
+                           Style="{StaticResource Text.Subtle}"
+                           Visibility="{Binding HasMemory, Converter={StaticResource InvBoolToVis}}" />
+
+                <StackPanel Visibility="{Binding HasMemory, Converter={StaticResource BoolToVis}}">
+                    <TextBlock Text="{Binding MemorySummaryText}" Style="{StaticResource Text.Subtle}" Margin="0,0,0,4" />
+                    <TextBlock Text="{Binding XmpText}" Style="{StaticResource Text.Subtle}" FontSize="12"
+                               TextWrapping="Wrap" Margin="0,0,0,6" />
+
+                    <ItemsControl ItemsSource="{Binding Memory}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border BorderBrush="{DynamicResource Brush.Card.Border}" BorderThickness="0,0,0,1" Padding="0,10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="{Binding Slot}" FontWeight="SemiBold" VerticalAlignment="Center"
+                                                   MinWidth="80" Foreground="{DynamicResource Brush.Text.Primary}" />
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0">
+                                            <TextBlock Text="{Binding Model}" Foreground="{DynamicResource Brush.Text.Primary}"
+                                                       TextTrimming="CharacterEllipsis" />
+                                            <TextBlock Style="{StaticResource Text.Subtle}" FontSize="12">
+                                                <Run Text="{Binding TypeText, Mode=OneWay}" />
+                                                <Run Text="·" />
+                                                <Run Text="{Binding SpeedText, Mode=OneWay}" />
+                                            </TextBlock>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding CapacityText}" FontWeight="SemiBold" HorizontalAlignment="Right"
+                                                       Foreground="{DynamicResource Brush.Text.Primary}" />
+                                            <TextBlock Text="{Binding VoltageText}" Style="{StaticResource Text.Subtle}" FontSize="12"
+                                                       HorizontalAlignment="Right"
+                                                       Visibility="{Binding HasVoltage, Converter={StaticResource BoolToVis}}" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
         <!-- Impact au démarrage -->
-        <Border Grid.Row="2" Style="{StaticResource Card}">
+        <Border Grid.Row="3" Style="{StaticResource Card}">
             <DockPanel>
                 <TextBlock DockPanel.Dock="Top" Text="{DynamicResource SystemHealth.StartupImpact}" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
                 <TextBlock DockPanel.Dock="Top" Text="{Binding ImpactMessage}" Style="{StaticResource Text.Subtle}"

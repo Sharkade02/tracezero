@@ -12,6 +12,7 @@ public static class StorageServiceCollectionExtensions
     {
         services.AddSingleton<IDriveQueryService, DriveQueryService>();
         services.AddSingleton<IDiskHealthService, DiskHealthService>();
+        services.AddSingleton<IMemoryInfoService, MemoryInfoService>();
         services.AddSingleton<IStorageMediaProbe, StorageMediaProbe>();
         return services;
     }
