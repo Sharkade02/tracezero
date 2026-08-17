@@ -1,0 +1,6 @@
+# winget — manifeste de version (gabarit).
+PackageIdentifier: TraceZero.TraceZero
+PackageVersion: "<VERSION>"
+DefaultLocale: en-US
+ManifestType: version
+ManifestVersion: 1.6.0

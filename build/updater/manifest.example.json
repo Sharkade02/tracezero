@@ -1,0 +1,9 @@
+{
+  "_comment": "EXEMPLE — ne pas publier tel quel. Généré par build/updater/sign-manifest.sh avec la clé privée. Les champs signés sont Version, Channel, Url, Sha256, MinimumSupportedVersion (dans cet ordre, séparés par des sauts de ligne). La signature est RSA-SHA256/PKCS#1 v1.5 en base64.",
+  "Version": "0.1.0",
+  "Channel": "stable",
+  "Url": "https://github.com/Sharkade02/tracezero/releases/download/v0.1.0/TraceZero-portable.zip",
+  "Sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "MinimumSupportedVersion": "0.1.0",
+  "Signature": "REMPLACÉ_PAR_sign-manifest.sh"
+}
