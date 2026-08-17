@@ -399,3 +399,7 @@ Phase 18 (Updater — endpoint + **certificat**), Phase 19 (installateur MSI/EXE
   sont explicitement mal vus). Positionnement local-first/honnête aide mais **ne garantit pas** l'admission.
   **Distribution hors-Store** (téléchargement direct signé + winget) est le plan par défaut plus sûr ;
   le Store reste un bonus incertain. À décider avec l'utilisateur avant d'investir dans l'empaquetage MSIX Store.
+- **Stratégie détaillée** : `docs/distribution-strategy.md` — approche **étagée** où le coût de signature ne
+  vient qu'**après** la traction (revenu par dons), chemins de signature **gratuits** pour l'open source
+  (SignPath Foundation / Certum OSS), canaux gratuits (GitHub Releases + winget + Pages), et distinction
+  signature-de-MAJ (déjà faite, gratuite) vs Authenticode (payant, uniquement pour SmartScreen).
