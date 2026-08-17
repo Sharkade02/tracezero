@@ -44,6 +44,9 @@
             <DataTemplate DataType="{x:Type vm:ApplicationsViewModel}">
                 <views:ApplicationsView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SoftwareUpdateViewModel}">
+                <views:SoftwareUpdateView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AutomationViewModel}">
                 <views:AutomationView />
             </DataTemplate>

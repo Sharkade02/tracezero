@@ -59,7 +59,7 @@ Installer via `winget install --id Microsoft.DotNet.SDK.10 -e`.
 
 ```powershell
 dotnet build -c Release              # doit être 0 warning
-dotnet test                          # 144 tests au dernier point (2026-08)
+dotnet test                          # 147 tests au dernier point (2026-08)
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj   # lance l'appli WPF
 build\scripts\release.ps1            # pipeline release (Phase 27) : build/test Release + publish + SHA-256
 ```
@@ -70,12 +70,12 @@ build\scripts\release.ps1            # pipeline release (Phase 27) : build/test 
 Navigateurs · Espace disque · Doublons · Applications · Automatisation · Historique · Paramètres · Soutenir.
 Plus aucune page placeholder.
 
-**DONE (24)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
+**DONE (25)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
 5 Privacy Inspector · 6 Cleaning Plan + Exclusions + Historique · 7 Protection/Backup/Restore ·
 8 Analyse NTFS · 9 Effacement sécurisé · 10 Disk Space · 11 Duplicate Finder · 12 Applications & Démarrage ·
-14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW · 20 Élévation ·
-21 Localisation · 22 Accessibilité · 23 Performance · 24 Tests de sécurité · 25 Golden dataset ·
-27 Qualité release · 28 Moniteur système.
+13 Software Updater · 14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW ·
+20 Élévation · 21 Localisation · 22 Accessibilité · 23 Performance · 24 Tests de sécurité ·
+25 Golden dataset · 27 Qualité release · 28 Moniteur système.
 
 **IN_PROGRESS (3)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
@@ -98,14 +98,12 @@ HKCU ; `IProtectionVault` (Persistence, table `restore_points`) persiste les poi
 le nettoyage Confidentialité sauvegarde les traces registre avant de les effacer ; page **Restauration**.
 Réversibilité honnête via l'enum `Reversibility`.
 
-## Ce qu'il reste à développer (NOT_STARTED)
+## Ce qu'il reste à développer
 
 | Phase | Nom | Notes |
 |------:|-----|-------|
-| 13 | Software Updater | Détection d'apps obsolètes ; risqué sans catalogue de versions |
-| 25 | Golden dataset | |
-| 26 | Tests VM | |
+| 26 | Tests VM | Nécessite une VM Windows propre (asset externe) |
 
-**Prochaine étape recommandée** (backend/qualité) : Phase 14 (Driver Health read-only), Phase 21
-(localisation), Phase 22 (accessibilité), puis 13/18/19. La Phase 4 (privacy navigateurs) peut réutiliser
-l'infra backup/restore.
+**IN_PROGRESS** : 4 (privacy navigateurs — reste history/cookies/sessions + Opera), 18 (updater — reste
+cert + endpoint), 19 (installateur — reste MSI/EXE + signature). Ces trois dépendent d'assets externes
+(certificat, serveur, VM). **Phase 26** (tests réels en VM) nécessite une VM. Tout le reste est DONE.

@@ -348,6 +348,18 @@
     <s:String x:Key="Startup.Machine">System (schreibgeschützt)</s:String>
     <s:String x:Key="Startup.Folder">Autostart-Ordner</s:String>
 
+    <s:String x:Key="Nav.Software">Updates</s:String>
+    <s:String x:Key="Software.Subtitle">Erkennt veraltete installierte Software über den Windows Package Manager (winget), eine offizielle und signierte Quelle. TraceZero installiert selbst nichts: Das Update wird von winget gestartet, sichtbar und abbrechbar.</s:String>
+    <s:String x:Key="Software.Check">Nach Updates suchen</s:String>
+    <s:String x:Key="Software.UpdateAll">Alle aktualisieren</s:String>
+    <s:String x:Key="Software.Update">Aktualisieren</s:String>
+    <s:String x:Key="Software.Unavailable">Der Windows Package Manager (winget) ist auf diesem PC nicht verfügbar. Installieren Sie „App Installer“ aus dem Microsoft Store, um Updates zu aktivieren.</s:String>
+    <s:String x:Key="Software.None">Alle winget bekannten Programme sind aktuell.</s:String>
+    <s:String x:Key="Software.Found">{0} Update(s) über winget verfügbar.</s:String>
+    <s:String x:Key="Software.LaunchedToast">Update von „{0}“ über winget gestartet.</s:String>
+    <s:String x:Key="Software.LaunchAllToast">Update aller Programme über winget gestartet.</s:String>
+    <s:String x:Key="Software.LaunchFailed">winget konnte nicht gestartet werden.</s:String>
+
     <s:String x:Key="Lang.French">Französisch</s:String>
     <s:String x:Key="Lang.English">Englisch</s:String>
     <s:String x:Key="Lang.German">Deutsch</s:String>

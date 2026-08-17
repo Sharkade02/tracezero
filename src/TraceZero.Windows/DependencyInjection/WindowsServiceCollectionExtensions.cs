@@ -7,6 +7,7 @@ using TraceZero.Application.Diagnostics;
 using TraceZero.Application.Elevation;
 using TraceZero.Application.Privacy;
 using TraceZero.Application.Protection;
+using TraceZero.Application.Software;
 using TraceZero.Windows.Apps;
 using TraceZero.Windows.Automation;
 using TraceZero.Windows.Diagnostics;
@@ -48,6 +49,9 @@ public static class WindowsServiceCollectionExtensions
 
         // Inventaire des pilotes (Driver Health, Phase 14), lecture seule — jamais d'installation.
         services.AddSingleton<IDriverHealthService, DriverHealthService>();
+
+        // Mises à jour logicielles via winget (Software Updater, Phase 13) — source officielle signée.
+        services.AddSingleton<ISoftwareUpdateService, Software.WingetUpdateService>();
 
         // Élévation à la demande via le helper séparé (Phase 20, §30) — jamais admin par défaut.
         services.AddSingleton<IElevatedOperationService, ElevatedOperationClient>();

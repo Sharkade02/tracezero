@@ -20,7 +20,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 10 | Disk Space Manager | DONE | 2 ✅ | Vue lecteurs (capacité/utilisé/libre + barre) ; recherche de gros fichiers (seuil 100 Mo–2 Go) ; ouvrir dans l'Explorateur ; envoi à la Corbeille (réversible), jamais auto-sélectionné |
 | 11 | Duplicate Finder | DONE | 3 ✅ | Pipeline taille → hash partiel → SHA-256 complet ; groupes, « garder le plus récent », garde-fou keep-one, envoi Corbeille réversible + validation |
 | 12 | Applications & Démarrage | DONE | 4 ✅ | Apps installées (registre Uninstall, recherche, ouvrir, désinstaller via éditeur) ; démarrage (Run HKCU activable/désactivable réversible + backup, HKLM/dossier en lecture seule) |
-| 13 | Software Updater | NOT_STARTED | — | |
+| 13 | Software Updater | DONE | 3 ✅ | Page **Mises à jour** : détection via **Windows Package Manager (winget)** — source officielle et signée (§23 priorité 2). Affiche version installée → disponible, id, source ; mise à jour lancée par **winget** (fenêtre visible, annulable), jamais installée par TraceZero, **aucun scraping**. Parser de sortie winget testable (robuste à la locale). Si winget absent → message honnête (installer « App Installer ») |
 | 14 | Driver Health / Updater | DONE | 7 ✅ | **Étape A (Driver Health)** : inventaire pilotes lecture seule via WMI (`Win32_PnPSignedDriver` : périphérique, version, fournisseur, date, signature) + problèmes Gestionnaire de périphériques (`Win32_PnPEntity.ConfigManagerErrorCode`). Recherche + skeleton. **Étape B (updater)** : redirigée vers **Windows Update** (§24), jamais de base tierce ni d'installation par TraceZero |
 | 15 | Automatisation | DONE | 1 ✅ | Profils Sûr/Confidentialité, déclencheurs hebdo/mensuel/ouverture session via Planificateur (schtasks), mode headless `--autoclean` ; jamais de REVIEW en auto |
 | 16 | Historique & Statistiques | DONE | ✅ | Page Historique réelle : total libéré, nb nettoyages, dernier, journal. Local, sans chemins personnels |
@@ -178,6 +178,17 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 13 — Software Updater** (§23) — DONE. Approche honnête et sûre : le **Windows Package Manager
+  (winget)**, source officielle et signée (§23 priorité 2), jamais de scraping de sites douteux.
+  - `WingetUpdateService` (`TraceZero.Windows`, `ISoftwareUpdateService`) : exécute `winget upgrade`,
+    **parse** la sortie tabulaire (parser pur/testable, robuste à la locale via découpe sur espaces
+    multiples), et lance la mise à jour via `winget upgrade --id ...` / `--all` dans une **fenêtre
+    visible** (l'utilisateur voit et peut interrompre). TraceZero n'installe rien lui-même.
+  - **UI** : page « Mises à jour » (version installée → disponible, id, source). Message honnête si winget
+    est absent (installer « App Installer » depuis le Store).
+  - **Tests** : 3 (parsing de mises à jour, ignore résumé/lignes vides, sortie vide/sans en-tête).
+    **147 tests au total.**
 
 - **Phase 24 — Tests de sécurité** (§34) — DONE. `TraceZero.SafetyTests` (47 tests) prouve le refus par
   défaut : validateur (racine, profil, dossiers personnels, système, jonctions/ancêtres-jonctions, UNC,

@@ -348,6 +348,18 @@
     <s:String x:Key="Startup.Machine">Sistema (solo lectura)</s:String>
     <s:String x:Key="Startup.Folder">Carpeta de inicio</s:String>
 
+    <s:String x:Key="Nav.Software">Actualizaciones</s:String>
+    <s:String x:Key="Software.Subtitle">Detecta software instalado obsoleto mediante el Administrador de paquetes de Windows (winget), una fuente oficial y firmada. TraceZero no instala nada: la actualización la lanza winget, visible e interrumpible.</s:String>
+    <s:String x:Key="Software.Check">Buscar actualizaciones</s:String>
+    <s:String x:Key="Software.UpdateAll">Actualizar todo</s:String>
+    <s:String x:Key="Software.Update">Actualizar</s:String>
+    <s:String x:Key="Software.Unavailable">El Administrador de paquetes de Windows (winget) no está disponible en este PC. Instale «Instalador de aplicaciones» desde Microsoft Store para habilitar las actualizaciones.</s:String>
+    <s:String x:Key="Software.None">Todo su software conocido por winget está actualizado.</s:String>
+    <s:String x:Key="Software.Found">{0} actualización(es) disponible(s) mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchedToast">Actualización de «{0}» lanzada mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchAllToast">Actualización de todo el software lanzada mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchFailed">No se pudo lanzar winget.</s:String>
+
     <s:String x:Key="Lang.French">Francés</s:String>
     <s:String x:Key="Lang.English">Inglés</s:String>
     <s:String x:Key="Lang.German">Alemán</s:String>

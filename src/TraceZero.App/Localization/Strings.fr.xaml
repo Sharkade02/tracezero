@@ -370,6 +370,19 @@
     <s:String x:Key="Startup.Machine">Système (lecture seule)</s:String>
     <s:String x:Key="Startup.Folder">Dossier de démarrage</s:String>
 
+    <!-- Mises à jour logicielles (winget) -->
+    <s:String x:Key="Nav.Software">Mises à jour</s:String>
+    <s:String x:Key="Software.Subtitle">Détecte les logiciels installés obsolètes via le Windows Package Manager (winget), source officielle et signée. TraceZero n'installe rien : la mise à jour est lancée par winget, visible et interruptible.</s:String>
+    <s:String x:Key="Software.Check">Rechercher les mises à jour</s:String>
+    <s:String x:Key="Software.UpdateAll">Tout mettre à jour</s:String>
+    <s:String x:Key="Software.Update">Mettre à jour</s:String>
+    <s:String x:Key="Software.Unavailable">Windows Package Manager (winget) est indisponible sur ce PC. Installez « App Installer » depuis le Microsoft Store pour activer les mises à jour.</s:String>
+    <s:String x:Key="Software.None">Tous vos logiciels connus de winget sont à jour.</s:String>
+    <s:String x:Key="Software.Found">{0} mise(s) à jour disponible(s) via winget.</s:String>
+    <s:String x:Key="Software.LaunchedToast">Mise à jour de « {0} » lancée via winget.</s:String>
+    <s:String x:Key="Software.LaunchAllToast">Mise à jour de tous les logiciels lancée via winget.</s:String>
+    <s:String x:Key="Software.LaunchFailed">Impossible de lancer winget.</s:String>
+
     <!-- Langues (endonymes) -->
     <s:String x:Key="Lang.French">Français</s:String>
     <s:String x:Key="Lang.English">Anglais</s:String>

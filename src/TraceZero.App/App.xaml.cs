@@ -55,6 +55,7 @@ public partial class App : System.Windows.Application
         services.AddSingleton<PageViewModelBase>(sp => sp.GetRequiredService<SecureEraseViewModel>());
         services.AddSingleton<PageViewModelBase, NtfsAnalysisViewModel>();
         services.AddSingleton<PageViewModelBase, ApplicationsViewModel>();
+        services.AddSingleton<PageViewModelBase, SoftwareUpdateViewModel>();
         services.AddSingleton<PageViewModelBase, AutomationViewModel>();
         services.AddSingleton<PageViewModelBase, HistoryViewModel>();
         services.AddSingleton<PageViewModelBase, RestoreViewModel>();
