@@ -83,6 +83,24 @@ public sealed class MemoryModuleRowViewModel
     public bool HasVoltage => !string.IsNullOrEmpty(VoltageText);
 }
 
+/// <summary>Ligne d'un programme consommateur de mémoire (top consommateurs).</summary>
+public sealed class ProcessUsageRowViewModel
+{
+    public ProcessUsageRowViewModel(ProcessUsage usage)
+    {
+        Name = usage.Name;
+        MemoryText = ByteSize.Format(usage.WorkingSetBytes);
+        CountText = usage.ProcessCount > 1
+            ? Localizer.Format("Load.ProcessCount", usage.ProcessCount)
+            : string.Empty;
+    }
+
+    public string Name { get; }
+    public string MemoryText { get; }
+    public string CountText { get; }
+    public bool HasCount => !string.IsNullOrEmpty(CountText);
+}
+
 /// <summary>Ligne d'impact au démarrage mesuré.</summary>
 public sealed class StartupImpactRowViewModel
 {
@@ -109,16 +127,34 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
     private readonly IDiskHealthService _diskHealth;
     private readonly IStartupImpactService _startupImpact;
     private readonly IMemoryInfoService _memoryInfo;
+    private readonly ISystemLoadService _systemLoad;
+    private readonly IProcessUsageService _processUsage;
+    private readonly IPerformanceIndexService _performanceIndex;
+    private readonly System.Windows.Threading.DispatcherTimer _liveTimer;
     private bool _loaded;
+    private bool _liveBusy;
 
     public SystemHealthViewModel(
         IDiskHealthService diskHealth,
         IStartupImpactService startupImpact,
-        IMemoryInfoService memoryInfo)
+        IMemoryInfoService memoryInfo,
+        ISystemLoadService systemLoad,
+        IProcessUsageService processUsage,
+        IPerformanceIndexService performanceIndex)
     {
         _diskHealth = diskHealth;
         _startupImpact = startupImpact;
         _memoryInfo = memoryInfo;
+        _systemLoad = systemLoad;
+        _processUsage = processUsage;
+        _performanceIndex = performanceIndex;
+
+        // Rafraîchissement du direct (RAM/CPU/top process) tant que la page est affichée.
+        _liveTimer = new System.Windows.Threading.DispatcherTimer
+        {
+            Interval = TimeSpan.FromSeconds(2),
+        };
+        _liveTimer.Tick += (_, _) => _ = RefreshLiveAsync();
     }
 
     public override string Title => TraceZero.App.Services.Localizer.Get("Nav.SystemHealth");
@@ -133,6 +169,8 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
 
     public ObservableCollection<MemoryModuleRowViewModel> Memory { get; } = [];
 
+    public ObservableCollection<ProcessUsageRowViewModel> TopProcesses { get; } = [];
+
     [ObservableProperty]
     private bool _hasMemory;
 
@@ -141,6 +179,49 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
 
     [ObservableProperty]
     private string _xmpText = string.Empty;
+
+    // --- Charge en direct (RAM + CPU) ---
+
+    [ObservableProperty]
+    private bool _hasLiveLoad;
+
+    [ObservableProperty]
+    private double _memoryUsedPercent;
+
+    [ObservableProperty]
+    private string _memoryUsedText = string.Empty;
+
+    [ObservableProperty]
+    private double _cpuPercent;
+
+    [ObservableProperty]
+    private string _cpuPercentText = string.Empty;
+
+    [ObservableProperty]
+    private bool _hasTopProcesses;
+
+    // --- Indice de performance Windows (WinSAT) ---
+
+    [ObservableProperty]
+    private bool _hasPerfIndex;
+
+    [ObservableProperty]
+    private string _perfBaseScoreText = string.Empty;
+
+    [ObservableProperty]
+    private string _perfCpuText = string.Empty;
+
+    [ObservableProperty]
+    private string _perfMemoryText = string.Empty;
+
+    [ObservableProperty]
+    private string _perfDiskText = string.Empty;
+
+    [ObservableProperty]
+    private string _perfGraphicsText = string.Empty;
+
+    [ObservableProperty]
+    private string _perfGamingText = string.Empty;
 
     [ObservableProperty]
     private bool _isLoading;
@@ -160,6 +241,16 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
         {
             _ = RefreshAsync();
         }
+
+        // Direct : une mesure immédiate, puis rafraîchissement périodique tant que la page est visible.
+        _ = RefreshLiveAsync();
+        _liveTimer.Start();
+    }
+
+    public override void OnDeactivated()
+    {
+        // Ne pas sonder WMI en arrière-plan quand la page n'est pas affichée.
+        _liveTimer.Stop();
     }
 
     [RelayCommand]
@@ -210,6 +301,19 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
                 XmpText = InferXmp(memory);
             }
 
+            // Indice de performance Windows (WinSAT) : statique, chargé une fois.
+            var index = await Task.Run(() => _performanceIndex.GetIndex());
+            HasPerfIndex = index.Assessed;
+            if (HasPerfIndex)
+            {
+                PerfBaseScoreText = Score(index.BaseScore);
+                PerfCpuText = Score(index.CpuScore);
+                PerfMemoryText = Score(index.MemoryScore);
+                PerfDiskText = Score(index.DiskScore);
+                PerfGraphicsText = Score(index.GraphicsScore);
+                PerfGamingText = Score(index.GamingGraphicsScore);
+            }
+
             _loaded = true;
         }
         finally
@@ -217,6 +321,52 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
             IsLoading = false;
         }
     }
+
+    /// <summary>
+    /// Rafraîchit la charge en direct (RAM/CPU) et les programmes les plus gourmands. Réentrance
+    /// protégée : si une lecture est déjà en cours, ce tick est ignoré.
+    /// </summary>
+    private async Task RefreshLiveAsync()
+    {
+        if (_liveBusy)
+        {
+            return;
+        }
+
+        _liveBusy = true;
+        try
+        {
+            var snapshot = await Task.Run(() => _systemLoad.GetSnapshot());
+            HasLiveLoad = snapshot.Available;
+            if (snapshot.Available)
+            {
+                MemoryUsedPercent = snapshot.Memory.UsedPercent;
+                MemoryUsedText = Localizer.Format(
+                    "Load.MemoryUsed",
+                    ByteSize.Format(snapshot.Memory.UsedBytes),
+                    ByteSize.Format(snapshot.Memory.TotalBytes),
+                    Math.Round(snapshot.Memory.UsedPercent));
+                CpuPercent = snapshot.CpuPercent;
+                CpuPercentText = Localizer.Format("Load.Cpu", Math.Round(snapshot.CpuPercent));
+            }
+
+            var top = await Task.Run(() => _processUsage.GetTopByMemory());
+            TopProcesses.Clear();
+            foreach (var process in top)
+            {
+                TopProcesses.Add(new ProcessUsageRowViewModel(process));
+            }
+
+            HasTopProcesses = TopProcesses.Count > 0;
+        }
+        finally
+        {
+            _liveBusy = false;
+        }
+    }
+
+    private static string Score(double value) =>
+        value > 0 ? value.ToString("0.0", CultureInfo.CurrentCulture) : "—";
 
     /// <summary>
     /// Inférence honnête du profil de performance (XMP/EXPO) : si un module tourne au-dessus de la

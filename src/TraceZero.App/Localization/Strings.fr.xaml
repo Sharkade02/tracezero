@@ -170,6 +170,27 @@
     <s:String x:Key="Mem.XmpInactive">Aucun profil de performance détecté — la mémoire tourne à la fréquence JEDEC de base.</s:String>
     <s:String x:Key="Mem.XmpUnknown">Profil de performance indéterminé (type de mémoire inconnu).</s:String>
 
+    <!-- Moniteur système en direct -->
+    <s:String x:Key="SystemHealth.LiveLoad">Activité en direct</s:String>
+    <s:String x:Key="SystemHealth.TopProcesses">Programmes les plus gourmands</s:String>
+    <s:String x:Key="SystemHealth.PerfIndex">Indice de performance Windows</s:String>
+    <s:String x:Key="Load.NoData">Charge système indisponible sur cette machine.</s:String>
+    <s:String x:Key="Load.CpuLabel">Processeur</s:String>
+    <s:String x:Key="Load.MemoryLabel">Mémoire</s:String>
+    <s:String x:Key="Load.Cpu">{0}%</s:String>
+    <s:String x:Key="Load.MemoryUsed">{0} utilisés sur {1} ({2}%)</s:String>
+    <s:String x:Key="Load.TopProcessesHint">Trié par mémoire réellement utilisée. C'est souvent ce qui ralentit le PC — fermez ce dont vous n'avez pas besoin.</s:String>
+    <s:String x:Key="Load.NoProcesses">Aucun programme lisible (droits insuffisants).</s:String>
+    <s:String x:Key="Load.ProcessCount">{0} process</s:String>
+    <s:String x:Key="Perf.Note">Scores calculés par Windows (WinSAT / « Indice de performance »), pas par TraceZero. De 1,0 à 9,9.</s:String>
+    <s:String x:Key="Perf.NotAssessed">Aucune évaluation en cache. Lancez « winsat formal » dans une invite de commandes administrateur pour la générer.</s:String>
+    <s:String x:Key="Perf.Base">Score de base</s:String>
+    <s:String x:Key="Perf.Cpu">Processeur</s:String>
+    <s:String x:Key="Perf.Memory">Mémoire (RAM)</s:String>
+    <s:String x:Key="Perf.Disk">Disque principal</s:String>
+    <s:String x:Key="Perf.Graphics">Graphismes</s:String>
+    <s:String x:Key="Perf.Gaming">Graphismes de jeu</s:String>
+
     <!-- Pilotes -->
     <s:String x:Key="Drivers.Subtitle">Inventaire en lecture seule de vos pilotes. TraceZero n'installe ni ne télécharge aucun pilote : les mises à jour passent par Windows Update, jamais par une base tierce.</s:String>
     <s:String x:Key="Drivers.UpdateTitle">Mise à jour des pilotes</s:String>

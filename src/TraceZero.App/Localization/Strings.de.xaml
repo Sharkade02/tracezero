@@ -155,6 +155,27 @@
     <s:String x:Key="Mem.XmpInactive">Kein Leistungsprofil erkannt — Speicher läuft mit JEDEC-Basisfrequenz.</s:String>
     <s:String x:Key="Mem.XmpUnknown">Leistungsprofil unbestimmt (unbekannter Speichertyp).</s:String>
 
+    <!-- Live-Systemmonitor -->
+    <s:String x:Key="SystemHealth.LiveLoad">Live-Aktivität</s:String>
+    <s:String x:Key="SystemHealth.TopProcesses">Größte Speicherverbraucher</s:String>
+    <s:String x:Key="SystemHealth.PerfIndex">Windows-Leistungsindex</s:String>
+    <s:String x:Key="Load.NoData">Systemlast auf diesem Gerät nicht verfügbar.</s:String>
+    <s:String x:Key="Load.CpuLabel">Prozessor</s:String>
+    <s:String x:Key="Load.MemoryLabel">Arbeitsspeicher</s:String>
+    <s:String x:Key="Load.Cpu">{0}%</s:String>
+    <s:String x:Key="Load.MemoryUsed">{0} von {1} belegt ({2}%)</s:String>
+    <s:String x:Key="Load.TopProcessesHint">Sortiert nach tatsächlich belegtem Speicher. Das bremst oft den PC — schließen Sie, was Sie nicht brauchen.</s:String>
+    <s:String x:Key="Load.NoProcesses">Keine lesbaren Programme (unzureichende Rechte).</s:String>
+    <s:String x:Key="Load.ProcessCount">{0} Prozesse</s:String>
+    <s:String x:Key="Perf.Note">Von Windows berechnete Werte (WinSAT / „Leistungsindex"), nicht von TraceZero. Von 1,0 bis 9,9.</s:String>
+    <s:String x:Key="Perf.NotAssessed">Keine zwischengespeicherte Bewertung. Führen Sie „winsat formal" in einer Administrator-Eingabeaufforderung aus.</s:String>
+    <s:String x:Key="Perf.Base">Basiswert</s:String>
+    <s:String x:Key="Perf.Cpu">Prozessor</s:String>
+    <s:String x:Key="Perf.Memory">Arbeitsspeicher (RAM)</s:String>
+    <s:String x:Key="Perf.Disk">Primäre Festplatte</s:String>
+    <s:String x:Key="Perf.Graphics">Grafik</s:String>
+    <s:String x:Key="Perf.Gaming">Spielegrafik</s:String>
+
     <s:String x:Key="Drivers.Subtitle">Schreibgeschützte Übersicht Ihrer Treiber. TraceZero installiert und lädt keinen Treiber herunter: Updates laufen über Windows Update, nie über eine Drittanbieter-Datenbank.</s:String>
     <s:String x:Key="Drivers.UpdateTitle">Treiber-Updates</s:String>
     <s:String x:Key="Drivers.UpdateBody">Aus Sicherheitsgründen wird die Treiberinstallation Windows Update überlassen (signierte, kompatible, reversible Treiber).</s:String>

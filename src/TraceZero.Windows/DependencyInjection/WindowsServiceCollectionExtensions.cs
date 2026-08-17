@@ -47,6 +47,11 @@ public static class WindowsServiceCollectionExtensions
         // Impact au démarrage mesuré par Windows (Phase 28), lecture seule.
         services.AddSingleton<IStartupImpactService, StartupImpactService>();
 
+        // Moniteur système en direct : charge RAM/CPU, top consommateurs, indice WinSAT (lecture seule).
+        services.AddSingleton<ISystemLoadService, SystemLoadService>();
+        services.AddSingleton<IProcessUsageService, ProcessUsageService>();
+        services.AddSingleton<IPerformanceIndexService, PerformanceIndexService>();
+
         // Inventaire des pilotes (Driver Health, Phase 14), lecture seule — jamais d'installation.
         services.AddSingleton<IDriverHealthService, DriverHealthService>();
 

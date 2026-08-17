@@ -134,6 +134,11 @@ public partial class ShellViewModel : ObservableObject
             return;
         }
 
+        if (Current is not null && !ReferenceEquals(Current, page))
+        {
+            Current.OnDeactivated();
+        }
+
         foreach (var candidate in PrimaryPages.Concat(FooterPages))
         {
             candidate.IsSelected = ReferenceEquals(candidate, page);
