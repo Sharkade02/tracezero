@@ -9,7 +9,10 @@ et rien de sensible n'est supprimé sans votre choix explicite.
 
 ## Téléchargement
 
-- **Version portable (recommandée, aucune installation)** :
+- **Installeur (`TraceZeroSetup-<version>.exe`)** : double-clic → installe (menu Démarrer + désinstallation
+  propre). Installation **par utilisateur, sans admin** par défaut ; les données vont dans
+  `%LOCALAPPDATA%\TraceZero`.
+- **Version portable (aucune installation)** :
   [`TraceZero-portable.zip`](https://github.com/Sharkade02/tracezero/releases/latest) — décompressez,
   lancez `TraceZero.App.exe`. Les données restent dans le dossier (`Data\`), rien n'est écrit ailleurs.
 - Ou via **winget** : `winget install TraceZero.TraceZero`
@@ -29,6 +32,9 @@ Le résultat doit être **exactement** :
 ```
 
 _(SHA-256 de `TraceZero-portable.zip` v0.1.1)_
+
+> Pour l'**installeur**, comparez avec l'empreinte publiée à côté de `TraceZeroSetup-<version>.exe` dans la
+> release (`Get-FileHash .\TraceZeroSetup-<version>.exe -Algorithm SHA256`).
 
 Si l'empreinte diffère, **ne lancez pas** le fichier (téléchargement corrompu ou altéré).
 

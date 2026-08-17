@@ -86,12 +86,18 @@ façon fiable, est listée ici avec son état honnête.
 
 - **Mode portable** — ✅ livré et testé : données à côté de l'exe via marqueur `tracezero.portable`,
   aucune écriture cachée. Script `build/scripts/publish-portable.ps1` validé.
+- **Installeur EXE** — ✅ livré et testé (Inno Setup). `build/scripts/publish-installer.ps1` publie l'app
+  en layout installé (sans marqueur portable → données dans `%LOCALAPPDATA%\TraceZero`) et compile
+  `build/installer/TraceZero.iss` → `TraceZeroSetup-<version>.exe`. Installation **par utilisateur, sans
+  admin** par défaut (choix « pour tous » possible), raccourci menu Démarrer, désinstallation propre.
+  Vérifié : install silencieux → app lancée → désinstallation → registre/fichiers nettoyés.
 - **Manifeste MSIX** — ✅ fourni (`build/msix/Package.appxmanifest`), non signé.
-- **Reste `PLANNED`** (dépend d'assets externes) : installateur direct **MSI/EXE** (WiX ou équivalent,
-  installation dans Program Files + désinstallation propre), **assets visuels MSIX** aux dimensions du
-  Store, et **signature de code** de tous les exécutables sensibles (app, updater, installer, helper
-  elevated) avec **timestamp** — nécessite un **certificat de signature**. `Publisher` du manifeste MSIX
-  à aligner sur le sujet du certificat.
+- **Reste `PLANNED`** (dépend d'assets externes) : **signature de code** de l'installeur et des exécutables
+  sensibles (app, updater, helper elevated) avec **timestamp** — nécessite un **certificat** (voir
+  `docs/signpath-application.md`) ; **assets visuels MSIX** aux dimensions du Store ; variante **MSI** (WiX)
+  si un déploiement d'entreprise par GPO est un jour requis (l'EXE Inno couvre le cas grand public).
+- **Icône** — l'exe n'embarque pas encore d'`.ico` dédiée ; le raccourci utilise l'icône .NET par défaut
+  (polish à venir : générer une `.ico` depuis `logo.png` + `ApplicationIcon`).
 
 ## Phase 18 — Updater
 
