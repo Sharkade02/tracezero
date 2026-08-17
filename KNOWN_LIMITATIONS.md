@@ -32,11 +32,13 @@ façon fiable, est listée ici avec son état honnête.
 
 ## Phase 4 — Navigateurs
 
-- **Nettoyage limité aux caches SAFE** — `PLANNED`. En Phase 4, seuls les dossiers de cache
-  (régénérables) sont nettoyés ; les connexions/cookies/mots de passe/favoris ne sont jamais touchés
-  (protection par construction). Le nettoyage PRIVACY/REVIEW (historique, cookies choisis, sessions)
-  nécessite de fermer le navigateur et des transactions sur des bases SQLite : prévu ultérieurement
-  avec sauvegarde/restauration (Phase 7) et gestionnaire de cookies (§14).
+- **Nettoyage limité aux caches SAFE** — `DETECTED_ONLY` pour le reste (décision assumée). En Phase 4,
+  seuls les dossiers de cache (régénérables) sont nettoyés ; connexions/cookies/mots de passe/favoris
+  jamais touchés (protection par construction). Le nettoyage **PRIVACY/REVIEW** (historique, cookies,
+  sessions) est **conçu mais non implémenté** : c'est la fonctionnalité la plus à risque du produit
+  (corruption de base SQLite ouverte, dérive de schéma, et surtout **Firefox `places.sqlite` mêle
+  historique et favoris**). Plan complet + évaluation de risque : `docs/phase-4-privacy-browsers-plan.md`.
+  **Recommandation** : ne pas l'activer avant la validation VM (Phase 26).
 - **Opera** — `PLANNED`. Disposition cache/profil scindée entre `Local` et `Roaming` (cache sous
   `%LOCALAPPDATA%\Opera Software\Opera Stable\Cache`) : non incluse pour éviter des chemins erronés.
   Chrome, Edge, Brave, Vivaldi, Chromium et Firefox sont couverts.
