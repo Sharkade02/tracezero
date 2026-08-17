@@ -50,7 +50,7 @@ public sealed partial class NtfsAnalysisViewModel : PageViewModelBase
         _secureErase = secureErase;
     }
 
-    public override string Title => "Analyse NTFS";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Ntfs");
 
     public override string IconGlyph => "\U0001F50E"; // 🔎
 

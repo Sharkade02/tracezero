@@ -14,6 +14,7 @@ public partial class ShellViewModel : ObservableObject
     public ShellViewModel(
         IEnumerable<PageViewModelBase> pages,
         IThemeService themeService,
+        ILocalizationService localization,
         INavigationService navigation,
         IToastService toasts,
         IDialogService dialog)
@@ -27,6 +28,15 @@ public partial class ShellViewModel : ObservableObject
         var all = pages.ToList();
         PrimaryPages = all.Where(p => !p.IsFooter).ToList();
         FooterPages = all.Where(p => p.IsFooter).ToList();
+
+        // Au changement de langue, réémettre les titres/chaînes calculées de toutes les pages (§31).
+        localization.LanguageChanged += (_, _) =>
+        {
+            foreach (var page in PrimaryPages.Concat(FooterPages))
+            {
+                page.RefreshLocalization();
+            }
+        };
 
         Navigate(PrimaryPages.Count > 0 ? PrimaryPages[0] : null);
     }

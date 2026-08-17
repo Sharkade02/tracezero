@@ -76,7 +76,7 @@ public sealed partial class SettingsViewModel : PageViewModelBase
         }
     }
 
-    public override string Title => "Paramètres";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Settings");
 
     public override string IconGlyph => "\U0001F527";
 

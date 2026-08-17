@@ -18,7 +18,7 @@ public sealed partial class DashboardViewModel : PageViewModelBase
         _cleanup = cleanup;
     }
 
-    public override string Title => "Accueil";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Home");
 
     public override string IconGlyph => "\U0001F3E0";
 

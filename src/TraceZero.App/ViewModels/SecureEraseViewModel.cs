@@ -75,7 +75,7 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
         _toasts = toasts;
     }
 
-    public override string Title => "Effacement sécurisé";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.SecureErase");
 
     public override string IconGlyph => "\U0001F525"; // 🔥
 

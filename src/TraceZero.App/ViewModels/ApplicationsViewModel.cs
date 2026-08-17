@@ -64,7 +64,7 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
         _toasts = toasts;
     }
 
-    public override string Title => "Applications";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Applications");
     public override string IconGlyph => "\U0001F4E6";
     public override bool IsUnderConstruction => false;
 

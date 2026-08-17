@@ -50,7 +50,7 @@ public sealed partial class HistoryViewModel : PageViewModelBase
         _toasts = toasts;
     }
 
-    public override string Title => "Historique";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.History");
 
     public override string IconGlyph => "\U0001F553";
 

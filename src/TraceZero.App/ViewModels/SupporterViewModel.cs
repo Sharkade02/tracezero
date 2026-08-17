@@ -24,7 +24,7 @@ public sealed partial class SupporterViewModel : PageViewModelBase
         RefreshStatus();
     }
 
-    public override string Title => "Soutenir";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Supporter");
     public override string IconGlyph => "❤";
     public override bool IsFooter => true;
     public override bool IsUnderConstruction => false;

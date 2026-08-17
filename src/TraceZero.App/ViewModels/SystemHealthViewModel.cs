@@ -77,7 +77,7 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
         _startupImpact = startupImpact;
     }
 
-    public override string Title => "Santé système";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.SystemHealth");
 
     public override string IconGlyph => "\U0001FA7A"; // 🩺
 

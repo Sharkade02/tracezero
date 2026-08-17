@@ -12,8 +12,48 @@
     <s:String x:Key="Common.Add">Add</s:String>
     <s:String x:Key="Common.Remove">Remove</s:String>
     <s:String x:Key="Common.Close">Close</s:String>
+    <s:String x:Key="Action.Analyze">Analyze my PC</s:String>
+    <s:String x:Key="Action.Clean">Clean now</s:String>
+
+    <s:String x:Key="Risk.Safe">Safe</s:String>
+    <s:String x:Key="Risk.Privacy">Privacy</s:String>
+    <s:String x:Key="Risk.Review">Review</s:String>
+
+    <s:String x:Key="Nav.Home">Home</s:String>
+    <s:String x:Key="Nav.Cleanup">Cleanup</s:String>
+    <s:String x:Key="Nav.Privacy">Privacy</s:String>
+    <s:String x:Key="Nav.Browsers">Browsers</s:String>
+    <s:String x:Key="Nav.DiskSpace">Disk space</s:String>
+    <s:String x:Key="Nav.SystemHealth">System health</s:String>
+    <s:String x:Key="Nav.Drivers">Drivers</s:String>
+    <s:String x:Key="Nav.Duplicates">Duplicates</s:String>
+    <s:String x:Key="Nav.Applications">Applications</s:String>
+    <s:String x:Key="Nav.SecureErase">Secure erase</s:String>
+    <s:String x:Key="Nav.Ntfs">NTFS analysis</s:String>
+    <s:String x:Key="Nav.Automation">Automation</s:String>
+    <s:String x:Key="Nav.History">History</s:String>
+    <s:String x:Key="Nav.Restore">Restore</s:String>
+    <s:String x:Key="Nav.Settings">Settings</s:String>
+    <s:String x:Key="Nav.Supporter">Support</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Toggle theme</s:String>
+
+    <s:String x:Key="Home.Headline">Your PC can be cleaned safely</s:String>
+    <s:String x:Key="Home.Subtitle">TraceZero analyzes your system locally: temporary files, browser traces, Recycle Bin and Windows activity traces — while protecting your privacy.</s:String>
+    <s:String x:Key="Home.Recoverable">Recoverable space</s:String>
+    <s:String x:Key="Home.NoScan">No scan performed yet. Run a scan to see recoverable space.</s:String>
+    <s:String x:Key="Home.AnalyzeHint">Opens the Cleanup page and runs a real scan of your PC.</s:String>
+    <s:String x:Key="Home.Card.WinTemp">Windows temporary</s:String>
+    <s:String x:Key="Home.Card.RecycleBin">Recycle Bin</s:String>
+    <s:String x:Key="Home.Card.WinTraces">Windows traces</s:String>
+    <s:String x:Key="Home.Privacy.Title">Privacy first</s:String>
+    <s:String x:Key="Home.Privacy.Body">Everything runs locally on your PC. No data is sent, and no displayed value is faked: figures only appear after a real scan.</s:String>
+
+    <s:String x:Key="Cleanup.Subtitle">Scan your PC, choose what to delete, then clean. Every deletion is validated by the safety layer.</s:String>
+    <s:String x:Key="Cleanup.Selection">Selection to clean</s:String>
+    <s:String x:Key="Cleanup.EmptyTitle">Nothing to clean</s:String>
+    <s:String x:Key="Cleanup.EmptyBody">No recoverable items were found for now. That's a good sign!</s:String>
+    <s:String x:Key="Cleanup.ResultTitle">Cleanup result</s:String>
 
     <s:String x:Key="Settings.Title">Settings</s:String>
     <s:String x:Key="Settings.Appearance">Appearance</s:String>

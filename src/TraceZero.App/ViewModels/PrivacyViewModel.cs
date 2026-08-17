@@ -80,7 +80,7 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
         _vault = vault;
     }
 
-    public override string Title => "Confidentialité";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Privacy");
 
     public override string IconGlyph => "\U0001F512";
 

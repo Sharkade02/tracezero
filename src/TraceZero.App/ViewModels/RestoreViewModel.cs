@@ -68,7 +68,7 @@ public sealed partial class RestoreViewModel : PageViewModelBase
         _toasts = toasts;
     }
 
-    public override string Title => "Restauration";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Restore");
 
     public override string IconGlyph => "\U0001F6E1"; // 🛡
 

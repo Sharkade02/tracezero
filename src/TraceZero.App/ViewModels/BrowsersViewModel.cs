@@ -53,7 +53,7 @@ public sealed partial class BrowsersViewModel : PageViewModelBase
         Refresh();
     }
 
-    public override string Title => "Navigateurs";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Browsers");
 
     public override string IconGlyph => "\U0001F310";
 

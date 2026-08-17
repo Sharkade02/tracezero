@@ -39,7 +39,7 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
         _exclusionStore = exclusionStore;
     }
 
-    public override string Title => "Nettoyage";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Cleanup");
 
     public override string IconGlyph => "\U0001F9F9";
 

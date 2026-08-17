@@ -6,15 +6,61 @@
 
     <s:String x:Key="App.Tagline">Voyez ce qui reste. Nettoyez ce que vous choisissez.</s:String>
 
+    <!-- Actions et libellés communs -->
     <s:String x:Key="Common.Refresh">Actualiser</s:String>
     <s:String x:Key="Common.Cancel">Annuler</s:String>
     <s:String x:Key="Common.Confirm">Confirmer</s:String>
     <s:String x:Key="Common.Add">Ajouter</s:String>
     <s:String x:Key="Common.Remove">Retirer</s:String>
     <s:String x:Key="Common.Close">Fermer</s:String>
+    <s:String x:Key="Action.Analyze">Analyser mon PC</s:String>
+    <s:String x:Key="Action.Clean">Nettoyer maintenant</s:String>
+
+    <!-- Niveaux de risque -->
+    <s:String x:Key="Risk.Safe">Sans risque</s:String>
+    <s:String x:Key="Risk.Privacy">Confidentialité</s:String>
+    <s:String x:Key="Risk.Review">À vérifier</s:String>
+
+    <!-- Navigation -->
+    <s:String x:Key="Nav.Home">Accueil</s:String>
+    <s:String x:Key="Nav.Cleanup">Nettoyage</s:String>
+    <s:String x:Key="Nav.Privacy">Confidentialité</s:String>
+    <s:String x:Key="Nav.Browsers">Navigateurs</s:String>
+    <s:String x:Key="Nav.DiskSpace">Espace disque</s:String>
+    <s:String x:Key="Nav.SystemHealth">Santé système</s:String>
+    <s:String x:Key="Nav.Drivers">Pilotes</s:String>
+    <s:String x:Key="Nav.Duplicates">Doublons</s:String>
+    <s:String x:Key="Nav.Applications">Applications</s:String>
+    <s:String x:Key="Nav.SecureErase">Effacement sécurisé</s:String>
+    <s:String x:Key="Nav.Ntfs">Analyse NTFS</s:String>
+    <s:String x:Key="Nav.Automation">Automatisation</s:String>
+    <s:String x:Key="Nav.History">Historique</s:String>
+    <s:String x:Key="Nav.Restore">Restauration</s:String>
+    <s:String x:Key="Nav.Settings">Paramètres</s:String>
+    <s:String x:Key="Nav.Supporter">Soutenir</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Basculer le thème</s:String>
 
+    <!-- Accueil -->
+    <s:String x:Key="Home.Headline">Votre PC peut être nettoyé en toute sécurité</s:String>
+    <s:String x:Key="Home.Subtitle">TraceZero analyse votre système localement : fichiers temporaires, traces de navigateurs, Corbeille et traces d'activité Windows — en protégeant votre vie privée.</s:String>
+    <s:String x:Key="Home.Recoverable">Espace récupérable</s:String>
+    <s:String x:Key="Home.NoScan">Aucune analyse effectuée. Lancez une analyse pour voir l'espace récupérable.</s:String>
+    <s:String x:Key="Home.AnalyzeHint">Ouvre la page Nettoyage et lance une analyse réelle de votre PC.</s:String>
+    <s:String x:Key="Home.Card.WinTemp">Windows temporaires</s:String>
+    <s:String x:Key="Home.Card.RecycleBin">Corbeille</s:String>
+    <s:String x:Key="Home.Card.WinTraces">Traces Windows</s:String>
+    <s:String x:Key="Home.Privacy.Title">Confidentialité d'abord</s:String>
+    <s:String x:Key="Home.Privacy.Body">Tout se passe localement sur votre PC. Aucune donnée n'est envoyée, aucune valeur affichée n'est simulée : les chiffres n'apparaissent qu'après une analyse réelle.</s:String>
+
+    <!-- Nettoyage -->
+    <s:String x:Key="Cleanup.Subtitle">Analysez votre PC, choisissez ce qui doit être supprimé, puis nettoyez. Chaque suppression est validée par la couche de sécurité.</s:String>
+    <s:String x:Key="Cleanup.Selection">Sélection à nettoyer</s:String>
+    <s:String x:Key="Cleanup.EmptyTitle">Rien à nettoyer</s:String>
+    <s:String x:Key="Cleanup.EmptyBody">Aucun élément récupérable n'a été trouvé pour le moment. C'est bon signe !</s:String>
+    <s:String x:Key="Cleanup.ResultTitle">Résultat du nettoyage</s:String>
+
+    <!-- Paramètres -->
     <s:String x:Key="Settings.Title">Paramètres</s:String>
     <s:String x:Key="Settings.Appearance">Apparence</s:String>
     <s:String x:Key="Settings.DarkMode">Thème sombre</s:String>
@@ -27,6 +73,7 @@
     <s:String x:Key="Settings.AdvancedCleaning">Nettoyage avancé</s:String>
     <s:String x:Key="Settings.CleanWindowsTemp">Nettoyer C:\Windows\Temp (élévation)</s:String>
 
+    <!-- Langues (endonymes) -->
     <s:String x:Key="Lang.French">Français</s:String>
     <s:String x:Key="Lang.English">Anglais</s:String>
     <s:String x:Key="Lang.German">Allemand</s:String>

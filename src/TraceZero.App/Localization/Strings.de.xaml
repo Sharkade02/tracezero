@@ -12,8 +12,48 @@
     <s:String x:Key="Common.Add">Hinzufügen</s:String>
     <s:String x:Key="Common.Remove">Entfernen</s:String>
     <s:String x:Key="Common.Close">Schließen</s:String>
+    <s:String x:Key="Action.Analyze">Meinen PC analysieren</s:String>
+    <s:String x:Key="Action.Clean">Jetzt bereinigen</s:String>
+
+    <s:String x:Key="Risk.Safe">Unbedenklich</s:String>
+    <s:String x:Key="Risk.Privacy">Datenschutz</s:String>
+    <s:String x:Key="Risk.Review">Zu prüfen</s:String>
+
+    <s:String x:Key="Nav.Home">Start</s:String>
+    <s:String x:Key="Nav.Cleanup">Bereinigung</s:String>
+    <s:String x:Key="Nav.Privacy">Datenschutz</s:String>
+    <s:String x:Key="Nav.Browsers">Browser</s:String>
+    <s:String x:Key="Nav.DiskSpace">Speicherplatz</s:String>
+    <s:String x:Key="Nav.SystemHealth">Systemzustand</s:String>
+    <s:String x:Key="Nav.Drivers">Treiber</s:String>
+    <s:String x:Key="Nav.Duplicates">Duplikate</s:String>
+    <s:String x:Key="Nav.Applications">Anwendungen</s:String>
+    <s:String x:Key="Nav.SecureErase">Sicheres Löschen</s:String>
+    <s:String x:Key="Nav.Ntfs">NTFS-Analyse</s:String>
+    <s:String x:Key="Nav.Automation">Automatisierung</s:String>
+    <s:String x:Key="Nav.History">Verlauf</s:String>
+    <s:String x:Key="Nav.Restore">Wiederherstellung</s:String>
+    <s:String x:Key="Nav.Settings">Einstellungen</s:String>
+    <s:String x:Key="Nav.Supporter">Unterstützen</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Design umschalten</s:String>
+
+    <s:String x:Key="Home.Headline">Ihr PC kann sicher bereinigt werden</s:String>
+    <s:String x:Key="Home.Subtitle">TraceZero analysiert Ihr System lokal: temporäre Dateien, Browserspuren, Papierkorb und Windows-Aktivitätsspuren — und schützt dabei Ihre Privatsphäre.</s:String>
+    <s:String x:Key="Home.Recoverable">Freigebbarer Speicher</s:String>
+    <s:String x:Key="Home.NoScan">Noch keine Analyse durchgeführt. Starten Sie eine Analyse, um den freigebbaren Speicher zu sehen.</s:String>
+    <s:String x:Key="Home.AnalyzeHint">Öffnet die Bereinigungsseite und führt eine echte Analyse Ihres PCs durch.</s:String>
+    <s:String x:Key="Home.Card.WinTemp">Windows-Temporär</s:String>
+    <s:String x:Key="Home.Card.RecycleBin">Papierkorb</s:String>
+    <s:String x:Key="Home.Card.WinTraces">Windows-Spuren</s:String>
+    <s:String x:Key="Home.Privacy.Title">Datenschutz zuerst</s:String>
+    <s:String x:Key="Home.Privacy.Body">Alles läuft lokal auf Ihrem PC. Es werden keine Daten gesendet und kein angezeigter Wert ist erfunden: Zahlen erscheinen erst nach einer echten Analyse.</s:String>
+
+    <s:String x:Key="Cleanup.Subtitle">Analysieren Sie Ihren PC, wählen Sie, was gelöscht werden soll, und bereinigen Sie. Jede Löschung wird von der Sicherheitsschicht geprüft.</s:String>
+    <s:String x:Key="Cleanup.Selection">Auswahl zum Bereinigen</s:String>
+    <s:String x:Key="Cleanup.EmptyTitle">Nichts zu bereinigen</s:String>
+    <s:String x:Key="Cleanup.EmptyBody">Derzeit wurden keine freigebbaren Elemente gefunden. Das ist ein gutes Zeichen!</s:String>
+    <s:String x:Key="Cleanup.ResultTitle">Bereinigungsergebnis</s:String>
 
     <s:String x:Key="Settings.Title">Einstellungen</s:String>
     <s:String x:Key="Settings.Appearance">Darstellung</s:String>

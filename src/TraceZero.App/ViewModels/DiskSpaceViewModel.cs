@@ -67,7 +67,7 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
         LoadDrives();
     }
 
-    public override string Title => "Espace disque";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.DiskSpace");
     public override string IconGlyph => "\U0001F4BD";
     public override bool IsUnderConstruction => false;
 

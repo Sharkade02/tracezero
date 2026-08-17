@@ -88,7 +88,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
         SelectedThreshold = Thresholds[1];
     }
 
-    public override string Title => "Doublons";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Duplicates");
     public override string IconGlyph => "\U0001F5C2";
     public override bool IsUnderConstruction => false;
 

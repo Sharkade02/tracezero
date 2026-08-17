@@ -55,7 +55,7 @@ public sealed partial class DriverHealthViewModel : PageViewModelBase
         _toasts = toasts;
     }
 
-    public override string Title => "Pilotes";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Drivers");
 
     public override string IconGlyph => "\U0001F527"; // 🔧
 

@@ -22,7 +22,7 @@ public sealed partial class AutomationViewModel : PageViewModelBase
             : "Le nettoyage automatique est désactivé.";
     }
 
-    public override string Title => "Automatisation";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Automation");
     public override string IconGlyph => "⚙";
     public override bool IsUnderConstruction => false;
 
