@@ -1,0 +1,3 @@
+# Adds a "Sponsor" button to the repository.
+# PayPal isn't a native key → use "custom". Add ko_fi / github later if you set them up.
+custom: ["https://paypal.me/sharkadeFR"]
