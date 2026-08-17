@@ -22,9 +22,9 @@ public sealed class RestoreRowViewModel
         Source = record.Source;
         ReversibilityText = record.Reversibility switch
         {
-            Reversibility.Reversible => "Réversible",
-            Reversibility.PartiallyReversible => "Partiellement réversible",
-            _ => "Irréversible",
+            Reversibility.Reversible => Localizer.Get("Rev.Reversible"),
+            Reversibility.PartiallyReversible => Localizer.Get("Rev.Partial"),
+            _ => Localizer.Get("Rev.Irreversible"),
         };
     }
 

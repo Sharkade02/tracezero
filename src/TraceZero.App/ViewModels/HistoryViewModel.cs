@@ -12,16 +12,23 @@ namespace TraceZero.App.ViewModels;
 /// <summary>Ligne d'historique affichée.</summary>
 public sealed class HistoryRowViewModel
 {
-    private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
+    // Les sources sont stockées en clair (catégorie) ; on les mappe vers une chaîne localisée à l'affichage.
+    private static string MapSource(string source) => source switch
+    {
+        "Nettoyage" => Localizer.Get("Nav.Cleanup"),
+        "Confidentialité" => Localizer.Get("Nav.Privacy"),
+        "Automatisation" => Localizer.Get("Nav.Automation"),
+        _ => source,
+    };
 
     public HistoryRowViewModel(CleanupHistoryEntry entry)
     {
-        DateText = entry.TimestampUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm", Fr);
-        Source = entry.Source;
+        DateText = entry.TimestampUtc.ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        Source = MapSource(entry.Source);
         FreedText = ByteSize.Format(entry.FreedBytes);
         Details = entry.Failures > 0
-            ? $"{entry.ItemsCleaned} élément(s) · {entry.Failures} ignoré(s)"
-            : $"{entry.ItemsCleaned} élément(s)";
+            ? Localizer.Format("History.DetailsFailures", entry.ItemsCleaned, entry.Failures)
+            : Localizer.Format("Common.Items", entry.ItemsCleaned);
     }
 
     public string DateText { get; }

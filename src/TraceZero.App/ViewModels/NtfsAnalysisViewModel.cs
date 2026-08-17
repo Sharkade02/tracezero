@@ -18,7 +18,7 @@ public sealed class NtfsArtifactRowViewModel
         Why = artifact.Why;
         Detail = artifact.Detail ?? string.Empty;
         IsMitigable = artifact.Status == NtfsArtifactStatus.MitigableByFreeSpaceWipe;
-        StatusText = IsMitigable ? "Atténuable" : "Détectée";
+        StatusText = IsMitigable ? Localizer.Get("Ntfs.Mitigable") : Localizer.Get("Ntfs.Detected");
     }
 
     public NtfsArtifact Model { get; }

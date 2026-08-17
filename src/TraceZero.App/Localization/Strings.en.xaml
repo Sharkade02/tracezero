@@ -204,6 +204,33 @@
     <s:String x:Key="Rule.Thumbnails.Name">Cached thumbnails and icons</s:String>
     <s:String x:Key="Rule.Thumbnails.Desc">Thumbnails and icons cached by Explorer. Automatically regenerated.</s:String>
 
+    <s:String x:Key="Health.Hdd">Hard drive (HDD)</s:String>
+    <s:String x:Key="Health.Ssd">SSD</s:String>
+    <s:String x:Key="Health.UnknownMedia">Unknown type</s:String>
+    <s:String x:Key="Health.Healthy">Healthy</s:String>
+    <s:String x:Key="Health.Warning">Warning</s:String>
+    <s:String x:Key="Health.Unhealthy">Unhealthy</s:String>
+    <s:String x:Key="Health.Unknown">Unknown status</s:String>
+    <s:String x:Key="Health.WarningText">Windows reports a risk on this disk — consider backing up your data.</s:String>
+    <s:String x:Key="Impact.Average">average over {0:N0} startups</s:String>
+    <s:String x:Key="Impact.Single">1 startup measured</s:String>
+    <s:String x:Key="Impact.Unavailable">Measurements unavailable: reading the Windows performance log requires administrator rights.</s:String>
+    <s:String x:Key="Impact.None">No startup impact recently measured by Windows.</s:String>
+    <s:String x:Key="Impact.Measured">Impact actually measured by Windows over your last startups. Manage programs in 'Applications'.</s:String>
+    <s:String x:Key="Drivers.UnknownProvider">Unknown provider</s:String>
+    <s:String x:Key="Drivers.Problem">Problem (code {0})</s:String>
+    <s:String x:Key="Drivers.Signed">Signed</s:String>
+    <s:String x:Key="Drivers.Unsigned">Unsigned</s:String>
+    <s:String x:Key="Drivers.SummaryProblems">{0:N0} driver(s) · {1:N0} device(s) reported as problematic by Windows</s:String>
+    <s:String x:Key="Drivers.SummaryOk">{0:N0} driver(s) · no problem reported by Windows</s:String>
+    <s:String x:Key="Rev.Reversible">Reversible</s:String>
+    <s:String x:Key="Rev.Partial">Partially reversible</s:String>
+    <s:String x:Key="Rev.Irreversible">Irreversible</s:String>
+    <s:String x:Key="Ntfs.Detected">Detected</s:String>
+    <s:String x:Key="Ntfs.Mitigable">Mitigable</s:String>
+    <s:String x:Key="Apps.UnknownPublisher">Unknown publisher</s:String>
+    <s:String x:Key="History.DetailsFailures">{0:N0} item(s) · {1:N0} skipped</s:String>
+
     <s:String x:Key="Lang.French">French</s:String>
     <s:String x:Key="Lang.English">English</s:String>
     <s:String x:Key="Lang.German">German</s:String>

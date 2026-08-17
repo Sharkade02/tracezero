@@ -18,13 +18,13 @@ public sealed class DriverRowViewModel
         DeviceName = driver.DeviceName;
         DeviceClass = driver.DeviceClass ?? string.Empty;
         Version = string.IsNullOrWhiteSpace(driver.Version) ? "—" : driver.Version!;
-        Provider = driver.Provider ?? driver.Manufacturer ?? "Fournisseur inconnu";
-        DateText = driver.Date?.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("fr-FR")) ?? "—";
+        Provider = driver.Provider ?? driver.Manufacturer ?? Localizer.Get("Drivers.UnknownProvider");
+        DateText = driver.Date?.ToString("d", CultureInfo.CurrentCulture) ?? "—";
         HasProblem = driver.HasProblem;
 
         StatusText = driver.HasProblem
-            ? $"Problème (code {driver.ProblemCode})"
-            : driver.IsSigned ? "Signé" : "Non signé";
+            ? Localizer.Format("Drivers.Problem", driver.ProblemCode)
+            : driver.IsSigned ? Localizer.Get("Drivers.Signed") : Localizer.Get("Drivers.Unsigned");
     }
 
     public DriverInfo Model { get; }
@@ -129,8 +129,8 @@ public sealed partial class DriverHealthViewModel : PageViewModelBase
 
         var problemCount = _all.Count(d => d.HasProblem);
         SummaryText = problemCount > 0
-            ? $"{_all.Count} pilote(s) · {problemCount} périphérique(s) signalé(s) en problème par Windows"
-            : $"{_all.Count} pilote(s) · aucun problème signalé par Windows";
+            ? Localizer.Format("Drivers.SummaryProblems", _all.Count, problemCount)
+            : Localizer.Format("Drivers.SummaryOk", _all.Count);
     }
 
     [RelayCommand]

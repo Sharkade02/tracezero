@@ -15,7 +15,7 @@ public sealed class AppRowViewModel(AppInstallation app)
 {
     public AppInstallation Model => app;
     public string Name => app.Name;
-    public string Publisher => app.Publisher ?? "Éditeur inconnu";
+    public string Publisher => app.Publisher ?? Localizer.Get("Apps.UnknownPublisher");
     public string Version => app.Version is { } v ? $"v{v}" : string.Empty;
     public string SizeText => app.SizeBytes is { } s ? ByteSize.Format(s) : string.Empty;
     public string InstallDateText => app.InstallDate?.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("fr-FR")) ?? string.Empty;

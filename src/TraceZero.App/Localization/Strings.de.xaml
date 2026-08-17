@@ -204,6 +204,33 @@
     <s:String x:Key="Rule.Thumbnails.Name">Zwischengespeicherte Miniaturansichten und Symbole</s:String>
     <s:String x:Key="Rule.Thumbnails.Desc">Von Explorer zwischengespeicherte Miniaturansichten und Symbole. Automatisch neu erzeugt.</s:String>
 
+    <s:String x:Key="Health.Hdd">Festplatte (HDD)</s:String>
+    <s:String x:Key="Health.Ssd">SSD</s:String>
+    <s:String x:Key="Health.UnknownMedia">Unbekannter Typ</s:String>
+    <s:String x:Key="Health.Healthy">Fehlerfrei</s:String>
+    <s:String x:Key="Health.Warning">Warnung</s:String>
+    <s:String x:Key="Health.Unhealthy">Fehlerhaft</s:String>
+    <s:String x:Key="Health.Unknown">Unbekannter Status</s:String>
+    <s:String x:Key="Health.WarningText">Windows meldet ein Risiko für diesen Datenträger — sichern Sie Ihre Daten.</s:String>
+    <s:String x:Key="Impact.Average">Durchschnitt über {0:N0} Starts</s:String>
+    <s:String x:Key="Impact.Single">1 Start gemessen</s:String>
+    <s:String x:Key="Impact.Unavailable">Messungen nicht verfügbar: Das Lesen des Windows-Leistungsprotokolls erfordert Administratorrechte.</s:String>
+    <s:String x:Key="Impact.None">Kürzlich keine Startauswirkung von Windows gemessen.</s:String>
+    <s:String x:Key="Impact.Measured">Von Windows über Ihre letzten Starts tatsächlich gemessene Auswirkung. Verwalten Sie Programme unter „Anwendungen“.</s:String>
+    <s:String x:Key="Drivers.UnknownProvider">Unbekannter Anbieter</s:String>
+    <s:String x:Key="Drivers.Problem">Problem (Code {0})</s:String>
+    <s:String x:Key="Drivers.Signed">Signiert</s:String>
+    <s:String x:Key="Drivers.Unsigned">Nicht signiert</s:String>
+    <s:String x:Key="Drivers.SummaryProblems">{0:N0} Treiber · {1:N0} von Windows als problematisch gemeldete(s) Gerät(e)</s:String>
+    <s:String x:Key="Drivers.SummaryOk">{0:N0} Treiber · kein von Windows gemeldetes Problem</s:String>
+    <s:String x:Key="Rev.Reversible">Reversibel</s:String>
+    <s:String x:Key="Rev.Partial">Teilweise reversibel</s:String>
+    <s:String x:Key="Rev.Irreversible">Unwiderruflich</s:String>
+    <s:String x:Key="Ntfs.Detected">Erkannt</s:String>
+    <s:String x:Key="Ntfs.Mitigable">Minderbar</s:String>
+    <s:String x:Key="Apps.UnknownPublisher">Unbekannter Herausgeber</s:String>
+    <s:String x:Key="History.DetailsFailures">{0:N0} Element(e) · {1:N0} übersprungen</s:String>
+
     <s:String x:Key="Lang.French">Französisch</s:String>
     <s:String x:Key="Lang.English">Englisch</s:String>
     <s:String x:Key="Lang.German">Deutsch</s:String>

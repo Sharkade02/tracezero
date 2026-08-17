@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.Diagnostics;
 using TraceZero.Domain.Common;
 using TraceZero.Domain.Diagnostics;
@@ -17,21 +18,21 @@ public sealed class DiskHealthRowViewModel
         SizeText = disk.SizeBytes > 0 ? ByteSize.Format(disk.SizeBytes) : string.Empty;
         MediaText = disk.Media switch
         {
-            DiskMediaKind.Hdd => "Disque dur (HDD)",
-            DiskMediaKind.Ssd => "SSD",
-            _ => "Type inconnu",
+            DiskMediaKind.Hdd => Localizer.Get("Health.Hdd"),
+            DiskMediaKind.Ssd => Localizer.Get("Health.Ssd"),
+            _ => Localizer.Get("Health.UnknownMedia"),
         };
         Status = disk.Status;
         StatusText = disk.Status switch
         {
-            DiskHealthStatus.Healthy => "Sain",
-            DiskHealthStatus.Warning => "Avertissement",
-            DiskHealthStatus.Unhealthy => "Défaillant",
-            _ => "État inconnu",
+            DiskHealthStatus.Healthy => Localizer.Get("Health.Healthy"),
+            DiskHealthStatus.Warning => Localizer.Get("Health.Warning"),
+            DiskHealthStatus.Unhealthy => Localizer.Get("Health.Unhealthy"),
+            _ => Localizer.Get("Health.Unknown"),
         };
         // Détail factuel, sans alarmisme, quand Windows signale un risque.
         WarningText = disk.Status is DiskHealthStatus.Warning or DiskHealthStatus.Unhealthy
-            ? "Windows signale un risque sur ce disque — pensez à sauvegarder vos données."
+            ? Localizer.Get("Health.WarningText")
             : null;
     }
 
@@ -52,8 +53,8 @@ public sealed class StartupImpactRowViewModel
         Name = impact.Name;
         ImpactText = $"+{Math.Round(impact.AverageMs):N0} ms";
         SampleText = impact.SampleCount > 1
-            ? $"moyenne sur {impact.SampleCount} démarrages"
-            : "1 démarrage mesuré";
+            ? Localizer.Format("Impact.Average", impact.SampleCount)
+            : Localizer.Get("Impact.Single");
     }
 
     public string Name { get; }
@@ -131,10 +132,10 @@ public sealed partial class SystemHealthViewModel : PageViewModelBase
 
             HasImpacts = Impacts.Count > 0;
             ImpactMessage = !report.DataAvailable
-                ? "Mesures indisponibles : la lecture du journal de performances de Windows requiert des droits administrateur."
+                ? Localizer.Get("Impact.Unavailable")
                 : Impacts.Count == 0
-                    ? "Aucun impact au démarrage mesuré récemment par Windows."
-                    : "Impact réellement mesuré par Windows sur vos derniers démarrages. Gérez les programmes dans « Applications ».";
+                    ? Localizer.Get("Impact.None")
+                    : Localizer.Get("Impact.Measured");
 
             _loaded = true;
         }

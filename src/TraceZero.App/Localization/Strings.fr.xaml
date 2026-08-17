@@ -224,6 +224,34 @@
     <s:String x:Key="Rule.Thumbnails.Name">Miniatures et icônes en cache</s:String>
     <s:String x:Key="Rule.Thumbnails.Desc">Vignettes et icônes mises en cache par l'Explorateur. Régénérées automatiquement.</s:String>
 
+    <!-- Libellés calculés (lignes de listes) -->
+    <s:String x:Key="Health.Hdd">Disque dur (HDD)</s:String>
+    <s:String x:Key="Health.Ssd">SSD</s:String>
+    <s:String x:Key="Health.UnknownMedia">Type inconnu</s:String>
+    <s:String x:Key="Health.Healthy">Sain</s:String>
+    <s:String x:Key="Health.Warning">Avertissement</s:String>
+    <s:String x:Key="Health.Unhealthy">Défaillant</s:String>
+    <s:String x:Key="Health.Unknown">État inconnu</s:String>
+    <s:String x:Key="Health.WarningText">Windows signale un risque sur ce disque — pensez à sauvegarder vos données.</s:String>
+    <s:String x:Key="Impact.Average">moyenne sur {0:N0} démarrages</s:String>
+    <s:String x:Key="Impact.Single">1 démarrage mesuré</s:String>
+    <s:String x:Key="Impact.Unavailable">Mesures indisponibles : la lecture du journal de performances de Windows requiert des droits administrateur.</s:String>
+    <s:String x:Key="Impact.None">Aucun impact au démarrage mesuré récemment par Windows.</s:String>
+    <s:String x:Key="Impact.Measured">Impact réellement mesuré par Windows sur vos derniers démarrages. Gérez les programmes dans « Applications ».</s:String>
+    <s:String x:Key="Drivers.UnknownProvider">Fournisseur inconnu</s:String>
+    <s:String x:Key="Drivers.Problem">Problème (code {0})</s:String>
+    <s:String x:Key="Drivers.Signed">Signé</s:String>
+    <s:String x:Key="Drivers.Unsigned">Non signé</s:String>
+    <s:String x:Key="Drivers.SummaryProblems">{0:N0} pilote(s) · {1:N0} périphérique(s) signalé(s) en problème par Windows</s:String>
+    <s:String x:Key="Drivers.SummaryOk">{0:N0} pilote(s) · aucun problème signalé par Windows</s:String>
+    <s:String x:Key="Rev.Reversible">Réversible</s:String>
+    <s:String x:Key="Rev.Partial">Partiellement réversible</s:String>
+    <s:String x:Key="Rev.Irreversible">Irréversible</s:String>
+    <s:String x:Key="Ntfs.Detected">Détectée</s:String>
+    <s:String x:Key="Ntfs.Mitigable">Atténuable</s:String>
+    <s:String x:Key="Apps.UnknownPublisher">Éditeur inconnu</s:String>
+    <s:String x:Key="History.DetailsFailures">{0:N0} élément(s) · {1:N0} ignoré(s)</s:String>
+
     <!-- Langues (endonymes) -->
     <s:String x:Key="Lang.French">Français</s:String>
     <s:String x:Key="Lang.English">Anglais</s:String>

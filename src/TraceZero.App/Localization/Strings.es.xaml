@@ -204,6 +204,33 @@
     <s:String x:Key="Rule.Thumbnails.Name">Miniaturas e iconos en caché</s:String>
     <s:String x:Key="Rule.Thumbnails.Desc">Miniaturas e iconos almacenados en caché por el Explorador. Se regeneran automáticamente.</s:String>
 
+    <s:String x:Key="Health.Hdd">Disco duro (HDD)</s:String>
+    <s:String x:Key="Health.Ssd">SSD</s:String>
+    <s:String x:Key="Health.UnknownMedia">Tipo desconocido</s:String>
+    <s:String x:Key="Health.Healthy">Correcto</s:String>
+    <s:String x:Key="Health.Warning">Advertencia</s:String>
+    <s:String x:Key="Health.Unhealthy">Defectuoso</s:String>
+    <s:String x:Key="Health.Unknown">Estado desconocido</s:String>
+    <s:String x:Key="Health.WarningText">Windows indica un riesgo en este disco — considere hacer una copia de seguridad de sus datos.</s:String>
+    <s:String x:Key="Impact.Average">promedio sobre {0:N0} inicios</s:String>
+    <s:String x:Key="Impact.Single">1 inicio medido</s:String>
+    <s:String x:Key="Impact.Unavailable">Mediciones no disponibles: leer el registro de rendimiento de Windows requiere derechos de administrador.</s:String>
+    <s:String x:Key="Impact.None">Windows no ha medido recientemente ningún impacto en el inicio.</s:String>
+    <s:String x:Key="Impact.Measured">Impacto realmente medido por Windows en sus últimos inicios. Gestione los programas en «Aplicaciones».</s:String>
+    <s:String x:Key="Drivers.UnknownProvider">Proveedor desconocido</s:String>
+    <s:String x:Key="Drivers.Problem">Problema (código {0})</s:String>
+    <s:String x:Key="Drivers.Signed">Firmado</s:String>
+    <s:String x:Key="Drivers.Unsigned">Sin firmar</s:String>
+    <s:String x:Key="Drivers.SummaryProblems">{0:N0} controlador(es) · {1:N0} dispositivo(s) señalado(s) con problema por Windows</s:String>
+    <s:String x:Key="Drivers.SummaryOk">{0:N0} controlador(es) · ningún problema señalado por Windows</s:String>
+    <s:String x:Key="Rev.Reversible">Reversible</s:String>
+    <s:String x:Key="Rev.Partial">Parcialmente reversible</s:String>
+    <s:String x:Key="Rev.Irreversible">Irreversible</s:String>
+    <s:String x:Key="Ntfs.Detected">Detectado</s:String>
+    <s:String x:Key="Ntfs.Mitigable">Mitigable</s:String>
+    <s:String x:Key="Apps.UnknownPublisher">Editor desconocido</s:String>
+    <s:String x:Key="History.DetailsFailures">{0:N0} elemento(s) · {1:N0} omitido(s)</s:String>
+
     <s:String x:Key="Lang.French">Francés</s:String>
     <s:String x:Key="Lang.English">Inglés</s:String>
     <s:String x:Key="Lang.German">Alemán</s:String>
