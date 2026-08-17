@@ -383,6 +383,9 @@
     <s:String x:Key="Software.LaunchAllToast">Mise à jour de tous les logiciels lancée via winget.</s:String>
     <s:String x:Key="Software.LaunchFailed">Impossible de lancer winget.</s:String>
 
+    <s:String x:Key="Update.Banner">Mise à jour {0} disponible.</s:String>
+    <s:String x:Key="Update.Download">Télécharger</s:String>
+
     <!-- Langues (endonymes) -->
     <s:String x:Key="Lang.French">Français</s:String>
     <s:String x:Key="Lang.English">Anglais</s:String>

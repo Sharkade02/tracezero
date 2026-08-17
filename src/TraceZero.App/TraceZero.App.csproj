@@ -20,6 +20,8 @@
 
   <ItemGroup>
     <Resource Include="Assets\logo.png" />
+    <!-- Écran de démarrage natif WPF : affiché instantanément, fondu automatique à l'ouverture de la fenêtre. -->
+    <SplashScreen Include="Assets\splash.png" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -38,6 +38,10 @@ public partial class App : System.Windows.Application
         services.AddSingleton<IToastService, ToastService>();
         services.AddSingleton<IDialogService, DialogService>();
 
+        // Updater (Phase 18/28) : vérification de manifeste signé. Désactivé tant que UpdaterConfig est vide.
+        services.AddSingleton<Application.Update.IUpdateChecker>(_ => new Updater.UpdateChecker(UpdaterConfig.PublicKeyPem));
+        services.AddSingleton<IManifestSource>(_ => new HttpManifestSource(UpdaterConfig.ManifestUrl));
+
         // Pages nécessitant une résolution concrète (injectées ailleurs).
         services.AddSingleton<DashboardViewModel>();
         services.AddSingleton<CleanupViewModel>();
