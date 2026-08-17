@@ -118,9 +118,9 @@
     <s:String x:Key="DiskSpace.LargeFiles">Große Dateien</s:String>
     <s:String x:Key="DiskSpace.RecycleSelected">Auswahl in den Papierkorb verschieben</s:String>
 
-    <s:String x:Key="Browsers.Subtitle">Auf diesem PC erkannte Browser. TraceZero bereinigt nur Caches.</s:String>
-    <s:String x:Key="Browsers.Protected">🔒  Ihre Anmeldungen bleiben erhalten</s:String>
-    <s:String x:Key="Browsers.ProtectedBody">Es werden nur Cache-Dateien (automatisch neu erstellt) bereinigt. Ihre Cookies, Sitzungen, Passwörter und Lesezeichen werden nie berührt.</s:String>
+    <s:String x:Key="Browsers.Subtitle">Auf diesem PC erkannte Browser. Cache sicher bereinigt; Verlauf, Cookies und Sitzungen nur, wenn Sie sie ankreuzen.</s:String>
+    <s:String x:Key="Browsers.Protected">🔒  Ihre Passwörter und Lesezeichen bleiben erhalten</s:String>
+    <s:String x:Key="Browsers.ProtectedBody">Der Cache wird sicher bereinigt. Verlauf, Cookies und Sitzungen werden nur entfernt, wenn Sie sie selbst auswählen — nie standardmäßig. Ihre Passwörter und Lesezeichen werden nie berührt.</s:String>
     <s:String x:Key="Browsers.CleanCaches">Browser-Caches bereinigen</s:String>
     <s:String x:Key="Browsers.Empty">Auf diesem PC wurde kein unterstützter Browser erkannt.</s:String>
     <s:String x:Key="Browsers.Profiles">{0:N0} Profil(e)</s:String>

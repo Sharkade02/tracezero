@@ -130,9 +130,9 @@
     <s:String x:Key="DiskSpace.RecycleSelected">Envoyer la sélection à la Corbeille</s:String>
 
     <!-- Navigateurs -->
-    <s:String x:Key="Browsers.Subtitle">Navigateurs détectés sur ce PC. TraceZero ne nettoie que les caches.</s:String>
-    <s:String x:Key="Browsers.Protected">🔒  Vos connexions sont préservées</s:String>
-    <s:String x:Key="Browsers.ProtectedBody">Seuls les fichiers de cache (régénérés automatiquement) sont nettoyés. Vos cookies, sessions, mots de passe et favoris ne sont jamais touchés.</s:String>
+    <s:String x:Key="Browsers.Subtitle">Navigateurs détectés sur ce PC. Cache nettoyé sans risque ; historique, cookies et sessions uniquement si vous les cochez.</s:String>
+    <s:String x:Key="Browsers.Protected">🔒  Vos mots de passe et favoris sont préservés</s:String>
+    <s:String x:Key="Browsers.ProtectedBody">Le cache est nettoyé sans risque. L'historique, les cookies et les sessions ne sont supprimés que si vous les sélectionnez vous-même — jamais par défaut. Vos mots de passe et favoris ne sont jamais touchés.</s:String>
     <s:String x:Key="Browsers.CleanCaches">Nettoyer les caches navigateurs</s:String>
     <s:String x:Key="Browsers.Empty">Aucun navigateur pris en charge n'a été détecté sur ce PC.</s:String>
     <s:String x:Key="Browsers.Profiles">{0:N0} profil(s)</s:String>
