@@ -23,6 +23,12 @@ privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**
 > analyse réelle. Aucune suppression n'a lieu sans passer par une couche de sécurité qui refuse par
 > défaut. L'application ne démarre **jamais** en administrateur.
 
+## Captures d'écran
+
+| Accueil | Santé système (en direct) |
+|:---:|:---:|
+| ![Accueil](docs/screenshots/home.png) | ![Santé système](docs/screenshots/system-health.png) |
+
 ## Télécharger
 
 - **Version portable (aucune installation)** :

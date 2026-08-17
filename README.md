@@ -22,6 +22,12 @@ and no misleading claims**.
 > **Philosophy:** no displayed value is faked; numbers appear only after a real scan. No deletion happens
 > without going through a safety layer that refuses by default. The app **never** runs as administrator.
 
+## Screenshots
+
+| Home | System health (live) |
+|:---:|:---:|
+| ![Home](docs/screenshots/home.png) | ![System health](docs/screenshots/system-health.png) |
+
 ## Download
 
 - **Portable (no installation):**
