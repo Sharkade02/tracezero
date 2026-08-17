@@ -1,6 +1,4 @@
 # winget — manifeste de locale par défaut (gabarit).
-# Ajuster License/Publisher au besoin. Si TraceZero passe en open source, mettre la licence réelle
-# (ex. MIT/GPL) au lieu de "Freeware".
 PackageIdentifier: TraceZero.TraceZero
 PackageVersion: "<VERSION>"
 PackageLocale: en-US
@@ -9,8 +7,9 @@ PublisherUrl: https://github.com/Sharkade02
 PublisherSupportUrl: https://github.com/Sharkade02/tracezero/issues
 PackageName: TraceZero
 PackageUrl: https://github.com/Sharkade02/tracezero
-License: Freeware
-Copyright: © Sharkade02
+License: MIT
+LicenseUrl: https://github.com/Sharkade02/tracezero/blob/main/LICENSE
+Copyright: © 2026 Sharkade02
 ShortDescription: Local-first, privacy-first Windows cleaner — no ads, no dark patterns.
 Description: >-
   TraceZero is a local-first, privacy-first Windows cleaning, privacy and disk-space tool.
