@@ -2,6 +2,15 @@
 
 Toutes les versions notables de TraceZero. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/).
 
+## [0.1.3] — 2026-08-17
+
+### Amélioré
+- **Localisation complète de la page Nettoyage** : les noms et descriptions des éléments navigateurs
+  (cache, historique, cookies, sessions) sont désormais traduits (fr/en/de/es) au lieu d'être en français
+  en dur. La note « fermez le navigateur » est aussi localisée.
+- **Unités de taille internationales** : les tailles s'affichent en **GB/MB** (au lieu de « Go/Mo »),
+  cohérentes avec la langue de l'interface.
+
 ## [0.1.2] — 2026-08-17
 
 ### Ajouté
@@ -58,6 +67,7 @@ open source (MIT).
 - **Auto-update désactivé** dans cette version (mises à jour via winget ou téléchargement manuel).
 - Installeur MSI/EXE et validation en VM propre : à venir.
 
+[0.1.3]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.3
 [0.1.2]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.2
 [0.1.1]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.0
