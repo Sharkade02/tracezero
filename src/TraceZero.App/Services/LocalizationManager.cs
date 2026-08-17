@@ -20,7 +20,9 @@ public sealed class LocalizationManager : ILocalizationService
 
     public event EventHandler<AppLanguage>? LanguageChanged;
 
-    public void Apply(AppLanguage language)
+    public void Apply(AppLanguage language) => Apply(language, persist: true);
+
+    private void Apply(AppLanguage language, bool persist)
     {
         var app = System.Windows.Application.Current
                   ?? throw new InvalidOperationException("Application.Current est null.");
@@ -45,11 +47,51 @@ public sealed class LocalizationManager : ILocalizationService
         CultureInfo.DefaultThreadCurrentCulture = culture;
         CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-        Persist(language);
+        if (persist)
+        {
+            Persist(language);
+        }
+
         LanguageChanged?.Invoke(this, language);
     }
 
-    public void LoadPersisted() => Apply(ReadPersisted());
+    /// <summary>
+    /// Au démarrage : applique la langue choisie si elle a été persistée ; sinon, suit la langue de
+    /// Windows (sans la figer — l'app continue de suivre l'OS tant que l'utilisateur n'a pas choisi
+    /// explicitement une langue dans les Paramètres).
+    /// </summary>
+    public void LoadPersisted()
+    {
+        var persisted = ReadPersisted();
+        if (persisted is { } language)
+        {
+            Apply(language, persist: true);
+        }
+        else
+        {
+            Apply(DetectSystemLanguage(), persist: false);
+        }
+    }
+
+    /// <summary>Mappe la culture d'interface de Windows vers une langue supportée (repli : anglais).</summary>
+    private static AppLanguage DetectSystemLanguage()
+    {
+        try
+        {
+            return CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch
+            {
+                "fr" => AppLanguage.French,
+                "de" => AppLanguage.German,
+                "es" => AppLanguage.Spanish,
+                "en" => AppLanguage.English,
+                _ => AppLanguage.English,
+            };
+        }
+        catch (CultureNotFoundException)
+        {
+            return AppLanguage.English;
+        }
+    }
 
     private static string CodeOf(AppLanguage language) => language switch
     {
@@ -67,7 +109,8 @@ public sealed class LocalizationManager : ILocalizationService
         _ => "fr-FR",
     };
 
-    private static AppLanguage ReadPersisted()
+    /// <summary>Langue explicitement choisie et persistée, ou <c>null</c> si aucun choix valide n'existe.</summary>
+    private static AppLanguage? ReadPersisted()
     {
         try
         {
@@ -84,7 +127,7 @@ public sealed class LocalizationManager : ILocalizationService
         {
         }
 
-        return AppLanguage.French;
+        return null;
     }
 
     private static void Persist(AppLanguage language)
