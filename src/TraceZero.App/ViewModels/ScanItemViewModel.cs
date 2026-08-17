@@ -19,11 +19,27 @@ public partial class ScanItemViewModel : ObservableObject
     [ObservableProperty]
     private bool _isSelected;
 
-    public string DisplayName => Model.NameKey is { } nk ? Localizer.Get(nk) : Model.DisplayName;
+    public string DisplayName => Model.NameKey is { } nk
+        ? (Model.NameArgs.Count > 0 ? Localizer.Format(nk, [.. Model.NameArgs]) : Localizer.Get(nk))
+        : Model.DisplayName;
 
-    public string Description => Model.DescriptionKey is { } dk
-        ? Localizer.Get(dk)
-        : Model.Description ?? string.Empty;
+    public string Description
+    {
+        get
+        {
+            var text = Model.DescriptionKey is { } dk
+                ? (Model.DescriptionArgs.Count > 0 ? Localizer.Format(dk, [.. Model.DescriptionArgs]) : Localizer.Get(dk))
+                : Model.Description ?? string.Empty;
+
+            // Note « fichier verrouillé » ajoutée de façon localisée (ex. navigateur ouvert).
+            if (Model.IsLocked)
+            {
+                text = (text.Length > 0 ? text + " " : string.Empty) + Localizer.Get("Cleanup.LockedNote");
+            }
+
+            return text;
+        }
+    }
 
     public long SizeBytes => Model.SizeBytes;
 

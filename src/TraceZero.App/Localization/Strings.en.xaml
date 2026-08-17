@@ -144,6 +144,17 @@
     <s:String x:Key="Browsers.Running">Running</s:String>
     <s:String x:Key="Browsers.Closed">Closed</s:String>
 
+    <!-- Browser cleanup items (localized, {0}=browser {1}=profile) -->
+    <s:String x:Key="Browsers.Item.Cache">{0} — cache{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cache.Desc">Browser cache files, automatically regenerated. Your sign-ins and bookmarks are not touched.</s:String>
+    <s:String x:Key="Browsers.Item.History">{0} — browsing history{1}</s:String>
+    <s:String x:Key="Browsers.Item.History.Desc">Browsing history (visited sites and downloads). Your bookmarks and passwords are not touched.</s:String>
+    <s:String x:Key="Browsers.Item.Cookies">{0} — cookies{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cookies.Desc">Browser cookies. Clearing them will sign you out of sites you were logged into.</s:String>
+    <s:String x:Key="Browsers.Item.Sessions">{0} — session &amp; tabs{1}</s:String>
+    <s:String x:Key="Browsers.Item.Sessions.Desc">Sessions saved for tab restore. Clearing them loses restorable tabs.</s:String>
+    <s:String x:Key="Cleanup.LockedNote">Close the browser to allow deletion (locked files are skipped).</s:String>
+
     <s:String x:Key="Apps.Headline">Applications &amp; startup</s:String>
     <s:String x:Key="Apps.Subtitle">Installed applications and programs launched at startup. Uninstallation uses the publisher's mechanism.</s:String>
     <s:String x:Key="Apps.Search">Search for an application</s:String>

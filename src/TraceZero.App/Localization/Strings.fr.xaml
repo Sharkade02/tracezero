@@ -156,6 +156,17 @@
     <s:String x:Key="Browsers.Running">En cours d'exécution</s:String>
     <s:String x:Key="Browsers.Closed">Fermé</s:String>
 
+    <!-- Items de nettoyage navigateurs (localisés, {0}=navigateur {1}=profil) -->
+    <s:String x:Key="Browsers.Item.Cache">{0} — cache{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cache.Desc">Fichiers de cache du navigateur, régénérés automatiquement. Vos connexions et favoris ne sont pas touchés.</s:String>
+    <s:String x:Key="Browsers.Item.History">{0} — historique de navigation{1}</s:String>
+    <s:String x:Key="Browsers.Item.History.Desc">Historique de navigation (sites visités et téléchargements). Vos favoris et mots de passe ne sont pas touchés.</s:String>
+    <s:String x:Key="Browsers.Item.Cookies">{0} — cookies{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cookies.Desc">Cookies du navigateur. Les vider vous déconnectera des sites où vous étiez identifié.</s:String>
+    <s:String x:Key="Browsers.Item.Sessions">{0} — session &amp; onglets{1}</s:String>
+    <s:String x:Key="Browsers.Item.Sessions.Desc">Sessions mémorisées pour la restauration des onglets. Les effacer perd les onglets restaurables.</s:String>
+    <s:String x:Key="Cleanup.LockedNote">Fermez le navigateur pour permettre la suppression (fichiers verrouillés ignorés).</s:String>
+
     <!-- Applications -->
     <s:String x:Key="Apps.Headline">Applications &amp; démarrage</s:String>
     <s:String x:Key="Apps.Subtitle">Applications installées et programmes lancés au démarrage. La désinstallation utilise le mécanisme de l'éditeur.</s:String>

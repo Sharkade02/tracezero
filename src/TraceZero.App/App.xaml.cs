@@ -74,6 +74,9 @@ public partial class App : System.Windows.Application
 
     protected override async void OnStartup(StartupEventArgs e)
     {
+        // Fixer la culture des nombres/dates avant tout formatage (sinon fr-FR de l'OS reste actif).
+        Services.LocalizationManager.ApplyStartupCulture();
+
         base.OnStartup(e);
         await _host.StartAsync();
 

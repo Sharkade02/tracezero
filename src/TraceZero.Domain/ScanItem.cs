@@ -22,11 +22,17 @@ public sealed record ScanItem
     /// <summary>Clé de ressource pour le nom localisé (§31). Si présente, l'UI l'utilise avant <see cref="DisplayName"/>.</summary>
     public string? NameKey { get; init; }
 
+    /// <summary>Arguments de format pour <see cref="NameKey"/> (ex. nom du navigateur, profil). Vide = clé simple.</summary>
+    public IReadOnlyList<string> NameArgs { get; init; } = [];
+
     /// <summary>Explication en langage humain de ce que représente l'élément (repli).</summary>
     public string? Description { get; init; }
 
     /// <summary>Clé de ressource pour la description localisée (§31).</summary>
     public string? DescriptionKey { get; init; }
+
+    /// <summary>Arguments de format pour <see cref="DescriptionKey"/>. Vide = clé simple.</summary>
+    public IReadOnlyList<string> DescriptionArgs { get; init; } = [];
 
     /// <summary>Chemin de fichier ou identifiant système (clé de registre, etc.).</summary>
     public required string PathOrIdentifier { get; init; }

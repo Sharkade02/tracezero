@@ -96,7 +96,7 @@ public sealed class BrowserDetector : IBrowserDetector
                 [
                     new BrowserProfileInfo
                     {
-                        Name = "Par défaut",
+                        Name = "Default",
                         Path = cacheRoot,
                         ContentPath = contentRoot,
                         IsDefault = true,
@@ -140,7 +140,7 @@ public sealed class BrowserDetector : IBrowserDetector
             var isDefault = name.Equals("Default", StringComparison.OrdinalIgnoreCase);
             profiles.Add(new BrowserProfileInfo
             {
-                Name = isDefault ? "Par défaut" : name,
+                Name = isDefault ? "Default" : name,
                 Path = dir,
                 IsDefault = isDefault,
             });

@@ -25,9 +25,9 @@ privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**
 
 ## Captures d'écran
 
-| Accueil | Santé système (en direct) |
+| Accueil | Nettoyage (par risque, opt-in) |
 |:---:|:---:|
-| ![Accueil](docs/screenshots/home.png) | ![Santé système](docs/screenshots/system-health.png) |
+| ![Accueil](docs/screenshots/home.png) | ![Nettoyage](docs/screenshots/cleanup.png) |
 
 ## Télécharger
 
