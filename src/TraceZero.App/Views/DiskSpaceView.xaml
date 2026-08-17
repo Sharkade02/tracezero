@@ -21,9 +21,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Espace disque" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.DiskSpace}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Occupation de vos lecteurs et recherche des fichiers volumineux dans votre dossier personnel." />
+                       Text="{DynamicResource DiskSpace.Subtitle}" />
         </StackPanel>
 
         <!-- Lecteurs -->
@@ -50,15 +50,16 @@
         <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Fichiers volumineux" Style="{StaticResource Text.Title}" FontSize="15"
+                    <TextBlock Text="{DynamicResource DiskSpace.LargeFiles}" Style="{StaticResource Text.Title}" FontSize="15"
                                VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox ItemsSource="{Binding Thresholds}" SelectedItem="{Binding SelectedThreshold}"
-                              DisplayMemberPath="Label" Width="160" VerticalAlignment="Center" />
-                    <Button Content="Analyser" Style="{StaticResource PrimaryButton}" Command="{Binding ScanLargeFilesCommand}"
+                              DisplayMemberPath="Label" Width="160" VerticalAlignment="Center"
+                              AutomationProperties.Name="{DynamicResource DiskSpace.LargeFiles}" />
+                    <Button Content="{DynamicResource Common.Analyze}" Style="{StaticResource PrimaryButton}" Command="{Binding ScanLargeFilesCommand}"
                             Margin="12,0,0,0" MinWidth="120" />
-                    <Button Content="Annuler" Style="{StaticResource SecondaryButton}" Command="{Binding CancelCommand}"
+                    <Button Content="{DynamicResource Common.Cancel}" Style="{StaticResource SecondaryButton}" Command="{Binding CancelCommand}"
                             Margin="8,0,0,0" Visibility="{Binding IsScanning, Converter={StaticResource BoolToVis}}" />
-                    <Button Content="Envoyer la sélection à la Corbeille" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource DiskSpace.RecycleSelected}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding RecycleSelectedCommand}" Margin="8,0,0,0"
                             Visibility="{Binding HasResults, Converter={StaticResource BoolToVis}}" />
                 </StackPanel>
@@ -94,7 +95,7 @@
                                 <TextBlock Grid.Column="3" Text="{Binding SizeText}" FontWeight="SemiBold"
                                            Foreground="{DynamicResource Brush.Text.Primary}" VerticalAlignment="Center"
                                            MinWidth="80" TextAlignment="Right" />
-                                <Button Grid.Column="4" Content="Ouvrir" Style="{StaticResource SecondaryButton}" Padding="10,4"
+                                <Button Grid.Column="4" Content="{DynamicResource Common.Open}" Style="{StaticResource SecondaryButton}" Padding="10,4"
                                         Margin="12,0,0,0"
                                         Command="{Binding DataContext.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}" />

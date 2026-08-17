@@ -23,26 +23,26 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Automatisation" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.Automation}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                       Text="Planifiez un nettoyage automatique, sans service permanent. Il s'exécute via le Planificateur de tâches Windows. Aucun élément « à vérifier » n'est nettoyé automatiquement." />
+                       Text="{DynamicResource Automation.Subtitle}" />
         </StackPanel>
 
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,14">
             <StackPanel>
-                <TextBlock Text="Profil" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
+                <TextBlock Text="{DynamicResource Automation.Profile}" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
                 <RadioButton GroupName="Profile" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
                              IsChecked="{Binding SelectedProfile, Converter={StaticResource EnumMatch}, ConverterParameter=Safe}">
                     <StackPanel>
-                        <TextBlock Text="Sûr" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text.Primary}" />
-                        <TextBlock Text="Caches et fichiers temporaires uniquement." Style="{StaticResource Text.Subtle}" />
+                        <TextBlock Text="{DynamicResource Automation.Safe}" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text.Primary}" />
+                        <TextBlock Text="{DynamicResource Automation.SafeHint}" Style="{StaticResource Text.Subtle}" />
                     </StackPanel>
                 </RadioButton>
                 <RadioButton GroupName="Profile" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
                              IsChecked="{Binding SelectedProfile, Converter={StaticResource EnumMatch}, ConverterParameter=Privacy}">
                     <StackPanel>
-                        <TextBlock Text="Confidentialité" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text.Primary}" />
-                        <TextBlock Text="Ajoute les traces autorisées (caches + confidentialité)." Style="{StaticResource Text.Subtle}" />
+                        <TextBlock Text="{DynamicResource Risk.Privacy}" FontWeight="SemiBold" Foreground="{DynamicResource Brush.Text.Primary}" />
+                        <TextBlock Text="{DynamicResource Automation.PrivacyHint}" Style="{StaticResource Text.Subtle}" />
                     </StackPanel>
                 </RadioButton>
             </StackPanel>
@@ -50,21 +50,21 @@
 
         <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,0,0,14">
             <StackPanel>
-                <TextBlock Text="Déclencheur" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
-                <RadioButton GroupName="Trigger" Content="Chaque semaine" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
+                <TextBlock Text="{DynamicResource Automation.Trigger}" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
+                <RadioButton GroupName="Trigger" Content="{DynamicResource Automation.Weekly}" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
                              IsChecked="{Binding SelectedTrigger, Converter={StaticResource EnumMatch}, ConverterParameter=Weekly}" />
-                <RadioButton GroupName="Trigger" Content="Chaque mois" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
+                <RadioButton GroupName="Trigger" Content="{DynamicResource Automation.Monthly}" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
                              IsChecked="{Binding SelectedTrigger, Converter={StaticResource EnumMatch}, ConverterParameter=Monthly}" />
-                <RadioButton GroupName="Trigger" Content="À l'ouverture de session" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
+                <RadioButton GroupName="Trigger" Content="{DynamicResource Automation.AtLogon}" Margin="0,4" Foreground="{DynamicResource Brush.Text.Primary}"
                              IsChecked="{Binding SelectedTrigger, Converter={StaticResource EnumMatch}, ConverterParameter=AtLogon}" />
             </StackPanel>
         </Border>
 
         <Border Grid.Row="3" Style="{StaticResource Card}" Margin="0,0,0,14">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Content="Activer le nettoyage automatique" IsChecked="{Binding IsEnabled}"
+                <CheckBox Content="{DynamicResource Automation.Enable}" IsChecked="{Binding IsEnabled}"
                           Foreground="{DynamicResource Brush.Text.Primary}" VerticalAlignment="Center" />
-                <Button Content="Appliquer" Style="{StaticResource PrimaryButton}" Command="{Binding ApplyCommand}"
+                <Button Content="{DynamicResource Automation.Apply}" Style="{StaticResource PrimaryButton}" Command="{Binding ApplyCommand}"
                         Margin="20,0,0,0" MinWidth="130" />
             </StackPanel>
         </Border>

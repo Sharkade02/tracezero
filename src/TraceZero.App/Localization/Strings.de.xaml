@@ -12,6 +12,10 @@
     <s:String x:Key="Common.Add">Hinzufügen</s:String>
     <s:String x:Key="Common.Remove">Entfernen</s:String>
     <s:String x:Key="Common.Close">Schließen</s:String>
+    <s:String x:Key="Common.Analyze">Analysieren</s:String>
+    <s:String x:Key="Common.Open">Öffnen</s:String>
+    <s:String x:Key="Common.Loading">Wird geladen…</s:String>
+    <s:String x:Key="Common.Analyzing">Analyse läuft…</s:String>
     <s:String x:Key="Action.Analyze">Meinen PC analysieren</s:String>
     <s:String x:Key="Action.Clean">Jetzt bereinigen</s:String>
 
@@ -66,6 +70,96 @@
     <s:String x:Key="Settings.NoExclusions">Noch keine Ausnahmen.</s:String>
     <s:String x:Key="Settings.AdvancedCleaning">Erweiterte Bereinigung</s:String>
     <s:String x:Key="Settings.CleanWindowsTemp">C:\Windows\Temp bereinigen (Erhöhung)</s:String>
+
+    <s:String x:Key="Privacy.Headline">Was Windows noch über Ihre Aktivität weiß</s:String>
+    <s:String x:Key="Privacy.Subtitle">Windows speichert Spuren Ihrer letzten Dateien, Suchen und gestarteten Programme. Jede Spur wird erklärt. Sie wählen, was gelöscht wird.</s:String>
+    <s:String x:Key="Privacy.Analyze">Meine Spuren analysieren</s:String>
+    <s:String x:Key="Privacy.CleanSelected">Ausgewählte Spuren löschen</s:String>
+    <s:String x:Key="Privacy.Warning">Das Löschen einer Spur ist unwiderruflich und entfernt einen Verlauf. Ihre Dateien selbst sind nicht betroffen.</s:String>
+
+    <s:String x:Key="Supporter.Headline">TraceZero unterstützen</s:String>
+    <s:String x:Key="Supporter.Subtitle">TraceZero wird ohne Werbung, ohne Datenverkauf und ohne Pflichtabo entwickelt. Reinigung und Sicherheit sind in der kostenlosen Version vollständig.</s:String>
+    <s:String x:Key="Supporter.Donate">Spenden</s:String>
+    <s:String x:Key="Supporter.Recommended">Empfohlen</s:String>
+    <s:String x:Key="Supporter.OtherAmount">Anderer Betrag auf der Website</s:String>
+    <s:String x:Key="Supporter.HaveCode">Ich habe einen Unterstützungscode</s:String>
+    <s:String x:Key="Supporter.CodeHint">Der Code wird lokal und offline per kryptografischer Signatur geprüft. Kein Konto erforderlich.</s:String>
+    <s:String x:Key="Supporter.Activate">Aktivieren</s:String>
+    <s:String x:Key="Supporter.Deactivate">Deaktivieren</s:String>
+    <s:String x:Key="Supporter.UnlocksTitle">Unterstützung schaltet frei (bald)</s:String>
+    <s:String x:Key="Supporter.UnlocksBody">• Erweiterte Automatisierungen und mehrere Profile  • Geplante stille Bereinigung  • Designs und Anpassung  • Nicht wesentliche Komfortfunktionen. Kernreinigung und Sicherheit werden nie eingeschränkt.</s:String>
+
+    <s:String x:Key="History.Subtitle">Lokales Protokoll Ihrer Bereinigungen. Es werden keine Daten gesendet; kein persönlicher Pfad wird gespeichert.</s:String>
+    <s:String x:Key="History.TotalFreed">Insgesamt freigegeben</s:String>
+    <s:String x:Key="History.Count">Bereinigungen</s:String>
+    <s:String x:Key="History.Last">Letzte Bereinigung</s:String>
+    <s:String x:Key="History.Clear">Verlauf löschen</s:String>
+    <s:String x:Key="History.Empty">Noch keine Bereinigung aufgezeichnet.</s:String>
+
+    <s:String x:Key="Automation.Subtitle">Planen Sie eine automatische Bereinigung ohne permanenten Dienst. Sie läuft über die Windows-Aufgabenplanung. Kein Element „zu prüfen“ wird automatisch bereinigt.</s:String>
+    <s:String x:Key="Automation.Profile">Profil</s:String>
+    <s:String x:Key="Automation.Safe">Sicher</s:String>
+    <s:String x:Key="Automation.SafeHint">Nur Caches und temporäre Dateien.</s:String>
+    <s:String x:Key="Automation.PrivacyHint">Fügt erlaubte Spuren hinzu (Caches + Datenschutz).</s:String>
+    <s:String x:Key="Automation.Trigger">Auslöser</s:String>
+    <s:String x:Key="Automation.Weekly">Wöchentlich</s:String>
+    <s:String x:Key="Automation.Monthly">Monatlich</s:String>
+    <s:String x:Key="Automation.AtLogon">Bei der Anmeldung</s:String>
+    <s:String x:Key="Automation.Enable">Automatische Bereinigung aktivieren</s:String>
+    <s:String x:Key="Automation.Apply">Anwenden</s:String>
+
+    <s:String x:Key="DiskSpace.Subtitle">Belegung Ihrer Laufwerke und Suche nach großen Dateien in Ihrem persönlichen Ordner.</s:String>
+    <s:String x:Key="DiskSpace.LargeFiles">Große Dateien</s:String>
+    <s:String x:Key="DiskSpace.RecycleSelected">Auswahl in den Papierkorb verschieben</s:String>
+
+    <s:String x:Key="Browsers.Subtitle">Auf diesem PC erkannte Browser. TraceZero bereinigt nur Caches.</s:String>
+    <s:String x:Key="Browsers.Protected">🔒  Ihre Anmeldungen bleiben erhalten</s:String>
+    <s:String x:Key="Browsers.ProtectedBody">Es werden nur Cache-Dateien (automatisch neu erstellt) bereinigt. Ihre Cookies, Sitzungen, Passwörter und Lesezeichen werden nie berührt.</s:String>
+    <s:String x:Key="Browsers.CleanCaches">Browser-Caches bereinigen</s:String>
+    <s:String x:Key="Browsers.Empty">Auf diesem PC wurde kein unterstützter Browser erkannt.</s:String>
+
+    <s:String x:Key="Apps.Headline">Anwendungen &amp; Autostart</s:String>
+    <s:String x:Key="Apps.Subtitle">Installierte Anwendungen und beim Start ausgeführte Programme. Die Deinstallation nutzt den Mechanismus des Herstellers.</s:String>
+    <s:String x:Key="Apps.Search">Anwendung suchen</s:String>
+    <s:String x:Key="Apps.Uninstall">Deinstallieren</s:String>
+    <s:String x:Key="Apps.Startup">Autostart-Programme</s:String>
+    <s:String x:Key="Apps.Disable">Deaktivieren</s:String>
+    <s:String x:Key="Apps.Enable">Aktivieren</s:String>
+
+    <s:String x:Key="Restore.Subtitle">Verfügbare Elemente wiederherstellen. Datenschutzspuren werden vor dem Löschen gesichert.</s:String>
+    <s:String x:Key="Restore.ProtectionTitle">Bereinigungsschutz</s:String>
+    <s:String x:Key="Restore.ProtectionBody">Vor jeder reversiblen Bereinigung sichert TraceZero lokal, was möglich ist (Registrierungsschlüssel der Datenschutzspuren). Diese Sicherungen bleiben auf Ihrem PC und werden nie übertragen. Eine sicher gelöschte Datei kann nicht wiederhergestellt werden — das wird nie versprochen.</s:String>
+    <s:String x:Key="Restore.ClearVault">Tresor leeren</s:String>
+    <s:String x:Key="Restore.Empty">Derzeit kein Element zum Wiederherstellen.</s:String>
+    <s:String x:Key="Restore.RestoreBtn">Wiederherstellen</s:String>
+
+    <s:String x:Key="SystemHealth.Subtitle">Echte von Windows gemeldete Informationen. TraceZero erfindet keine Punktzahl und „boostet“ nichts — es zeigt, was gemessen wird, und erklärt es.</s:String>
+    <s:String x:Key="SystemHealth.DiskHealth">Laufwerkszustand</s:String>
+    <s:String x:Key="SystemHealth.NoDisks">Der Laufwerkszustand ist auf diesem Gerät nicht verfügbar.</s:String>
+    <s:String x:Key="SystemHealth.StartupImpact">Startauswirkung</s:String>
+
+    <s:String x:Key="Drivers.Subtitle">Schreibgeschützte Übersicht Ihrer Treiber. TraceZero installiert und lädt keinen Treiber herunter: Updates laufen über Windows Update, nie über eine Drittanbieter-Datenbank.</s:String>
+    <s:String x:Key="Drivers.UpdateTitle">Treiber-Updates</s:String>
+    <s:String x:Key="Drivers.UpdateBody">Aus Sicherheitsgründen wird die Treiberinstallation Windows Update überlassen (signierte, kompatible, reversible Treiber).</s:String>
+    <s:String x:Key="Drivers.OpenWU">Windows Update öffnen</s:String>
+    <s:String x:Key="Drivers.Search">Treiber suchen</s:String>
+
+    <s:String x:Key="Ntfs.ExpertMode">Expertenmodus</s:String>
+    <s:String x:Key="Ntfs.Subtitle">Schreibgeschützte Analyse der Dateisystemspuren. TraceZero verändert nie NTFS-Strukturen. Was nicht zuverlässig entfernt werden kann, wird als „Erkannt“ markiert — nie „bereinigt“ oder simuliert.</s:String>
+    <s:String x:Key="Ntfs.GoErase">Freien Speicher löschen…</s:String>
+
+    <s:String x:Key="SecureErase.Subtitle">Machen Sie Dateien unwiederherstellbar oder löschen Sie den freien Speicher eines Laufwerks. Bei SSD/NVMe wird keine Löschung als garantiert dargestellt — der Hinweis ist ehrlich.</s:String>
+    <s:String x:Key="SecureErase.FilesTitle">Zu löschende Dateien</s:String>
+    <s:String x:Key="SecureErase.AddFiles">Dateien hinzufügen…</s:String>
+    <s:String x:Key="SecureErase.ClearList">Liste leeren</s:String>
+    <s:String x:Key="SecureErase.Reinforced">Verstärkter Modus (3 Durchgänge)</s:String>
+    <s:String x:Key="SecureErase.EraseBtn">Endgültig löschen</s:String>
+    <s:String x:Key="SecureErase.EmptyHint">Fügen Sie Dateien zum Löschen hinzu. Systemdateien und Ordner werden abgelehnt. Unwiderrufliche Aktion.</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceTitle">Freien Speicher eines Laufwerks löschen</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceDesc">Macht bereits gelöschte Dateien unwiederherstellbar. Ihre vorhandenen Dateien werden nie berührt.</s:String>
+    <s:String x:Key="SecureErase.DriveName">Laufwerk, dessen freien Speicher löschen</s:String>
+    <s:String x:Key="SecureErase.WipeBtn">Freien Speicher löschen</s:String>
+    <s:String x:Key="SecureErase.ProgressName">Fortschritt der Löschung des freien Speichers</s:String>
 
     <s:String x:Key="Lang.French">Französisch</s:String>
     <s:String x:Key="Lang.English">Englisch</s:String>

@@ -61,13 +61,13 @@ façon fiable, est listée ici avec son état honnête.
 
 - **Infrastructure** — ✅ livrée : dictionnaires `fr/en/de/es` à chaud, service + persistance, accesseur
   `Localizer`, sélecteur de langue (Paramètres). Bascule live vérifiée sur la surface localisée.
-- **Couverture des chaînes** — migration en cours. **Localisé (4 langues)** : navigation complète (16
-  titres, rafraîchis live), pages Accueil / Nettoyage / Paramètres, chrome du shell, libellés
-  risque/actions. **Reste `PLANNED`** : chaînes internes des pages-outils (Confidentialité, Navigateurs,
-  Espace disque, Doublons, Applications, Automatisation, Historique, Restauration, Santé système, Pilotes,
-  Effacement sécurisé, Analyse NTFS, Soutenir), descriptions de règles de nettoyage et messages d'erreur.
-  La phase reste **IN_PROGRESS** tant que « aucun texte UI hardcodé » (§31) n'est pas atteint — jamais
-  marquée DONE prématurément (§0).
+- **Couverture des chaînes** — **tout le texte statique des 16 pages est localisé (4 langues)** :
+  en-têtes, sous-titres, boutons, titres de section, libellés, états vides, badges. Bascule live vérifiée.
+  **Reste `PLANNED`** : (1) les **messages dynamiques générés dans les ViewModels** (StatusMessage,
+  ResultMessage, toasts, résumés) — encore construits en français dans le code, à router via
+  `Localizer.Format` ; (2) les **descriptions de règles de nettoyage** (`WindowsCleaningRules`, couche
+  Engine) ; (3) les **messages d'erreur**. La phase reste **IN_PROGRESS** tant que « aucun texte UI
+  hardcodé » (§31) n'est pas atteint — jamais marquée DONE prématurément (§0).
 - **Titres de navigation** — ✅ résolu : `Title` route par `Localizer.Get("Nav.*")` et le shell réémet
   toutes les pages au changement de langue (`RefreshLocalization`).
 

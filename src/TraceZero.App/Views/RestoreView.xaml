@@ -21,18 +21,18 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Restauration" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.Restore}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Restaurer les éléments disponibles. Les traces de confidentialité sont sauvegardées avant d'être effacées." />
+                       Text="{DynamicResource Restore.Subtitle}" />
         </StackPanel>
 
         <!-- Protection du nettoyage -->
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="Protection du nettoyage" FontWeight="SemiBold"
+                <TextBlock Text="{DynamicResource Restore.ProtectionTitle}" FontWeight="SemiBold"
                            Foreground="{DynamicResource Brush.Text.Primary}" />
                 <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                           Text="Avant chaque nettoyage réversible, TraceZero sauvegarde localement ce qui peut l'être (clés de registre des traces de confidentialité). Ces sauvegardes restent sur votre PC et ne sont jamais transmises. Un fichier effacé de façon sécurisée ne peut pas être restauré — cela n'est jamais promis." />
+                           Text="{DynamicResource Restore.ProtectionBody}" />
             </StackPanel>
         </Border>
 
@@ -47,13 +47,13 @@
         <Border Grid.Row="3" Style="{StaticResource Card}" Padding="8">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,4,8,10">
-                    <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" />
-                    <Button Content="Vider le coffre" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" />
+                    <Button Content="{DynamicResource Restore.ClearVault}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding ClearCommand}" Margin="8,0,0,0" />
                 </StackPanel>
 
                 <TextBlock DockPanel.Dock="Top" Margin="8,4"
-                           Text="Aucun élément à restaurer pour le moment.">
+                           Text="{DynamicResource Restore.Empty}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource Text.Subtle}">
                             <Setter Property="Visibility" Value="Collapsed" />
@@ -88,7 +88,7 @@
                                             Background="{DynamicResource Brush.Risk.Safe}" CornerRadius="4" Padding="8,3">
                                         <TextBlock Text="{Binding ReversibilityText}" FontSize="12" Foreground="White" />
                                     </Border>
-                                    <Button Grid.Column="3" Content="Restaurer" Style="{StaticResource SecondaryButton}"
+                                    <Button Grid.Column="3" Content="{DynamicResource Restore.RestoreBtn}" Style="{StaticResource SecondaryButton}"
                                             VerticalAlignment="Center"
                                             Command="{Binding DataContext.RestoreCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}" />

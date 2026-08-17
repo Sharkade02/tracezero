@@ -12,6 +12,10 @@
     <s:String x:Key="Common.Add">Add</s:String>
     <s:String x:Key="Common.Remove">Remove</s:String>
     <s:String x:Key="Common.Close">Close</s:String>
+    <s:String x:Key="Common.Analyze">Analyze</s:String>
+    <s:String x:Key="Common.Open">Open</s:String>
+    <s:String x:Key="Common.Loading">Loading…</s:String>
+    <s:String x:Key="Common.Analyzing">Analyzing…</s:String>
     <s:String x:Key="Action.Analyze">Analyze my PC</s:String>
     <s:String x:Key="Action.Clean">Clean now</s:String>
 
@@ -66,6 +70,96 @@
     <s:String x:Key="Settings.NoExclusions">No exclusions yet.</s:String>
     <s:String x:Key="Settings.AdvancedCleaning">Advanced cleaning</s:String>
     <s:String x:Key="Settings.CleanWindowsTemp">Clean C:\Windows\Temp (elevation)</s:String>
+
+    <s:String x:Key="Privacy.Headline">What Windows still knows about your activity</s:String>
+    <s:String x:Key="Privacy.Subtitle">Windows keeps traces of your recent files, searches and launched programs. Each trace is explained. You choose what to erase.</s:String>
+    <s:String x:Key="Privacy.Analyze">Analyze my traces</s:String>
+    <s:String x:Key="Privacy.CleanSelected">Erase selected traces</s:String>
+    <s:String x:Key="Privacy.Warning">Erasing a trace is irreversible and removes a history. Your files themselves are not affected.</s:String>
+
+    <s:String x:Key="Supporter.Headline">Support TraceZero</s:String>
+    <s:String x:Key="Supporter.Subtitle">TraceZero is developed without ads, without selling data, and without a mandatory subscription. Cleaning and safety are complete in the free version.</s:String>
+    <s:String x:Key="Supporter.Donate">Make a donation</s:String>
+    <s:String x:Key="Supporter.Recommended">Recommended</s:String>
+    <s:String x:Key="Supporter.OtherAmount">Other amount on the website</s:String>
+    <s:String x:Key="Supporter.HaveCode">I have a support code</s:String>
+    <s:String x:Key="Supporter.CodeHint">The code is validated locally, offline, by cryptographic signature. No account required.</s:String>
+    <s:String x:Key="Supporter.Activate">Activate</s:String>
+    <s:String x:Key="Supporter.Deactivate">Deactivate</s:String>
+    <s:String x:Key="Supporter.UnlocksTitle">Support unlocks (coming soon)</s:String>
+    <s:String x:Key="Supporter.UnlocksBody">• Advanced automations and multiple profiles  • Scheduled silent cleaning  • Themes and customization  • Non-essential comfort features. Core cleaning and safety are never restricted.</s:String>
+
+    <s:String x:Key="History.Subtitle">Local log of your cleanups. No data is sent; no personal path is kept.</s:String>
+    <s:String x:Key="History.TotalFreed">Total freed</s:String>
+    <s:String x:Key="History.Count">Cleanups</s:String>
+    <s:String x:Key="History.Last">Last cleanup</s:String>
+    <s:String x:Key="History.Clear">Clear history</s:String>
+    <s:String x:Key="History.Empty">No cleanup recorded yet.</s:String>
+
+    <s:String x:Key="Automation.Subtitle">Schedule an automatic cleanup, with no permanent service. It runs via the Windows Task Scheduler. No 'review' item is cleaned automatically.</s:String>
+    <s:String x:Key="Automation.Profile">Profile</s:String>
+    <s:String x:Key="Automation.Safe">Safe</s:String>
+    <s:String x:Key="Automation.SafeHint">Caches and temporary files only.</s:String>
+    <s:String x:Key="Automation.PrivacyHint">Adds allowed traces (caches + privacy).</s:String>
+    <s:String x:Key="Automation.Trigger">Trigger</s:String>
+    <s:String x:Key="Automation.Weekly">Every week</s:String>
+    <s:String x:Key="Automation.Monthly">Every month</s:String>
+    <s:String x:Key="Automation.AtLogon">At sign-in</s:String>
+    <s:String x:Key="Automation.Enable">Enable automatic cleaning</s:String>
+    <s:String x:Key="Automation.Apply">Apply</s:String>
+
+    <s:String x:Key="DiskSpace.Subtitle">Usage of your drives and search for large files in your personal folder.</s:String>
+    <s:String x:Key="DiskSpace.LargeFiles">Large files</s:String>
+    <s:String x:Key="DiskSpace.RecycleSelected">Send selection to Recycle Bin</s:String>
+
+    <s:String x:Key="Browsers.Subtitle">Browsers detected on this PC. TraceZero only cleans caches.</s:String>
+    <s:String x:Key="Browsers.Protected">🔒  Your sign-ins are preserved</s:String>
+    <s:String x:Key="Browsers.ProtectedBody">Only cache files (automatically regenerated) are cleaned. Your cookies, sessions, passwords and bookmarks are never touched.</s:String>
+    <s:String x:Key="Browsers.CleanCaches">Clean browser caches</s:String>
+    <s:String x:Key="Browsers.Empty">No supported browser was detected on this PC.</s:String>
+
+    <s:String x:Key="Apps.Headline">Applications &amp; startup</s:String>
+    <s:String x:Key="Apps.Subtitle">Installed applications and programs launched at startup. Uninstallation uses the publisher's mechanism.</s:String>
+    <s:String x:Key="Apps.Search">Search for an application</s:String>
+    <s:String x:Key="Apps.Uninstall">Uninstall</s:String>
+    <s:String x:Key="Apps.Startup">Startup programs</s:String>
+    <s:String x:Key="Apps.Disable">Disable</s:String>
+    <s:String x:Key="Apps.Enable">Enable</s:String>
+
+    <s:String x:Key="Restore.Subtitle">Restore available items. Privacy traces are backed up before being erased.</s:String>
+    <s:String x:Key="Restore.ProtectionTitle">Cleanup protection</s:String>
+    <s:String x:Key="Restore.ProtectionBody">Before each reversible cleanup, TraceZero backs up locally what can be (registry keys of privacy traces). These backups stay on your PC and are never transmitted. A securely erased file cannot be restored — this is never promised.</s:String>
+    <s:String x:Key="Restore.ClearVault">Clear the vault</s:String>
+    <s:String x:Key="Restore.Empty">No item to restore for now.</s:String>
+    <s:String x:Key="Restore.RestoreBtn">Restore</s:String>
+
+    <s:String x:Key="SystemHealth.Subtitle">Real information reported by Windows. TraceZero invents no score and 'boosts' nothing — it shows what is measured and explains it.</s:String>
+    <s:String x:Key="SystemHealth.DiskHealth">Disk health</s:String>
+    <s:String x:Key="SystemHealth.NoDisks">Disk health status is unavailable on this machine.</s:String>
+    <s:String x:Key="SystemHealth.StartupImpact">Startup impact</s:String>
+
+    <s:String x:Key="Drivers.Subtitle">Read-only inventory of your drivers. TraceZero installs and downloads no driver: updates go through Windows Update, never a third-party database.</s:String>
+    <s:String x:Key="Drivers.UpdateTitle">Driver updates</s:String>
+    <s:String x:Key="Drivers.UpdateBody">To stay safe, driver installation is left to Windows Update (signed, compatible, reversible drivers).</s:String>
+    <s:String x:Key="Drivers.OpenWU">Open Windows Update</s:String>
+    <s:String x:Key="Drivers.Search">Search for a driver</s:String>
+
+    <s:String x:Key="Ntfs.ExpertMode">Expert mode</s:String>
+    <s:String x:Key="Ntfs.Subtitle">Read-only analysis of file system traces. TraceZero never modifies NTFS structures. What cannot be reliably removed is marked 'Detected' — never 'cleaned' or simulated.</s:String>
+    <s:String x:Key="Ntfs.GoErase">Erase free space…</s:String>
+
+    <s:String x:Key="SecureErase.Subtitle">Make files unrecoverable, or wipe a drive's free space. On SSD/NVMe, no erasure is presented as guaranteed — the warning is honest.</s:String>
+    <s:String x:Key="SecureErase.FilesTitle">Files to erase</s:String>
+    <s:String x:Key="SecureErase.AddFiles">Add files…</s:String>
+    <s:String x:Key="SecureErase.ClearList">Clear the list</s:String>
+    <s:String x:Key="SecureErase.Reinforced">Reinforced mode (3 passes)</s:String>
+    <s:String x:Key="SecureErase.EraseBtn">Erase permanently</s:String>
+    <s:String x:Key="SecureErase.EmptyHint">Add files to erase. System files and folders are refused. Irreversible operation.</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceTitle">Wipe a drive's free space</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceDesc">Makes already-deleted files unrecoverable. Your existing files are never touched.</s:String>
+    <s:String x:Key="SecureErase.DriveName">Drive whose free space to wipe</s:String>
+    <s:String x:Key="SecureErase.WipeBtn">Wipe free space</s:String>
+    <s:String x:Key="SecureErase.ProgressName">Free-space wipe progress</s:String>
 
     <s:String x:Key="Lang.French">French</s:String>
     <s:String x:Key="Lang.English">English</s:String>

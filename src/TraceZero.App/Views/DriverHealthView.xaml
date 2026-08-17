@@ -24,9 +24,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock Text="Pilotes" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.Drivers}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                       Text="Inventaire en lecture seule de vos pilotes. TraceZero n'installe ni ne télécharge aucun pilote : les mises à jour passent par Windows Update, jamais par une base tierce." />
+                       Text="{DynamicResource Drivers.Subtitle}" />
         </StackPanel>
 
         <!-- Mises à jour : délégué à Windows Update (§24) -->
@@ -37,12 +37,12 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="Mise à jour des pilotes" FontWeight="SemiBold"
+                    <TextBlock Text="{DynamicResource Drivers.UpdateTitle}" FontWeight="SemiBold"
                                Foreground="{DynamicResource Brush.Text.Primary}" />
                     <TextBlock Style="{StaticResource Text.Subtle}" FontSize="12" TextWrapping="Wrap"
-                               Text="Pour rester sûr, l'installation de pilotes est confiée à Windows Update (pilotes signés, compatibles, réversibles)." />
+                               Text="{DynamicResource Drivers.UpdateBody}" />
                 </StackPanel>
-                <Button Grid.Column="1" Content="Ouvrir Windows Update" Style="{StaticResource PrimaryButton}"
+                <Button Grid.Column="1" Content="{DynamicResource Drivers.OpenWU}" Style="{StaticResource PrimaryButton}"
                         VerticalAlignment="Center" Command="{Binding OpenWindowsUpdateCommand}" />
             </Grid>
         </Border>
@@ -50,11 +50,11 @@
         <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,0,0,12" Padding="14,10">
             <StackPanel Orientation="Horizontal">
                 <TextBox Width="260" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                         ToolTip="Rechercher un pilote (périphérique, fournisseur, classe)"
-                         AutomationProperties.Name="Rechercher un pilote" />
-                <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Margin="10,0,0,0" />
+                         ToolTip="{DynamicResource Drivers.Search}"
+                         AutomationProperties.Name="{DynamicResource Drivers.Search}" />
+                <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Margin="10,0,0,0" />
                 <TextBlock Text="{Binding SummaryText}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="16,0,0,0" />
-                <TextBlock Text="Analyse…" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
+                <TextBlock Text="{DynamicResource Common.Analyzing}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
                            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}" />
             </StackPanel>
         </Border>

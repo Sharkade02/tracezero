@@ -23,22 +23,22 @@
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Santé système" Style="{StaticResource Text.Headline}" />
-                <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Padding="12,6"
+                <TextBlock Text="{DynamicResource Nav.SystemHealth}" Style="{StaticResource Text.Headline}" />
+                <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Padding="12,6"
                         Command="{Binding RefreshCommand}" Margin="16,0,0,0" VerticalAlignment="Center" />
-                <TextBlock Text="Analyse…" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
+                <TextBlock Text="{DynamicResource Common.Analyzing}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
                            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}" />
             </StackPanel>
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                       Text="Informations réelles rapportées par Windows. TraceZero n'invente aucun score et ne « booste » rien — il montre ce qui est mesuré et l'explique." />
+                       Text="{DynamicResource SystemHealth.Subtitle}" />
         </StackPanel>
 
         <!-- Santé disque -->
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="Santé des disques" Style="{StaticResource Text.Title}" Margin="0,0,0,10" />
+                <TextBlock Text="{DynamicResource SystemHealth.DiskHealth}" Style="{StaticResource Text.Title}" Margin="0,0,0,10" />
 
-                <TextBlock Text="État de santé des disques indisponible sur cette machine."
+                <TextBlock Text="{DynamicResource SystemHealth.NoDisks}"
                            Style="{StaticResource Text.Subtle}"
                            Visibility="{Binding HasDisks, Converter={StaticResource InvBoolToVis}}" />
 
@@ -96,7 +96,7 @@
         <!-- Impact au démarrage -->
         <Border Grid.Row="2" Style="{StaticResource Card}">
             <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="Impact au démarrage" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
+                <TextBlock DockPanel.Dock="Top" Text="{DynamicResource SystemHealth.StartupImpact}" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
                 <TextBlock DockPanel.Dock="Top" Text="{Binding ImpactMessage}" Style="{StaticResource Text.Subtle}"
                            TextWrapping="Wrap" Margin="0,0,0,10" />
 

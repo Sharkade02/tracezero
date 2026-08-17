@@ -20,16 +20,16 @@
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Analyse NTFS" Style="{StaticResource Text.Headline}" />
+                <TextBlock Text="{DynamicResource Nav.Ntfs}" Style="{StaticResource Text.Headline}" />
                 <Border Background="{DynamicResource Brush.Nav.Selected.Background}" CornerRadius="4" Padding="8,3"
                         VerticalAlignment="Center" Margin="12,4,0,0">
-                    <TextBlock Text="Mode Expert" FontSize="12" Foreground="{DynamicResource Brush.Nav.Selected.Foreground}" />
+                    <TextBlock Text="{DynamicResource Ntfs.ExpertMode}" FontSize="12" Foreground="{DynamicResource Brush.Nav.Selected.Foreground}" />
                 </Border>
-                <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Padding="12,6"
+                <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Padding="12,6"
                         Command="{Binding RefreshCommand}" Margin="16,0,0,0" VerticalAlignment="Center" />
             </StackPanel>
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                       Text="Analyse en lecture seule des traces du système de fichiers. TraceZero ne modifie jamais les structures NTFS. Ce qui ne peut pas être retiré de façon fiable est marqué « Détectée » — jamais « nettoyé » ni simulé." />
+                       Text="{DynamicResource Ntfs.Subtitle}" />
         </StackPanel>
 
         <Border Grid.Row="1" Style="{StaticResource Card}" Padding="8">
@@ -65,7 +65,7 @@
                                     <TextBlock Text="{Binding Detail}" TextWrapping="Wrap" Margin="0,6,0,0" FontSize="12"
                                                Foreground="{DynamicResource Brush.Text.Primary}"
                                                Visibility="{Binding HasDetail, Converter={StaticResource BoolToVis}}" />
-                                    <Button Content="Effacer l'espace libre…" Style="{StaticResource SecondaryButton}" Padding="12,5"
+                                    <Button Content="{DynamicResource Ntfs.GoErase}" Style="{StaticResource SecondaryButton}" Padding="12,5"
                                             HorizontalAlignment="Left" Margin="0,8,0,0"
                                             Command="{Binding DataContext.GoToSecureEraseCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             Visibility="{Binding IsMitigable, Converter={StaticResource BoolToVis}}" />
