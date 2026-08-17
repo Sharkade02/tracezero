@@ -59,7 +59,7 @@ Installer via `winget install --id Microsoft.DotNet.SDK.10 -e`.
 
 ```powershell
 dotnet build -c Release              # doit être 0 warning
-dotnet test                          # 138 tests au dernier point (2026-08)
+dotnet test                          # 144 tests au dernier point (2026-08)
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj   # lance l'appli WPF
 build\scripts\release.ps1            # pipeline release (Phase 27) : build/test Release + publish + SHA-256
 ```
@@ -70,11 +70,12 @@ build\scripts\release.ps1            # pipeline release (Phase 27) : build/test 
 Navigateurs · Espace disque · Doublons · Applications · Automatisation · Historique · Paramètres · Soutenir.
 Plus aucune page placeholder.
 
-**DONE (22)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
+**DONE (24)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
 5 Privacy Inspector · 6 Cleaning Plan + Exclusions + Historique · 7 Protection/Backup/Restore ·
 8 Analyse NTFS · 9 Effacement sécurisé · 10 Disk Space · 11 Duplicate Finder · 12 Applications & Démarrage ·
 14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW · 20 Élévation ·
-21 Localisation · 22 Accessibilité · 23 Performance · 27 Qualité release · 28 Moniteur système.
+21 Localisation · 22 Accessibilité · 23 Performance · 24 Tests de sécurité · 25 Golden dataset ·
+27 Qualité release · 28 Moniteur système.
 
 **IN_PROGRESS (3)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
@@ -83,7 +84,6 @@ Plus aucune page placeholder.
   téléchargement/Authenticode/endpoint + certificat (assets externes).
 - **Phase 19 — Installateur/Portable** : mode portable (`TraceZeroPaths` + marqueur) + `publish-portable.ps1`
   + manifeste MSIX livrés/testés ; reste MSI/EXE + signature (WiX + certificat).
-- **Phase 24 — Tests de sécurité** : suite `SafetyTests` amorcée, à étoffer.
 
 **Localisation (Phase 21, DONE)** : toute l'UI en fr/en/de/es, bascule live. Ajouter une chaîne = clé dans
 les 4 `Localization/Strings.*.xaml` ; en XAML `{DynamicResource Ma.Cle}`, en code `Localizer.Get("Ma.Cle")`

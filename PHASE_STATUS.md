@@ -31,9 +31,9 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 21 | Localisation | DONE | — | **fr/en/de/es** avec bascule live (infra type thème : `ILocalizationService`, `Localizer`, sélecteur Paramètres, culture du thread, persistance). **Aucun texte UI codé en dur** (§31) : 16 pages, descriptions de **règles** (clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), navigateurs, tous les **libellés de lignes**, **messages dynamiques des VM** (status/toasts/confirmations modales/titres de dialogues) et libellés de démarrage. Seuls restent non traduits les endonymes de langues et les clés de catégorie stockées en base (mappées à l'affichage) |
 | 22 | Accessibilité | DONE | — | **Focus clavier visible** (bordure) ajouté aux templates boutons/nav qui le masquaient ; `AutomationProperties.Name` sur les contrôles sans libellé (recherches, sélecteur de lecteur, barre de progression, fermeture toast) ; modale : Entrée=confirmer / Échap=annuler (`IsDefault`/`IsCancel`) ; aucun statut par la couleur seule (toasts glyphe+texte, états disque/pilote libellés). Résiduels (gestion du focus lecteur d'écran sur modale, DPI per-monitor, mise à l'échelle du texte) dans `KNOWN_LIMITATIONS.md` |
 | 23 | Performance | DONE | 5 ✅ | Objectifs §23 satisfaits par l'architecture (scan async annulable, `Parallel.ForEachAsync` borné cœurs/2, énumération **streaming** sans `stat` par fichier, hashing doublons 3 passes, résultats plafonnés). **Benchmarks** `TraceZero.PerformanceTests` : énumération 6000 fichiers, **annulation prompte**, filtrage par seuil, hashing doublons correct à l'échelle + benchmark 100k **opt-in** (`TZ_BIGBENCH=1`). **Virtualisation UI** (`VirtualizingStackPanel` + `CanContentScroll`) sur les listes longues non plafonnées (Applications, Pilotes) |
-| 24 | Tests de sécurité | IN_PROGRESS | — | `TraceZero.SafetyTests` amorcé en Phase 0 |
-| 25 | Golden dataset | NOT_STARTED | — | |
-| 26 | Tests VM | NOT_STARTED | — | |
+| 24 | Tests de sécurité | DONE | 47 ✅ | Suite `TraceZero.SafetyTests` couvrant les cas §34 : C:\, profil, Documents/Desktop/Downloads, Program Files, Windows, jonction, ancêtre-jonction, UNC, traversal, wildcard, vide, racine de volume, **long paths**, **jeton d'env non expansé**, et la **re-validation du moteur avant suppression** (le plan seul n'autorise rien : refus hors-racine autorisée + contrôle positif) — protection TOCTOU / fichier remplacé entre scan et clean |
+| 25 | Golden dataset | DONE | 2 ✅ | Faux profil (`Temp`, `Chrome/Cache`, `Documents`, `Bookmarks`, `Protected/session`) avec fichiers dangereux + à préserver. Après nettoyage réel : **caches absents**, documents/favoris/sessions **présents**, et **exclusion respectée** (cache exclu conservé, Temp non exclu nettoyé) — §35 |
+| 26 | Tests VM | NOT_STARTED | — | Nécessite une VM Windows propre (asset externe) — checklist dans `release.ps1` et `KNOWN_LIMITATIONS.md` |
 | 27 | Qualité release | DONE | — | Script **`build/scripts/release.ps1`** (validé de bout en bout) : restore, **build -c Release (échec si le moindre avertissement)**, **test -c Release**, publish App+Elevated (win-x64), empreintes **SHA-256** (`artifacts/SHA256SUMS.txt`). Portes externes (signature Authenticode, scan AV, smoke install/uninstall, test updater, nettoyage réel en VM) **listées honnêtement comme manuelles, jamais simulées** (§37). Gate Release actuel : 0 warning, 124 tests ✅ |
 | 28 | Moniteur système honnête | DONE | 4 ✅ | Page **Santé système** : santé disque via WMI (`MSFT_PhysicalDisk` : état Healthy/Warning/Unhealthy + type HDD/SSD + taille, sans admin) + **impact au démarrage mesuré** (journal `Diagnostics-Performance` évt 101, agrégé par programme). Read-only, mesuré, expliqué ; aucun score inventé ni « booster » (§42). SMART détaillé/NVMe = `DETECTED_ONLY`. Détail : `docs/phase-28-system-monitor.md` |
 
@@ -178,6 +178,15 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 24 — Tests de sécurité** (§34) — DONE. `TraceZero.SafetyTests` (47 tests) prouve le refus par
+  défaut : validateur (racine, profil, dossiers personnels, système, jonctions/ancêtres-jonctions, UNC,
+  traversal, wildcard, vide, long paths, jeton d'environnement non expansé) **et** re-validation du moteur
+  avant chaque suppression (le plan seul n'autorise jamais — protection TOCTOU), avec contrôle positif.
+
+- **Phase 25 — Golden dataset** (§35) — DONE. Faux profil avec fichiers dangereux (caches Temp/Chrome) et
+  à préserver (documents, favoris, session). Après nettoyage réel : caches absents, tout le reste intact,
+  et **exclusion respectée**. 2 tests d'intégration. **144 tests au total.**
 
 - **Phase 19 — Installateur / Portable / Distribution** (§29) — IN_PROGRESS (portable + MSIX manifest livrés).
   - **Mode portable** : `TraceZeroPaths` détecte le marqueur `tracezero.portable` à côté de l'exe et
