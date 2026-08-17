@@ -25,7 +25,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 15 | Automatisation | DONE | 1 ✅ | Profils Sûr/Confidentialité, déclencheurs hebdo/mensuel/ouverture session via Planificateur (schtasks), mode headless `--autoclean` ; jamais de REVIEW en auto |
 | 16 | Historique & Statistiques | DONE | ✅ | Page Historique réelle : total libéré, nb nettoyages, dernier, journal. Local, sans chemins personnels |
 | 17 | Supporter / PWYW | DONE | 4 ✅ | Page Soutenir (PWYW 10/19/29/49 + autre), `ILicenseService` validation RSA-SHA256 locale hors ligne, activation/désactivation, clé privée jamais embarquée |
-| 18 | Updater | NOT_STARTED | — | |
+| 18 | Updater | IN_PROGRESS | 7 ✅ | **Cœur vérifiable livré** : `UpdateChecker` (`TraceZero.Updater`) valide un **manifeste signé RSA-SHA256** (clé publique embarquée) et décide UpToDate / UpdateAvailable / BelowMinimum / ManifestInvalid / ChannelMismatch. Un manifeste dont la signature échoue n'est **jamais** accepté (§28). Canaux stable/beta. **Reste** : téléchargement HTTPS + vérif SHA-256 + **Authenticode** + éditeur attendu + exécution + endpoint réel + **certificat de signature** (assets externes) → `KNOWN_LIMITATIONS.md` |
 | 19 | Installateur / Portable | NOT_STARTED | — | |
 | 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
 | 21 | Localisation | DONE | — | **fr/en/de/es** avec bascule live (infra type thème : `ILocalizationService`, `Localizer`, sélecteur Paramètres, culture du thread, persistance). **Aucun texte UI codé en dur** (§31) : 16 pages, descriptions de **règles** (clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), navigateurs, tous les **libellés de lignes**, **messages dynamiques des VM** (status/toasts/confirmations modales/titres de dialogues) et libellés de démarrage. Seuls restent non traduits les endonymes de langues et les clés de catégorie stockées en base (mappées à l'affichage) |
@@ -178,6 +178,19 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 18 — Updater** (§28) — IN_PROGRESS (cœur vérifiable livré et testé).
+  - `UpdateChecker` (`TraceZero.Updater`, `IUpdateChecker`) : désérialise un manifeste JSON, **vérifie sa
+    signature RSA-SHA256** avec une clé publique (constructeur), puis décide selon la version, le minimum
+    supporté et le canal. Contenu signé déterministe (`SignedPayload`, ordre de champs fixe) : toute
+    altération d'un champ invalide la signature. Un manifeste invalide → `ManifestInvalid`, **jamais
+    exécuté** (§28). Canaux : stable (strict), beta (accepte beta ou stable).
+  - **Tests** (7) : version plus récente disponible, à jour, **manifeste altéré rejeté**, mauvaise clé
+    rejetée, sous le minimum → forcé, manifeste beta refusé sur canal stable, canal beta accepte beta.
+  - **Reste (assets externes, différé)** : téléchargement HTTPS, vérif SHA-256 du binaire, **Authenticode
+    + vérification de l'éditeur attendu**, exécution/rollback, endpoint de publication et **certificat de
+    signature de code**. La build Microsoft Store ne doit pas contourner le mécanisme de mise à jour du
+    Store. **136 tests au total.**
 
 - **Phase 23 — Performance** (§23) — DONE. La plupart des objectifs étaient déjà tenus par l'architecture
   (scan `Task.Run` non bloquant, `IProgress` immédiat, annulation par `CancellationToken`, parallélisme

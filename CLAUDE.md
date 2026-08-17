@@ -59,7 +59,7 @@ Installer via `winget install --id Microsoft.DotNet.SDK.10 -e`.
 
 ```powershell
 dotnet build -c Release              # doit être 0 warning
-dotnet test                          # 129 tests au dernier point (2026-08)
+dotnet test                          # 136 tests au dernier point (2026-08)
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj   # lance l'appli WPF
 build\scripts\release.ps1            # pipeline release (Phase 27) : build/test Release + publish + SHA-256
 ```
@@ -76,9 +76,11 @@ Plus aucune page placeholder.
 14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW · 20 Élévation ·
 21 Localisation · 22 Accessibilité · 23 Performance · 27 Qualité release · 28 Moniteur système.
 
-**IN_PROGRESS (2)** :
+**IN_PROGRESS (3)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
   Peut réutiliser l'infra backup/restore de la Phase 7.
+- **Phase 18 — Updater** : cœur `UpdateChecker` (manifeste signé RSA + décision) fait/testé ; reste
+  téléchargement/Authenticode/endpoint + certificat (assets externes).
 - **Phase 24 — Tests de sécurité** : suite `SafetyTests` amorcée, à étoffer.
 
 **Localisation (Phase 21, DONE)** : toute l'UI en fr/en/de/es, bascule live. Ajouter une chaîne = clé dans

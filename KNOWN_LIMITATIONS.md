@@ -72,6 +72,17 @@ façon fiable, est listée ici avec son état honnête.
 - **Restant hors périmètre §31** : audit humain des traductions DE/ES par un locuteur natif avant release
   (les traductions actuelles sont fonctionnelles et cohérentes).
 
+## Phase 18 — Updater
+
+- **Cœur** — ✅ livré : `UpdateChecker` valide un manifeste **signé RSA-SHA256** et décide s'il faut
+  mettre à jour ; un manifeste dont la signature échoue n'est jamais accepté (§28).
+- **Reste `PLANNED`** (dépend d'assets externes) : téléchargement **HTTPS** du binaire, vérification
+  **SHA-256** du fichier téléchargé, **Authenticode** + vérification de l'**éditeur attendu**,
+  exécution/rollback documenté, **endpoint de publication** réel et **certificat de signature de code**.
+  Aucune de ces étapes ne s'exécute sans un manifeste validé.
+- **Microsoft Store** — `WONTDO` pour cette build : la version Store ne doit pas contourner le mécanisme
+  de mise à jour du Store (l'updater maison est désactivé dans ce packaging).
+
 ## Phase 8 — Analyse NTFS avancée
 
 - **Lecture des artefacts NTFS bruts** (contenu du Journal USN, entrées MFT résiduelles, `$LogFile`) —
