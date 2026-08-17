@@ -32,6 +32,7 @@ OutputBaseFilename=TraceZeroSetup-{#MyAppVersion}
 Compression=lzma2
 SolidCompression=yes
 WizardStyle=modern
+SetupIconFile={#SourcePath}\..\..\src\TraceZero.App\Assets\logo.ico
 ArchitecturesAllowed=x64compatible
 ArchitecturesInstallIn64BitMode=x64compatible
 UninstallDisplayIcon={app}\{#MyAppExeName}

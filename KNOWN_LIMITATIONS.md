@@ -92,12 +92,13 @@ façon fiable, est listée ici avec son état honnête.
   admin** par défaut (choix « pour tous » possible), raccourci menu Démarrer, désinstallation propre.
   Vérifié : install silencieux → app lancée → désinstallation → registre/fichiers nettoyés.
 - **Manifeste MSIX** — ✅ fourni (`build/msix/Package.appxmanifest`), non signé.
+- **Icône** — ✅ `.ico` multi-résolutions (256→16) générée depuis `logo.png`
+  (`build/scripts/make-icon.ps1`), embarquée dans l'exe (`ApplicationIcon`) et utilisée par le Setup.exe
+  (`SetupIconFile`) → Explorateur, raccourci menu Démarrer, barre des tâches et installeur affichent le logo.
 - **Reste `PLANNED`** (dépend d'assets externes) : **signature de code** de l'installeur et des exécutables
   sensibles (app, updater, helper elevated) avec **timestamp** — nécessite un **certificat** (voir
   `docs/signpath-application.md`) ; **assets visuels MSIX** aux dimensions du Store ; variante **MSI** (WiX)
   si un déploiement d'entreprise par GPO est un jour requis (l'EXE Inno couvre le cas grand public).
-- **Icône** — l'exe n'embarque pas encore d'`.ico` dédiée ; le raccourci utilise l'icône .NET par défaut
-  (polish à venir : générer une `.ico` depuis `logo.png` + `ApplicationIcon`).
 
 ## Phase 18 — Updater
 
