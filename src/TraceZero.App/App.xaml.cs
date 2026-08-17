@@ -65,6 +65,7 @@ public partial class App : System.Windows.Application
         services.AddSingleton<PageViewModelBase, RestoreViewModel>();
         services.AddSingleton<PageViewModelBase, SettingsViewModel>();
         services.AddSingleton<PageViewModelBase, SupporterViewModel>();
+        services.AddSingleton<PageViewModelBase, AboutViewModel>();
 
         services.AddSingleton<AutoCleanRunner>();
         services.AddSingleton<ShellViewModel>();

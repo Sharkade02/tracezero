@@ -40,6 +40,23 @@
     <s:String x:Key="Nav.Restore">Wiederherstellung</s:String>
     <s:String x:Key="Nav.Settings">Einstellungen</s:String>
     <s:String x:Key="Nav.Supporter">Unterstützen</s:String>
+    <s:String x:Key="Nav.About">Über</s:String>
+
+    <!-- Über / Rechtliches -->
+    <s:String x:Key="About.Subtitle">Version, Lizenz und rechtliche Dokumente von TraceZero.</s:String>
+    <s:String x:Key="About.Tagline">Sehen, was bleibt. Löschen, was Sie wählen. Local-first, ohne Werbung, ohne Dark Patterns.</s:String>
+    <s:String x:Key="About.Version">Version {0}</s:String>
+    <s:String x:Key="About.License">Open Source — MIT-Lizenz</s:String>
+    <s:String x:Key="About.DisclaimerTitle">Haftungsausschluss</s:String>
+    <s:String x:Key="About.DisclaimerBody">Bereitgestellt „wie besehen", ohne Gewähr. Einige Vorgänge (sicheres Löschen, Löschen des freien Speichers) sind unwiderruflich. Nichts Sensibles wird ohne Ihre Wahl entfernt. Sichern Sie wichtige Daten vor dem Löschen.</s:String>
+    <s:String x:Key="About.PrivacyTitle">Datenschutz</s:String>
+    <s:String x:Key="About.PrivacyBody">Keine Telemetrie, keine Werbung, keine Datenübertragung. Alles bleibt lokal. Die einzig mögliche Netzwerkverbindung ist die Updateprüfung (HTTPS), standardmäßig deaktiviert.</s:String>
+    <s:String x:Key="About.LegalTitle">Dokumente</s:String>
+    <s:String x:Key="About.OpenRepo">Quellcode</s:String>
+    <s:String x:Key="About.OpenLicense">Lizenz</s:String>
+    <s:String x:Key="About.OpenPrivacy">Datenschutz</s:String>
+    <s:String x:Key="About.OpenDisclaimer">Haftungsausschluss</s:String>
+    <s:String x:Key="About.OpenNotices">Drittanbieter-Hinweise</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Design umschalten</s:String>
 
