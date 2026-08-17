@@ -144,6 +144,17 @@
     <s:String x:Key="Browsers.Running">En ejecución</s:String>
     <s:String x:Key="Browsers.Closed">Cerrado</s:String>
 
+    <!-- Elementos de limpieza del navegador (localizados, {0}=navegador {1}=perfil) -->
+    <s:String x:Key="Browsers.Item.Cache">{0} — caché{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cache.Desc">Archivos de caché del navegador, regenerados automáticamente. Tus sesiones y favoritos no se tocan.</s:String>
+    <s:String x:Key="Browsers.Item.History">{0} — historial de navegación{1}</s:String>
+    <s:String x:Key="Browsers.Item.History.Desc">Historial de navegación (sitios visitados y descargas). Tus favoritos y contraseñas no se tocan.</s:String>
+    <s:String x:Key="Browsers.Item.Cookies">{0} — cookies{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cookies.Desc">Cookies del navegador. Borrarlas cerrará tu sesión en los sitios donde estabas identificado.</s:String>
+    <s:String x:Key="Browsers.Item.Sessions">{0} — sesión y pestañas{1}</s:String>
+    <s:String x:Key="Browsers.Item.Sessions.Desc">Sesiones guardadas para restaurar pestañas. Borrarlas pierde las pestañas restaurables.</s:String>
+    <s:String x:Key="Cleanup.LockedNote">Cierra el navegador para permitir la eliminación (los archivos bloqueados se omiten).</s:String>
+
     <s:String x:Key="Apps.Headline">Aplicaciones e inicio</s:String>
     <s:String x:Key="Apps.Subtitle">Aplicaciones instaladas y programas iniciados al arrancar. La desinstalación usa el mecanismo del editor.</s:String>
     <s:String x:Key="Apps.Search">Buscar una aplicación</s:String>

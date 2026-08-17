@@ -144,6 +144,17 @@
     <s:String x:Key="Browsers.Running">Wird ausgeführt</s:String>
     <s:String x:Key="Browsers.Closed">Geschlossen</s:String>
 
+    <!-- Browser-Bereinigungselemente (lokalisiert, {0}=Browser {1}=Profil) -->
+    <s:String x:Key="Browsers.Item.Cache">{0} — Cache{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cache.Desc">Browser-Cache-Dateien, automatisch neu erstellt. Ihre Anmeldungen und Lesezeichen bleiben unberührt.</s:String>
+    <s:String x:Key="Browsers.Item.History">{0} — Browserverlauf{1}</s:String>
+    <s:String x:Key="Browsers.Item.History.Desc">Browserverlauf (besuchte Seiten und Downloads). Ihre Lesezeichen und Passwörter bleiben unberührt.</s:String>
+    <s:String x:Key="Browsers.Item.Cookies">{0} — Cookies{1}</s:String>
+    <s:String x:Key="Browsers.Item.Cookies.Desc">Browser-Cookies. Das Löschen meldet Sie von Websites ab, bei denen Sie angemeldet waren.</s:String>
+    <s:String x:Key="Browsers.Item.Sessions">{0} — Sitzung &amp; Tabs{1}</s:String>
+    <s:String x:Key="Browsers.Item.Sessions.Desc">Für die Tab-Wiederherstellung gespeicherte Sitzungen. Das Löschen verliert wiederherstellbare Tabs.</s:String>
+    <s:String x:Key="Cleanup.LockedNote">Schließen Sie den Browser, um das Löschen zu ermöglichen (gesperrte Dateien werden übersprungen).</s:String>
+
     <s:String x:Key="Apps.Headline">Anwendungen &amp; Autostart</s:String>
     <s:String x:Key="Apps.Subtitle">Installierte Anwendungen und beim Start ausgeführte Programme. Die Deinstallation nutzt den Mechanismus des Herstellers.</s:String>
     <s:String x:Key="Apps.Search">Anwendung suchen</s:String>

@@ -81,10 +81,7 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
         }
 
         var profileSuffix = multiProfile ? $" ({profile.Name})" : string.Empty;
-        var running = browser.IsRunning;
-        var runningNote = running
-            ? " Fermez le navigateur pour permettre la suppression (fichiers verrouillés ignorés)."
-            : string.Empty;
+        var (nameKey, descKey) = KeysFor(target.Category);
 
         return new ScanItem
         {
@@ -92,15 +89,20 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
             RuleId = "browsers.privacy",
             Category = target.Category,
             SubCategory = browser.DisplayName,
+            // Repli non localisé ; l'UI utilise NameKey/DescriptionKey. La note « fermez le navigateur »
+            // est ajoutée par l'UI via IsLocked.
             DisplayName = $"{browser.DisplayName} — {target.Label}{profileSuffix}",
-            Description = target.Description + runningNote,
+            NameKey = nameKey,
+            NameArgs = [browser.DisplayName, profileSuffix],
+            Description = target.Description,
+            DescriptionKey = descKey,
             PathOrIdentifier = target.Path,
             SizeBytes = sizeBytes,
             ItemCount = itemCount,
             Risk = target.Risk,
             // Trace de confidentialité : jamais cochée par défaut, l'utilisateur choisit (§3.2, §14).
             SelectedByDefault = false,
-            IsLocked = running,
+            IsLocked = browser.IsRunning,
             AssociatedApp = browser.DisplayName,
             // Le moteur supprime définitivement (pas de Corbeille) : rester honnête.
             Reversibility = Reversibility.Irreversible,
@@ -173,6 +175,15 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
                 "Sessions mémorisées pour la restauration des onglets. Les effacer perd les onglets restaurables.");
         }
     }
+
+    /// <summary>Clés de ressource (nom, description) pour une catégorie de trace navigateur.</summary>
+    private static (string NameKey, string DescriptionKey) KeysFor(Category category) => category switch
+    {
+        Category.BrowserHistory => ("Browsers.Item.History", "Browsers.Item.History.Desc"),
+        Category.BrowserCookies => ("Browsers.Item.Cookies", "Browsers.Item.Cookies.Desc"),
+        Category.BrowserSessions => ("Browsers.Item.Sessions", "Browsers.Item.Sessions.Desc"),
+        _ => ("Browsers.Item.Cache", "Browsers.Item.Cache.Desc"),
+    };
 
     private static (long Bytes, int Count) MeasureFile(string path)
     {

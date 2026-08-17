@@ -60,6 +60,21 @@ public sealed class LocalizationManager : ILocalizationService
     /// Windows (sans la figer — l'app continue de suivre l'OS tant que l'utilisateur n'a pas choisi
     /// explicitement une langue dans les Paramètres).
     /// </summary>
+    /// <summary>
+    /// Applique la culture (séparateurs de nombres/dates) le plus tôt possible au démarrage, avant que
+    /// WPF ne fige un contexte d'exécution — sinon la culture de l'OS (ex. fr-FR) reste active pour le
+    /// formatage des nombres même quand l'UI est en anglais. À appeler en tout premier dans OnStartup.
+    /// </summary>
+    public static void ApplyStartupCulture()
+    {
+        var language = ReadPersisted() ?? DetectSystemLanguage();
+        var culture = CultureInfo.GetCultureInfo(CultureOf(language));
+        CultureInfo.DefaultThreadCurrentCulture = culture;
+        CultureInfo.DefaultThreadCurrentUICulture = culture;
+        Thread.CurrentThread.CurrentCulture = culture;
+        Thread.CurrentThread.CurrentUICulture = culture;
+    }
+
     public void LoadPersisted()
     {
         var persisted = ReadPersisted();

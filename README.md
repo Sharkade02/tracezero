@@ -24,9 +24,9 @@ and no misleading claims**.
 
 ## Screenshots
 
-| Home | System health (live) |
+| Home | Cleanup (risk-based, opt-in) |
 |:---:|:---:|
-| ![Home](docs/screenshots/home.png) | ![System health](docs/screenshots/system-health.png) |
+| ![Home](docs/screenshots/home.png) | ![Cleanup](docs/screenshots/cleanup.png) |
 
 ## Download
 

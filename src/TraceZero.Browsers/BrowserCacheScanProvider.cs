@@ -92,10 +92,7 @@ public sealed class BrowserCacheScanProvider : IScanProvider
             return null;
         }
 
-        var name = multiProfile ? $"{browser.DisplayName} — cache ({profile.Name})" : $"{browser.DisplayName} — cache";
-        var description = browser.IsRunning
-            ? "Cache du navigateur. Fermez le navigateur pour un nettoyage complet (les fichiers ouverts sont ignorés)."
-            : "Fichiers de cache du navigateur, régénérés automatiquement. Vos connexions et favoris ne sont pas touchés.";
+        var profileSuffix = multiProfile ? $" ({profile.Name})" : string.Empty;
 
         return new ScanItem
         {
@@ -103,14 +100,20 @@ public sealed class BrowserCacheScanProvider : IScanProvider
             RuleId = "browsers.cache",
             Category = Category.BrowserCache,
             SubCategory = browser.DisplayName,
-            DisplayName = name,
-            Description = description,
+            // Repli non localisé (consommateurs hors UI) ; l'UI utilise NameKey/DescriptionKey.
+            DisplayName = $"{browser.DisplayName} — cache{profileSuffix}",
+            NameKey = "Browsers.Item.Cache",
+            NameArgs = [browser.DisplayName, profileSuffix],
+            Description = "Fichiers de cache du navigateur, régénérés automatiquement. Vos connexions et favoris ne sont pas touchés.",
+            DescriptionKey = "Browsers.Item.Cache.Desc",
             PathOrIdentifier = cacheDirs[0],
             SizeBytes = totalBytes,
             ItemCount = fileCount,
             Risk = RiskLevel.Safe,
-            // Un navigateur en cours d'exécution n'est pas coché par défaut (§14).
+            // Un navigateur en cours d'exécution n'est pas coché par défaut (§14) ; la note « fermez le
+            // navigateur » est ajoutée par l'UI via IsLocked.
             SelectedByDefault = !browser.IsRunning,
+            IsLocked = browser.IsRunning,
             AssociatedApp = browser.DisplayName,
             Reversibility = Reversibility.Irreversible,
             ActionKind = FileActionKind.DeleteDirectoryContents,
