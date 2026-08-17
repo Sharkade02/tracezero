@@ -33,6 +33,7 @@ public partial class App : System.Windows.Application
 
         // Services d'application.
         services.AddSingleton<IThemeService, ThemeManager>();
+        services.AddSingleton<ILocalizationService, LocalizationManager>();
         services.AddSingleton<INavigationService, NavigationService>();
         services.AddSingleton<IToastService, ToastService>();
         services.AddSingleton<IDialogService, DialogService>();
@@ -86,6 +87,7 @@ public partial class App : System.Windows.Application
         }
 
         _host.Services.GetRequiredService<IThemeService>().Apply(AppTheme.Light);
+        _host.Services.GetRequiredService<ILocalizationService>().LoadPersisted();
 
         var window = _host.Services.GetRequiredService<MainWindow>();
         window.DataContext = _host.Services.GetRequiredService<ShellViewModel>();

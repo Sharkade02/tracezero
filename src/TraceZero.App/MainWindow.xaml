@@ -57,7 +57,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
 
-                    <Button Content="◑  Basculer le thème" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Shell.ToggleTheme}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding ToggleThemeCommand}" Margin="12,8,12,0"
                             HorizontalContentAlignment="Left" />
                 </StackPanel>

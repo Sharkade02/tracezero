@@ -28,7 +28,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 18 | Updater | NOT_STARTED | — | |
 | 19 | Installateur / Portable | NOT_STARTED | — | |
 | 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
-| 21 | Localisation | NOT_STARTED | — | fr/en/de/es |
+| 21 | Localisation | IN_PROGRESS | — | **Infrastructure complète** : dictionnaires de chaînes `fr/en/de/es` swappés à chaud (même mécanisme que les thèmes), `ILocalizationService`/`LocalizationManager` (culture du thread + persistance), accesseur code `Localizer`, **sélecteur de langue** dans Paramètres (bascule live). Surface localisée : shell (thème) + page Paramètres. **Reste** : migrer les chaînes des autres pages/VM, descriptions de règles et messages d'erreur (§31 « aucun texte hardcodé ») → voir `KNOWN_LIMITATIONS.md` |
 | 22 | Accessibilité | DONE | — | **Focus clavier visible** (bordure) ajouté aux templates boutons/nav qui le masquaient ; `AutomationProperties.Name` sur les contrôles sans libellé (recherches, sélecteur de lecteur, barre de progression, fermeture toast) ; modale : Entrée=confirmer / Échap=annuler (`IsDefault`/`IsCancel`) ; aucun statut par la couleur seule (toasts glyphe+texte, états disque/pilote libellés). Résiduels (gestion du focus lecteur d'écran sur modale, DPI per-monitor, mise à l'échelle du texte) dans `KNOWN_LIMITATIONS.md` |
 | 23 | Performance | NOT_STARTED | — | |
 | 24 | Tests de sécurité | IN_PROGRESS | — | `TraceZero.SafetyTests` amorcé en Phase 0 |
@@ -178,6 +178,16 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 21 — Localisation** (§31) — IN_PROGRESS (infrastructure livrée, migration des chaînes en cours).
+  - **Mécanisme** (calqué sur le thème) : dictionnaires `Localization/Strings.{fr,en,de,es}.xaml`
+    (`ResourceDictionary` de `s:String`) swappés à chaud ; les vues utilisent `DynamicResource`, le code
+    `Localizer.Get(key)`. `LocalizationManager` applique aussi la culture du thread et **persiste** le
+    choix (`%LOCALAPPDATA%\TraceZero\language.txt`), rechargé au démarrage.
+  - **Sélecteur de langue** dans Paramètres (endonymes Français/English/Deutsch/Español), bascule
+    **immédiate** de toute la surface déjà localisée (shell + Paramètres).
+  - **Reste** (marqué IN_PROGRESS, jamais DONE tant que hardcodé, §0) : migrer les chaînes des autres
+    pages et ViewModels, les **descriptions de règles** et les **messages d'erreur** vers les 4 langues.
 
 - **Phase 27 — Qualité release** (§37) — DONE (portes automatisables).
   - **`build/scripts/release.ps1`** (compatible PS 5.1 et 7, validé) : `restore` → `build -c Release`

@@ -16,26 +16,33 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Paramètres" Style="{StaticResource Text.Headline}" Margin="0,0,0,16" />
+        <TextBlock Grid.Row="0" Text="{DynamicResource Settings.Title}" Style="{StaticResource Text.Headline}" Margin="0,0,0,16" />
 
-        <!-- Apparence -->
+        <!-- Apparence + langue -->
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="Apparence" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,10" />
-                <CheckBox Content="Thème sombre" IsChecked="{Binding IsDarkTheme}"
+                <TextBlock Text="{DynamicResource Settings.Appearance}" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,10" />
+                <CheckBox Content="{DynamicResource Settings.DarkMode}" IsChecked="{Binding IsDarkTheme}"
                           Foreground="{DynamicResource Brush.Text.Primary}" />
+
+                <TextBlock Text="{DynamicResource Settings.Language}" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,16,0,6" />
+                <ComboBox Width="220" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Languages}" SelectedItem="{Binding SelectedLanguage}"
+                          DisplayMemberPath="Display"
+                          AutomationProperties.Name="{DynamicResource Settings.Language}" />
+                <TextBlock Text="{DynamicResource Settings.LanguageHint}" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" />
             </StackPanel>
         </Border>
 
         <!-- Nettoyage avancé (élévation, Phase 20) -->
         <Border Grid.Row="2" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
-                <TextBlock Text="Nettoyage avancé (administrateur)" Style="{StaticResource Text.Title}"
+                <TextBlock Text="{DynamicResource Settings.AdvancedCleaning}" Style="{StaticResource Text.Title}"
                            FontSize="15" Margin="0,0,0,4" />
                 <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,0,0,10" TextWrapping="Wrap"
                            Text="Le dossier C:\Windows\Temp est en dehors de votre profil : son nettoyage nécessite les droits administrateur. TraceZero ne démarre jamais en administrateur : un composant séparé et vérifié demandera l'autorisation (invite Windows), agira sur ce seul dossier, puis se fermera." />
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Nettoyer C:\Windows\Temp…" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Settings.CleanWindowsTemp}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding CleanWindowsTempCommand}" HorizontalAlignment="Left" />
                     <TextBlock Text="{Binding ElevatedStatus}" Style="{StaticResource Text.Subtle}"
                                VerticalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap" />
@@ -47,10 +54,10 @@
         <Border Grid.Row="3" Style="{StaticResource Card}" VerticalAlignment="Top">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top">
-                    <TextBlock Text="Exclusions" Style="{StaticResource Text.Title}" FontSize="15" />
+                    <TextBlock Text="{DynamicResource Settings.Exclusions}" Style="{StaticResource Text.Title}" FontSize="15" />
                     <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,10" TextWrapping="Wrap"
-                               Text="Les dossiers exclus ne seront jamais proposés au nettoyage, même s'ils contiennent des fichiers correspondant à une règle." />
-                    <Button Content="Ajouter un dossier…" Style="{StaticResource SecondaryButton}"
+                               Text="{DynamicResource Settings.ExclusionsHint}" />
+                    <Button Content="{DynamicResource Settings.AddFolder}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding AddFolderCommand}" HorizontalAlignment="Left" Margin="0,0,0,10" />
                 </StackPanel>
 
@@ -72,7 +79,7 @@
                                     <TextBlock Grid.Column="1" Text="{Binding DisplayName}" VerticalAlignment="Center"
                                                TextTrimming="CharacterEllipsis"
                                                Foreground="{DynamicResource Brush.Text.Primary}" />
-                                    <Button Grid.Column="2" Content="Retirer" Style="{StaticResource SecondaryButton}"
+                                    <Button Grid.Column="2" Content="{DynamicResource Common.Remove}" Style="{StaticResource SecondaryButton}"
                                             Padding="10,4"
                                             Command="{Binding DataContext.RemoveCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CommandParameter="{Binding}" />

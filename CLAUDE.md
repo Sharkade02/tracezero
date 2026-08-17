@@ -76,10 +76,15 @@ Plus aucune page placeholder.
 14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW ·
 20 Élévation de privilèges · 22 Accessibilité · 27 Qualité release · 28 Moniteur système.
 
-**IN_PROGRESS (2)** :
+**IN_PROGRESS (3)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
   Peut réutiliser l'infra backup/restore de la Phase 7.
+- **Phase 21 — Localisation** : infra complète (dicos `fr/en/de/es` à chaud, `ILocalizationService`,
+  `Localizer`, sélecteur dans Paramètres). Reste à migrer les chaînes des autres pages/VM + règles + erreurs.
 - **Phase 24 — Tests de sécurité** : suite `SafetyTests` amorcée, à étoffer.
+
+**Localisation (Phase 21)** : ajouter une chaîne = clé dans les 4 `Localization/Strings.*.xaml` ;
+en XAML `{DynamicResource Ma.Cle}`, en code `Localizer.Get("Ma.Cle")`. Bascule live via `ILocalizationService`.
 
 **Design system (Phase 1)** : composants réutilisables — `Skeleton` (Shared.xaml), `IToastService`
 (toasts superposés, coin bas-droit), `IDialogService` (`ConfirmAsync` awaitable, modale thématisée).

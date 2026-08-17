@@ -28,23 +28,52 @@ public sealed class ExclusionRowViewModel
     public string KindText { get; }
 }
 
-/// <summary>Page Paramètres (§40) : thème et gestion des exclusions.</summary>
+/// <summary>Option de langue (endonyme affiché tel quel dans toutes les langues).</summary>
+public sealed record LanguageOption(AppLanguage Language, string Display);
+
+/// <summary>Page Paramètres (§40) : thème, langue (§31) et gestion des exclusions.</summary>
 public sealed partial class SettingsViewModel : PageViewModelBase
 {
     private readonly IThemeService _themeService;
+    private readonly ILocalizationService _localization;
     private readonly IExclusionStore _exclusionStore;
     private readonly IElevatedOperationService _elevatedService;
 
     public SettingsViewModel(
         IThemeService themeService,
+        ILocalizationService localization,
         IExclusionStore exclusionStore,
         IElevatedOperationService elevatedService)
     {
         _themeService = themeService;
+        _localization = localization;
         _exclusionStore = exclusionStore;
         _elevatedService = elevatedService;
         _themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(IsDarkTheme));
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(nameof(SelectedLanguage));
         ReloadExclusions();
+    }
+
+    /// <summary>Langues proposées, par endonyme (jamais traduit — convention des sélecteurs de langue).</summary>
+    public IReadOnlyList<LanguageOption> Languages { get; } =
+    [
+        new(AppLanguage.French, "Français"),
+        new(AppLanguage.English, "English"),
+        new(AppLanguage.German, "Deutsch"),
+        new(AppLanguage.Spanish, "Español"),
+    ];
+
+    public LanguageOption SelectedLanguage
+    {
+        get => Languages.First(l => l.Language == _localization.Current);
+        set
+        {
+            if (value is not null && value.Language != _localization.Current)
+            {
+                _localization.Apply(value.Language);
+                OnPropertyChanged();
+            }
+        }
     }
 
     public override string Title => "Paramètres";

@@ -57,6 +57,17 @@ façon fiable, est listée ici avec son état honnête.
   scan/nettoyage et ne crée pas encore de points de restauration ; à câbler sur `IProtectionVault` pour
   les profils touchant des traces registre.
 
+## Phase 21 — Localisation
+
+- **Infrastructure** — ✅ livrée : dictionnaires `fr/en/de/es` à chaud, service + persistance, accesseur
+  `Localizer`, sélecteur de langue (Paramètres). Bascule live vérifiée sur la surface localisée.
+- **Couverture des chaînes** — `PLANNED` (migration en cours). Toutes les chaînes des pages autres que
+  Paramètres, les descriptions de règles de nettoyage et les messages d'erreur sont encore en français
+  codé en dur ; elles doivent être extraites vers les 4 dictionnaires. La phase reste **IN_PROGRESS**
+  tant que « aucun texte UI hardcodé » (§31) n'est pas atteint — jamais marquée DONE prématurément (§0).
+- **Titres de navigation** — `PLANNED` : les `Title` des pages sont des propriétés C# en français ; leur
+  rafraîchissement live au changement de langue nécessitera de router par clé + notification par page.
+
 ## Phase 8 — Analyse NTFS avancée
 
 - **Lecture des artefacts NTFS bruts** (contenu du Journal USN, entrées MFT résiduelles, `$LogFile`) —
