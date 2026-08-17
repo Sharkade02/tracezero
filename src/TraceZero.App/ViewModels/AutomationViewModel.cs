@@ -1,5 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.Automation;
 using TraceZero.Domain.Automation;
 
@@ -18,11 +19,11 @@ public sealed partial class AutomationViewModel : PageViewModelBase
         _selectedProfile = config.Profile;
         _selectedTrigger = config.Trigger;
         _statusMessage = config.Enabled
-            ? "Nettoyage automatique activé."
-            : "Le nettoyage automatique est désactivé.";
+            ? Localizer.Get("Auto.Msg.Enabled")
+            : Localizer.Get("Auto.Msg.Disabled");
     }
 
-    public override string Title => "Automatisation";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Automation");
     public override string IconGlyph => "⚙";
     public override bool IsUnderConstruction => false;
 
@@ -52,12 +53,12 @@ public sealed partial class AutomationViewModel : PageViewModelBase
 
         if (!ok)
         {
-            StatusMessage = "Impossible d'appliquer la planification (le Planificateur de tâches a refusé l'opération).";
+            StatusMessage = Localizer.Get("Auto.Msg.ApplyFailed");
             return;
         }
 
         StatusMessage = IsEnabled
-            ? "Nettoyage automatique planifié. Il s'exécutera sans fenêtre selon le déclencheur choisi."
-            : "Nettoyage automatique désactivé (tâche planifiée supprimée).";
+            ? Localizer.Get("Auto.Msg.Scheduled")
+            : Localizer.Get("Auto.Msg.Removed");
     }
 }

@@ -26,17 +26,35 @@
             <DataTemplate DataType="{x:Type vm:DiskSpaceViewModel}">
                 <views:DiskSpaceView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SystemHealthViewModel}">
+                <views:SystemHealthView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:DriverHealthViewModel}">
+                <views:DriverHealthView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:DuplicatesViewModel}">
                 <views:DuplicatesView />
             </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SecureEraseViewModel}">
+                <views:SecureEraseView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:NtfsAnalysisViewModel}">
+                <views:NtfsAnalysisView />
+            </DataTemplate>
             <DataTemplate DataType="{x:Type vm:ApplicationsViewModel}">
                 <views:ApplicationsView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:SoftwareUpdateViewModel}">
+                <views:SoftwareUpdateView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:AutomationViewModel}">
                 <views:AutomationView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:HistoryViewModel}">
                 <views:HistoryView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type vm:RestoreViewModel}">
+                <views:RestoreView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type vm:SettingsViewModel}">
                 <views:SettingsView />

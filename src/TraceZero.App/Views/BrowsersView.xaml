@@ -20,9 +20,9 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Navigateurs" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.Browsers}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Navigateurs détectés sur ce PC. TraceZero ne nettoie que les caches." />
+                       Text="{DynamicResource Browsers.Subtitle}" />
         </StackPanel>
 
         <!-- Bandeau protection des connexions -->
@@ -33,14 +33,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                    <TextBlock Text="🔒  Vos connexions sont préservées" Style="{StaticResource Text.Title}" FontSize="15" />
+                    <TextBlock Text="{DynamicResource Browsers.Protected}" Style="{StaticResource Text.Title}" FontSize="15" />
                     <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
-                               Text="Seuls les fichiers de cache (régénérés automatiquement) sont nettoyés. Vos cookies, sessions, mots de passe et favoris ne sont jamais touchés." />
+                               Text="{DynamicResource Browsers.ProtectedBody}" />
                 </StackPanel>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                    <Button Content="Nettoyer les caches navigateurs" Style="{StaticResource PrimaryButton}"
+                    <Button Content="{DynamicResource Browsers.CleanCaches}" Style="{StaticResource PrimaryButton}"
                             Command="{Binding CleanCachesCommand}" MinWidth="200" />
-                    <Button Content="Actualiser" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding RefreshCommand}" Margin="0,8,0,0" />
                 </StackPanel>
             </Grid>
@@ -97,7 +97,7 @@
                 </Style>
             </Border.Style>
             <TextBlock Style="{StaticResource Text.Subtle}"
-                       Text="Aucun navigateur pris en charge n'a été détecté sur ce PC." />
+                       Text="{DynamicResource Browsers.Empty}" />
         </Border>
     </Grid>
 </UserControl>

@@ -11,9 +11,17 @@ public partial class ShellViewModel : ObservableObject
 {
     private readonly IThemeService _themeService;
 
-    public ShellViewModel(IEnumerable<PageViewModelBase> pages, IThemeService themeService, INavigationService navigation)
+    public ShellViewModel(
+        IEnumerable<PageViewModelBase> pages,
+        IThemeService themeService,
+        ILocalizationService localization,
+        INavigationService navigation,
+        IToastService toasts,
+        IDialogService dialog)
     {
         _themeService = themeService;
+        Toasts = toasts;
+        Dialog = dialog;
         _themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(IsDarkTheme));
         navigation.NavigationRequested += Navigate;
 
@@ -21,12 +29,27 @@ public partial class ShellViewModel : ObservableObject
         PrimaryPages = all.Where(p => !p.IsFooter).ToList();
         FooterPages = all.Where(p => p.IsFooter).ToList();
 
+        // Au changement de langue, réémettre les titres/chaînes calculées de toutes les pages (§31).
+        localization.LanguageChanged += (_, _) =>
+        {
+            foreach (var page in PrimaryPages.Concat(FooterPages))
+            {
+                page.RefreshLocalization();
+            }
+        };
+
         Navigate(PrimaryPages.Count > 0 ? PrimaryPages[0] : null);
     }
 
     public IReadOnlyList<PageViewModelBase> PrimaryPages { get; }
 
     public IReadOnlyList<PageViewModelBase> FooterPages { get; }
+
+    /// <summary>Notifications transitoires (superposition, coin bas-droit).</summary>
+    public IToastService Toasts { get; }
+
+    /// <summary>Confirmations modales (superposition centrée).</summary>
+    public IDialogService Dialog { get; }
 
     [ObservableProperty]
     private PageViewModelBase? _current;

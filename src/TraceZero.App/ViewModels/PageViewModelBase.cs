@@ -30,4 +30,10 @@ public abstract partial class PageViewModelBase : ObservableObject
     public virtual void OnActivated()
     {
     }
+
+    /// <summary>
+    /// Appelé par le shell au changement de langue (§31). Réémet toutes les propriétés pour que les
+    /// chaînes calculées (Title, messages) se relisent dans la nouvelle langue.
+    /// </summary>
+    public void RefreshLocalization() => OnPropertyChanged(string.Empty);
 }

@@ -38,18 +38,18 @@
 
         <!-- En-tête -->
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Nettoyage" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.Cleanup}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Analysez votre PC, choisissez ce qui doit être supprimé, puis nettoyez. Chaque suppression est validée par la couche de sécurité." />
+                       Text="{DynamicResource Cleanup.Subtitle}" />
         </StackPanel>
 
         <!-- Barre d'action -->
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
             <StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Analyser mon PC" Style="{StaticResource PrimaryButton}"
+                    <Button Content="{DynamicResource Action.Analyze}" Style="{StaticResource PrimaryButton}"
                             Command="{Binding ScanCommand}" MinWidth="160" />
-                    <Button Content="Annuler" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Common.Cancel}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding CancelCommand}" Margin="10,0,0,0"
                             Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}" />
                     <TextBlock Text="{Binding StatusMessage}" Style="{StaticResource Text.Subtle}"
@@ -72,19 +72,19 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <TextBlock Style="{StaticResource Text.Subtle}" Text="Sélection à nettoyer" />
+                    <TextBlock Style="{StaticResource Text.Subtle}" Text="{DynamicResource Cleanup.Selection}" />
                     <TextBlock Text="{Binding SelectedBytesText}" FontSize="30" FontWeight="Bold"
                                Foreground="{DynamicResource Brush.Text.Primary}" />
                     <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
-                        <TextBlock Text="Sans risque " Foreground="{DynamicResource Brush.Risk.Safe}" FontWeight="SemiBold" FontSize="12" />
+                        <TextBlock Text="{DynamicResource Risk.Safe}" Foreground="{DynamicResource Brush.Risk.Safe}" FontWeight="SemiBold" FontSize="12" Margin="0,0,4,0" />
                         <TextBlock Text="{Binding SafeBytesText}" Style="{StaticResource Text.Subtle}" Margin="0,0,16,0" />
-                        <TextBlock Text="Confidentialité " Foreground="{DynamicResource Brush.Risk.Privacy}" FontWeight="SemiBold" FontSize="12" />
+                        <TextBlock Text="{DynamicResource Risk.Privacy}" Foreground="{DynamicResource Brush.Risk.Privacy}" FontWeight="SemiBold" FontSize="12" Margin="0,0,4,0" />
                         <TextBlock Text="{Binding PrivacyBytesText}" Style="{StaticResource Text.Subtle}" Margin="0,0,16,0" />
-                        <TextBlock Text="À vérifier " Foreground="{DynamicResource Brush.Risk.Review}" FontWeight="SemiBold" FontSize="12" />
+                        <TextBlock Text="{DynamicResource Risk.Review}" Foreground="{DynamicResource Brush.Risk.Review}" FontWeight="SemiBold" FontSize="12" Margin="0,0,4,0" />
                         <TextBlock Text="{Binding ReviewBytesText}" Style="{StaticResource Text.Subtle}" />
                     </StackPanel>
                 </StackPanel>
-                <Button Grid.Column="1" Content="Nettoyer maintenant" Style="{StaticResource PrimaryButton}"
+                <Button Grid.Column="1" Content="{DynamicResource Action.Clean}" Style="{StaticResource PrimaryButton}"
                         Command="{Binding CleanCommand}" VerticalAlignment="Center" MinWidth="180" />
             </Grid>
         </Border>
@@ -141,9 +141,9 @@
         <Border Grid.Row="3" Style="{StaticResource Card}" VerticalAlignment="Top"
                 Visibility="{Binding ShowEmptyState, Converter={StaticResource BoolToVis}}">
             <StackPanel>
-                <TextBlock Text="Rien à nettoyer" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
+                <TextBlock Text="{DynamicResource Cleanup.EmptyTitle}" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
                 <TextBlock Style="{StaticResource Text.Subtle}" TextWrapping="Wrap"
-                           Text="Aucun élément récupérable n'a été trouvé pour le moment. C'est bon signe !" />
+                           Text="{DynamicResource Cleanup.EmptyBody}" />
             </StackPanel>
         </Border>
 
@@ -151,7 +151,7 @@
         <Border Grid.Row="3" Style="{StaticResource Card}" VerticalAlignment="Bottom" Margin="0,12,0,0"
                 Visibility="{Binding HasResult, Converter={StaticResource BoolToVis}}">
             <StackPanel>
-                <TextBlock Text="Résultat du nettoyage" Style="{StaticResource Text.Title}" FontSize="14" Margin="0,0,0,4" />
+                <TextBlock Text="{DynamicResource Cleanup.ResultTitle}" Style="{StaticResource Text.Title}" FontSize="14" Margin="0,0,0,4" />
                 <TextBlock Text="{Binding ResultMessage}" Style="{StaticResource Text.Subtle}" TextWrapping="Wrap" />
             </StackPanel>
         </Border>

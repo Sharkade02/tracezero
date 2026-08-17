@@ -1,0 +1,119 @@
+<UserControl x:Class="TraceZero.App.Views.SecureEraseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="760" d:DesignWidth="1000"
+             d:DataContext="{d:DesignInstance vm:SecureEraseViewModel}">
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid Margin="32">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="{DynamicResource Nav.SecureErase}" Style="{StaticResource Text.Headline}" />
+            <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0" TextWrapping="Wrap"
+                       Text="{DynamicResource SecureErase.Subtitle}" />
+        </StackPanel>
+
+        <!-- Effacement de fichiers -->
+        <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,16">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Top" Text="{DynamicResource SecureErase.FilesTitle}" Style="{StaticResource Text.Title}" Margin="0,0,0,8" />
+
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,8">
+                    <Button Content="{DynamicResource SecureErase.AddFiles}" Style="{StaticResource SecondaryButton}" Command="{Binding AddFilesCommand}" />
+                    <Button Content="{DynamicResource SecureErase.ClearList}" Style="{StaticResource SecondaryButton}" Command="{Binding ClearTargetsCommand}" Margin="8,0,0,0" />
+                    <CheckBox Content="{DynamicResource SecureErase.Reinforced}" IsChecked="{Binding Reinforced}" VerticalAlignment="Center" Margin="16,0,0,0"
+                              Foreground="{DynamicResource Brush.Text.Primary}" />
+                </StackPanel>
+
+                <TextBlock DockPanel.Dock="Bottom" Text="{Binding FileMediaWarning}" TextWrapping="Wrap" Margin="0,8,0,0"
+                           Foreground="{DynamicResource Brush.Risk.Privacy}" FontSize="12"
+                           Visibility="{Binding HasTargets, Converter={StaticResource BoolToVis}}" />
+
+                <Button DockPanel.Dock="Bottom" Content="{DynamicResource SecureErase.EraseBtn}" HorizontalAlignment="Left" Margin="0,10,0,0"
+                        Command="{Binding EraseCommand}"
+                        Visibility="{Binding HasTargets, Converter={StaticResource BoolToVis}}">
+                    <Button.Style>
+                        <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                            <Setter Property="Background" Value="{DynamicResource Brush.Risk.Review}" />
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <TextBlock DockPanel.Dock="Bottom"
+                           Text="{DynamicResource SecureErase.EmptyHint}">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock" BasedOn="{StaticResource Text.Subtle}">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding HasTargets}" Value="True">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Targets}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,6">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding FileName}" FontWeight="SemiBold"
+                                                   Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis" />
+                                        <TextBlock Text="{Binding Path}" Style="{StaticResource Text.Subtle}" FontSize="11" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="{Binding SizeText}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" />
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </DockPanel>
+        </Border>
+
+        <!-- Effacement de l'espace libre -->
+        <Border Grid.Row="2" Style="{StaticResource Card}">
+            <StackPanel>
+                <TextBlock Text="{DynamicResource SecureErase.FreeSpaceTitle}" Style="{StaticResource Text.Title}" Margin="0,0,0,6" />
+                <TextBlock Style="{StaticResource Text.Subtle}" TextWrapping="Wrap" Margin="0,0,0,10"
+                           Text="{DynamicResource SecureErase.FreeSpaceDesc}" />
+
+                <StackPanel Orientation="Horizontal">
+                    <ComboBox Width="320" VerticalAlignment="Center" ItemsSource="{Binding Drives}"
+                              SelectedItem="{Binding SelectedDrive}" DisplayMemberPath="Display"
+                              AutomationProperties.Name="{DynamicResource SecureErase.DriveName}" />
+                    <Button Content="{DynamicResource SecureErase.WipeBtn}" Style="{StaticResource SecondaryButton}" Margin="12,0,0,0"
+                            Command="{Binding WipeFreeSpaceCommand}" />
+                    <Button Content="{DynamicResource Common.Cancel}" Style="{StaticResource SecondaryButton}" Margin="8,0,0,0"
+                            Command="{Binding CancelWipeCommand}"
+                            Visibility="{Binding IsWiping, Converter={StaticResource BoolToVis}}" />
+                </StackPanel>
+
+                <TextBlock Text="{Binding DriveMediaWarning}" TextWrapping="Wrap" Margin="0,8,0,0"
+                           Foreground="{DynamicResource Brush.Risk.Privacy}" FontSize="12" />
+
+                <ProgressBar Height="8" Margin="0,10,0,0" Minimum="0" Maximum="1" Value="{Binding WipeProgress}"
+                             Visibility="{Binding IsWiping, Converter={StaticResource BoolToVis}}"
+                             AutomationProperties.Name="{DynamicResource SecureErase.ProgressName}"
+                             Foreground="{DynamicResource Brush.Accent}" Background="{DynamicResource Brush.Control.Hover}" />
+                <TextBlock Text="{Binding WipeStatus}" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" TextWrapping="Wrap" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

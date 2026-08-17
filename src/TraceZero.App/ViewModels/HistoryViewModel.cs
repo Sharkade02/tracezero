@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.History;
 using TraceZero.Domain.Common;
 using TraceZero.Domain.History;
@@ -11,16 +12,23 @@ namespace TraceZero.App.ViewModels;
 /// <summary>Ligne d'historique affichée.</summary>
 public sealed class HistoryRowViewModel
 {
-    private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
+    // Les sources sont stockées en clair (catégorie) ; on les mappe vers une chaîne localisée à l'affichage.
+    private static string MapSource(string source) => source switch
+    {
+        "Nettoyage" => Localizer.Get("Nav.Cleanup"),
+        "Confidentialité" => Localizer.Get("Nav.Privacy"),
+        "Automatisation" => Localizer.Get("Nav.Automation"),
+        _ => source,
+    };
 
     public HistoryRowViewModel(CleanupHistoryEntry entry)
     {
-        DateText = entry.TimestampUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm", Fr);
-        Source = entry.Source;
+        DateText = entry.TimestampUtc.ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
+        Source = MapSource(entry.Source);
         FreedText = ByteSize.Format(entry.FreedBytes);
         Details = entry.Failures > 0
-            ? $"{entry.ItemsCleaned} élément(s) · {entry.Failures} ignoré(s)"
-            : $"{entry.ItemsCleaned} élément(s)";
+            ? Localizer.Format("History.DetailsFailures", entry.ItemsCleaned, entry.Failures)
+            : Localizer.Format("Common.Items", entry.ItemsCleaned);
     }
 
     public string DateText { get; }
@@ -39,13 +47,17 @@ public sealed class HistoryRowViewModel
 public sealed partial class HistoryViewModel : PageViewModelBase
 {
     private readonly ICleanupHistoryStore _store;
+    private readonly IDialogService _dialog;
+    private readonly IToastService _toasts;
 
-    public HistoryViewModel(ICleanupHistoryStore store)
+    public HistoryViewModel(ICleanupHistoryStore store, IDialogService dialog, IToastService toasts)
     {
         _store = store;
+        _dialog = dialog;
+        _toasts = toasts;
     }
 
-    public override string Title => "Historique";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.History");
 
     public override string IconGlyph => "\U0001F553";
 
@@ -90,7 +102,25 @@ public sealed partial class HistoryViewModel : PageViewModelBase
     [RelayCommand]
     private async Task ClearAsync()
     {
+        if (!HasEntries)
+        {
+            return;
+        }
+
+        var confirmed = await _dialog.ConfirmAsync(
+            Localizer.Get("History.Confirm.Title"),
+            Localizer.Get("History.Confirm.Body"),
+            confirmText: Localizer.Get("Common.Erase"),
+            cancelText: Localizer.Get("Common.Cancel"),
+            destructive: true);
+
+        if (!confirmed)
+        {
+            return;
+        }
+
         await _store.ClearAsync();
+        _toasts.Show(Localizer.Get("History.Toast.Cleared"), ToastKind.Info);
         await RefreshAsync();
     }
 }

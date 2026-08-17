@@ -19,10 +19,10 @@
 
             <!-- En-tête -->
             <StackPanel Grid.Row="0" Margin="0,0,0,20">
-                <TextBlock Text="Votre PC peut être nettoyé en toute sécurité"
+                <TextBlock Text="{DynamicResource Home.Headline}"
                            Style="{StaticResource Text.Headline}" TextWrapping="Wrap" />
                 <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" TextWrapping="Wrap"
-                           Text="TraceZero analyse votre système localement : fichiers temporaires, traces de navigateurs, Corbeille et traces d'activité Windows — en protégeant votre vie privée." />
+                           Text="{DynamicResource Home.Subtitle}" />
             </StackPanel>
 
             <!-- Carte principale : état non analysé (aucune valeur inventée) -->
@@ -34,25 +34,24 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <TextBlock Style="{StaticResource Text.Subtle}" Text="Espace récupérable" />
+                        <TextBlock Style="{StaticResource Text.Subtle}" Text="{DynamicResource Home.Recoverable}" />
                         <TextBlock Text="—" FontSize="40" FontWeight="Bold"
                                    Foreground="{DynamicResource Brush.Text.Primary}" Margin="0,2,0,4" />
-                        <TextBlock Style="{StaticResource Text.Subtle}"
-                                   Text="Aucune analyse effectuée. Lancez une analyse pour voir l'espace récupérable." />
+                        <TextBlock Style="{StaticResource Text.Subtle}" Text="{DynamicResource Home.NoScan}" />
 
                         <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
                             <StackPanel Margin="0,0,28,0">
-                                <TextBlock Text="Sans risque" Foreground="{DynamicResource Brush.Risk.Safe}"
+                                <TextBlock Text="{DynamicResource Risk.Safe}" Foreground="{DynamicResource Brush.Risk.Safe}"
                                            FontWeight="SemiBold" FontSize="13" />
                                 <TextBlock Text="—" Style="{StaticResource Text.Subtle}" />
                             </StackPanel>
                             <StackPanel Margin="0,0,28,0">
-                                <TextBlock Text="Confidentialité" Foreground="{DynamicResource Brush.Risk.Privacy}"
+                                <TextBlock Text="{DynamicResource Risk.Privacy}" Foreground="{DynamicResource Brush.Risk.Privacy}"
                                            FontWeight="SemiBold" FontSize="13" />
                                 <TextBlock Text="—" Style="{StaticResource Text.Subtle}" />
                             </StackPanel>
                             <StackPanel>
-                                <TextBlock Text="À vérifier" Foreground="{DynamicResource Brush.Risk.Review}"
+                                <TextBlock Text="{DynamicResource Risk.Review}" Foreground="{DynamicResource Brush.Risk.Review}"
                                            FontWeight="SemiBold" FontSize="13" />
                                 <TextBlock Text="—" Style="{StaticResource Text.Subtle}" />
                             </StackPanel>
@@ -60,11 +59,11 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Right">
-                        <Button Content="Analyser mon PC" Style="{StaticResource PrimaryButton}"
+                        <Button Content="{DynamicResource Action.Analyze}" Style="{StaticResource PrimaryButton}"
                                 Command="{Binding AnalyzeCommand}" MinWidth="180" />
                         <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,10,0,0"
                                    TextAlignment="Center" MaxWidth="180" TextWrapping="Wrap"
-                                   Text="Ouvre la page Nettoyage et lance une analyse réelle de votre PC." />
+                                   Text="{DynamicResource Home.AnalyzeHint}" />
                     </StackPanel>
                 </Grid>
             </Border>
@@ -73,36 +72,36 @@
             <UniformGrid Grid.Row="2" Columns="4" Margin="0,0,0,20">
                 <Border Style="{StaticResource Card}" Margin="0,0,10,0">
                     <StackPanel>
-                        <TextBlock Text="Windows temporaires" Style="{StaticResource Text.Title}" FontSize="14" TextWrapping="Wrap" />
+                        <TextBlock Text="{DynamicResource Home.Card.WinTemp}" Style="{StaticResource Text.Title}" FontSize="14" TextWrapping="Wrap" />
                         <TextBlock Text="—" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" />
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}" Margin="5,0">
                     <StackPanel>
-                        <TextBlock Text="Navigateurs" Style="{StaticResource Text.Title}" FontSize="14" />
+                        <TextBlock Text="{DynamicResource Nav.Browsers}" Style="{StaticResource Text.Title}" FontSize="14" />
                         <TextBlock Text="—" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" />
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}" Margin="5,0">
                     <StackPanel>
-                        <TextBlock Text="Corbeille" Style="{StaticResource Text.Title}" FontSize="14" />
+                        <TextBlock Text="{DynamicResource Home.Card.RecycleBin}" Style="{StaticResource Text.Title}" FontSize="14" />
                         <TextBlock Text="—" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" />
                     </StackPanel>
                 </Border>
                 <Border Style="{StaticResource Card}" Margin="10,0,0,0">
                     <StackPanel>
-                        <TextBlock Text="Traces Windows" Style="{StaticResource Text.Title}" FontSize="14" TextWrapping="Wrap" />
+                        <TextBlock Text="{DynamicResource Home.Card.WinTraces}" Style="{StaticResource Text.Title}" FontSize="14" TextWrapping="Wrap" />
                         <TextBlock Text="—" Style="{StaticResource Text.Subtle}" Margin="0,6,0,0" />
                     </StackPanel>
                 </Border>
             </UniformGrid>
 
-            <!-- Bandeau honnêteté Phase 0 -->
+            <!-- Bandeau honnêteté -->
             <Border Grid.Row="3" Style="{StaticResource Card}">
                 <StackPanel>
-                    <TextBlock Text="Phase 0 — Fondations" Style="{StaticResource Text.Title}" FontSize="14" Margin="0,0,0,6" />
+                    <TextBlock Text="{DynamicResource Home.Privacy.Title}" Style="{StaticResource Text.Title}" FontSize="14" Margin="0,0,0,6" />
                     <TextBlock Style="{StaticResource Text.Subtle}" TextWrapping="Wrap"
-                               Text="La coquille, la navigation, les thèmes et la couche de sécurité (validation des chemins) sont en place. Le scan et le nettoyage réels arrivent aux phases suivantes. Aucune valeur affichée n'est simulée." />
+                               Text="{DynamicResource Home.Privacy.Body}" />
                 </StackPanel>
             </Border>
         </Grid>

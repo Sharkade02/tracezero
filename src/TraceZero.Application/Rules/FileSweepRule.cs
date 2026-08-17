@@ -12,7 +12,13 @@ public sealed record FileSweepRule
 
     public required string DisplayName { get; init; }
 
+    /// <summary>Clé de ressource pour le nom localisé (§31), repli sur <see cref="DisplayName"/>.</summary>
+    public string? NameKey { get; init; }
+
     public string? Description { get; init; }
+
+    /// <summary>Clé de ressource pour la description localisée (§31), repli sur <see cref="Description"/>.</summary>
+    public string? DescriptionKey { get; init; }
 
     public required Category Category { get; init; }
 

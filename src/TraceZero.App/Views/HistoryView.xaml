@@ -20,30 +20,30 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
-            <TextBlock Text="Historique" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Nav.History}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Journal local de vos nettoyages. Aucune donnée n'est envoyée ; aucun chemin personnel n'est conservé." />
+                       Text="{DynamicResource History.Subtitle}" />
         </StackPanel>
 
         <!-- Statistiques -->
         <UniformGrid Grid.Row="1" Columns="3" Margin="0,0,0,16">
             <Border Style="{StaticResource Card}" Margin="0,0,8,0">
                 <StackPanel>
-                    <TextBlock Text="Total libéré" Style="{StaticResource Text.Subtle}" />
+                    <TextBlock Text="{DynamicResource History.TotalFreed}" Style="{StaticResource Text.Subtle}" />
                     <TextBlock Text="{Binding TotalFreedText}" FontSize="26" FontWeight="Bold"
                                Foreground="{DynamicResource Brush.Risk.Safe}" Margin="0,2,0,0" />
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Card}" Margin="4,0">
                 <StackPanel>
-                    <TextBlock Text="Nettoyages" Style="{StaticResource Text.Subtle}" />
+                    <TextBlock Text="{DynamicResource History.Count}" Style="{StaticResource Text.Subtle}" />
                     <TextBlock Text="{Binding CleanupCountText}" FontSize="26" FontWeight="Bold"
                                Foreground="{DynamicResource Brush.Text.Primary}" Margin="0,2,0,0" />
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource Card}" Margin="8,0,0,0">
                 <StackPanel>
-                    <TextBlock Text="Dernier nettoyage" Style="{StaticResource Text.Subtle}" />
+                    <TextBlock Text="{DynamicResource History.Last}" Style="{StaticResource Text.Subtle}" />
                     <TextBlock Text="{Binding LastCleanupText}" FontSize="18" FontWeight="SemiBold"
                                Foreground="{DynamicResource Brush.Text.Primary}" Margin="0,6,0,0" TextWrapping="Wrap" />
                 </StackPanel>
@@ -54,13 +54,13 @@
         <Border Grid.Row="2" Style="{StaticResource Card}" Padding="8">
             <DockPanel>
                 <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="8,4,8,10">
-                    <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" />
-                    <Button Content="Effacer l'historique" Style="{StaticResource SecondaryButton}"
+                    <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" />
+                    <Button Content="{DynamicResource History.Clear}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding ClearCommand}" Margin="8,0,0,0" />
                 </StackPanel>
 
                 <TextBlock DockPanel.Dock="Top" Margin="8,4"
-                           Text="Aucun nettoyage enregistré pour le moment.">
+                           Text="{DynamicResource History.Empty}">
                     <TextBlock.Style>
                         <Style TargetType="TextBlock" BasedOn="{StaticResource Text.Subtle}">
                             <Setter Property="Visibility" Value="Collapsed" />

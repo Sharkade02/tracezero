@@ -73,3 +73,31 @@ Chaque décision technique structurante est notée ici : contexte, choix, altern
 - **Conséquences** : le cœur (`ElevatedTempCleaner`, validateur, exécuteur) est portable/testable sans
   privilège ; ajouter une opération élevée future = étendre l'enum + sa liste d'autorisation dédiée,
   jamais ouvrir un chemin générique.
+
+## ADR-0007 — Protection/Restauration : sauvegarde registre native + coffre SQLite (Phase 7)
+
+- **Contexte** : §17 impose de sauvegarder les données modifiées « lorsque possible » avant une action
+  sensible, de classer chaque action (Reversible / PartiallyReversible / Irreversible) et d'offrir
+  « Restaurer les éléments disponibles », sans jamais prétendre restaurer un fichier effacé de façon
+  sécurisée.
+- **Décision** :
+  - **Sauvegarde registre native** plutôt que `reg.exe export`/`import` : `RegistryBackupService` lit
+    récursivement une sous-clé HKCU en un `RegistryKeySnapshot` portable (types encodés en texte/base64),
+    et restaure par réécriture. Motif : **testable sans admin ni shell externe** (round-trip sur une clé
+    HKCU de test), format maîtrisé et sérialisable (`RegistrySnapshotCodec`, JSON).
+  - **HKCU uniquement, aucune élévation** : la restauration réécrit sous HKEY_CURRENT_USER ; la sous-clé
+    est **fournie par l'appelant** (catalogue de traces autorisées), le service ne choisit jamais seul
+    quoi sauvegarder — cohérent avec le « refus par défaut » du nettoyeur registre (ADR équivalent §43).
+  - **Coffre = table SQLite dédiée** (`restore_points`) dans la base locale existante, séparée de
+    l'historique anonymisé : le coffre doit, lui, conserver la charge utile (contenu registre) pour
+    pouvoir restaurer. Ces données restent **locales**, jamais transmises — c'est le principe d'une
+    sauvegarde.
+  - **Réversibilité honnête** portée par `RestoreRecord.Reversibility` ; l'UI n'offre « Restaurer » que
+    pour les éléments réversibles.
+- **Alternatives** : `reg.exe` (rejeté : moins testable, dépend d'un process externe) ; point de
+  restauration Windows comme mécanisme principal (rejeté : exige l'élévation, trop lourd pour une trace
+  HKCU — reste `PLANNED` pour les modules Expert) ; stocker la charge utile en fichiers `.reg` séparés
+  (rejeté : gestion de fichiers superflue, une colonne `payload` JSON suffit).
+- **Conséquences** : la Phase 4 (nettoyage PRIVACY navigateurs : cookies/DB) réutilisera ce coffre et le
+  motif capture-avant-modification. Ajouter un type restaurable = étendre `RestoreItemKind` + son
+  applicateur, sans ouvrir de chemin générique.

@@ -14,9 +14,7 @@ public sealed class BrowserRowViewModel
     {
         DisplayName = browser.DisplayName;
         IsRunning = browser.IsRunning;
-        ProfilesText = browser.Profiles.Count > 1
-            ? $"{browser.Profiles.Count} profils"
-            : "1 profil";
+        ProfilesText = Localizer.Format("Browsers.Profiles", browser.Profiles.Count);
         Glyph = browser.Kind switch
         {
             BrowserKind.Firefox => "\U0001F98A", // 🦊
@@ -30,7 +28,7 @@ public sealed class BrowserRowViewModel
 
     public bool IsRunning { get; }
 
-    public string StateText => IsRunning ? "En cours d'exécution" : "Fermé";
+    public string StateText => IsRunning ? Localizer.Get("Browsers.Running") : Localizer.Get("Browsers.Closed");
 
     public string Glyph { get; }
 }
@@ -53,7 +51,7 @@ public sealed partial class BrowsersViewModel : PageViewModelBase
         Refresh();
     }
 
-    public override string Title => "Navigateurs";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Browsers");
 
     public override string IconGlyph => "\U0001F310";
 

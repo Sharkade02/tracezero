@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.Apps;
 using TraceZero.Domain.Apps;
 using TraceZero.Domain.Common;
@@ -15,7 +15,7 @@ public sealed class AppRowViewModel(AppInstallation app)
 {
     public AppInstallation Model => app;
     public string Name => app.Name;
-    public string Publisher => app.Publisher ?? "Éditeur inconnu";
+    public string Publisher => app.Publisher ?? Localizer.Get("Apps.UnknownPublisher");
     public string Version => app.Version is { } v ? $"v{v}" : string.Empty;
     public string SizeText => app.SizeBytes is { } s ? ByteSize.Format(s) : string.Empty;
     public string InstallDateText => app.InstallDate?.ToString("dd/MM/yyyy", CultureInfo.GetCultureInfo("fr-FR")) ?? string.Empty;
@@ -35,9 +35,9 @@ public sealed partial class StartupRowViewModel(StartupEntry entry) : Observable
 
     public string LocationText => entry.Location switch
     {
-        StartupLocation.RunCurrentUser => "Utilisateur",
-        StartupLocation.RunLocalMachine => "Système (lecture seule)",
-        StartupLocation.StartupFolder => "Dossier de démarrage",
+        StartupLocation.RunCurrentUser => Localizer.Get("Startup.User"),
+        StartupLocation.RunLocalMachine => Localizer.Get("Startup.Machine"),
+        StartupLocation.StartupFolder => Localizer.Get("Startup.Folder"),
         _ => string.Empty,
     };
 }
@@ -47,16 +47,24 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
 {
     private readonly IInstalledAppService _appService;
     private readonly IStartupService _startupService;
+    private readonly IDialogService _dialog;
+    private readonly IToastService _toasts;
     private readonly List<AppRowViewModel> _allApps = [];
     private bool _loaded;
 
-    public ApplicationsViewModel(IInstalledAppService appService, IStartupService startupService)
+    public ApplicationsViewModel(
+        IInstalledAppService appService,
+        IStartupService startupService,
+        IDialogService dialog,
+        IToastService toasts)
     {
         _appService = appService;
         _startupService = startupService;
+        _dialog = dialog;
+        _toasts = toasts;
     }
 
-    public override string Title => "Applications";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Applications");
     public override string IconGlyph => "\U0001F4E6";
     public override bool IsUnderConstruction => false;
 
@@ -129,7 +137,7 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
             Apps.Add(app);
         }
 
-        AppCountText = $"{_allApps.Count} application(s) installée(s)";
+        AppCountText = Localizer.Format("Apps.Count", _allApps.Count);
     }
 
     [RelayCommand]
@@ -151,22 +159,32 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
     }
 
     [RelayCommand]
-    private void Uninstall(AppRowViewModel? row)
+    private async Task UninstallAsync(AppRowViewModel? row)
     {
         if (row is null || !row.CanUninstall)
         {
             return;
         }
 
-        var confirm = MessageBox.Show(
-            $"Lancer la désinstallation de « {row.Name} » ? TraceZero exécute le désinstallateur fourni par l'éditeur ; il ne supprime jamais un logiciel manuellement.",
-            "Désinstaller",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
+        var confirmed = await _dialog.ConfirmAsync(
+            Localizer.Get("Apps.Confirm.Title"),
+            Localizer.Format("Apps.Confirm.Body", row.Name),
+            confirmText: Localizer.Get("Apps.Uninstall"),
+            cancelText: Localizer.Get("Common.Cancel"),
+            destructive: true);
 
-        if (confirm == MessageBoxResult.Yes)
+        if (!confirmed)
         {
-            _appService.LaunchUninstaller(row.Model);
+            return;
+        }
+
+        if (_appService.LaunchUninstaller(row.Model))
+        {
+            _toasts.Show(Localizer.Format("Apps.Toast.Launched", row.Name), ToastKind.Info);
+        }
+        else
+        {
+            _toasts.Show(Localizer.Format("Apps.Toast.LaunchFailed", row.Name), ToastKind.Error);
         }
     }
 

@@ -70,8 +70,11 @@ public static class WindowsPrivacyCatalog
     {
         Id = id,
         DisplayName = name,
+        NameKey = $"Privacy.{id}.Name",
         Explanation = explanation,
+        ExplanationKey = $"Privacy.{id}.Expl",
         Why = why,
+        WhyKey = $"Privacy.{id}.Why",
         Kind = PrivacyTraceKind.Registry,
         RegistrySubKey = subKey,
     };
@@ -80,8 +83,11 @@ public static class WindowsPrivacyCatalog
     {
         Id = id,
         DisplayName = name,
+        NameKey = $"Privacy.{id}.Name",
         Explanation = explanation,
+        ExplanationKey = $"Privacy.{id}.Expl",
         Why = why,
+        WhyKey = $"Privacy.{id}.Why",
         Kind = PrivacyTraceKind.File,
         FileRoot = root,
     };

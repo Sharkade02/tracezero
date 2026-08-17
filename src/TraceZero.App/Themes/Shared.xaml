@@ -52,12 +52,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Border x:Name="Root" Background="{TemplateBinding Background}"
-                            CornerRadius="8" Padding="{TemplateBinding Padding}">
+                            CornerRadius="8" Padding="{TemplateBinding Padding}"
+                            BorderThickness="2" BorderBrush="Transparent">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Root" Property="Opacity" Value="0.90" />
+                        </Trigger>
+                        <!-- Focus clavier visible (accessibilité, Phase 22). -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource Brush.Text.Primary}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Root" Property="Opacity" Value="0.45" />
@@ -88,10 +93,38 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Root" Property="Background" Value="{DynamicResource Brush.Control.Hover}" />
                         </Trigger>
+                        <!-- Focus clavier visible (accessibilité, Phase 22). -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource Brush.Text.Primary}" />
+                            <Setter TargetName="Root" Property="BorderThickness" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Root" Property="Opacity" Value="0.5" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Squelette de chargement (Phase 1) : bloc au fond neutre, pulsation douce. Réutilisable. -->
+    <Style x:Key="Skeleton" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource Brush.Skeleton}" />
+        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="Height" Value="14" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Style.Triggers>
+            <EventTrigger RoutedEvent="Loaded">
+                <BeginStoryboard>
+                    <Storyboard>
+                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                                         From="0.45" To="1.0" Duration="0:0:0.9"
+                                         AutoReverse="True" RepeatBehavior="Forever" />
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger>
+        </Style.Triggers>
     </Style>
 
     <!-- Bouton de navigation latérale. -->
@@ -104,7 +137,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RadioButton">
-                    <Border x:Name="Root" Background="Transparent" CornerRadius="8" Padding="12,10">
+                    <Border x:Name="Root" Background="Transparent" CornerRadius="8" Padding="12,10"
+                            BorderThickness="2" BorderBrush="Transparent">
                         <ContentPresenter VerticalAlignment="Center" />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -115,6 +149,10 @@
                             <Setter TargetName="Root" Property="Background" Value="{DynamicResource Brush.Nav.Selected.Background}" />
                             <Setter Property="Foreground" Value="{DynamicResource Brush.Nav.Selected.Foreground}" />
                             <Setter Property="FontWeight" Value="SemiBold" />
+                        </Trigger>
+                        <!-- Focus clavier visible (accessibilité, Phase 22). -->
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Root" Property="BorderBrush" Value="{DynamicResource Brush.Nav.Selected.Foreground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

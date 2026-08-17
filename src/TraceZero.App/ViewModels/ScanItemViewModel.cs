@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.ComponentModel;
+using TraceZero.App.Services;
 using TraceZero.Domain;
 using TraceZero.Domain.Common;
 
@@ -18,9 +19,11 @@ public partial class ScanItemViewModel : ObservableObject
     [ObservableProperty]
     private bool _isSelected;
 
-    public string DisplayName => Model.DisplayName;
+    public string DisplayName => Model.NameKey is { } nk ? Localizer.Get(nk) : Model.DisplayName;
 
-    public string Description => Model.Description ?? string.Empty;
+    public string Description => Model.DescriptionKey is { } dk
+        ? Localizer.Get(dk)
+        : Model.Description ?? string.Empty;
 
     public long SizeBytes => Model.SizeBytes;
 
@@ -30,11 +33,11 @@ public partial class ScanItemViewModel : ObservableObject
 
     public string RiskLabel => Risk switch
     {
-        RiskLevel.Safe => "Sans risque",
-        RiskLevel.Privacy => "Confidentialité",
-        RiskLevel.Review => "À vérifier",
+        RiskLevel.Safe => Localizer.Get("Risk.Safe"),
+        RiskLevel.Privacy => Localizer.Get("Risk.Privacy"),
+        RiskLevel.Review => Localizer.Get("Risk.Review"),
         _ => string.Empty,
     };
 
-    public string CountText => Model.ItemCount > 0 ? $"{Model.ItemCount:N0} élément(s)" : string.Empty;
+    public string CountText => Model.ItemCount > 0 ? Localizer.Format("Common.Items", Model.ItemCount) : string.Empty;
 }

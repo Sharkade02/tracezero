@@ -4,12 +4,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+             xmlns:conv="clr-namespace:TraceZero.App.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1000"
              d:DataContext="{d:DesignInstance vm:ApplicationsViewModel}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:InverseBooleanToVisibilityConverter x:Key="InvBoolToVis" />
     </UserControl.Resources>
 
     <Grid Margin="32">
@@ -21,26 +24,66 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Margin="0,0,0,14">
-            <TextBlock Text="Applications &amp; démarrage" Style="{StaticResource Text.Headline}" />
+            <TextBlock Text="{DynamicResource Apps.Headline}" Style="{StaticResource Text.Headline}" />
             <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,4,0,0"
-                       Text="Applications installées et programmes lancés au démarrage. La désinstallation utilise le mécanisme de l'éditeur." />
+                       Text="{DynamicResource Apps.Subtitle}" />
         </StackPanel>
 
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,12" Padding="14,10">
             <StackPanel Orientation="Horizontal">
                 <TextBox Width="260" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                         ToolTip="Rechercher une application" />
-                <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Margin="10,0,0,0" />
+                         ToolTip="{DynamicResource Apps.Search}" AutomationProperties.Name="{DynamicResource Apps.Search}" />
+                <Button Content="{DynamicResource Common.Refresh}" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Margin="10,0,0,0" />
                 <TextBlock Text="{Binding AppCountText}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="16,0,0,0" />
-                <TextBlock Text="Chargement…" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
+                <TextBlock Text="{DynamicResource Common.Loading}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
                            Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}" />
             </StackPanel>
         </Border>
 
         <!-- Applications installées -->
         <Border Grid.Row="2" Style="{StaticResource Card}" Padding="8">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Apps}">
+            <Grid>
+                <!-- Squelette de chargement (Phase 1), pendant la lecture du registre. -->
+                <ItemsControl Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}"
+                              Focusable="False" Margin="10,7">
+                    <ItemsControl.ItemsSource>
+                        <x:Array Type="{x:Type sys:Double}">
+                            <sys:Double>320</sys:Double>
+                            <sys:Double>260</sys:Double>
+                            <sys:Double>300</sys:Double>
+                            <sys:Double>230</sys:Double>
+                            <sys:Double>290</sys:Double>
+                            <sys:Double>250</sys:Double>
+                        </x:Array>
+                    </ItemsControl.ItemsSource>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,9">
+                                <Border Style="{StaticResource Skeleton}" Width="{Binding}"
+                                        HorizontalAlignment="Left" />
+                                <Border Style="{StaticResource Skeleton}" Width="140" Height="10"
+                                        HorizontalAlignment="Left" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ItemsControl ItemsSource="{Binding Apps}"
+                              Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVis}}"
+                              VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                              ScrollViewer.CanContentScroll="True">
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" Focusable="False">
+                                <ItemsPresenter />
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <Grid Margin="10,7">
@@ -60,11 +103,11 @@
                                            VerticalAlignment="Center" Margin="10,0" MinWidth="70" />
                                 <TextBlock Grid.Column="2" Text="{Binding SizeText}" Style="{StaticResource Text.Subtle}"
                                            VerticalAlignment="Center" Margin="10,0" MinWidth="70" TextAlignment="Right" />
-                                <Button Grid.Column="3" Content="Ouvrir" Style="{StaticResource SecondaryButton}" Padding="10,3" Margin="10,0,0,0"
+                                <Button Grid.Column="3" Content="{DynamicResource Common.Open}" Style="{StaticResource SecondaryButton}" Padding="10,3" Margin="10,0,0,0"
                                         Visibility="{Binding CanOpen, Converter={StaticResource BoolToVis}}"
                                         Command="{Binding DataContext.OpenLocationCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}" />
-                                <Button Grid.Column="4" Content="Désinstaller" Style="{StaticResource SecondaryButton}" Padding="10,3" Margin="8,0,0,0"
+                                <Button Grid.Column="4" Content="{DynamicResource Apps.Uninstall}" Style="{StaticResource SecondaryButton}" Padding="10,3" Margin="8,0,0,0"
                                         Visibility="{Binding CanUninstall, Converter={StaticResource BoolToVis}}"
                                         Command="{Binding DataContext.UninstallCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                         CommandParameter="{Binding}" />
@@ -72,13 +115,13 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </ScrollViewer>
+            </Grid>
         </Border>
 
         <!-- Démarrage -->
         <Border Grid.Row="3" Style="{StaticResource Card}" Margin="0,12,0,0" MaxHeight="230">
             <DockPanel>
-                <TextBlock DockPanel.Dock="Top" Text="Programmes au démarrage" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
+                <TextBlock DockPanel.Dock="Top" Text="{DynamicResource Apps.Startup}" Style="{StaticResource Text.Title}" FontSize="15" Margin="0,0,0,8" />
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <ItemsControl ItemsSource="{Binding StartupEntries}">
                         <ItemsControl.ItemTemplate>
@@ -105,10 +148,10 @@
                                             <TextBlock>
                                                 <TextBlock.Style>
                                                     <Style TargetType="TextBlock">
-                                                        <Setter Property="Text" Value="Désactiver" />
+                                                        <Setter Property="Text" Value="{DynamicResource Apps.Disable}" />
                                                         <Style.Triggers>
                                                             <DataTrigger Binding="{Binding IsEnabled}" Value="False">
-                                                                <Setter Property="Text" Value="Activer" />
+                                                                <Setter Property="Text" Value="{DynamicResource Apps.Enable}" />
                                                             </DataTrigger>
                                                         </Style.Triggers>
                                                     </Style>

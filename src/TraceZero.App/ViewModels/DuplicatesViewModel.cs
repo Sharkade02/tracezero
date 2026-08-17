@@ -14,15 +14,13 @@ namespace TraceZero.App.ViewModels;
 
 public sealed partial class DuplicateFileRowViewModel(DuplicateFile file) : ObservableObject
 {
-    private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
-
     [ObservableProperty]
     private bool _isSelected;
 
     public DuplicateFile File => file;
     public string FileName => file.FileName;
     public string Path => file.Path;
-    public string DateText => file.LastWriteUtc.ToLocalTime().ToString("dd/MM/yyyy HH:mm", Fr);
+    public string DateText => file.LastWriteUtc.ToLocalTime().ToString("g", CultureInfo.CurrentCulture);
     public DateTime LastWriteUtc => file.LastWriteUtc;
 }
 
@@ -34,7 +32,7 @@ public sealed class DuplicateGroupViewModel
         ReclaimableText = ByteSize.Format(group.ReclaimableBytes);
         Files = new ObservableCollection<DuplicateFileRowViewModel>(
             group.Files.OrderByDescending(f => f.LastWriteUtc).Select(f => new DuplicateFileRowViewModel(f)));
-        HeaderText = $"{Files.Count} copies · {SizeText} chacune · {ReclaimableText} récupérables";
+        HeaderText = Localizer.Format("Dup.Header", Files.Count, SizeText, ReclaimableText);
     }
 
     public string SizeText { get; }
@@ -88,7 +86,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
         SelectedThreshold = Thresholds[1];
     }
 
-    public override string Title => "Doublons";
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Duplicates");
     public override string IconGlyph => "\U0001F5C2";
     public override bool IsUnderConstruction => false;
 
@@ -96,9 +94,9 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
 
     public IReadOnlyList<ThresholdOption> Thresholds { get; } =
     [
-        new("À partir de 100 Ko", 100L * 1024),
-        new("À partir de 1 Mo", 1024L * 1024),
-        new("À partir de 10 Mo", 10L * 1024 * 1024),
+        new(Localizer.Format("Dup.Threshold", "100 Ko"), 100L * 1024),
+        new(Localizer.Format("Dup.Threshold", "1 Mo"), 1024L * 1024),
+        new(Localizer.Format("Dup.Threshold", "10 Mo"), 10L * 1024 * 1024),
     ];
 
     [ObservableProperty]
@@ -109,7 +107,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
     private bool _isScanning;
 
     [ObservableProperty]
-    private string _statusMessage = "Recherchez les fichiers en double dans votre dossier personnel.";
+    private string _statusMessage = Localizer.Get("Dup.Msg.Idle");
 
     [ObservableProperty]
     private bool _hasGroups;
@@ -131,7 +129,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
 
         try
         {
-            var progress = new Progress<long>(n => StatusMessage = $"Analyse en cours… {n:N0} fichiers examinés");
+            var progress = new Progress<long>(n => StatusMessage = Localizer.Format("Dup.Msg.Scanning", n));
             var reporter = new ProgressScanReporter(progress);
 
             var found = await _finder.FindAsync(root, minBytes, reporter, token);
@@ -145,12 +143,12 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
 
             HasGroups = Groups.Count > 0;
             StatusMessage = Groups.Count == 0
-                ? "Aucun doublon trouvé au-dessus du seuil choisi."
-                : $"{Groups.Count} groupe(s) de doublons — {ByteSize.Format(reclaimable)} récupérables.";
+                ? Localizer.Get("Dup.Msg.None")
+                : Localizer.Format("Dup.Msg.Found", Groups.Count, ByteSize.Format(reclaimable));
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Analyse annulée.";
+            StatusMessage = Localizer.Get("Dup.Msg.Canceled");
         }
         finally
         {
@@ -169,7 +167,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
             group.SelectAllButNewest();
         }
 
-        StatusMessage = "Copies présélectionnées (la plus récente est conservée dans chaque groupe).";
+        StatusMessage = Localizer.Get("Dup.Msg.Preselected");
     }
 
     [RelayCommand]
@@ -210,13 +208,13 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
         var toRemove = Groups.SelectMany(g => g.Files).Where(f => f.IsSelected).ToList();
         if (toRemove.Count == 0)
         {
-            StatusMessage = "Aucune copie sélectionnée.";
+            StatusMessage = Localizer.Get("Dup.Msg.NoneSelected");
             return;
         }
 
         var confirm = MessageBox.Show(
-            $"Envoyer {toRemove.Count} copie(s) en double à la Corbeille ? Au moins une copie est conservée dans chaque groupe. Vous pourrez restaurer depuis la Corbeille.",
-            "Confirmer",
+            Localizer.Format("Dup.Confirm.Body", toRemove.Count),
+            Localizer.Get("Common.Confirm"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
 
@@ -244,7 +242,7 @@ public sealed partial class DuplicatesViewModel : PageViewModelBase, IDisposable
         }
 
         HasGroups = Groups.Count > 0;
-        StatusMessage = $"{removed} copie(s) envoyée(s) à la Corbeille.";
+        StatusMessage = Localizer.Format("Dup.Msg.Recycled", removed);
     }
 
     public void Dispose()

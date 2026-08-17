@@ -1,0 +1,368 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Español (es-ES). Mismas claves que fr. -->
+
+    <s:String x:Key="App.Tagline">Vea lo que se almacena. Limpie lo que elija.</s:String>
+
+    <s:String x:Key="Common.Refresh">Actualizar</s:String>
+    <s:String x:Key="Common.Cancel">Cancelar</s:String>
+    <s:String x:Key="Common.Confirm">Confirmar</s:String>
+    <s:String x:Key="Common.Add">Añadir</s:String>
+    <s:String x:Key="Common.Remove">Quitar</s:String>
+    <s:String x:Key="Common.Close">Cerrar</s:String>
+    <s:String x:Key="Common.Analyze">Analizar</s:String>
+    <s:String x:Key="Common.Open">Abrir</s:String>
+    <s:String x:Key="Common.Loading">Cargando…</s:String>
+    <s:String x:Key="Common.Analyzing">Analizando…</s:String>
+    <s:String x:Key="Common.Items">{0:N0} elemento(s)</s:String>
+    <s:String x:Key="Action.Analyze">Analizar mi PC</s:String>
+    <s:String x:Key="Action.Clean">Limpiar ahora</s:String>
+
+    <s:String x:Key="Risk.Safe">Sin riesgo</s:String>
+    <s:String x:Key="Risk.Privacy">Privacidad</s:String>
+    <s:String x:Key="Risk.Review">Revisar</s:String>
+
+    <s:String x:Key="Nav.Home">Inicio</s:String>
+    <s:String x:Key="Nav.Cleanup">Limpieza</s:String>
+    <s:String x:Key="Nav.Privacy">Privacidad</s:String>
+    <s:String x:Key="Nav.Browsers">Navegadores</s:String>
+    <s:String x:Key="Nav.DiskSpace">Espacio en disco</s:String>
+    <s:String x:Key="Nav.SystemHealth">Estado del sistema</s:String>
+    <s:String x:Key="Nav.Drivers">Controladores</s:String>
+    <s:String x:Key="Nav.Duplicates">Duplicados</s:String>
+    <s:String x:Key="Nav.Applications">Aplicaciones</s:String>
+    <s:String x:Key="Nav.SecureErase">Borrado seguro</s:String>
+    <s:String x:Key="Nav.Ntfs">Análisis NTFS</s:String>
+    <s:String x:Key="Nav.Automation">Automatización</s:String>
+    <s:String x:Key="Nav.History">Historial</s:String>
+    <s:String x:Key="Nav.Restore">Restauración</s:String>
+    <s:String x:Key="Nav.Settings">Ajustes</s:String>
+    <s:String x:Key="Nav.Supporter">Apoyar</s:String>
+
+    <s:String x:Key="Shell.ToggleTheme">Cambiar tema</s:String>
+
+    <s:String x:Key="Home.Headline">Su PC se puede limpiar de forma segura</s:String>
+    <s:String x:Key="Home.Subtitle">TraceZero analiza su sistema localmente: archivos temporales, rastros de navegadores, Papelera y rastros de actividad de Windows — protegiendo su privacidad.</s:String>
+    <s:String x:Key="Home.Recoverable">Espacio recuperable</s:String>
+    <s:String x:Key="Home.NoScan">Aún no se ha realizado ningún análisis. Ejecute un análisis para ver el espacio recuperable.</s:String>
+    <s:String x:Key="Home.AnalyzeHint">Abre la página de Limpieza y ejecuta un análisis real de su PC.</s:String>
+    <s:String x:Key="Home.Card.WinTemp">Temporales de Windows</s:String>
+    <s:String x:Key="Home.Card.RecycleBin">Papelera</s:String>
+    <s:String x:Key="Home.Card.WinTraces">Rastros de Windows</s:String>
+    <s:String x:Key="Home.Privacy.Title">Privacidad primero</s:String>
+    <s:String x:Key="Home.Privacy.Body">Todo ocurre localmente en su PC. No se envía ningún dato y ningún valor mostrado es simulado: las cifras solo aparecen tras un análisis real.</s:String>
+
+    <s:String x:Key="Cleanup.Subtitle">Analice su PC, elija qué eliminar y luego limpie. Cada eliminación es validada por la capa de seguridad.</s:String>
+    <s:String x:Key="Cleanup.Selection">Selección para limpiar</s:String>
+    <s:String x:Key="Cleanup.EmptyTitle">Nada que limpiar</s:String>
+    <s:String x:Key="Cleanup.EmptyBody">Por ahora no se han encontrado elementos recuperables. ¡Es buena señal!</s:String>
+    <s:String x:Key="Cleanup.ResultTitle">Resultado de la limpieza</s:String>
+
+    <s:String x:Key="Settings.Title">Ajustes</s:String>
+    <s:String x:Key="Settings.Appearance">Apariencia</s:String>
+    <s:String x:Key="Settings.DarkMode">Tema oscuro</s:String>
+    <s:String x:Key="Settings.Language">Idioma</s:String>
+    <s:String x:Key="Settings.LanguageHint">El idioma de la interfaz cambia de inmediato.</s:String>
+    <s:String x:Key="Settings.Exclusions">Exclusiones</s:String>
+    <s:String x:Key="Settings.ExclusionsHint">Las carpetas y categorías excluidas nunca se analizan ni se limpian.</s:String>
+    <s:String x:Key="Settings.AddFolder">Añadir una carpeta…</s:String>
+    <s:String x:Key="Settings.NoExclusions">Aún no hay exclusiones.</s:String>
+    <s:String x:Key="Settings.AdvancedCleaning">Limpieza avanzada</s:String>
+    <s:String x:Key="Settings.CleanWindowsTemp">Limpiar C:\Windows\Temp (elevación)</s:String>
+
+    <s:String x:Key="Privacy.Headline">Lo que Windows aún sabe de su actividad</s:String>
+    <s:String x:Key="Privacy.Subtitle">Windows guarda rastros de sus archivos recientes, búsquedas y programas iniciados. Cada rastro se explica. Usted elige qué borrar.</s:String>
+    <s:String x:Key="Privacy.Analyze">Analizar mis rastros</s:String>
+    <s:String x:Key="Privacy.CleanSelected">Borrar los rastros seleccionados</s:String>
+    <s:String x:Key="Privacy.Warning">Borrar un rastro es irreversible y elimina un historial. Sus archivos no se ven afectados.</s:String>
+
+    <s:String x:Key="Supporter.Headline">Apoyar TraceZero</s:String>
+    <s:String x:Key="Supporter.Subtitle">TraceZero se desarrolla sin publicidad, sin venta de datos y sin suscripción obligatoria. La limpieza y la seguridad son completas en la versión gratuita.</s:String>
+    <s:String x:Key="Supporter.Donate">Hacer una donación</s:String>
+    <s:String x:Key="Supporter.Recommended">Recomendado</s:String>
+    <s:String x:Key="Supporter.OtherAmount">Otro importe en el sitio</s:String>
+    <s:String x:Key="Supporter.HaveCode">Tengo un código de apoyo</s:String>
+    <s:String x:Key="Supporter.CodeHint">El código se valida localmente, sin conexión, mediante firma criptográfica. No se requiere cuenta.</s:String>
+    <s:String x:Key="Supporter.Activate">Activar</s:String>
+    <s:String x:Key="Supporter.Deactivate">Desactivar</s:String>
+    <s:String x:Key="Supporter.UnlocksTitle">El apoyo desbloquea (próximamente)</s:String>
+    <s:String x:Key="Supporter.UnlocksBody">• Automatizaciones avanzadas y múltiples perfiles  • Limpieza silenciosa programada  • Temas y personalización  • Funciones de comodidad no esenciales. La limpieza principal y la seguridad nunca se limitan.</s:String>
+
+    <s:String x:Key="History.Subtitle">Registro local de sus limpiezas. No se envía ningún dato; no se conserva ninguna ruta personal.</s:String>
+    <s:String x:Key="History.TotalFreed">Total liberado</s:String>
+    <s:String x:Key="History.Count">Limpiezas</s:String>
+    <s:String x:Key="History.Last">Última limpieza</s:String>
+    <s:String x:Key="History.Clear">Borrar el historial</s:String>
+    <s:String x:Key="History.Empty">Aún no hay limpiezas registradas.</s:String>
+
+    <s:String x:Key="Automation.Subtitle">Programe una limpieza automática, sin servicio permanente. Se ejecuta mediante el Programador de tareas de Windows. Ningún elemento «a revisar» se limpia automáticamente.</s:String>
+    <s:String x:Key="Automation.Profile">Perfil</s:String>
+    <s:String x:Key="Automation.Safe">Seguro</s:String>
+    <s:String x:Key="Automation.SafeHint">Solo cachés y archivos temporales.</s:String>
+    <s:String x:Key="Automation.PrivacyHint">Añade los rastros permitidos (cachés + privacidad).</s:String>
+    <s:String x:Key="Automation.Trigger">Desencadenador</s:String>
+    <s:String x:Key="Automation.Weekly">Cada semana</s:String>
+    <s:String x:Key="Automation.Monthly">Cada mes</s:String>
+    <s:String x:Key="Automation.AtLogon">Al iniciar sesión</s:String>
+    <s:String x:Key="Automation.Enable">Activar la limpieza automática</s:String>
+    <s:String x:Key="Automation.Apply">Aplicar</s:String>
+
+    <s:String x:Key="DiskSpace.Subtitle">Ocupación de sus unidades y búsqueda de archivos grandes en su carpeta personal.</s:String>
+    <s:String x:Key="DiskSpace.LargeFiles">Archivos grandes</s:String>
+    <s:String x:Key="DiskSpace.RecycleSelected">Enviar la selección a la Papelera</s:String>
+
+    <s:String x:Key="Browsers.Subtitle">Navegadores detectados en este PC. TraceZero solo limpia las cachés.</s:String>
+    <s:String x:Key="Browsers.Protected">🔒  Sus sesiones se conservan</s:String>
+    <s:String x:Key="Browsers.ProtectedBody">Solo se limpian los archivos de caché (regenerados automáticamente). Sus cookies, sesiones, contraseñas y favoritos nunca se tocan.</s:String>
+    <s:String x:Key="Browsers.CleanCaches">Limpiar las cachés de navegadores</s:String>
+    <s:String x:Key="Browsers.Empty">No se detectó ningún navegador compatible en este PC.</s:String>
+    <s:String x:Key="Browsers.Profiles">{0:N0} perfil(es)</s:String>
+    <s:String x:Key="Browsers.Running">En ejecución</s:String>
+    <s:String x:Key="Browsers.Closed">Cerrado</s:String>
+
+    <s:String x:Key="Apps.Headline">Aplicaciones e inicio</s:String>
+    <s:String x:Key="Apps.Subtitle">Aplicaciones instaladas y programas iniciados al arrancar. La desinstalación usa el mecanismo del editor.</s:String>
+    <s:String x:Key="Apps.Search">Buscar una aplicación</s:String>
+    <s:String x:Key="Apps.Uninstall">Desinstalar</s:String>
+    <s:String x:Key="Apps.Startup">Programas de inicio</s:String>
+    <s:String x:Key="Apps.Disable">Desactivar</s:String>
+    <s:String x:Key="Apps.Enable">Activar</s:String>
+
+    <s:String x:Key="Restore.Subtitle">Restaure los elementos disponibles. Los rastros de privacidad se respaldan antes de borrarse.</s:String>
+    <s:String x:Key="Restore.ProtectionTitle">Protección de la limpieza</s:String>
+    <s:String x:Key="Restore.ProtectionBody">Antes de cada limpieza reversible, TraceZero respalda localmente lo que puede (claves de registro de rastros de privacidad). Estas copias permanecen en su PC y nunca se transmiten. Un archivo borrado de forma segura no se puede restaurar — esto nunca se promete.</s:String>
+    <s:String x:Key="Restore.ClearVault">Vaciar la caja fuerte</s:String>
+    <s:String x:Key="Restore.Empty">Ningún elemento para restaurar por ahora.</s:String>
+    <s:String x:Key="Restore.RestoreBtn">Restaurar</s:String>
+
+    <s:String x:Key="SystemHealth.Subtitle">Información real reportada por Windows. TraceZero no inventa ninguna puntuación ni «acelera» nada — muestra lo que se mide y lo explica.</s:String>
+    <s:String x:Key="SystemHealth.DiskHealth">Estado de los discos</s:String>
+    <s:String x:Key="SystemHealth.NoDisks">El estado de salud de los discos no está disponible en este equipo.</s:String>
+    <s:String x:Key="SystemHealth.StartupImpact">Impacto en el inicio</s:String>
+
+    <s:String x:Key="Drivers.Subtitle">Inventario de solo lectura de sus controladores. TraceZero no instala ni descarga ningún controlador: las actualizaciones pasan por Windows Update, nunca por una base de terceros.</s:String>
+    <s:String x:Key="Drivers.UpdateTitle">Actualización de controladores</s:String>
+    <s:String x:Key="Drivers.UpdateBody">Para mantener la seguridad, la instalación de controladores se deja a Windows Update (controladores firmados, compatibles, reversibles).</s:String>
+    <s:String x:Key="Drivers.OpenWU">Abrir Windows Update</s:String>
+    <s:String x:Key="Drivers.Search">Buscar un controlador</s:String>
+
+    <s:String x:Key="Ntfs.ExpertMode">Modo experto</s:String>
+    <s:String x:Key="Ntfs.Subtitle">Análisis de solo lectura de los rastros del sistema de archivos. TraceZero nunca modifica las estructuras NTFS. Lo que no se puede eliminar de forma fiable se marca como «Detectado» — nunca «limpiado» ni simulado.</s:String>
+    <s:String x:Key="Ntfs.GoErase">Borrar el espacio libre…</s:String>
+
+    <s:String x:Key="SecureErase.Subtitle">Haga que los archivos sean irrecuperables, o borre el espacio libre de una unidad. En SSD/NVMe, ningún borrado se presenta como garantizado — la advertencia es honesta.</s:String>
+    <s:String x:Key="SecureErase.FilesTitle">Archivos para borrar</s:String>
+    <s:String x:Key="SecureErase.AddFiles">Añadir archivos…</s:String>
+    <s:String x:Key="SecureErase.ClearList">Vaciar la lista</s:String>
+    <s:String x:Key="SecureErase.Reinforced">Modo reforzado (3 pasadas)</s:String>
+    <s:String x:Key="SecureErase.EraseBtn">Borrar definitivamente</s:String>
+    <s:String x:Key="SecureErase.EmptyHint">Añada archivos para borrar. Los archivos del sistema y las carpetas se rechazan. Operación irreversible.</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceTitle">Borrar el espacio libre de una unidad</s:String>
+    <s:String x:Key="SecureErase.FreeSpaceDesc">Hace irrecuperables los archivos ya eliminados. Sus archivos existentes nunca se tocan.</s:String>
+    <s:String x:Key="SecureErase.DriveName">Unidad cuyo espacio libre borrar</s:String>
+    <s:String x:Key="SecureErase.WipeBtn">Borrar el espacio libre</s:String>
+    <s:String x:Key="SecureErase.ProgressName">Progreso del borrado del espacio libre</s:String>
+
+    <s:String x:Key="Privacy.NoTrace">Sin rastro</s:String>
+    <s:String x:Key="Privacy.ElementsSize">{0:N0} elementos · {1}</s:String>
+    <s:String x:Key="Privacy.TraceCount">{0:N0} rastro(s)</s:String>
+    <s:String x:Key="Privacy.recentdocs.Name">Documentos abiertos recientemente</s:String>
+    <s:String x:Key="Privacy.recentdocs.Expl">Windows guarda la lista de los archivos que abrió recientemente, por tipo.</s:String>
+    <s:String x:Key="Privacy.recentdocs.Why">Para volver a ofrecérselos rápidamente en el Explorador y las aplicaciones.</s:String>
+    <s:String x:Key="Privacy.runmru.Name">Comandos «Ejecutar»</s:String>
+    <s:String x:Key="Privacy.runmru.Expl">Windows recuerda los comandos que escribió en el cuadro de diálogo Ejecutar (Win+R).</s:String>
+    <s:String x:Key="Privacy.runmru.Why">Para autocompletarlos la próxima vez.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Name">Rutas escritas en el Explorador</s:String>
+    <s:String x:Key="Privacy.typedpaths.Expl">Windows conserva las rutas y direcciones introducidas en la barra de direcciones del Explorador.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Why">Para el autocompletado de la barra de direcciones.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Name">Búsquedas en el Explorador</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Expl">Windows conserva el historial de sus búsquedas realizadas en el Explorador de archivos.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Why">Para volver a sugerirle sus búsquedas anteriores.</s:String>
+    <s:String x:Key="Privacy.userassist.Name">Programas iniciados</s:String>
+    <s:String x:Key="Privacy.userassist.Expl">Windows cuenta y fecha los inicios de los programas que usa (UserAssist).</s:String>
+    <s:String x:Key="Privacy.userassist.Why">Para clasificar sus aplicaciones más usadas en el menú Inicio.</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Name">Carpetas de los diálogos Abrir/Guardar</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Expl">Windows recuerda las últimas carpetas usadas en las ventanas «Abrir» y «Guardar como».</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Why">Para reabrir los diálogos en la última ubicación usada por aplicación.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Name">Archivos Abrir/Guardar</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Expl">Windows recuerda los archivos abiertos o guardados recientemente mediante los diálogos, por extensión.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Why">Para volver a ofrecérselos en las ventanas «Abrir» y «Guardar como».</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Name">Documentos recientes y Jump Lists</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Expl">Accesos directos a sus documentos recientes y listas de accesos rápidos (Jump Lists) de las aplicaciones de la barra de tareas.</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Why">Para mostrar sus archivos recientes en el Explorador y al hacer clic derecho en los iconos de la barra de tareas.</s:String>
+
+    <s:String x:Key="Rule.UserTemp.Name">Archivos temporales (sesión)</s:String>
+    <s:String x:Key="Rule.UserTemp.Desc">Archivos temporales creados por sus aplicaciones en la carpeta TEMP de su sesión.</s:String>
+    <s:String x:Key="Rule.CrashDumps.Name">Informes de fallos</s:String>
+    <s:String x:Key="Rule.CrashDumps.Desc">Volcados de memoria generados cuando una aplicación falla (CrashDumps).</s:String>
+    <s:String x:Key="Rule.Wer.Name">Informes de errores de Windows (WER)</s:String>
+    <s:String x:Key="Rule.Wer.Desc">Archivos de informes de errores de Windows pendientes de envío.</s:String>
+    <s:String x:Key="Rule.InetCache.Name">Caché de Internet heredada</s:String>
+    <s:String x:Key="Rule.InetCache.Desc">Caché de componentes de Windows / Internet Explorer (INetCache).</s:String>
+    <s:String x:Key="Rule.Thumbnails.Name">Miniaturas e iconos en caché</s:String>
+    <s:String x:Key="Rule.Thumbnails.Desc">Miniaturas e iconos almacenados en caché por el Explorador. Se regeneran automáticamente.</s:String>
+
+    <s:String x:Key="Health.Hdd">Disco duro (HDD)</s:String>
+    <s:String x:Key="Health.Ssd">SSD</s:String>
+    <s:String x:Key="Health.UnknownMedia">Tipo desconocido</s:String>
+    <s:String x:Key="Health.Healthy">Correcto</s:String>
+    <s:String x:Key="Health.Warning">Advertencia</s:String>
+    <s:String x:Key="Health.Unhealthy">Defectuoso</s:String>
+    <s:String x:Key="Health.Unknown">Estado desconocido</s:String>
+    <s:String x:Key="Health.WarningText">Windows indica un riesgo en este disco — considere hacer una copia de seguridad de sus datos.</s:String>
+    <s:String x:Key="Impact.Average">promedio sobre {0:N0} inicios</s:String>
+    <s:String x:Key="Impact.Single">1 inicio medido</s:String>
+    <s:String x:Key="Impact.Unavailable">Mediciones no disponibles: leer el registro de rendimiento de Windows requiere derechos de administrador.</s:String>
+    <s:String x:Key="Impact.None">Windows no ha medido recientemente ningún impacto en el inicio.</s:String>
+    <s:String x:Key="Impact.Measured">Impacto realmente medido por Windows en sus últimos inicios. Gestione los programas en «Aplicaciones».</s:String>
+    <s:String x:Key="Drivers.UnknownProvider">Proveedor desconocido</s:String>
+    <s:String x:Key="Drivers.Problem">Problema (código {0})</s:String>
+    <s:String x:Key="Drivers.Signed">Firmado</s:String>
+    <s:String x:Key="Drivers.Unsigned">Sin firmar</s:String>
+    <s:String x:Key="Drivers.SummaryProblems">{0:N0} controlador(es) · {1:N0} dispositivo(s) señalado(s) con problema por Windows</s:String>
+    <s:String x:Key="Drivers.SummaryOk">{0:N0} controlador(es) · ningún problema señalado por Windows</s:String>
+    <s:String x:Key="Rev.Reversible">Reversible</s:String>
+    <s:String x:Key="Rev.Partial">Parcialmente reversible</s:String>
+    <s:String x:Key="Rev.Irreversible">Irreversible</s:String>
+    <s:String x:Key="Ntfs.Detected">Detectado</s:String>
+    <s:String x:Key="Ntfs.Mitigable">Mitigable</s:String>
+    <s:String x:Key="Apps.UnknownPublisher">Editor desconocido</s:String>
+    <s:String x:Key="History.DetailsFailures">{0:N0} elemento(s) · {1:N0} omitido(s)</s:String>
+
+    <s:String x:Key="Common.Erase">Borrar</s:String>
+    <s:String x:Key="Excl.Folder">Carpeta</s:String>
+    <s:String x:Key="Excl.Category">Categoría</s:String>
+
+    <s:String x:Key="Cleanup.Msg.Idle">Inicie un análisis para ver qué se puede limpiar.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningFiles">Analizando… {0:N0} archivos examinados — {1} recuperables</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningProvider">Analizando… {0}</s:String>
+    <s:String x:Key="Cleanup.Msg.ExcludedSuffix"> ({0} excluido(s) por sus reglas)</s:String>
+    <s:String x:Key="Cleanup.Msg.NothingFound">Nada que limpiar: no se encontró ningún elemento recuperable.</s:String>
+    <s:String x:Key="Cleanup.Msg.Found">{0} categoría(s) encontrada(s) — {1} recuperables en {2:F1} s.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanCanceled">Análisis cancelado.</s:String>
+    <s:String x:Key="Cleanup.Msg.Cleaning">Limpiando… {0} ({1}/{2})</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultFailures">{0} liberado(s). Se omitieron {1} elemento(s) bloqueado(s) o protegido(s).</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultOk">{0} liberado(s) con éxito.</s:String>
+    <s:String x:Key="Cleanup.Msg.Done">Limpieza completada. Vuelva a analizar para ver el estado actual.</s:String>
+    <s:String x:Key="Cleanup.Msg.CleanCanceled">Limpieza cancelada.</s:String>
+
+    <s:String x:Key="Privacy.Msg.Idle">Analice los rastros que Windows conserva sobre su actividad.</s:String>
+    <s:String x:Key="Privacy.Msg.NoneFound">No se encontró ningún rastro de actividad.</s:String>
+    <s:String x:Key="Privacy.Msg.Found">{0} tipo(s) de rastro detectado(s). Seleccione lo que desea borrar.</s:String>
+    <s:String x:Key="Privacy.Msg.CleanedFailures">{0} tipo(s) de rastro limpiado(s). {1} elemento(s) bloqueado(s) omitido(s).</s:String>
+    <s:String x:Key="Privacy.Msg.Cleaned">{0} tipo(s) de rastro limpiado(s).</s:String>
+    <s:String x:Key="Privacy.Msg.Done">Limpieza completada. Vuelva a ejecutar el análisis para ver el estado actual.</s:String>
+    <s:String x:Key="Privacy.Msg.Canceled">Limpieza cancelada.</s:String>
+
+    <s:String x:Key="Apps.Confirm.Title">Desinstalar la aplicación</s:String>
+    <s:String x:Key="Apps.Confirm.Body">¿Iniciar la desinstalación de «{0}»? TraceZero ejecuta el desinstalador proporcionado por el editor; nunca elimina software manualmente.</s:String>
+    <s:String x:Key="Apps.Toast.Launched">Desinstalador de «{0}» iniciado.</s:String>
+    <s:String x:Key="Apps.Toast.LaunchFailed">No se pudo iniciar el desinstalador de «{0}».</s:String>
+    <s:String x:Key="Apps.Count">{0:N0} aplicación(es) instalada(s)</s:String>
+
+    <s:String x:Key="Restore.Msg.Restored">«{0}» restaurado ({1} entrada(s) reescrita(s)).</s:String>
+    <s:String x:Key="Restore.Toast.Restored">«{0}» restaurado.</s:String>
+    <s:String x:Key="Restore.Msg.Failed">No se pudo restaurar «{0}». Ningún otro cambio.</s:String>
+    <s:String x:Key="Restore.Toast.Failed">Error al restaurar «{0}».</s:String>
+    <s:String x:Key="Restore.Confirm.Title">Vaciar la caja fuerte de restauración</s:String>
+    <s:String x:Key="Restore.Confirm.Body">Todas las copias de seguridad se eliminarán y ya no podrán restaurarse. ¿Continuar?</s:String>
+    <s:String x:Key="Restore.Msg.Cleared">Caja fuerte de restauración vaciada.</s:String>
+
+    <s:String x:Key="History.Confirm.Title">Borrar el historial</s:String>
+    <s:String x:Key="History.Confirm.Body">Se eliminará todo el registro local de sus limpiezas. ¿Continuar?</s:String>
+    <s:String x:Key="History.Toast.Cleared">Historial borrado.</s:String>
+
+    <s:String x:Key="Drivers.Toast.WUFailed">No se pudo abrir Windows Update.</s:String>
+
+    <s:String x:Key="SecureErase.Toast.Rejected">{0} elemento(s) rechazado(s): archivo del sistema, carpeta u objetivo protegido.</s:String>
+    <s:String x:Key="SecureErase.Confirm.Title">Borrado seguro irreversible</s:String>
+    <s:String x:Key="SecureErase.Confirm.Body">Se sobrescribirán y luego se eliminarán {0} archivo(s). Esta operación es irreversible — los archivos no podrán recuperarse. ¿Continuar?</s:String>
+    <s:String x:Key="SecureErase.Toast.Erased">{0} archivo(s) borrado(s) de forma segura.</s:String>
+    <s:String x:Key="SecureErase.Toast.ErasedPartial">{0} borrado(s), {1} con error (bloqueado/inaccesible).</s:String>
+    <s:String x:Key="SecureErase.Wipe.ConfirmBody">TraceZero llenará el espacio libre de {0} para hacer irrecuperables los archivos ya eliminados. Sus archivos existentes no se tocan. La operación puede ser larga y es cancelable. ¿Continuar?</s:String>
+    <s:String x:Key="SecureErase.Toast.WriteFailed">No se pudo escribir en {0} (¿derechos insuficientes?).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Running">Borrando el espacio libre…</s:String>
+    <s:String x:Key="SecureErase.Wipe.Progress">{0} escritos de ~{1}</s:String>
+    <s:String x:Key="SecureErase.Wipe.Canceled">Borrado del espacio libre cancelado.</s:String>
+    <s:String x:Key="SecureErase.Wipe.Success">Espacio libre borrado ({0} escritos y luego liberados).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Failed">Error: {0}</s:String>
+    <s:String x:Key="SecureErase.Media.Ssd">Esta unidad es un SSD/NVMe. La sobrescritura no está garantizada (wear leveling, TRIM): Windows puede colocar los datos en otro lugar. No confíe en ello como en un HDD.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFree">Disco duro (HDD): el borrado del espacio libre es eficaz.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFile">Disco duro (HDD): la sobrescritura antes de eliminar es eficaz.</s:String>
+    <s:String x:Key="SecureErase.Media.Unknown">Tipo de unidad indeterminado. Si es un SSD/NVMe, la sobrescritura no está garantizada (wear leveling / TRIM).</s:String>
+    <s:String x:Key="SecureErase.PickFiles">Elegir los archivos a borrar definitivamente</s:String>
+
+    <s:String x:Key="DiskSpace.Drive.Summary">{0} usados de {1} · {2} libres</s:String>
+    <s:String x:Key="DiskSpace.Threshold">Más de {0}</s:String>
+    <s:String x:Key="DiskSpace.Msg.Idle">Analice su carpeta personal para encontrar archivos grandes.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Scanning">Analizando… {0:N0} archivos examinados</s:String>
+    <s:String x:Key="DiskSpace.Msg.None">Ningún archivo por encima del umbral en su carpeta personal.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Found">{0:N0} archivo(s) encontrado(s)</s:String>
+    <s:String x:Key="DiskSpace.Msg.CapSuffix"> ({0} más grandes mostrados)</s:String>
+    <s:String x:Key="DiskSpace.Msg.Canceled">Análisis cancelado.</s:String>
+    <s:String x:Key="DiskSpace.Confirm.Body">¿Enviar {0} archivo(s) a la Papelera? Podrá restaurarlos desde la Papelera.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Recycled">{0} archivo(s) enviado(s) a la Papelera.</s:String>
+
+    <s:String x:Key="Dup.Header">{0} copias · {1} cada una · {2} recuperables</s:String>
+    <s:String x:Key="Dup.Threshold">A partir de {0}</s:String>
+    <s:String x:Key="Dup.Msg.Idle">Busque archivos duplicados en su carpeta personal.</s:String>
+    <s:String x:Key="Dup.Msg.Scanning">Analizando… {0:N0} archivos examinados</s:String>
+    <s:String x:Key="Dup.Msg.None">No se encontró ningún duplicado por encima del umbral elegido.</s:String>
+    <s:String x:Key="Dup.Msg.Found">{0} grupo(s) de duplicados — {1} recuperables.</s:String>
+    <s:String x:Key="Dup.Msg.Canceled">Análisis cancelado.</s:String>
+    <s:String x:Key="Dup.Msg.Preselected">Copias preseleccionadas (la más reciente se conserva en cada grupo).</s:String>
+    <s:String x:Key="Dup.Msg.NoneSelected">Ninguna copia seleccionada.</s:String>
+    <s:String x:Key="Dup.Confirm.Body">¿Enviar {0} copia(s) duplicada(s) a la Papelera? Se conserva al menos una copia en cada grupo. Podrá restaurar desde la Papelera.</s:String>
+    <s:String x:Key="Dup.Msg.Recycled">{0} copia(s) enviada(s) a la Papelera.</s:String>
+
+    <s:String x:Key="Auto.Msg.Enabled">Limpieza automática activada.</s:String>
+    <s:String x:Key="Auto.Msg.Disabled">La limpieza automática está desactivada.</s:String>
+    <s:String x:Key="Auto.Msg.ApplyFailed">No se pudo aplicar la programación (el Programador de tareas rechazó la operación).</s:String>
+    <s:String x:Key="Auto.Msg.Scheduled">Limpieza automática programada. Se ejecutará sin ventana según el desencadenador elegido.</s:String>
+    <s:String x:Key="Auto.Msg.Removed">Limpieza automática desactivada (tarea programada eliminada).</s:String>
+
+    <s:String x:Key="Supporter.Msg.Thanks">¡Gracias {0}! Usted apoya TraceZero. 💙</s:String>
+    <s:String x:Key="Supporter.Msg.Free">Está usando la versión gratuita — completa y sin publicidad.</s:String>
+    <s:String x:Key="Supporter.Msg.Paste">Pegue su código de apoyo.</s:String>
+    <s:String x:Key="Supporter.Msg.Valid">¡Código validado, gracias por su apoyo!</s:String>
+    <s:String x:Key="Supporter.Msg.Invalid">Este código de apoyo no es válido.</s:String>
+
+    <s:String x:Key="Settings.Elev.Running">Elevación en curso (autorice el aviso de Windows)…</s:String>
+    <s:String x:Key="Settings.Elev.Cleaned">Limpiado: {0} liberados ({1} archivos{2}).</s:String>
+    <s:String x:Key="Settings.Elev.FailedSuffix">, {0} omitidos/bloqueados</s:String>
+    <s:String x:Key="Settings.Elev.Failed">Error en la limpieza con privilegios.</s:String>
+    <s:String x:Key="Settings.PickFolder">Elegir una carpeta para excluir de la limpieza</s:String>
+
+    <s:String x:Key="Dup.Subtitle">Archivos con contenido idéntico, confirmado por huella criptográfica (nunca solo por nombre o tamaño).</s:String>
+    <s:String x:Key="Dup.Scan">Buscar duplicados</s:String>
+    <s:String x:Key="Dup.KeepNewest">Conservar el más reciente</s:String>
+    <s:String x:Key="Dup.ClearSel">Deseleccionar todo</s:String>
+    <s:String x:Key="Dup.RecycleSel">Enviar la selección a la Papelera</s:String>
+    <s:String x:Key="Settings.AdvCleanBody">La carpeta C:\Windows\Temp está fuera de su perfil: su limpieza requiere derechos de administrador. TraceZero nunca se inicia como administrador: un componente separado y verificado pedirá permiso (aviso de Windows), actuará solo en esta carpeta y luego se cerrará.</s:String>
+    <s:String x:Key="Placeholder.Title">Módulo en construcción</s:String>
+    <s:String x:Key="Placeholder.Body">Esta página se conectará al motor en una fase posterior. Ningún dato mostrado aquí es real hasta que se entregue el módulo.</s:String>
+
+    <s:String x:Key="Startup.User">Usuario</s:String>
+    <s:String x:Key="Startup.Machine">Sistema (solo lectura)</s:String>
+    <s:String x:Key="Startup.Folder">Carpeta de inicio</s:String>
+
+    <s:String x:Key="Nav.Software">Actualizaciones</s:String>
+    <s:String x:Key="Software.Subtitle">Detecta software instalado obsoleto mediante el Administrador de paquetes de Windows (winget), una fuente oficial y firmada. TraceZero no instala nada: la actualización la lanza winget, visible e interrumpible.</s:String>
+    <s:String x:Key="Software.Check">Buscar actualizaciones</s:String>
+    <s:String x:Key="Software.UpdateAll">Actualizar todo</s:String>
+    <s:String x:Key="Software.Update">Actualizar</s:String>
+    <s:String x:Key="Software.Unavailable">El Administrador de paquetes de Windows (winget) no está disponible en este PC. Instale «Instalador de aplicaciones» desde Microsoft Store para habilitar las actualizaciones.</s:String>
+    <s:String x:Key="Software.None">Todo su software conocido por winget está actualizado.</s:String>
+    <s:String x:Key="Software.Found">{0} actualización(es) disponible(s) mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchedToast">Actualización de «{0}» lanzada mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchAllToast">Actualización de todo el software lanzada mediante winget.</s:String>
+    <s:String x:Key="Software.LaunchFailed">No se pudo lanzar winget.</s:String>
+
+    <s:String x:Key="Lang.French">Francés</s:String>
+    <s:String x:Key="Lang.English">Inglés</s:String>
+    <s:String x:Key="Lang.German">Alemán</s:String>
+    <s:String x:Key="Lang.Spanish">Español</s:String>
+
+</ResourceDictionary>

@@ -16,11 +16,17 @@ public sealed record ScanItem
 
     public string? SubCategory { get; init; }
 
-    /// <summary>Nom lisible affiché à l'utilisateur.</summary>
+    /// <summary>Nom lisible affiché à l'utilisateur (repli si aucune clé localisée).</summary>
     public required string DisplayName { get; init; }
 
-    /// <summary>Explication en langage humain de ce que représente l'élément.</summary>
+    /// <summary>Clé de ressource pour le nom localisé (§31). Si présente, l'UI l'utilise avant <see cref="DisplayName"/>.</summary>
+    public string? NameKey { get; init; }
+
+    /// <summary>Explication en langage humain de ce que représente l'élément (repli).</summary>
     public string? Description { get; init; }
+
+    /// <summary>Clé de ressource pour la description localisée (§31).</summary>
+    public string? DescriptionKey { get; init; }
 
     /// <summary>Chemin de fichier ou identifiant système (clé de registre, etc.).</summary>
     public required string PathOrIdentifier { get; init; }

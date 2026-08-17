@@ -18,7 +18,7 @@ public sealed class ExclusionRowViewModel
     {
         Id = rule.Id;
         DisplayName = rule.DisplayName;
-        KindText = rule.Kind == ExclusionKind.Folder ? "Dossier" : "Catégorie";
+        KindText = rule.Kind == ExclusionKind.Folder ? Localizer.Get("Excl.Folder") : Localizer.Get("Excl.Category");
     }
 
     public Guid Id { get; }
@@ -28,26 +28,55 @@ public sealed class ExclusionRowViewModel
     public string KindText { get; }
 }
 
-/// <summary>Page Paramètres (§40) : thème et gestion des exclusions.</summary>
+/// <summary>Option de langue (endonyme affiché tel quel dans toutes les langues).</summary>
+public sealed record LanguageOption(AppLanguage Language, string Display);
+
+/// <summary>Page Paramètres (§40) : thème, langue (§31) et gestion des exclusions.</summary>
 public sealed partial class SettingsViewModel : PageViewModelBase
 {
     private readonly IThemeService _themeService;
+    private readonly ILocalizationService _localization;
     private readonly IExclusionStore _exclusionStore;
     private readonly IElevatedOperationService _elevatedService;
 
     public SettingsViewModel(
         IThemeService themeService,
+        ILocalizationService localization,
         IExclusionStore exclusionStore,
         IElevatedOperationService elevatedService)
     {
         _themeService = themeService;
+        _localization = localization;
         _exclusionStore = exclusionStore;
         _elevatedService = elevatedService;
         _themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(IsDarkTheme));
+        _localization.LanguageChanged += (_, _) => OnPropertyChanged(nameof(SelectedLanguage));
         ReloadExclusions();
     }
 
-    public override string Title => "Paramètres";
+    /// <summary>Langues proposées, par endonyme (jamais traduit — convention des sélecteurs de langue).</summary>
+    public IReadOnlyList<LanguageOption> Languages { get; } =
+    [
+        new(AppLanguage.French, "Français"),
+        new(AppLanguage.English, "English"),
+        new(AppLanguage.German, "Deutsch"),
+        new(AppLanguage.Spanish, "Español"),
+    ];
+
+    public LanguageOption SelectedLanguage
+    {
+        get => Languages.First(l => l.Language == _localization.Current);
+        set
+        {
+            if (value is not null && value.Language != _localization.Current)
+            {
+                _localization.Apply(value.Language);
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public override string Title => TraceZero.App.Services.Localizer.Get("Nav.Settings");
 
     public override string IconGlyph => "\U0001F527";
 
@@ -73,7 +102,7 @@ public sealed partial class SettingsViewModel : PageViewModelBase
     {
         var dialog = new OpenFolderDialog
         {
-            Title = "Choisir un dossier à exclure du nettoyage",
+            Title = Localizer.Get("Settings.PickFolder"),
         };
 
         if (dialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(dialog.FolderName))
@@ -130,7 +159,7 @@ public sealed partial class SettingsViewModel : PageViewModelBase
     private async Task CleanWindowsTempAsync()
     {
         IsElevatedBusy = true;
-        ElevatedStatus = "Élévation en cours (autorisez l'invite Windows)…";
+        ElevatedStatus = Localizer.Get("Settings.Elev.Running");
         CleanWindowsTempCommand.NotifyCanExecuteChanged();
 
         try
@@ -140,11 +169,10 @@ public sealed partial class SettingsViewModel : PageViewModelBase
                 Operation = ElevatedOperation.CleanWindowsTemp,
             });
 
+            var failedSuffix = result.ActionsFailed > 0 ? Localizer.Format("Settings.Elev.FailedSuffix", result.ActionsFailed) : string.Empty;
             ElevatedStatus = result.Success
-                ? $"Nettoyé : {ByteSize.Format(result.BytesFreed)} libérés " +
-                  $"({result.ActionsSucceeded} fichiers" +
-                  (result.ActionsFailed > 0 ? $", {result.ActionsFailed} ignorés/verrouillés" : string.Empty) + ")."
-                : result.ErrorMessage ?? "Échec du nettoyage élevé.";
+                ? Localizer.Format("Settings.Elev.Cleaned", ByteSize.Format(result.BytesFreed), result.ActionsSucceeded, failedSuffix)
+                : result.ErrorMessage ?? Localizer.Get("Settings.Elev.Failed");
         }
         finally
         {
