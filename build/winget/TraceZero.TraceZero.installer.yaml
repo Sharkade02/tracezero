@@ -1,0 +1,23 @@
+# winget — manifeste d'installeur (gabarit).
+# À soumettre dans microsoft/winget-pkgs sous manifests/t/TraceZero/TraceZero/<version>/
+# Remplacer <VERSION> et <SHA256_DU_ZIP> à chaque release. SHA-256 = celui du .zip publié
+# (voir artifacts/SHA256SUMS.txt produit par build/scripts/release.ps1).
+#
+# PackageIdentifier : "TraceZero.TraceZero" (alternative acceptable : "Sharkade02.TraceZero").
+# La cohérence Publisher/Identifier est vérifiée par la modération winget.
+PackageIdentifier: TraceZero.TraceZero
+PackageVersion: "<VERSION>"
+Platform:
+  - Windows.Desktop
+MinimumOSVersion: 10.0.0.0
+InstallerType: zip
+NestedInstallerType: portable
+NestedInstallerFiles:
+  - RelativeFilePath: TraceZero.App.exe
+    PortableCommandAlias: tracezero
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/Sharkade02/tracezero/releases/download/v<VERSION>/TraceZero-portable.zip
+    InstallerSha256: <SHA256_DU_ZIP>
+ManifestType: installer
+ManifestVersion: 1.6.0

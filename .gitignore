@@ -34,6 +34,11 @@ logs/
 docs/licensing/*PRIVATE*
 *.private.pem
 
+# Updater keys & generated release manifest — never commit
+updater.private.pem
+updater.public.pem
+/manifest.json
+
 # OS
 Thumbs.db
 Desktop.ini
