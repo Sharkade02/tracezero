@@ -51,6 +51,11 @@
     <s:String x:Key="Home.Card.WinTemp">Windows-Temporär</s:String>
     <s:String x:Key="Home.Card.RecycleBin">Papierkorb</s:String>
     <s:String x:Key="Home.Card.WinTraces">Windows-Spuren</s:String>
+    <s:String x:Key="Home.Checking">Schnellanalyse läuft…</s:String>
+    <s:String x:Key="Home.CheckResult">Analyse abgeschlossen: {0} freigebbar. Öffnen Sie „Bereinigung“ zur Auswahl.</s:String>
+    <s:String x:Key="Home.CheckClean">Analyse abgeschlossen: derzeit nichts zu bereinigen. 👍</s:String>
+    <s:String x:Key="Home.CheckCanceled">Analyse abgebrochen.</s:String>
+    <s:String x:Key="Home.DriveSummary">{0} frei von {1}</s:String>
     <s:String x:Key="Home.Privacy.Title">Datenschutz zuerst</s:String>
     <s:String x:Key="Home.Privacy.Body">Alles läuft lokal auf Ihrem PC. Es werden keine Daten gesendet und kein angezeigter Wert ist erfunden: Zahlen erscheinen erst nach einer echten Analyse.</s:String>
 

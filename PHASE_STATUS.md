@@ -123,6 +123,12 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
   par la tâche planifiée, respectant les exclusions et journalisant l'historique. 1 test
   (sélection par profil). **71 tests au total.**
 
+- **Accueil — Health Check en un clic** (post-phases, §2 benchmark) : le bouton « Analyser mon PC » lance
+  une **analyse rapide réelle** (moteur de scan + inspecteur de confidentialité + lecteurs), agrège
+  l'espace récupérable par **risque** (Sûr/Confidentialité/À vérifier) et par **catégorie** (temporaires
+  Windows, navigateurs, Corbeille) + nombre de traces + occupation disque. Aucune valeur simulée (§0),
+  aucun score inventé (§42). Bouton « Nettoyer » → page Nettoyage. Localisé fr/en/de/es. `DashboardViewModel`.
+
 ### État — TOUS les onglets sont fonctionnels
 Accueil · Nettoyage · Confidentialité · Navigateurs · Espace disque · Doublons · Applications ·
 Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeholder.
