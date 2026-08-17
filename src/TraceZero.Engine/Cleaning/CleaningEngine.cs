@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using TraceZero.Application.Browsers;
 using TraceZero.Application.Cleaning;
 using TraceZero.Application.Privacy;
 using TraceZero.Application.Safety;
@@ -18,17 +19,20 @@ public sealed class CleaningEngine : ICleaningEngine
     private readonly ISafePathValidator _validator;
     private readonly IRecycleBinService? _recycleBin;
     private readonly IRegistryTraceCleaner? _registryCleaner;
+    private readonly IBrowserHistoryCleaner? _historyCleaner;
     private readonly ILogger<CleaningEngine>? _logger;
 
     public CleaningEngine(
         ISafePathValidator validator,
         IRecycleBinService? recycleBin = null,
         IRegistryTraceCleaner? registryCleaner = null,
+        IBrowserHistoryCleaner? historyCleaner = null,
         ILogger<CleaningEngine>? logger = null)
     {
         _validator = validator ?? throw new ArgumentNullException(nameof(validator));
         _recycleBin = recycleBin;
         _registryCleaner = registryCleaner;
+        _historyCleaner = historyCleaner;
         _logger = logger;
     }
 
@@ -146,6 +150,8 @@ public sealed class CleaningEngine : ICleaningEngine
             FileActionKind.DeleteFile => DeleteSingleFile(action, failures),
             FileActionKind.DeleteDirectoryContents => SweepAll(action, failures, deleteRoot: false, cancellationToken),
             FileActionKind.DeleteDirectory => SweepAll(action, failures, deleteRoot: true, cancellationToken),
+            // Suppression ciblée (favoris préservés) déléguée au nettoyeur d'historique navigateur.
+            FileActionKind.ClearBrowserHistory => _historyCleaner?.ClearFirefoxHistory(action.TargetPath) ?? 0,
             _ => 0,
         };
     }

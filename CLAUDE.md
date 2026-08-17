@@ -75,11 +75,15 @@ Plus aucune page placeholder.
 8 Analyse NTFS · 9 Effacement sécurisé · 10 Disk Space · 11 Duplicate Finder · 12 Applications & Démarrage ·
 13 Software Updater · 14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW ·
 20 Élévation · 21 Localisation · 22 Accessibilité · 23 Performance · 24 Tests de sécurité ·
-25 Golden dataset · 27 Qualité release · 28 Moniteur système.
+25 Golden dataset · 27 Qualité release · 28 Moniteur système · **4 Navigateurs**.
 
-**IN_PROGRESS (3)** :
-- **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
-  Peut réutiliser l'infra backup/restore de la Phase 7.
+**Phase 4 (Navigateurs, DONE)** : caches SAFE + traces confidentialité (historique/cookies/sessions,
+opt-in, jamais coché par défaut). Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX** + Firefox.
+Historique Firefox = suppression SQL ciblée (favoris préservés, `FirefoxHistoryCleaner`). Opera/Firefox :
+disposition Local/Roaming via `BrowserProfileInfo.ContentPath`. Moniteur en direct (RAM/CPU, top process,
+WinSAT) ajouté à la Santé système.
+
+**IN_PROGRESS (2)** :
 - **Phase 18 — Updater** : cœur `UpdateChecker` + UI branchés (vérif démarrage via `HttpManifestSource`,
   bannière shell) ; **désactivé par défaut** (`UpdaterConfig` vide) ; reste Authenticode/endpoint + certificat.
 - **Phase 19 — Installateur/Portable** : mode portable (`TraceZeroPaths` + marqueur) + `publish-portable.ps1`
@@ -104,6 +108,6 @@ Réversibilité honnête via l'enum `Reversibility`.
 |------:|-----|-------|
 | 26 | Tests VM | Nécessite une VM Windows propre (asset externe) |
 
-**IN_PROGRESS** : 4 (privacy navigateurs — reste history/cookies/sessions + Opera), 18 (updater — reste
-cert + endpoint), 19 (installateur — reste MSI/EXE + signature). Ces trois dépendent d'assets externes
-(certificat, serveur, VM). **Phase 26** (tests réels en VM) nécessite une VM. Tout le reste est DONE.
+**IN_PROGRESS** : 18 (updater — reste cert + endpoint), 19 (installateur — reste MSI/EXE + signature).
+Ces deux dépendent d'assets externes (certificat, serveur). **Phase 26** (tests réels en VM) nécessite
+une VM. Tout le reste est DONE (Phase 4 Navigateurs incluse).

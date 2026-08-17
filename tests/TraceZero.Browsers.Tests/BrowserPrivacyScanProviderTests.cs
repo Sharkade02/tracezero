@@ -96,9 +96,10 @@ public sealed class BrowserPrivacyScanProviderTests : IDisposable
     }
 
     [Fact]
-    public async Task Firefox_history_is_never_offered_to_protect_bookmarks()
+    public async Task Firefox_history_uses_targeted_deletion_not_whole_file()
     {
-        // places.sqlite contient aussi les favoris : il ne doit jamais apparaître comme cible.
+        // places.sqlite mêle historique et favoris : l'item doit exister mais via suppression CIBLÉE
+        // (ClearBrowserHistory), jamais une suppression de fichier entier qui perdrait les favoris.
         File.WriteAllBytes(Path.Combine(_profileDir, "places.sqlite"), new byte[400]);
         File.WriteAllBytes(Path.Combine(_profileDir, "cookies.sqlite"), new byte[200]);
 
@@ -114,8 +115,34 @@ public sealed class BrowserPrivacyScanProviderTests : IDisposable
 
         var items = await Collect(new BrowserPrivacyScanProvider(new FakePrivacyDetector(firefox)));
 
-        Assert.DoesNotContain(items, i => i.Category == Category.BrowserHistory);
+        var history = Assert.Single(items, i => i.Category == Category.BrowserHistory);
+        Assert.Equal(FileActionKind.ClearBrowserHistory, history.ActionKind);
         Assert.Contains(items, i => i.Category == Category.BrowserCookies);
+    }
+
+    [Fact]
+    public async Task Firefox_privacy_targets_are_read_from_the_roaming_content_root()
+    {
+        // Firefox : cache (Path) en Local, contenu (ContentPath) en Roaming. Les cibles doivent venir
+        // de ContentPath, pas de Path.
+        var contentRoot = Path.Combine(Path.GetDirectoryName(_profileDir)!, "roaming-profile");
+        Directory.CreateDirectory(contentRoot);
+        File.WriteAllBytes(Path.Combine(contentRoot, "cookies.sqlite"), new byte[200]);
+
+        var firefox = new DetectedBrowser
+        {
+            Kind = BrowserKind.Firefox,
+            Engine = BrowserEngine.Gecko,
+            DisplayName = "Mozilla Firefox",
+            DataRoot = contentRoot,
+            Profiles = [new BrowserProfileInfo { Name = "default", Path = _profileDir, ContentPath = contentRoot, IsDefault = true }],
+            IsRunning = false,
+        };
+
+        var items = await Collect(new BrowserPrivacyScanProvider(new FakePrivacyDetector(firefox)));
+
+        var cookies = Assert.Single(items, i => i.Category == Category.BrowserCookies);
+        Assert.Equal(Path.Combine(contentRoot, "cookies.sqlite"), cookies.PathOrIdentifier);
     }
 
     [Fact]

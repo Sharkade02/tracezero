@@ -24,10 +24,20 @@ public sealed record BrowserProfileInfo
 {
     public required string Name { get; init; }
 
-    /// <summary>Dossier racine du profil.</summary>
+    /// <summary>Dossier racine du profil côté cache (Local). Utilisé pour le nettoyage des caches.</summary>
     public required string Path { get; init; }
 
+    /// <summary>
+    /// Racine des données de contenu (historique, cookies, sessions) lorsqu'elle diffère du dossier de
+    /// cache <see cref="Path"/> — navigateurs à disposition Local/Roaming scindée (Firefox, Opera).
+    /// <c>null</c> ⇒ identique à <see cref="Path"/> (cas Chrome/Edge/Brave…).
+    /// </summary>
+    public string? ContentPath { get; init; }
+
     public bool IsDefault { get; init; }
+
+    /// <summary>Racine effective des traces de confidentialité (contenu), quelle que soit la disposition.</summary>
+    public string ContentRoot => ContentPath ?? Path;
 }
 
 /// <summary>Un navigateur installé, avec ses profils et son état d'exécution.</summary>

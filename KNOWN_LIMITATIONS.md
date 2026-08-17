@@ -38,17 +38,18 @@ façon fiable, est listée ici avec son état honnête.
   choisit explicitement. Suppression **honnêtement irréversible** (le moteur supprime définitivement, pas
   de Corbeille) — voir Phase 7 pour la réversibilité `PLANNED`. Ne sont **jamais** ciblés : mots de passe
   (`Login Data`), favoris, données de formulaire.
-- **Suppression = fichier entier, pas de chirurgie SQL** — l'historique/les cookies sont supprimés en
+- **Chromium : suppression = fichier entier** — l'historique/les cookies Chromium sont supprimés en
   effaçant le fichier SQLite complet (le navigateur le recrée). Les fichiers compagnons `-wal`/`-shm` et
   les fichiers de session hérités ne sont pas ciblés individuellement (orphelins ignorés par SQLite / le
   navigateur). La suppression sélective par site/entrée reste `PLANNED`.
-- **Firefox — historique non proposé** — `places.sqlite` mêle **historique et favoris** ; une suppression
-  du fichier entier perdrait les favoris. Firefox n'expose donc que **cookies** (`cookies.sqlite`) et
-  **session** (`sessionstore-backups`). L'historique Firefox reste `PLANNED` (nécessite une suppression
-  ciblée par table, hors périmètre du modèle « fichier entier »).
-- **Opera** — `PLANNED`. Disposition cache/profil scindée entre `Local` et `Roaming` (cache sous
-  `%LOCALAPPDATA%\Opera Software\Opera Stable\Cache`) : non incluse pour éviter des chemins erronés.
-  Chrome, Edge, Brave, Vivaldi, Chromium et Firefox sont couverts.
+- **Firefox — historique par suppression ciblée** — `places.sqlite` mêle **historique et favoris** ; le
+  fichier n'est donc **jamais** supprimé en entier. `FirefoxHistoryCleaner` efface l'historique par SQL
+  ciblé (transaction : `moz_historyvisits`, `moz_places WHERE foreign_count = 0`) et **annule** si un favori
+  serait orphelin — les favoris sont préservés (couvert par tests, dont un end-to-end via le moteur).
+  Cookies (`cookies.sqlite`) et session (`sessionstore-backups`) restent en suppression de fichier.
+- **Opera / Opera GX** — couverts. Disposition Local/Roaming scindée gérée via `BrowserProfileInfo.ContentPath`
+  (profil/traces sous Roaming, cache sous Local). Navigateurs couverts : Chrome, Edge, Brave, Vivaldi,
+  Chromium, **Opera, Opera GX**, Firefox.
 - **Navigateur en cours d'exécution** — ni les caches ni les traces d'un navigateur ouvert ne sont cochés
   par défaut ; ses fichiers verrouillés sont signalés puis ignorés (jamais forcés).
 

@@ -67,9 +67,13 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
         IScanProgressReporter reporter,
         CancellationToken cancellationToken)
     {
-        var (sizeBytes, itemCount) = target.IsDirectory
-            ? MeasureDirectory(target.Path, reporter, cancellationToken)
-            : MeasureFile(target.Path);
+        var (sizeBytes, itemCount) = target.ActionKind switch
+        {
+            FileActionKind.DeleteDirectory => MeasureDirectory(target.Path, reporter, cancellationToken),
+            // Suppression ciblée in-place : l'espace libéré n'est pas connu à l'avance (on ne l'invente pas).
+            FileActionKind.ClearBrowserHistory => (0L, File.Exists(target.Path) ? 1 : 0),
+            _ => MeasureFile(target.Path),
+        };
 
         if (itemCount == 0)
         {
@@ -100,9 +104,9 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
             AssociatedApp = browser.DisplayName,
             // Le moteur supprime définitivement (pas de Corbeille) : rester honnête.
             Reversibility = Reversibility.Irreversible,
-            ActionKind = target.IsDirectory ? FileActionKind.DeleteDirectory : FileActionKind.DeleteFile,
+            ActionKind = target.ActionKind,
             AllowedRoots = [target.AllowedRoot],
-            SweepRoots = target.IsDirectory ? [target.Path] : [],
+            SweepRoots = target.ActionKind == FileActionKind.DeleteDirectory ? [target.Path] : [],
         };
     }
 
@@ -111,52 +115,61 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
     {
         if (browser.Engine == BrowserEngine.Gecko)
         {
-            // Firefox : historique NON proposé (places.sqlite contient aussi les favoris).
-            var cookies = Path.Combine(profile.Path, "cookies.sqlite");
+            // Firefox : historique via suppression CIBLÉE (places.sqlite mêle historique et favoris —
+            // les favoris sont préservés, cf. FirefoxHistoryCleaner). Jamais de suppression du fichier entier.
+            var places = Path.Combine(profile.ContentRoot, "places.sqlite");
+            if (File.Exists(places))
+            {
+                yield return new PrivacyTarget(Category.BrowserHistory, RiskLevel.Privacy, "historique de navigation", places,
+                    profile.ContentRoot, FileActionKind.ClearBrowserHistory,
+                    "Historique des sites visités. Vos favoris sont conservés (suppression ciblée).");
+            }
+
+            var cookies = Path.Combine(profile.ContentRoot, "cookies.sqlite");
             if (File.Exists(cookies))
             {
                 yield return new PrivacyTarget(Category.BrowserCookies, RiskLevel.Review, "cookies", cookies,
-                    profile.Path, false,
+                    profile.ContentRoot, FileActionKind.DeleteFile,
                     "Cookies du navigateur. Les vider vous déconnectera des sites où vous étiez identifié.");
             }
 
-            var sessions = Path.Combine(profile.Path, "sessionstore-backups");
+            var sessions = Path.Combine(profile.ContentRoot, "sessionstore-backups");
             if (Directory.Exists(sessions))
             {
                 yield return new PrivacyTarget(Category.BrowserSessions, RiskLevel.Review, "session & onglets", sessions,
-                    profile.Path, true,
+                    profile.ContentRoot, FileActionKind.DeleteDirectory,
                     "Sessions mémorisées pour la restauration des onglets. Les effacer perd les onglets restaurables.");
             }
 
             yield break;
         }
 
-        // Chromium et dérivés.
-        var history = Path.Combine(profile.Path, "History");
+        // Chromium et dérivés (Chrome, Edge, Brave, Vivaldi, Chromium, Opera).
+        var history = Path.Combine(profile.ContentRoot, "History");
         if (File.Exists(history))
         {
             yield return new PrivacyTarget(Category.BrowserHistory, RiskLevel.Privacy, "historique de navigation", history,
-                profile.Path, false,
+                profile.ContentRoot, FileActionKind.DeleteFile,
                 "Historique des sites visités et des téléchargements. Vos favoris et mots de passe ne sont pas touchés.");
         }
 
         // Chromium récent range les cookies sous « Network », les versions plus anciennes à la racine du profil.
-        var cookiesModern = Path.Combine(profile.Path, "Network", "Cookies");
-        var cookiesLegacy = Path.Combine(profile.Path, "Cookies");
+        var cookiesModern = Path.Combine(profile.ContentRoot, "Network", "Cookies");
+        var cookiesLegacy = Path.Combine(profile.ContentRoot, "Cookies");
         var chromiumCookies = File.Exists(cookiesModern) ? cookiesModern
             : File.Exists(cookiesLegacy) ? cookiesLegacy : null;
         if (chromiumCookies is not null)
         {
             yield return new PrivacyTarget(Category.BrowserCookies, RiskLevel.Review, "cookies", chromiumCookies,
-                Path.GetDirectoryName(chromiumCookies)!, false,
+                Path.GetDirectoryName(chromiumCookies)!, FileActionKind.DeleteFile,
                 "Cookies du navigateur. Les vider vous déconnectera des sites où vous étiez identifié.");
         }
 
-        var chromiumSessions = Path.Combine(profile.Path, "Sessions");
+        var chromiumSessions = Path.Combine(profile.ContentRoot, "Sessions");
         if (Directory.Exists(chromiumSessions))
         {
             yield return new PrivacyTarget(Category.BrowserSessions, RiskLevel.Review, "session & onglets", chromiumSessions,
-                profile.Path, true,
+                profile.ContentRoot, FileActionKind.DeleteDirectory,
                 "Sessions mémorisées pour la restauration des onglets. Les effacer perd les onglets restaurables.");
         }
     }
@@ -202,13 +215,13 @@ public sealed class BrowserPrivacyScanProvider : IScanProvider
         return (bytes, count);
     }
 
-    /// <summary>Une cible de confidentialité concrète (fichier ou dossier) au sein d'un profil.</summary>
+    /// <summary>Une cible de confidentialité concrète (fichier, dossier ou base à nettoyer) dans un profil.</summary>
     private readonly record struct PrivacyTarget(
         Category Category,
         RiskLevel Risk,
         string Label,
         string Path,
         string AllowedRoot,
-        bool IsDirectory,
+        FileActionKind ActionKind,
         string Description);
 }
