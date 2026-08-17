@@ -25,8 +25,10 @@ Get-FileHash .\TraceZero-portable.zip -Algorithm SHA256
 Le résultat doit être **exactement** :
 
 ```
-<SHA256_DU_ZIP>
+32855D8DB59D3599BDF5CC16853DF91A232EE4A81651E70C0FD941F817F0BCFB
 ```
+
+_(SHA-256 de `TraceZero-portable.zip` v0.1.0)_
 
 Si l'empreinte diffère, **ne lancez pas** le fichier (téléchargement corrompu ou altéré).
 

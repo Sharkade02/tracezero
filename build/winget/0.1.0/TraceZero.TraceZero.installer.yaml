@@ -1,0 +1,16 @@
+PackageIdentifier: TraceZero.TraceZero
+PackageVersion: "0.1.0"
+Platform:
+  - Windows.Desktop
+MinimumOSVersion: 10.0.0.0
+InstallerType: zip
+NestedInstallerType: portable
+NestedInstallerFiles:
+  - RelativeFilePath: TraceZero.App.exe
+    PortableCommandAlias: tracezero
+Installers:
+  - Architecture: x64
+    InstallerUrl: https://github.com/Sharkade02/tracezero/releases/download/v0.1.0/TraceZero-portable.zip
+    InstallerSha256: 32855D8DB59D3599BDF5CC16853DF91A232EE4A81651E70C0FD941F817F0BCFB
+ManifestType: installer
+ManifestVersion: 1.6.0
