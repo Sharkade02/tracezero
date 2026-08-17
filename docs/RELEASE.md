@@ -23,11 +23,17 @@ auto-update signé. Voir `docs/distribution-strategy.md` pour la stratégie et l
    pwsh build/scripts/publish-portable.ps1
    ```
    Produit `artifacts/portable/TraceZero-portable.zip`.
+3b. **Installeur EXE** (Inno Setup) :
+   ```powershell
+   pwsh build/scripts/publish-installer.ps1   # produit artifacts/installer/TraceZeroSetup-<version>.exe
+   ```
+   (Nécessite Inno Setup 6 : `winget install JRSoftware.InnoSetup`.) Le script affiche le SHA-256.
 4. **Empreinte du zip** :
    ```powershell
    (Get-FileHash artifacts/portable/TraceZero-portable.zip -Algorithm SHA256).Hash
    ```
-5. **GitHub Release** (tag `v<VERSION>`) : joindre `TraceZero-portable.zip` et `SHA256SUMS.txt`.
+5. **GitHub Release** (tag `v<VERSION>`) : joindre `TraceZero-portable.zip`, `TraceZeroSetup-<VERSION>.exe`
+   et `SHA256SUMS.txt`.
 6. **Manifeste d'update signé** :
    ```bash
    bash build/updater/sign-manifest.sh \
