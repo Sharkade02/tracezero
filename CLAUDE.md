@@ -80,8 +80,8 @@ Plus aucune page placeholder.
 **IN_PROGRESS (3)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
   Peut réutiliser l'infra backup/restore de la Phase 7.
-- **Phase 18 — Updater** : cœur `UpdateChecker` (manifeste signé RSA + décision) fait/testé ; reste
-  téléchargement/Authenticode/endpoint + certificat (assets externes).
+- **Phase 18 — Updater** : cœur `UpdateChecker` + UI branchés (vérif démarrage via `HttpManifestSource`,
+  bannière shell) ; **désactivé par défaut** (`UpdaterConfig` vide) ; reste Authenticode/endpoint + certificat.
 - **Phase 19 — Installateur/Portable** : mode portable (`TraceZeroPaths` + marqueur) + `publish-portable.ps1`
   + manifeste MSIX livrés/testés ; reste MSI/EXE + signature (WiX + certificat).
 

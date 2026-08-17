@@ -83,9 +83,28 @@
             </DockPanel>
         </Border>
 
-        <!-- Zone de contenu -->
-        <ContentControl Grid.Column="1" Content="{Binding Current}"
-                        Focusable="False" Margin="0" />
+        <!-- Zone de contenu (avec bannière de mise à jour) -->
+        <DockPanel Grid.Column="1">
+            <Border DockPanel.Dock="Top" Background="{DynamicResource Brush.Accent}" Padding="20,10"
+                    Visibility="{Binding HasUpdate, Converter={StaticResource BoolToVis}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding UpdateBannerText}" VerticalAlignment="Center"
+                               Foreground="{DynamicResource Brush.Accent.Foreground}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                    <Button Grid.Column="1" Content="{DynamicResource Update.Download}" Style="{StaticResource SecondaryButton}"
+                            Padding="14,6" Command="{Binding DownloadUpdateCommand}"
+                            Foreground="{DynamicResource Brush.Accent.Foreground}" />
+                    <Button Grid.Column="2" Content="✕" Style="{StaticResource SecondaryButton}" Padding="8,4" Margin="8,0,0,0"
+                            Command="{Binding DismissUpdateCommand}" Foreground="{DynamicResource Brush.Accent.Foreground}"
+                            AutomationProperties.Name="{DynamicResource Common.Close}" />
+                </Grid>
+            </Border>
+            <ContentControl Content="{Binding Current}" Focusable="False" Margin="0" />
+        </DockPanel>
     </Grid>
 
         <!-- Couche modale (confirmations) -->

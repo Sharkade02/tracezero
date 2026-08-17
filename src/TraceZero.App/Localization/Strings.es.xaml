@@ -360,6 +360,9 @@
     <s:String x:Key="Software.LaunchAllToast">Actualización de todo el software lanzada mediante winget.</s:String>
     <s:String x:Key="Software.LaunchFailed">No se pudo lanzar winget.</s:String>
 
+    <s:String x:Key="Update.Banner">Actualización {0} disponible.</s:String>
+    <s:String x:Key="Update.Download">Descargar</s:String>
+
     <s:String x:Key="Lang.French">Francés</s:String>
     <s:String x:Key="Lang.English">Inglés</s:String>
     <s:String x:Key="Lang.German">Alemán</s:String>
