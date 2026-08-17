@@ -11,6 +11,9 @@ public static class BrowsersServiceCollectionExtensions
     {
         services.AddSingleton<IBrowserDetector, BrowserDetector>();
         services.AddSingleton<IScanProvider, BrowserCacheScanProvider>();
+
+        // Traces de confidentialité (historique, cookies, sessions), jamais cochées par défaut (§14).
+        services.AddSingleton<IScanProvider, BrowserPrivacyScanProvider>();
         return services;
     }
 }

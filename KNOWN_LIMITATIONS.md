@@ -32,18 +32,25 @@ façon fiable, est listée ici avec son état honnête.
 
 ## Phase 4 — Navigateurs
 
-- **Nettoyage limité aux caches SAFE** — `DETECTED_ONLY` pour le reste (décision assumée). En Phase 4,
-  seuls les dossiers de cache (régénérables) sont nettoyés ; connexions/cookies/mots de passe/favoris
-  jamais touchés (protection par construction). Le nettoyage **PRIVACY/REVIEW** (historique, cookies,
-  sessions) est **conçu mais non implémenté** : c'est la fonctionnalité la plus à risque du produit
-  (corruption de base SQLite ouverte, dérive de schéma, et surtout **Firefox `places.sqlite` mêle
-  historique et favoris**). Plan complet + évaluation de risque : `docs/phase-4-privacy-browsers-plan.md`.
-  **Recommandation** : ne pas l'activer avant la validation VM (Phase 26).
+- **Nettoyage caches (SAFE) + traces confidentialité (PRIVACY/REVIEW)** — les caches régénérables sont
+  cochés par défaut (hors navigateur ouvert). L'**historique, les cookies et les sessions** sont
+  désormais proposés (`BrowserPrivacyScanProvider`) mais **jamais cochés par défaut** : l'utilisateur
+  choisit explicitement. Suppression **honnêtement irréversible** (le moteur supprime définitivement, pas
+  de Corbeille) — voir Phase 7 pour la réversibilité `PLANNED`. Ne sont **jamais** ciblés : mots de passe
+  (`Login Data`), favoris, données de formulaire.
+- **Suppression = fichier entier, pas de chirurgie SQL** — l'historique/les cookies sont supprimés en
+  effaçant le fichier SQLite complet (le navigateur le recrée). Les fichiers compagnons `-wal`/`-shm` et
+  les fichiers de session hérités ne sont pas ciblés individuellement (orphelins ignorés par SQLite / le
+  navigateur). La suppression sélective par site/entrée reste `PLANNED`.
+- **Firefox — historique non proposé** — `places.sqlite` mêle **historique et favoris** ; une suppression
+  du fichier entier perdrait les favoris. Firefox n'expose donc que **cookies** (`cookies.sqlite`) et
+  **session** (`sessionstore-backups`). L'historique Firefox reste `PLANNED` (nécessite une suppression
+  ciblée par table, hors périmètre du modèle « fichier entier »).
 - **Opera** — `PLANNED`. Disposition cache/profil scindée entre `Local` et `Roaming` (cache sous
   `%LOCALAPPDATA%\Opera Software\Opera Stable\Cache`) : non incluse pour éviter des chemins erronés.
   Chrome, Edge, Brave, Vivaldi, Chromium et Firefox sont couverts.
-- **Navigateur en cours d'exécution** — les caches d'un navigateur ouvert ne sont pas cochés par
-  défaut, et ses fichiers verrouillés sont ignorés (jamais forcés).
+- **Navigateur en cours d'exécution** — ni les caches ni les traces d'un navigateur ouvert ne sont cochés
+  par défaut ; ses fichiers verrouillés sont signalés puis ignorés (jamais forcés).
 
 ## Phase 7 — Protection / Backup / Restore
 
