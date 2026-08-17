@@ -231,6 +231,123 @@
     <s:String x:Key="Apps.UnknownPublisher">Unbekannter Herausgeber</s:String>
     <s:String x:Key="History.DetailsFailures">{0:N0} Element(e) · {1:N0} übersprungen</s:String>
 
+    <s:String x:Key="Common.Erase">Löschen</s:String>
+    <s:String x:Key="Excl.Folder">Ordner</s:String>
+    <s:String x:Key="Excl.Category">Kategorie</s:String>
+
+    <s:String x:Key="Cleanup.Msg.Idle">Starten Sie eine Analyse, um zu sehen, was bereinigt werden kann.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningFiles">Analyse läuft… {0:N0} Dateien geprüft — {1} freigebbar</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningProvider">Analyse läuft… {0}</s:String>
+    <s:String x:Key="Cleanup.Msg.ExcludedSuffix"> ({0} durch Ihre Regeln ausgeschlossen)</s:String>
+    <s:String x:Key="Cleanup.Msg.NothingFound">Nichts zu bereinigen: kein freigebbares Element gefunden.</s:String>
+    <s:String x:Key="Cleanup.Msg.Found">{0} Kategorie(n) gefunden — {1} freigebbar in {2:F1} s.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanCanceled">Analyse abgebrochen.</s:String>
+    <s:String x:Key="Cleanup.Msg.Cleaning">Bereinigung läuft… {0} ({1}/{2})</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultFailures">{0} freigegeben. {1} gesperrte oder geschützte Element(e) wurden übersprungen.</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultOk">{0} erfolgreich freigegeben.</s:String>
+    <s:String x:Key="Cleanup.Msg.Done">Bereinigung abgeschlossen. Starten Sie erneut eine Analyse, um den aktuellen Stand zu sehen.</s:String>
+    <s:String x:Key="Cleanup.Msg.CleanCanceled">Bereinigung abgebrochen.</s:String>
+
+    <s:String x:Key="Privacy.Msg.Idle">Analysieren Sie die Spuren, die Windows über Ihre Aktivität speichert.</s:String>
+    <s:String x:Key="Privacy.Msg.NoneFound">Keine Aktivitätsspur gefunden.</s:String>
+    <s:String x:Key="Privacy.Msg.Found">{0} Spurtyp(en) erkannt. Wählen Sie aus, was Sie löschen möchten.</s:String>
+    <s:String x:Key="Privacy.Msg.CleanedFailures">{0} Spurtyp(en) bereinigt. {1} gesperrte(s) Element(e) übersprungen.</s:String>
+    <s:String x:Key="Privacy.Msg.Cleaned">{0} Spurtyp(en) bereinigt.</s:String>
+    <s:String x:Key="Privacy.Msg.Done">Bereinigung abgeschlossen. Starten Sie die Analyse erneut, um den aktuellen Stand zu sehen.</s:String>
+    <s:String x:Key="Privacy.Msg.Canceled">Bereinigung abgebrochen.</s:String>
+
+    <s:String x:Key="Apps.Confirm.Title">Anwendung deinstallieren</s:String>
+    <s:String x:Key="Apps.Confirm.Body">Deinstallation von „{0}“ starten? TraceZero führt das vom Hersteller bereitgestellte Deinstallationsprogramm aus; es entfernt niemals Software manuell.</s:String>
+    <s:String x:Key="Apps.Toast.Launched">Deinstallationsprogramm für „{0}“ gestartet.</s:String>
+    <s:String x:Key="Apps.Toast.LaunchFailed">Deinstallationsprogramm für „{0}“ konnte nicht gestartet werden.</s:String>
+    <s:String x:Key="Apps.Count">{0:N0} installierte Anwendung(en)</s:String>
+
+    <s:String x:Key="Restore.Msg.Restored">„{0}“ wiederhergestellt ({1} Eintrag/Einträge zurückgeschrieben).</s:String>
+    <s:String x:Key="Restore.Toast.Restored">„{0}“ wiederhergestellt.</s:String>
+    <s:String x:Key="Restore.Msg.Failed">„{0}“ konnte nicht wiederhergestellt werden. Keine weitere Änderung.</s:String>
+    <s:String x:Key="Restore.Toast.Failed">Wiederherstellung von „{0}“ fehlgeschlagen.</s:String>
+    <s:String x:Key="Restore.Confirm.Title">Wiederherstellungstresor leeren</s:String>
+    <s:String x:Key="Restore.Confirm.Body">Alle Sicherungen werden gelöscht und können nicht mehr wiederhergestellt werden. Fortfahren?</s:String>
+    <s:String x:Key="Restore.Msg.Cleared">Wiederherstellungstresor geleert.</s:String>
+
+    <s:String x:Key="History.Confirm.Title">Verlauf löschen</s:String>
+    <s:String x:Key="History.Confirm.Body">Das gesamte lokale Protokoll Ihrer Bereinigungen wird gelöscht. Fortfahren?</s:String>
+    <s:String x:Key="History.Toast.Cleared">Verlauf gelöscht.</s:String>
+
+    <s:String x:Key="Drivers.Toast.WUFailed">Windows Update konnte nicht geöffnet werden.</s:String>
+
+    <s:String x:Key="SecureErase.Toast.Rejected">{0} Element(e) abgelehnt: Systemdatei, Ordner oder geschütztes Ziel.</s:String>
+    <s:String x:Key="SecureErase.Confirm.Title">Unwiderrufliches sicheres Löschen</s:String>
+    <s:String x:Key="SecureErase.Confirm.Body">{0} Datei(en) werden überschrieben und dann gelöscht. Dieser Vorgang ist unwiderruflich — die Dateien können nicht wiederhergestellt werden. Fortfahren?</s:String>
+    <s:String x:Key="SecureErase.Toast.Erased">{0} Datei(en) sicher gelöscht.</s:String>
+    <s:String x:Key="SecureErase.Toast.ErasedPartial">{0} gelöscht, {1} fehlgeschlagen (gesperrt/unzugänglich).</s:String>
+    <s:String x:Key="SecureErase.Wipe.ConfirmBody">TraceZero füllt den freien Speicher von {0}, um bereits gelöschte Dateien unwiederherstellbar zu machen. Ihre vorhandenen Dateien werden nicht berührt. Der Vorgang kann lange dauern und ist abbrechbar. Fortfahren?</s:String>
+    <s:String x:Key="SecureErase.Toast.WriteFailed">Auf {0} konnte nicht geschrieben werden (unzureichende Rechte?).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Running">Freier Speicher wird gelöscht…</s:String>
+    <s:String x:Key="SecureErase.Wipe.Progress">{0} geschrieben von ~{1}</s:String>
+    <s:String x:Key="SecureErase.Wipe.Canceled">Löschung des freien Speichers abgebrochen.</s:String>
+    <s:String x:Key="SecureErase.Wipe.Success">Freier Speicher gelöscht ({0} geschrieben und dann freigegeben).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Failed">Fehlgeschlagen: {0}</s:String>
+    <s:String x:Key="SecureErase.Media.Ssd">Dieses Laufwerk ist eine SSD/NVMe. Das Überschreiben ist nicht garantiert (Wear Leveling, TRIM): Windows kann Daten anderswo ablegen. Verlassen Sie sich nicht wie bei einer HDD darauf.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFree">Festplatte (HDD): Das Löschen des freien Speichers ist wirksam.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFile">Festplatte (HDD): Das Überschreiben vor dem Löschen ist wirksam.</s:String>
+    <s:String x:Key="SecureErase.Media.Unknown">Unbestimmter Laufwerkstyp. Wenn es eine SSD/NVMe ist, ist das Überschreiben nicht garantiert (Wear Leveling / TRIM).</s:String>
+    <s:String x:Key="SecureErase.PickFiles">Wählen Sie die endgültig zu löschenden Dateien</s:String>
+
+    <s:String x:Key="DiskSpace.Drive.Summary">{0} belegt von {1} · {2} frei</s:String>
+    <s:String x:Key="DiskSpace.Threshold">Über {0}</s:String>
+    <s:String x:Key="DiskSpace.Msg.Idle">Analysieren Sie Ihren persönlichen Ordner, um große Dateien zu finden.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Scanning">Analyse läuft… {0:N0} Dateien geprüft</s:String>
+    <s:String x:Key="DiskSpace.Msg.None">Keine Datei über dem Schwellenwert in Ihrem persönlichen Ordner.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Found">{0:N0} Datei(en) gefunden</s:String>
+    <s:String x:Key="DiskSpace.Msg.CapSuffix"> ({0} größte angezeigt)</s:String>
+    <s:String x:Key="DiskSpace.Msg.Canceled">Analyse abgebrochen.</s:String>
+    <s:String x:Key="DiskSpace.Confirm.Body">{0} Datei(en) in den Papierkorb verschieben? Sie können sie aus dem Papierkorb wiederherstellen.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Recycled">{0} Datei(en) in den Papierkorb verschoben.</s:String>
+
+    <s:String x:Key="Dup.Header">{0} Kopien · je {1} · {2} freigebbar</s:String>
+    <s:String x:Key="Dup.Threshold">Ab {0}</s:String>
+    <s:String x:Key="Dup.Msg.Idle">Suchen Sie nach doppelten Dateien in Ihrem persönlichen Ordner.</s:String>
+    <s:String x:Key="Dup.Msg.Scanning">Analyse läuft… {0:N0} Dateien geprüft</s:String>
+    <s:String x:Key="Dup.Msg.None">Kein Duplikat über dem gewählten Schwellenwert gefunden.</s:String>
+    <s:String x:Key="Dup.Msg.Found">{0} Duplikatgruppe(n) — {1} freigebbar.</s:String>
+    <s:String x:Key="Dup.Msg.Canceled">Analyse abgebrochen.</s:String>
+    <s:String x:Key="Dup.Msg.Preselected">Kopien vorausgewählt (die neueste wird in jeder Gruppe behalten).</s:String>
+    <s:String x:Key="Dup.Msg.NoneSelected">Keine Kopie ausgewählt.</s:String>
+    <s:String x:Key="Dup.Confirm.Body">{0} doppelte Kopie(n) in den Papierkorb verschieben? In jeder Gruppe bleibt mindestens eine Kopie erhalten. Sie können aus dem Papierkorb wiederherstellen.</s:String>
+    <s:String x:Key="Dup.Msg.Recycled">{0} Kopie(n) in den Papierkorb verschoben.</s:String>
+
+    <s:String x:Key="Auto.Msg.Enabled">Automatische Bereinigung aktiviert.</s:String>
+    <s:String x:Key="Auto.Msg.Disabled">Die automatische Bereinigung ist deaktiviert.</s:String>
+    <s:String x:Key="Auto.Msg.ApplyFailed">Zeitplan konnte nicht angewendet werden (Aufgabenplanung hat den Vorgang abgelehnt).</s:String>
+    <s:String x:Key="Auto.Msg.Scheduled">Automatische Bereinigung geplant. Sie läuft ohne Fenster gemäß dem gewählten Auslöser.</s:String>
+    <s:String x:Key="Auto.Msg.Removed">Automatische Bereinigung deaktiviert (geplante Aufgabe entfernt).</s:String>
+
+    <s:String x:Key="Supporter.Msg.Thanks">Danke {0}! Sie unterstützen TraceZero. 💙</s:String>
+    <s:String x:Key="Supporter.Msg.Free">Sie verwenden die kostenlose Version — vollständig und werbefrei.</s:String>
+    <s:String x:Key="Supporter.Msg.Paste">Fügen Sie Ihren Unterstützungscode ein.</s:String>
+    <s:String x:Key="Supporter.Msg.Valid">Code bestätigt, danke für Ihre Unterstützung!</s:String>
+    <s:String x:Key="Supporter.Msg.Invalid">Dieser Unterstützungscode ist ungültig.</s:String>
+
+    <s:String x:Key="Settings.Elev.Running">Erhöhung läuft (erlauben Sie die Windows-Eingabeaufforderung)…</s:String>
+    <s:String x:Key="Settings.Elev.Cleaned">Bereinigt: {0} freigegeben ({1} Dateien{2}).</s:String>
+    <s:String x:Key="Settings.Elev.FailedSuffix">, {0} übersprungen/gesperrt</s:String>
+    <s:String x:Key="Settings.Elev.Failed">Erhöhte Bereinigung fehlgeschlagen.</s:String>
+    <s:String x:Key="Settings.PickFolder">Wählen Sie einen von der Bereinigung auszuschließenden Ordner</s:String>
+
+    <s:String x:Key="Dup.Subtitle">Dateien mit identischem Inhalt, bestätigt durch kryptografischen Hash (nie allein durch Name oder Größe).</s:String>
+    <s:String x:Key="Dup.Scan">Duplikate suchen</s:String>
+    <s:String x:Key="Dup.KeepNewest">Neueste behalten</s:String>
+    <s:String x:Key="Dup.ClearSel">Alle abwählen</s:String>
+    <s:String x:Key="Dup.RecycleSel">Auswahl in den Papierkorb verschieben</s:String>
+    <s:String x:Key="Settings.AdvCleanBody">Der Ordner C:\Windows\Temp liegt außerhalb Ihres Profils: seine Bereinigung erfordert Administratorrechte. TraceZero startet nie als Administrator: eine separate, geprüfte Komponente fragt nach der Erlaubnis (Windows-Eingabeaufforderung), wirkt nur auf diesen Ordner und schließt sich dann.</s:String>
+    <s:String x:Key="Placeholder.Title">Modul im Aufbau</s:String>
+    <s:String x:Key="Placeholder.Body">Diese Seite wird in einer späteren Phase mit der Engine verbunden. Keine hier angezeigten Daten sind echt, bis das Modul geliefert wird.</s:String>
+
+    <s:String x:Key="Startup.User">Benutzer</s:String>
+    <s:String x:Key="Startup.Machine">System (schreibgeschützt)</s:String>
+    <s:String x:Key="Startup.Folder">Autostart-Ordner</s:String>
+
     <s:String x:Key="Lang.French">Französisch</s:String>
     <s:String x:Key="Lang.English">Englisch</s:String>
     <s:String x:Key="Lang.German">Deutsch</s:String>

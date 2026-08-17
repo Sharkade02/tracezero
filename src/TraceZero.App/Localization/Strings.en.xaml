@@ -231,6 +231,123 @@
     <s:String x:Key="Apps.UnknownPublisher">Unknown publisher</s:String>
     <s:String x:Key="History.DetailsFailures">{0:N0} item(s) · {1:N0} skipped</s:String>
 
+    <s:String x:Key="Common.Erase">Erase</s:String>
+    <s:String x:Key="Excl.Folder">Folder</s:String>
+    <s:String x:Key="Excl.Category">Category</s:String>
+
+    <s:String x:Key="Cleanup.Msg.Idle">Run a scan to see what can be cleaned.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningFiles">Scanning… {0:N0} files examined — {1} recoverable</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningProvider">Scanning… {0}</s:String>
+    <s:String x:Key="Cleanup.Msg.ExcludedSuffix"> ({0} excluded by your rules)</s:String>
+    <s:String x:Key="Cleanup.Msg.NothingFound">Nothing to clean: no recoverable item found.</s:String>
+    <s:String x:Key="Cleanup.Msg.Found">{0} category(ies) found — {1} recoverable in {2:F1} s.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanCanceled">Scan canceled.</s:String>
+    <s:String x:Key="Cleanup.Msg.Cleaning">Cleaning… {0} ({1}/{2})</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultFailures">{0} freed. {1} locked or protected item(s) were skipped.</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultOk">{0} successfully freed.</s:String>
+    <s:String x:Key="Cleanup.Msg.Done">Cleanup complete. Run a scan again to see the current state.</s:String>
+    <s:String x:Key="Cleanup.Msg.CleanCanceled">Cleanup canceled.</s:String>
+
+    <s:String x:Key="Privacy.Msg.Idle">Analyze the traces Windows keeps about your activity.</s:String>
+    <s:String x:Key="Privacy.Msg.NoneFound">No activity trace found.</s:String>
+    <s:String x:Key="Privacy.Msg.Found">{0} trace type(s) detected. Select what you want to erase.</s:String>
+    <s:String x:Key="Privacy.Msg.CleanedFailures">{0} trace type(s) cleaned. {1} locked item(s) skipped.</s:String>
+    <s:String x:Key="Privacy.Msg.Cleaned">{0} trace type(s) cleaned.</s:String>
+    <s:String x:Key="Privacy.Msg.Done">Cleanup complete. Run the analysis again to see the current state.</s:String>
+    <s:String x:Key="Privacy.Msg.Canceled">Cleanup canceled.</s:String>
+
+    <s:String x:Key="Apps.Confirm.Title">Uninstall the application</s:String>
+    <s:String x:Key="Apps.Confirm.Body">Start uninstalling '{0}'? TraceZero runs the uninstaller provided by the publisher; it never removes software manually.</s:String>
+    <s:String x:Key="Apps.Toast.Launched">Uninstaller for '{0}' launched.</s:String>
+    <s:String x:Key="Apps.Toast.LaunchFailed">Could not launch the uninstaller for '{0}'.</s:String>
+    <s:String x:Key="Apps.Count">{0:N0} installed application(s)</s:String>
+
+    <s:String x:Key="Restore.Msg.Restored">'{0}' restored ({1} entry(ies) rewritten).</s:String>
+    <s:String x:Key="Restore.Toast.Restored">'{0}' restored.</s:String>
+    <s:String x:Key="Restore.Msg.Failed">Could not restore '{0}'. No other change.</s:String>
+    <s:String x:Key="Restore.Toast.Failed">Failed to restore '{0}'.</s:String>
+    <s:String x:Key="Restore.Confirm.Title">Clear the restore vault</s:String>
+    <s:String x:Key="Restore.Confirm.Body">All backups will be deleted and can no longer be restored. Continue?</s:String>
+    <s:String x:Key="Restore.Msg.Cleared">Restore vault cleared.</s:String>
+
+    <s:String x:Key="History.Confirm.Title">Clear history</s:String>
+    <s:String x:Key="History.Confirm.Body">The entire local log of your cleanups will be deleted. Continue?</s:String>
+    <s:String x:Key="History.Toast.Cleared">History cleared.</s:String>
+
+    <s:String x:Key="Drivers.Toast.WUFailed">Could not open Windows Update.</s:String>
+
+    <s:String x:Key="SecureErase.Toast.Rejected">{0} item(s) refused: system file, folder or protected target.</s:String>
+    <s:String x:Key="SecureErase.Confirm.Title">Irreversible secure erase</s:String>
+    <s:String x:Key="SecureErase.Confirm.Body">{0} file(s) will be overwritten then deleted. This operation is irreversible — the files cannot be recovered. Continue?</s:String>
+    <s:String x:Key="SecureErase.Toast.Erased">{0} file(s) securely erased.</s:String>
+    <s:String x:Key="SecureErase.Toast.ErasedPartial">{0} erased, {1} failed (locked/inaccessible).</s:String>
+    <s:String x:Key="SecureErase.Wipe.ConfirmBody">TraceZero will fill the free space of {0} to make already-deleted files unrecoverable. Your existing files are not touched. The operation can be long and is cancelable. Continue?</s:String>
+    <s:String x:Key="SecureErase.Toast.WriteFailed">Could not write to {0} (insufficient rights?).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Running">Wiping free space…</s:String>
+    <s:String x:Key="SecureErase.Wipe.Progress">{0} written of ~{1}</s:String>
+    <s:String x:Key="SecureErase.Wipe.Canceled">Free-space wipe canceled.</s:String>
+    <s:String x:Key="SecureErase.Wipe.Success">Free space wiped ({0} written then freed).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Failed">Failed: {0}</s:String>
+    <s:String x:Key="SecureErase.Media.Ssd">This drive is an SSD/NVMe. Overwriting is not guaranteed (wear leveling, TRIM): Windows may place data elsewhere. Do not rely on it as on an HDD.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFree">Hard drive (HDD): wiping free space is effective.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFile">Hard drive (HDD): overwriting before deletion is effective.</s:String>
+    <s:String x:Key="SecureErase.Media.Unknown">Undetermined drive type. If it is an SSD/NVMe, overwriting is not guaranteed (wear leveling / TRIM).</s:String>
+    <s:String x:Key="SecureErase.PickFiles">Choose the files to erase permanently</s:String>
+
+    <s:String x:Key="DiskSpace.Drive.Summary">{0} used of {1} · {2} free</s:String>
+    <s:String x:Key="DiskSpace.Threshold">Over {0}</s:String>
+    <s:String x:Key="DiskSpace.Msg.Idle">Scan your personal folder to find large files.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Scanning">Scanning… {0:N0} files examined</s:String>
+    <s:String x:Key="DiskSpace.Msg.None">No file above the threshold in your personal folder.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Found">{0:N0} file(s) found</s:String>
+    <s:String x:Key="DiskSpace.Msg.CapSuffix"> ({0} largest shown)</s:String>
+    <s:String x:Key="DiskSpace.Msg.Canceled">Scan canceled.</s:String>
+    <s:String x:Key="DiskSpace.Confirm.Body">Send {0} file(s) to the Recycle Bin? You can restore them from the Recycle Bin.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Recycled">{0} file(s) sent to the Recycle Bin.</s:String>
+
+    <s:String x:Key="Dup.Header">{0} copies · {1} each · {2} recoverable</s:String>
+    <s:String x:Key="Dup.Threshold">From {0}</s:String>
+    <s:String x:Key="Dup.Msg.Idle">Search for duplicate files in your personal folder.</s:String>
+    <s:String x:Key="Dup.Msg.Scanning">Scanning… {0:N0} files examined</s:String>
+    <s:String x:Key="Dup.Msg.None">No duplicate found above the chosen threshold.</s:String>
+    <s:String x:Key="Dup.Msg.Found">{0} duplicate group(s) — {1} recoverable.</s:String>
+    <s:String x:Key="Dup.Msg.Canceled">Scan canceled.</s:String>
+    <s:String x:Key="Dup.Msg.Preselected">Copies preselected (the most recent is kept in each group).</s:String>
+    <s:String x:Key="Dup.Msg.NoneSelected">No copy selected.</s:String>
+    <s:String x:Key="Dup.Confirm.Body">Send {0} duplicate copy(ies) to the Recycle Bin? At least one copy is kept in each group. You can restore from the Recycle Bin.</s:String>
+    <s:String x:Key="Dup.Msg.Recycled">{0} copy(ies) sent to the Recycle Bin.</s:String>
+
+    <s:String x:Key="Auto.Msg.Enabled">Automatic cleaning enabled.</s:String>
+    <s:String x:Key="Auto.Msg.Disabled">Automatic cleaning is disabled.</s:String>
+    <s:String x:Key="Auto.Msg.ApplyFailed">Could not apply the schedule (Task Scheduler refused the operation).</s:String>
+    <s:String x:Key="Auto.Msg.Scheduled">Automatic cleaning scheduled. It will run without a window according to the chosen trigger.</s:String>
+    <s:String x:Key="Auto.Msg.Removed">Automatic cleaning disabled (scheduled task removed).</s:String>
+
+    <s:String x:Key="Supporter.Msg.Thanks">Thank you {0}! You support TraceZero. 💙</s:String>
+    <s:String x:Key="Supporter.Msg.Free">You are using the free version — complete and ad-free.</s:String>
+    <s:String x:Key="Supporter.Msg.Paste">Paste your support code.</s:String>
+    <s:String x:Key="Supporter.Msg.Valid">Code validated, thank you for your support!</s:String>
+    <s:String x:Key="Supporter.Msg.Invalid">This support code is not valid.</s:String>
+
+    <s:String x:Key="Settings.Elev.Running">Elevation in progress (allow the Windows prompt)…</s:String>
+    <s:String x:Key="Settings.Elev.Cleaned">Cleaned: {0} freed ({1} files{2}).</s:String>
+    <s:String x:Key="Settings.Elev.FailedSuffix">, {0} skipped/locked</s:String>
+    <s:String x:Key="Settings.Elev.Failed">Elevated cleanup failed.</s:String>
+    <s:String x:Key="Settings.PickFolder">Choose a folder to exclude from cleaning</s:String>
+
+    <s:String x:Key="Dup.Subtitle">Files with identical content, confirmed by cryptographic hash (never by name or size alone).</s:String>
+    <s:String x:Key="Dup.Scan">Find duplicates</s:String>
+    <s:String x:Key="Dup.KeepNewest">Keep the most recent</s:String>
+    <s:String x:Key="Dup.ClearSel">Deselect all</s:String>
+    <s:String x:Key="Dup.RecycleSel">Send selection to Recycle Bin</s:String>
+    <s:String x:Key="Settings.AdvCleanBody">The C:\Windows\Temp folder is outside your profile: cleaning it requires administrator rights. TraceZero never starts as administrator: a separate, verified component will ask for permission (Windows prompt), act on this folder only, then close.</s:String>
+    <s:String x:Key="Placeholder.Title">Module under construction</s:String>
+    <s:String x:Key="Placeholder.Body">This page will be connected to the engine in a later phase. No data shown here is real until the module is delivered.</s:String>
+
+    <s:String x:Key="Startup.User">User</s:String>
+    <s:String x:Key="Startup.Machine">System (read-only)</s:String>
+    <s:String x:Key="Startup.Folder">Startup folder</s:String>
+
     <s:String x:Key="Lang.French">French</s:String>
     <s:String x:Key="Lang.English">English</s:String>
     <s:String x:Key="Lang.German">German</s:String>

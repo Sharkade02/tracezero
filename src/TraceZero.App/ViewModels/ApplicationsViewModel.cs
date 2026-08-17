@@ -35,9 +35,9 @@ public sealed partial class StartupRowViewModel(StartupEntry entry) : Observable
 
     public string LocationText => entry.Location switch
     {
-        StartupLocation.RunCurrentUser => "Utilisateur",
-        StartupLocation.RunLocalMachine => "Système (lecture seule)",
-        StartupLocation.StartupFolder => "Dossier de démarrage",
+        StartupLocation.RunCurrentUser => Localizer.Get("Startup.User"),
+        StartupLocation.RunLocalMachine => Localizer.Get("Startup.Machine"),
+        StartupLocation.StartupFolder => Localizer.Get("Startup.Folder"),
         _ => string.Empty,
     };
 }
@@ -137,7 +137,7 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
             Apps.Add(app);
         }
 
-        AppCountText = $"{_allApps.Count} application(s) installée(s)";
+        AppCountText = Localizer.Format("Apps.Count", _allApps.Count);
     }
 
     [RelayCommand]
@@ -167,10 +167,10 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
         }
 
         var confirmed = await _dialog.ConfirmAsync(
-            "Désinstaller l'application",
-            $"Lancer la désinstallation de « {row.Name} » ? TraceZero exécute le désinstallateur fourni par l'éditeur ; il ne supprime jamais un logiciel manuellement.",
-            confirmText: "Désinstaller",
-            cancelText: "Annuler",
+            Localizer.Get("Apps.Confirm.Title"),
+            Localizer.Format("Apps.Confirm.Body", row.Name),
+            confirmText: Localizer.Get("Apps.Uninstall"),
+            cancelText: Localizer.Get("Common.Cancel"),
             destructive: true);
 
         if (!confirmed)
@@ -180,11 +180,11 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
 
         if (_appService.LaunchUninstaller(row.Model))
         {
-            _toasts.Show($"Désinstallateur de « {row.Name} » lancé.", ToastKind.Info);
+            _toasts.Show(Localizer.Format("Apps.Toast.Launched", row.Name), ToastKind.Info);
         }
         else
         {
-            _toasts.Show($"Impossible de lancer le désinstallateur de « {row.Name} ».", ToastKind.Error);
+            _toasts.Show(Localizer.Format("Apps.Toast.LaunchFailed", row.Name), ToastKind.Error);
         }
     }
 

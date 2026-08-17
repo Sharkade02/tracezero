@@ -21,10 +21,10 @@
 
         <Border Grid.Row="1" Style="{StaticResource Card}" VerticalAlignment="Top">
             <StackPanel>
-                <TextBlock Text="Module en cours de construction"
+                <TextBlock Text="{DynamicResource Placeholder.Title}"
                            Style="{StaticResource Text.Title}" Margin="0,0,0,8" />
                 <TextBlock Style="{StaticResource Text.Subtle}" TextWrapping="Wrap"
-                           Text="Cette page sera connectée au moteur dans une phase ultérieure. Aucune donnée affichée ici n'est réelle tant que le module n'est pas livré." />
+                           Text="{DynamicResource Placeholder.Body}" />
             </StackPanel>
         </Border>
     </Grid>

@@ -125,14 +125,14 @@ public sealed partial class RestoreViewModel : PageViewModelBase
             });
 
             await _vault.MarkRestoredAsync(record.Id);
-            StatusMessage = $"« {record.Description} » restauré ({restored} entrée(s) réécrite(s)).";
-            _toasts.Show($"« {record.Description} » restauré.", ToastKind.Success);
+            StatusMessage = Localizer.Format("Restore.Msg.Restored", record.Description, restored);
+            _toasts.Show(Localizer.Format("Restore.Toast.Restored", record.Description), ToastKind.Success);
             await RefreshAsync();
         }
         catch (Exception)
         {
-            StatusMessage = $"Impossible de restaurer « {row.Description} ». Aucune autre modification.";
-            _toasts.Show($"Échec de la restauration de « {row.Description} ».", ToastKind.Error);
+            StatusMessage = Localizer.Format("Restore.Msg.Failed", row.Description);
+            _toasts.Show(Localizer.Format("Restore.Toast.Failed", row.Description), ToastKind.Error);
         }
         finally
         {
@@ -149,10 +149,10 @@ public sealed partial class RestoreViewModel : PageViewModelBase
         }
 
         var confirmed = await _dialog.ConfirmAsync(
-            "Vider le coffre de restauration",
-            "Toutes les sauvegardes seront supprimées et ne pourront plus être restaurées. Continuer ?",
-            confirmText: "Vider",
-            cancelText: "Annuler",
+            Localizer.Get("Restore.Confirm.Title"),
+            Localizer.Get("Restore.Confirm.Body"),
+            confirmText: Localizer.Get("Restore.ClearVault"),
+            cancelText: Localizer.Get("Common.Cancel"),
             destructive: true);
 
         if (!confirmed)
@@ -161,8 +161,8 @@ public sealed partial class RestoreViewModel : PageViewModelBase
         }
 
         await _vault.ClearAsync();
-        StatusMessage = "Coffre de restauration vidé.";
-        _toasts.Show("Coffre de restauration vidé.", ToastKind.Info);
+        StatusMessage = Localizer.Get("Restore.Msg.Cleared");
+        _toasts.Show(Localizer.Get("Restore.Msg.Cleared"), ToastKind.Info);
         await RefreshAsync();
     }
 }

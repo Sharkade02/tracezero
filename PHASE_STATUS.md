@@ -28,7 +28,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 18 | Updater | NOT_STARTED | — | |
 | 19 | Installateur / Portable | NOT_STARTED | — | |
 | 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
-| 21 | Localisation | IN_PROGRESS | — | **Infra complète** (`fr/en/de/es` à chaud, `ILocalizationService`, `Localizer`, sélecteur Paramètres, persistance). **Tout le texte persistant visible localisé en 4 langues** : 16 pages (statique), **descriptions de règles** (mécanisme clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), états navigateurs, **tous les libellés calculés de lignes** (santé disque, pilotes, impact, réversibilité, NTFS, historique, éditeur). **Reste** : messages transitoires générés dans les VM (StatusMessage/ResultMessage/toasts/textes de confirmation modale). → `KNOWN_LIMITATIONS.md` |
+| 21 | Localisation | DONE | — | **fr/en/de/es** avec bascule live (infra type thème : `ILocalizationService`, `Localizer`, sélecteur Paramètres, culture du thread, persistance). **Aucun texte UI codé en dur** (§31) : 16 pages, descriptions de **règles** (clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), navigateurs, tous les **libellés de lignes**, **messages dynamiques des VM** (status/toasts/confirmations modales/titres de dialogues) et libellés de démarrage. Seuls restent non traduits les endonymes de langues et les clés de catégorie stockées en base (mappées à l'affichage) |
 | 22 | Accessibilité | DONE | — | **Focus clavier visible** (bordure) ajouté aux templates boutons/nav qui le masquaient ; `AutomationProperties.Name` sur les contrôles sans libellé (recherches, sélecteur de lecteur, barre de progression, fermeture toast) ; modale : Entrée=confirmer / Échap=annuler (`IsDefault`/`IsCancel`) ; aucun statut par la couleur seule (toasts glyphe+texte, états disque/pilote libellés). Résiduels (gestion du focus lecteur d'écran sur modale, DPI per-monitor, mise à l'échelle du texte) dans `KNOWN_LIMITATIONS.md` |
 | 23 | Performance | NOT_STARTED | — | |
 | 24 | Tests de sécurité | IN_PROGRESS | — | `TraceZero.SafetyTests` amorcé en Phase 0 |
@@ -179,7 +179,8 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
 
-- **Phase 21 — Localisation** (§31) — IN_PROGRESS (infrastructure livrée, migration des chaînes en cours).
+- **Phase 21 — Localisation** (§31) — **DONE**. **Aucun texte UI codé en dur** : toute l'interface est
+  traduite en **fr/en/de/es** avec bascule live.
   - **Mécanisme** (calqué sur le thème) : dictionnaires `Localization/Strings.{fr,en,de,es}.xaml`
     (`ResourceDictionary` de `s:String`) swappés à chaud ; les vues utilisent `DynamicResource`, le code
     `Localizer.Get(key)`. `LocalizationManager` applique aussi la culture du thread et **persiste** le

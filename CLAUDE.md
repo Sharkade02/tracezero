@@ -70,21 +70,20 @@ build\scripts\release.ps1            # pipeline release (Phase 27) : build/test 
 Navigateurs · Espace disque · Doublons · Applications · Automatisation · Historique · Paramètres · Soutenir.
 Plus aucune page placeholder.
 
-**DONE (20)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
+**DONE (21)** : 0 Bootstrap · 1 UI Shell + Design System · 2 Scan Engine · 3 Nettoyage Windows ·
 5 Privacy Inspector · 6 Cleaning Plan + Exclusions + Historique · 7 Protection/Backup/Restore ·
 8 Analyse NTFS · 9 Effacement sécurisé · 10 Disk Space · 11 Duplicate Finder · 12 Applications & Démarrage ·
-14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW ·
-20 Élévation de privilèges · 22 Accessibilité · 27 Qualité release · 28 Moniteur système.
+14 Driver Health · 15 Automatisation · 16 Historique/Stats · 17 Supporter/PWYW · 20 Élévation ·
+21 Localisation · 22 Accessibilité · 27 Qualité release · 28 Moniteur système.
 
-**IN_PROGRESS (3)** :
+**IN_PROGRESS (2)** :
 - **Phase 4 — Navigateurs** : caches SAFE OK ; reste History/cookies/sessions + Opera (différés).
   Peut réutiliser l'infra backup/restore de la Phase 7.
-- **Phase 21 — Localisation** : infra complète (dicos `fr/en/de/es` à chaud, `ILocalizationService`,
-  `Localizer`, sélecteur dans Paramètres). Reste à migrer les chaînes des autres pages/VM + règles + erreurs.
 - **Phase 24 — Tests de sécurité** : suite `SafetyTests` amorcée, à étoffer.
 
-**Localisation (Phase 21)** : ajouter une chaîne = clé dans les 4 `Localization/Strings.*.xaml` ;
-en XAML `{DynamicResource Ma.Cle}`, en code `Localizer.Get("Ma.Cle")`. Bascule live via `ILocalizationService`.
+**Localisation (Phase 21, DONE)** : toute l'UI en fr/en/de/es, bascule live. Ajouter une chaîne = clé dans
+les 4 `Localization/Strings.*.xaml` ; en XAML `{DynamicResource Ma.Cle}`, en code `Localizer.Get("Ma.Cle")`
+ou `Localizer.Format("Ma.Cle", args)`. Descriptions de règles = `NameKey`/`DescriptionKey` sur le modèle.
 
 **Design system (Phase 1)** : composants réutilisables — `Skeleton` (Shared.xaml), `IToastService`
 (toasts superposés, coin bas-droit), `IDialogService` (`ConfirmAsync` awaitable, modale thématisée).
@@ -102,7 +101,6 @@ Réversibilité honnête via l'enum `Reversibility`.
 | 13 | Software Updater | |
 | 18 | Updater signé | `TraceZero.Updater` |
 | 19 | Installateur / Portable / MSIX | Distribution signée + Microsoft Store |
-| 21 | Localisation | fr/en/de/es |
 | 23 | Performance | |
 | 25 | Golden dataset | |
 | 26 | Tests VM | |

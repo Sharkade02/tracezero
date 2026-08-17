@@ -29,13 +29,11 @@ public sealed class DriveRowViewModel
     public string FreeText { get; }
     public string TotalText { get; }
     public double UsedFraction { get; }
-    public string SummaryText => $"{UsedText} utilisés sur {TotalText} · {FreeText} libres";
+    public string SummaryText => Localizer.Format("DiskSpace.Drive.Summary", UsedText, TotalText, FreeText);
 }
 
 public sealed partial class LargeFileRowViewModel(LargeFileEntry entry) : ObservableObject
 {
-    private static readonly CultureInfo Fr = CultureInfo.GetCultureInfo("fr-FR");
-
     [ObservableProperty]
     private bool _isSelected;
 
@@ -43,7 +41,7 @@ public sealed partial class LargeFileRowViewModel(LargeFileEntry entry) : Observ
     public string Path => entry.Path;
     public long SizeBytes => entry.SizeBytes;
     public string SizeText => ByteSize.Format(entry.SizeBytes);
-    public string DateText => entry.LastWriteUtc.ToLocalTime().ToString("dd/MM/yyyy", Fr);
+    public string DateText => entry.LastWriteUtc.ToLocalTime().ToString("d", CultureInfo.CurrentCulture);
 }
 
 public sealed record ThresholdOption(string Label, long Bytes);
@@ -77,10 +75,10 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
 
     public IReadOnlyList<ThresholdOption> Thresholds { get; } =
     [
-        new("Plus de 100 Mo", 100L * 1024 * 1024),
-        new("Plus de 500 Mo", 500L * 1024 * 1024),
-        new("Plus de 1 Go", 1024L * 1024 * 1024),
-        new("Plus de 2 Go", 2L * 1024 * 1024 * 1024),
+        new(Localizer.Format("DiskSpace.Threshold", "100 Mo"), 100L * 1024 * 1024),
+        new(Localizer.Format("DiskSpace.Threshold", "500 Mo"), 500L * 1024 * 1024),
+        new(Localizer.Format("DiskSpace.Threshold", "1 Go"), 1024L * 1024 * 1024),
+        new(Localizer.Format("DiskSpace.Threshold", "2 Go"), 2L * 1024 * 1024 * 1024),
     ];
 
     [ObservableProperty]
@@ -92,7 +90,7 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
     private bool _isScanning;
 
     [ObservableProperty]
-    private string _statusMessage = "Analysez votre dossier personnel pour trouver les fichiers volumineux.";
+    private string _statusMessage = Localizer.Get("DiskSpace.Msg.Idle");
 
     [ObservableProperty]
     private bool _hasResults;
@@ -125,7 +123,7 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
 
         try
         {
-            var progress = new Progress<long>(n => StatusMessage = $"Analyse en cours… {n:N0} fichiers examinés");
+            var progress = new Progress<long>(n => StatusMessage = Localizer.Format("DiskSpace.Msg.Scanning", n));
             var reporter = new ProgressScanReporter(progress);
 
             var found = await Task.Run(async () =>
@@ -145,13 +143,14 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
             }
 
             HasResults = LargeFiles.Count > 0;
+            var capSuffix = found.Count > MaxResults ? Localizer.Format("DiskSpace.Msg.CapSuffix", MaxResults) : string.Empty;
             StatusMessage = LargeFiles.Count == 0
-                ? "Aucun fichier au-dessus du seuil dans votre dossier personnel."
-                : $"{found.Count:N0} fichier(s) trouvé(s){(found.Count > MaxResults ? $" (affichage des {MaxResults} plus gros)" : string.Empty)}.";
+                ? Localizer.Get("DiskSpace.Msg.None")
+                : Localizer.Format("DiskSpace.Msg.Found", found.Count) + capSuffix;
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Analyse annulée.";
+            StatusMessage = Localizer.Get("DiskSpace.Msg.Canceled");
         }
         finally
         {
@@ -192,8 +191,8 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
         }
 
         var confirm = MessageBox.Show(
-            $"Envoyer {selected.Count} fichier(s) à la Corbeille ? Vous pourrez les restaurer depuis la Corbeille.",
-            "Confirmer",
+            Localizer.Format("DiskSpace.Confirm.Body", selected.Count),
+            Localizer.Get("Common.Confirm"),
             MessageBoxButton.YesNo,
             MessageBoxImage.Question);
 
@@ -213,7 +212,7 @@ public sealed partial class DiskSpaceViewModel : PageViewModelBase, IDisposable
         }
 
         HasResults = LargeFiles.Count > 0;
-        StatusMessage = $"{removed} fichier(s) envoyé(s) à la Corbeille.";
+        StatusMessage = Localizer.Format("DiskSpace.Msg.Recycled", removed);
         LoadDrives();
     }
 

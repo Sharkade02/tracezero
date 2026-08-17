@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.Licensing;
 
 namespace TraceZero.App.ViewModels;
@@ -54,8 +55,8 @@ public sealed partial class SupporterViewModel : PageViewModelBase
         var status = _licenseService.Status;
         IsSupporter = status.IsSupporter;
         StatusText = status.IsSupporter
-            ? $"Merci {status.SupporterName} ! Vous soutenez TraceZero. 💙"
-            : "Vous utilisez la version gratuite — complète et sans publicité.";
+            ? Localizer.Format("Supporter.Msg.Thanks", status.SupporterName ?? string.Empty)
+            : Localizer.Get("Supporter.Msg.Free");
     }
 
     [RelayCommand]
@@ -73,18 +74,18 @@ public sealed partial class SupporterViewModel : PageViewModelBase
     {
         if (string.IsNullOrWhiteSpace(LicenseInput))
         {
-            ActivationMessage = "Collez votre code de soutien.";
+            ActivationMessage = Localizer.Get("Supporter.Msg.Paste");
             return;
         }
 
         if (_licenseService.TryActivate(LicenseInput.Trim()))
         {
-            ActivationMessage = "Code validé, merci pour votre soutien !";
+            ActivationMessage = Localizer.Get("Supporter.Msg.Valid");
             LicenseInput = string.Empty;
         }
         else
         {
-            ActivationMessage = "Ce code de soutien n'est pas valide.";
+            ActivationMessage = Localizer.Get("Supporter.Msg.Invalid");
         }
 
         RefreshStatus();

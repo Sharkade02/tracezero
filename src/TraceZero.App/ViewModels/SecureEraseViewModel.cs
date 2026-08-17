@@ -132,7 +132,7 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
     {
         var dialog = new OpenFileDialog
         {
-            Title = "Choisir les fichiers à effacer définitivement",
+            Title = Localizer.Get("SecureErase.PickFiles"),
             Multiselect = true,
             CheckFileExists = true,
         };
@@ -164,7 +164,7 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
 
         if (rejected > 0)
         {
-            _toasts.Show($"{rejected} élément(s) refusé(s) : fichier système, dossier ou cible protégée.", ToastKind.Warning);
+            _toasts.Show(Localizer.Format("SecureErase.Toast.Rejected", rejected), ToastKind.Warning);
         }
 
         UpdateFileMedia();
@@ -196,10 +196,10 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
     {
         var method = Reinforced ? SecureEraseMethod.ReinforcedOverwrite : SecureEraseMethod.SingleOverwrite;
         var confirmed = await _dialog.ConfirmAsync(
-            "Effacement sécurisé irréversible",
-            $"{Targets.Count} fichier(s) vont être écrasés puis supprimés. Cette opération est irréversible — les fichiers ne pourront pas être récupérés. Continuer ?",
-            confirmText: "Effacer définitivement",
-            cancelText: "Annuler",
+            Localizer.Get("SecureErase.Confirm.Title"),
+            Localizer.Format("SecureErase.Confirm.Body", Targets.Count),
+            confirmText: Localizer.Get("SecureErase.EraseBtn"),
+            cancelText: Localizer.Get("Common.Cancel"),
             destructive: true);
 
         if (!confirmed)
@@ -230,8 +230,8 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
 
             _toasts.Show(
                 failed == 0
-                    ? $"{succeeded} fichier(s) effacé(s) de façon sécurisée."
-                    : $"{succeeded} effacé(s), {failed} en échec (verrouillé/inaccessible).",
+                    ? Localizer.Format("SecureErase.Toast.Erased", succeeded)
+                    : Localizer.Format("SecureErase.Toast.ErasedPartial", succeeded, failed),
                 failed == 0 ? ToastKind.Success : ToastKind.Warning);
         }
         finally
@@ -254,10 +254,10 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
         }
 
         var confirmed = await _dialog.ConfirmAsync(
-            "Effacer l'espace libre",
-            $"TraceZero va remplir l'espace libre de {drive.Root} pour rendre irrécupérables les fichiers déjà supprimés. Vos fichiers existants ne sont pas touchés. L'opération peut être longue et est annulable. Continuer ?",
-            confirmText: "Effacer l'espace libre",
-            cancelText: "Annuler",
+            Localizer.Get("SecureErase.WipeBtn"),
+            Localizer.Format("SecureErase.Wipe.ConfirmBody", drive.Root),
+            confirmText: Localizer.Get("SecureErase.WipeBtn"),
+            cancelText: Localizer.Get("Common.Cancel"),
             destructive: true);
 
         if (!confirmed)
@@ -268,7 +268,7 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
         var workingDir = ResolveWorkingDirectory(drive.Root);
         if (workingDir is null)
         {
-            _toasts.Show($"Impossible d'écrire sur {drive.Root} (droits insuffisants ?).", ToastKind.Error);
+            _toasts.Show(Localizer.Format("SecureErase.Toast.WriteFailed", drive.Root), ToastKind.Error);
             return;
         }
 
@@ -276,22 +276,22 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
         _wipeCts = new CancellationTokenSource();
         IsWiping = true;
         WipeProgress = 0;
-        WipeStatus = "Effacement de l'espace libre en cours…";
+        WipeStatus = Localizer.Get("SecureErase.Wipe.Running");
 
         var progress = new Progress<FreeSpaceWipeProgress>(p =>
         {
             WipeProgress = p.Fraction;
-            WipeStatus = $"{ByteSize.Format(p.BytesWritten)} écrits sur ~{ByteSize.Format(p.EstimatedTotalBytes)}";
+            WipeStatus = Localizer.Format("SecureErase.Wipe.Progress", ByteSize.Format(p.BytesWritten), ByteSize.Format(p.EstimatedTotalBytes));
         });
 
         try
         {
             var result = await _wiper.WipeAsync(workingDir, maxBytes: 0, progress, _wipeCts.Token);
             WipeStatus = result.Canceled
-                ? "Effacement de l'espace libre annulé."
+                ? Localizer.Get("SecureErase.Wipe.Canceled")
                 : result.Success
-                    ? $"Espace libre effacé ({ByteSize.Format(result.BytesWritten)} écrits puis libérés)."
-                    : $"Échec : {result.Error}";
+                    ? Localizer.Format("SecureErase.Wipe.Success", ByteSize.Format(result.BytesWritten))
+                    : Localizer.Format("SecureErase.Wipe.Failed", result.Error ?? string.Empty);
 
             _toasts.Show(WipeStatus, result.Success ? ToastKind.Success : ToastKind.Warning);
         }
@@ -336,12 +336,10 @@ public sealed partial class SecureEraseViewModel : PageViewModelBase, IDisposabl
 
     private static string MediaWarning(DiskMediaKind media, bool forFreeSpace) => media switch
     {
-        DiskMediaKind.Ssd =>
-            "Ce lecteur est un SSD/NVMe. L'écrasement n'est pas garanti (wear leveling, TRIM) : Windows peut placer les données ailleurs. Ne comptez pas dessus comme sur un HDD.",
+        DiskMediaKind.Ssd => Localizer.Get("SecureErase.Media.Ssd"),
         DiskMediaKind.Hdd => forFreeSpace
-            ? "Disque dur (HDD) : l'effacement de l'espace libre est efficace."
-            : "Disque dur (HDD) : l'écrasement avant suppression est efficace.",
-        _ =>
-            "Type de lecteur indéterminé. Si c'est un SSD/NVMe, l'écrasement n'est pas garanti (wear leveling / TRIM).",
+            ? Localizer.Get("SecureErase.Media.HddFree")
+            : Localizer.Get("SecureErase.Media.HddFile"),
+        _ => Localizer.Get("SecureErase.Media.Unknown"),
     };
 }

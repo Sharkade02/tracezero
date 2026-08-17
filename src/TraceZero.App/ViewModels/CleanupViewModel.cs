@@ -64,7 +64,7 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
     private bool _hasScanned;
 
     [ObservableProperty]
-    private string _statusMessage = "Lancez une analyse pour voir ce qui peut être nettoyé.";
+    private string _statusMessage = Localizer.Get("Cleanup.Msg.Idle");
 
     [ObservableProperty]
     private double _progressFraction;
@@ -121,8 +121,8 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
             {
                 ProgressFraction = p.Fraction;
                 StatusMessage = p.FilesScanned > 0
-                    ? $"Analyse en cours… {p.FilesScanned:N0} fichiers examinés — {ByteSize.Format(p.BytesFound)} récupérables"
-                    : $"Analyse en cours… {p.CurrentProvider}";
+                    ? Localizer.Format("Cleanup.Msg.ScanningFiles", p.FilesScanned, ByteSize.Format(p.BytesFound))
+                    : Localizer.Format("Cleanup.Msg.ScanningProvider", p.CurrentProvider);
             });
 
             var report = await _scanEngine.ScanAsync(progress, _cts.Token);
@@ -142,14 +142,14 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
             }
 
             HasScanned = true;
-            var excludedSuffix = excluded > 0 ? $" ({excluded} exclu(s) par vos règles)" : string.Empty;
+            var excludedSuffix = excluded > 0 ? Localizer.Format("Cleanup.Msg.ExcludedSuffix", excluded) : string.Empty;
             StatusMessage = Items.Count == 0
-                ? "Rien à nettoyer : aucun élément récupérable trouvé." + excludedSuffix
-                : $"{Items.Count} catégorie(s) trouvée(s) — {ByteSize.Format(Items.Sum(i => i.SizeBytes))} récupérables en {report.Elapsed.TotalSeconds:F1} s.{excludedSuffix}";
+                ? Localizer.Get("Cleanup.Msg.NothingFound") + excludedSuffix
+                : Localizer.Format("Cleanup.Msg.Found", Items.Count, ByteSize.Format(Items.Sum(i => i.SizeBytes)), report.Elapsed.TotalSeconds) + excludedSuffix;
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Analyse annulée.";
+            StatusMessage = Localizer.Get("Cleanup.Msg.ScanCanceled");
         }
         finally
         {
@@ -177,7 +177,7 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
             var progress = new Progress<CleaningProgress>(p =>
             {
                 ProgressFraction = p.Fraction;
-                StatusMessage = $"Nettoyage en cours… {p.CurrentItem} ({p.Processed}/{p.Total})";
+                StatusMessage = Localizer.Format("Cleanup.Msg.Cleaning", p.CurrentItem, p.Processed, p.Total);
             });
 
             var result = await _cleaningEngine.CleanAsync(plan, progress, _cts.Token);
@@ -185,9 +185,9 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
 
             HasResultFailures = result.HasFailures;
             ResultMessage = result.HasFailures
-                ? $"{ByteSize.Format(result.BytesFreed)} libéré(s). {result.Failures.Count} élément(s) verrouillé(s) ou protégé(s) ont été ignorés."
-                : $"{ByteSize.Format(result.BytesFreed)} libéré(s) avec succès.";
-            StatusMessage = "Nettoyage terminé. Relancez une analyse pour voir l'état actuel.";
+                ? Localizer.Format("Cleanup.Msg.ResultFailures", ByteSize.Format(result.BytesFreed), result.Failures.Count)
+                : Localizer.Format("Cleanup.Msg.ResultOk", ByteSize.Format(result.BytesFreed));
+            StatusMessage = Localizer.Get("Cleanup.Msg.Done");
 
             DetachItems();
             Items.Clear();
@@ -195,7 +195,7 @@ public partial class CleanupViewModel : PageViewModelBase, IDisposable
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Nettoyage annulé.";
+            StatusMessage = Localizer.Get("Cleanup.Msg.CleanCanceled");
         }
         finally
         {

@@ -57,23 +57,20 @@ façon fiable, est listée ici avec son état honnête.
   scan/nettoyage et ne crée pas encore de points de restauration ; à câbler sur `IProtectionVault` pour
   les profils touchant des traces registre.
 
-## Phase 21 — Localisation
+## Phase 21 — Localisation — ✅ DONE
 
-- **Infrastructure** — ✅ livrée : dictionnaires `fr/en/de/es` à chaud, service + persistance, accesseur
-  `Localizer`, sélecteur de langue (Paramètres). Bascule live vérifiée sur la surface localisée.
-- **Couverture des chaînes** — **tout le texte persistant visible est localisé (4 langues)** : les 16
-  pages (statique), les **descriptions de règles de nettoyage** (mécanisme clé+repli sur `ScanItem`/
-  `FileSweepRule`, résolu par l'UI — l'Engine reste portable), le **catalogue Confidentialité** (8 traces,
-  clés dérivées de l'id), les états navigateurs, et **tous les libellés calculés des lignes de listes**
-  (santé disque, pilotes, impact démarrage, réversibilité, NTFS, historique, éditeur inconnu). Bascule
-  live vérifiée.
-  **Reste `PLANNED`** : les **messages transitoires générés dans les ViewModels** — lignes de statut
-  (`StatusMessage`/`ResultMessage`), **toasts**, et **textes des confirmations modales** (titres/corps
-  passés à `ConfirmAsync`). Ils sont encore construits en français dans le code ; à router via
-  `Localizer.Get`/`Localizer.Format` avec des clés paramétrées. La phase reste **IN_PROGRESS** tant que
-  « aucun texte UI hardcodé » (§31) n'est pas strictement atteint — jamais marquée DONE prématurément (§0).
-- **Titres de navigation** — ✅ résolu : `Title` route par `Localizer.Get("Nav.*")` et le shell réémet
-  toutes les pages au changement de langue (`RefreshLocalization`).
+- **Aucun texte UI codé en dur** (§31) : toute l'interface est traduite en **fr/en/de/es** avec bascule
+  live (dictionnaires de chaînes swappés à chaud + culture du thread, mécanisme type thème). Couvre : les
+  16 pages, les **descriptions de règles** (mécanisme clé+repli sur `ScanItem`/`FileSweepRule`, résolu par
+  l'UI — l'Engine reste portable), le **catalogue Confidentialité** (8 traces), les navigateurs, **tous
+  les libellés calculés des lignes**, et **tous les messages dynamiques des ViewModels** (status, toasts,
+  confirmations modales, titres de dialogues) ainsi que les libellés de démarrage.
+- **Non traduits (par conception)** : les **endonymes** du sélecteur de langue (Français/English/Deutsch/
+  Español) et les **clés de catégorie stockées en base** (`Source` de l'historique = « Nettoyage »/
+  « Confidentialité »/« Automatisation »), qui sont des identifiants stables **mappés vers une chaîne
+  localisée à l'affichage** (jamais montrés bruts).
+- **Restant hors périmètre §31** : audit humain des traductions DE/ES par un locuteur natif avant release
+  (les traductions actuelles sont fonctionnelles et cohérentes).
 
 ## Phase 8 — Analyse NTFS avancée
 

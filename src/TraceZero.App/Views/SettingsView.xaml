@@ -40,7 +40,7 @@
                 <TextBlock Text="{DynamicResource Settings.AdvancedCleaning}" Style="{StaticResource Text.Title}"
                            FontSize="15" Margin="0,0,0,4" />
                 <TextBlock Style="{StaticResource Text.Subtle}" Margin="0,0,0,10" TextWrapping="Wrap"
-                           Text="Le dossier C:\Windows\Temp est en dehors de votre profil : son nettoyage nécessite les droits administrateur. TraceZero ne démarre jamais en administrateur : un composant séparé et vérifié demandera l'autorisation (invite Windows), agira sur ce seul dossier, puis se fermera." />
+                           Text="{DynamicResource Settings.AdvCleanBody}" />
                 <StackPanel Orientation="Horizontal">
                     <Button Content="{DynamicResource Settings.CleanWindowsTemp}" Style="{StaticResource SecondaryButton}"
                             Command="{Binding CleanWindowsTempCommand}" HorizontalAlignment="Left" />

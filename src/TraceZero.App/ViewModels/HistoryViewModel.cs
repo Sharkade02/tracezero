@@ -108,10 +108,10 @@ public sealed partial class HistoryViewModel : PageViewModelBase
         }
 
         var confirmed = await _dialog.ConfirmAsync(
-            "Effacer l'historique",
-            "L'ensemble du journal local de vos nettoyages sera supprimé. Continuer ?",
-            confirmText: "Effacer",
-            cancelText: "Annuler",
+            Localizer.Get("History.Confirm.Title"),
+            Localizer.Get("History.Confirm.Body"),
+            confirmText: Localizer.Get("Common.Erase"),
+            cancelText: Localizer.Get("Common.Cancel"),
             destructive: true);
 
         if (!confirmed)
@@ -120,7 +120,7 @@ public sealed partial class HistoryViewModel : PageViewModelBase
         }
 
         await _store.ClearAsync();
-        _toasts.Show("Historique effacé.", ToastKind.Info);
+        _toasts.Show(Localizer.Get("History.Toast.Cleared"), ToastKind.Info);
         await RefreshAsync();
     }
 }

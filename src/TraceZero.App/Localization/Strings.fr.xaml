@@ -252,6 +252,124 @@
     <s:String x:Key="Apps.UnknownPublisher">Éditeur inconnu</s:String>
     <s:String x:Key="History.DetailsFailures">{0:N0} élément(s) · {1:N0} ignoré(s)</s:String>
 
+    <!-- Messages dynamiques (ViewModels) -->
+    <s:String x:Key="Common.Erase">Effacer</s:String>
+    <s:String x:Key="Excl.Folder">Dossier</s:String>
+    <s:String x:Key="Excl.Category">Catégorie</s:String>
+
+    <s:String x:Key="Cleanup.Msg.Idle">Lancez une analyse pour voir ce qui peut être nettoyé.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningFiles">Analyse en cours… {0:N0} fichiers examinés — {1} récupérables</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanningProvider">Analyse en cours… {0}</s:String>
+    <s:String x:Key="Cleanup.Msg.ExcludedSuffix"> ({0} exclu(s) par vos règles)</s:String>
+    <s:String x:Key="Cleanup.Msg.NothingFound">Rien à nettoyer : aucun élément récupérable trouvé.</s:String>
+    <s:String x:Key="Cleanup.Msg.Found">{0} catégorie(s) trouvée(s) — {1} récupérables en {2:F1} s.</s:String>
+    <s:String x:Key="Cleanup.Msg.ScanCanceled">Analyse annulée.</s:String>
+    <s:String x:Key="Cleanup.Msg.Cleaning">Nettoyage en cours… {0} ({1}/{2})</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultFailures">{0} libéré(s). {1} élément(s) verrouillé(s) ou protégé(s) ont été ignorés.</s:String>
+    <s:String x:Key="Cleanup.Msg.ResultOk">{0} libéré(s) avec succès.</s:String>
+    <s:String x:Key="Cleanup.Msg.Done">Nettoyage terminé. Relancez une analyse pour voir l'état actuel.</s:String>
+    <s:String x:Key="Cleanup.Msg.CleanCanceled">Nettoyage annulé.</s:String>
+
+    <s:String x:Key="Privacy.Msg.Idle">Analysez les traces que Windows conserve sur votre activité.</s:String>
+    <s:String x:Key="Privacy.Msg.NoneFound">Aucune trace d'activité trouvée.</s:String>
+    <s:String x:Key="Privacy.Msg.Found">{0} type(s) de trace détecté(s). Sélectionnez ce que vous voulez effacer.</s:String>
+    <s:String x:Key="Privacy.Msg.CleanedFailures">{0} type(s) de trace nettoyé(s). {1} élément(s) verrouillé(s) ignoré(s).</s:String>
+    <s:String x:Key="Privacy.Msg.Cleaned">{0} type(s) de trace nettoyé(s).</s:String>
+    <s:String x:Key="Privacy.Msg.Done">Nettoyage terminé. Relancez l'analyse pour voir l'état actuel.</s:String>
+    <s:String x:Key="Privacy.Msg.Canceled">Nettoyage annulé.</s:String>
+
+    <s:String x:Key="Apps.Confirm.Title">Désinstaller l'application</s:String>
+    <s:String x:Key="Apps.Confirm.Body">Lancer la désinstallation de « {0} » ? TraceZero exécute le désinstallateur fourni par l'éditeur ; il ne supprime jamais un logiciel manuellement.</s:String>
+    <s:String x:Key="Apps.Toast.Launched">Désinstallateur de « {0} » lancé.</s:String>
+    <s:String x:Key="Apps.Toast.LaunchFailed">Impossible de lancer le désinstallateur de « {0} ».</s:String>
+    <s:String x:Key="Apps.Count">{0:N0} application(s) installée(s)</s:String>
+
+    <s:String x:Key="Restore.Msg.Restored">« {0} » restauré ({1} entrée(s) réécrite(s)).</s:String>
+    <s:String x:Key="Restore.Toast.Restored">« {0} » restauré.</s:String>
+    <s:String x:Key="Restore.Msg.Failed">Impossible de restaurer « {0} ». Aucune autre modification.</s:String>
+    <s:String x:Key="Restore.Toast.Failed">Échec de la restauration de « {0} ».</s:String>
+    <s:String x:Key="Restore.Confirm.Title">Vider le coffre de restauration</s:String>
+    <s:String x:Key="Restore.Confirm.Body">Toutes les sauvegardes seront supprimées et ne pourront plus être restaurées. Continuer ?</s:String>
+    <s:String x:Key="Restore.Msg.Cleared">Coffre de restauration vidé.</s:String>
+
+    <s:String x:Key="History.Confirm.Title">Effacer l'historique</s:String>
+    <s:String x:Key="History.Confirm.Body">L'ensemble du journal local de vos nettoyages sera supprimé. Continuer ?</s:String>
+    <s:String x:Key="History.Toast.Cleared">Historique effacé.</s:String>
+
+    <s:String x:Key="Drivers.Toast.WUFailed">Impossible d'ouvrir Windows Update.</s:String>
+
+    <s:String x:Key="SecureErase.Toast.Rejected">{0} élément(s) refusé(s) : fichier système, dossier ou cible protégée.</s:String>
+    <s:String x:Key="SecureErase.Confirm.Title">Effacement sécurisé irréversible</s:String>
+    <s:String x:Key="SecureErase.Confirm.Body">{0} fichier(s) vont être écrasés puis supprimés. Cette opération est irréversible — les fichiers ne pourront pas être récupérés. Continuer ?</s:String>
+    <s:String x:Key="SecureErase.Toast.Erased">{0} fichier(s) effacé(s) de façon sécurisée.</s:String>
+    <s:String x:Key="SecureErase.Toast.ErasedPartial">{0} effacé(s), {1} en échec (verrouillé/inaccessible).</s:String>
+    <s:String x:Key="SecureErase.Wipe.ConfirmBody">TraceZero va remplir l'espace libre de {0} pour rendre irrécupérables les fichiers déjà supprimés. Vos fichiers existants ne sont pas touchés. L'opération peut être longue et est annulable. Continuer ?</s:String>
+    <s:String x:Key="SecureErase.Toast.WriteFailed">Impossible d'écrire sur {0} (droits insuffisants ?).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Running">Effacement de l'espace libre en cours…</s:String>
+    <s:String x:Key="SecureErase.Wipe.Progress">{0} écrits sur ~{1}</s:String>
+    <s:String x:Key="SecureErase.Wipe.Canceled">Effacement de l'espace libre annulé.</s:String>
+    <s:String x:Key="SecureErase.Wipe.Success">Espace libre effacé ({0} écrits puis libérés).</s:String>
+    <s:String x:Key="SecureErase.Wipe.Failed">Échec : {0}</s:String>
+    <s:String x:Key="SecureErase.Media.Ssd">Ce lecteur est un SSD/NVMe. L'écrasement n'est pas garanti (wear leveling, TRIM) : Windows peut placer les données ailleurs. Ne comptez pas dessus comme sur un HDD.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFree">Disque dur (HDD) : l'effacement de l'espace libre est efficace.</s:String>
+    <s:String x:Key="SecureErase.Media.HddFile">Disque dur (HDD) : l'écrasement avant suppression est efficace.</s:String>
+    <s:String x:Key="SecureErase.Media.Unknown">Type de lecteur indéterminé. Si c'est un SSD/NVMe, l'écrasement n'est pas garanti (wear leveling / TRIM).</s:String>
+    <s:String x:Key="SecureErase.PickFiles">Choisir les fichiers à effacer définitivement</s:String>
+
+    <s:String x:Key="DiskSpace.Drive.Summary">{0} utilisés sur {1} · {2} libres</s:String>
+    <s:String x:Key="DiskSpace.Threshold">Plus de {0}</s:String>
+    <s:String x:Key="DiskSpace.Msg.Idle">Analysez votre dossier personnel pour trouver les fichiers volumineux.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Scanning">Analyse en cours… {0:N0} fichiers examinés</s:String>
+    <s:String x:Key="DiskSpace.Msg.None">Aucun fichier au-dessus du seuil dans votre dossier personnel.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Found">{0:N0} fichier(s) trouvé(s)</s:String>
+    <s:String x:Key="DiskSpace.Msg.CapSuffix"> ({0} plus gros affichés)</s:String>
+    <s:String x:Key="DiskSpace.Msg.Canceled">Analyse annulée.</s:String>
+    <s:String x:Key="DiskSpace.Confirm.Body">Envoyer {0} fichier(s) à la Corbeille ? Vous pourrez les restaurer depuis la Corbeille.</s:String>
+    <s:String x:Key="DiskSpace.Msg.Recycled">{0} fichier(s) envoyé(s) à la Corbeille.</s:String>
+
+    <s:String x:Key="Dup.Header">{0} copies · {1} chacune · {2} récupérables</s:String>
+    <s:String x:Key="Dup.Threshold">À partir de {0}</s:String>
+    <s:String x:Key="Dup.Msg.Idle">Recherchez les fichiers en double dans votre dossier personnel.</s:String>
+    <s:String x:Key="Dup.Msg.Scanning">Analyse en cours… {0:N0} fichiers examinés</s:String>
+    <s:String x:Key="Dup.Msg.None">Aucun doublon trouvé au-dessus du seuil choisi.</s:String>
+    <s:String x:Key="Dup.Msg.Found">{0} groupe(s) de doublons — {1} récupérables.</s:String>
+    <s:String x:Key="Dup.Msg.Canceled">Analyse annulée.</s:String>
+    <s:String x:Key="Dup.Msg.Preselected">Copies présélectionnées (la plus récente est conservée dans chaque groupe).</s:String>
+    <s:String x:Key="Dup.Msg.NoneSelected">Aucune copie sélectionnée.</s:String>
+    <s:String x:Key="Dup.Confirm.Body">Envoyer {0} copie(s) en double à la Corbeille ? Au moins une copie est conservée dans chaque groupe. Vous pourrez restaurer depuis la Corbeille.</s:String>
+    <s:String x:Key="Dup.Msg.Recycled">{0} copie(s) envoyée(s) à la Corbeille.</s:String>
+
+    <s:String x:Key="Auto.Msg.Enabled">Nettoyage automatique activé.</s:String>
+    <s:String x:Key="Auto.Msg.Disabled">Le nettoyage automatique est désactivé.</s:String>
+    <s:String x:Key="Auto.Msg.ApplyFailed">Impossible d'appliquer la planification (le Planificateur de tâches a refusé l'opération).</s:String>
+    <s:String x:Key="Auto.Msg.Scheduled">Nettoyage automatique planifié. Il s'exécutera sans fenêtre selon le déclencheur choisi.</s:String>
+    <s:String x:Key="Auto.Msg.Removed">Nettoyage automatique désactivé (tâche planifiée supprimée).</s:String>
+
+    <s:String x:Key="Supporter.Msg.Thanks">Merci {0} ! Vous soutenez TraceZero. 💙</s:String>
+    <s:String x:Key="Supporter.Msg.Free">Vous utilisez la version gratuite — complète et sans publicité.</s:String>
+    <s:String x:Key="Supporter.Msg.Paste">Collez votre code de soutien.</s:String>
+    <s:String x:Key="Supporter.Msg.Valid">Code validé, merci pour votre soutien !</s:String>
+    <s:String x:Key="Supporter.Msg.Invalid">Ce code de soutien n'est pas valide.</s:String>
+
+    <s:String x:Key="Settings.Elev.Running">Élévation en cours (autorisez l'invite Windows)…</s:String>
+    <s:String x:Key="Settings.Elev.Cleaned">Nettoyé : {0} libérés ({1} fichiers{2}).</s:String>
+    <s:String x:Key="Settings.Elev.FailedSuffix">, {0} ignorés/verrouillés</s:String>
+    <s:String x:Key="Settings.Elev.Failed">Échec du nettoyage élevé.</s:String>
+    <s:String x:Key="Settings.PickFolder">Choisir un dossier à exclure du nettoyage</s:String>
+
+    <s:String x:Key="Dup.Subtitle">Fichiers au contenu identique, confirmé par empreinte cryptographique (jamais par le nom ou la taille seuls).</s:String>
+    <s:String x:Key="Dup.Scan">Rechercher les doublons</s:String>
+    <s:String x:Key="Dup.KeepNewest">Garder le plus récent</s:String>
+    <s:String x:Key="Dup.ClearSel">Tout désélectionner</s:String>
+    <s:String x:Key="Dup.RecycleSel">Envoyer la sélection à la Corbeille</s:String>
+    <s:String x:Key="Settings.AdvCleanBody">Le dossier C:\Windows\Temp est en dehors de votre profil : son nettoyage nécessite les droits administrateur. TraceZero ne démarre jamais en administrateur : un composant séparé et vérifié demandera l'autorisation (invite Windows), agira sur ce seul dossier, puis se fermera.</s:String>
+    <s:String x:Key="Placeholder.Title">Module en cours de construction</s:String>
+    <s:String x:Key="Placeholder.Body">Cette page sera connectée au moteur dans une phase ultérieure. Aucune donnée affichée ici n'est réelle tant que le module n'est pas livré.</s:String>
+
+    <s:String x:Key="Startup.User">Utilisateur</s:String>
+    <s:String x:Key="Startup.Machine">Système (lecture seule)</s:String>
+    <s:String x:Key="Startup.Folder">Dossier de démarrage</s:String>
+
     <!-- Langues (endonymes) -->
     <s:String x:Key="Lang.French">Français</s:String>
     <s:String x:Key="Lang.English">Anglais</s:String>

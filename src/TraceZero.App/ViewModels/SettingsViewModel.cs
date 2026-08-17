@@ -18,7 +18,7 @@ public sealed class ExclusionRowViewModel
     {
         Id = rule.Id;
         DisplayName = rule.DisplayName;
-        KindText = rule.Kind == ExclusionKind.Folder ? "Dossier" : "Catégorie";
+        KindText = rule.Kind == ExclusionKind.Folder ? Localizer.Get("Excl.Folder") : Localizer.Get("Excl.Category");
     }
 
     public Guid Id { get; }
@@ -102,7 +102,7 @@ public sealed partial class SettingsViewModel : PageViewModelBase
     {
         var dialog = new OpenFolderDialog
         {
-            Title = "Choisir un dossier à exclure du nettoyage",
+            Title = Localizer.Get("Settings.PickFolder"),
         };
 
         if (dialog.ShowDialog() == true && !string.IsNullOrWhiteSpace(dialog.FolderName))
@@ -159,7 +159,7 @@ public sealed partial class SettingsViewModel : PageViewModelBase
     private async Task CleanWindowsTempAsync()
     {
         IsElevatedBusy = true;
-        ElevatedStatus = "Élévation en cours (autorisez l'invite Windows)…";
+        ElevatedStatus = Localizer.Get("Settings.Elev.Running");
         CleanWindowsTempCommand.NotifyCanExecuteChanged();
 
         try
@@ -169,11 +169,10 @@ public sealed partial class SettingsViewModel : PageViewModelBase
                 Operation = ElevatedOperation.CleanWindowsTemp,
             });
 
+            var failedSuffix = result.ActionsFailed > 0 ? Localizer.Format("Settings.Elev.FailedSuffix", result.ActionsFailed) : string.Empty;
             ElevatedStatus = result.Success
-                ? $"Nettoyé : {ByteSize.Format(result.BytesFreed)} libérés " +
-                  $"({result.ActionsSucceeded} fichiers" +
-                  (result.ActionsFailed > 0 ? $", {result.ActionsFailed} ignorés/verrouillés" : string.Empty) + ")."
-                : result.ErrorMessage ?? "Échec du nettoyage élevé.";
+                ? Localizer.Format("Settings.Elev.Cleaned", ByteSize.Format(result.BytesFreed), result.ActionsSucceeded, failedSuffix)
+                : result.ErrorMessage ?? Localizer.Get("Settings.Elev.Failed");
         }
         finally
         {

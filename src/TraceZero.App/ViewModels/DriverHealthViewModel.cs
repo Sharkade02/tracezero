@@ -142,7 +142,7 @@ public sealed partial class DriverHealthViewModel : PageViewModelBase
         }
         catch (Exception ex) when (ex is System.ComponentModel.Win32Exception or InvalidOperationException)
         {
-            _toasts.Show("Impossible d'ouvrir Windows Update.", ToastKind.Error);
+            _toasts.Show(Localizer.Get("Drivers.Toast.WUFailed"), ToastKind.Error);
         }
     }
 }

@@ -104,7 +104,7 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
     private bool _hasInspected;
 
     [ObservableProperty]
-    private string _statusMessage = "Analysez les traces que Windows conserve sur votre activité.";
+    private string _statusMessage = Localizer.Get("Privacy.Msg.Idle");
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasResult))]
@@ -141,8 +141,8 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
             HasInspected = true;
             var present = results.Count(r => r.IsPresent);
             StatusMessage = present == 0
-                ? "Aucune trace d'activité trouvée."
-                : $"{present} type(s) de trace détecté(s). Sélectionnez ce que vous voulez effacer.";
+                ? Localizer.Get("Privacy.Msg.NoneFound")
+                : Localizer.Format("Privacy.Msg.Found", present);
         }
         finally
         {
@@ -193,16 +193,16 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
             await PersistBackupsAsync(backups);
 
             ResultMessage = result.HasFailures
-                ? $"{result.ActionsSucceeded} type(s) de trace nettoyé(s). {result.Failures.Count} élément(s) verrouillé(s) ignoré(s)."
-                : $"{result.ActionsSucceeded} type(s) de trace nettoyé(s).";
-            StatusMessage = "Nettoyage terminé. Relancez l'analyse pour voir l'état actuel.";
+                ? Localizer.Format("Privacy.Msg.CleanedFailures", result.ActionsSucceeded, result.Failures.Count)
+                : Localizer.Format("Privacy.Msg.Cleaned", result.ActionsSucceeded);
+            StatusMessage = Localizer.Get("Privacy.Msg.Done");
             DetachRows();
             Traces.Clear();
             HasInspected = false;
         }
         catch (OperationCanceledException)
         {
-            StatusMessage = "Nettoyage annulé.";
+            StatusMessage = Localizer.Get("Privacy.Msg.Canceled");
         }
         finally
         {
