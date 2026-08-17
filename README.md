@@ -38,8 +38,7 @@ privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**
 TraceZero est **gratuit, open source (MIT)**, sans publicité. Le soutien est **volontaire, au prix que
 vous voulez** — aucune fonctionnalité n'est bloquée derrière un paiement.
 
-➡️ **[paypal.me/CHANGEME](https://paypal.me/CHANGEME)** _(remplacer par le lien PayPal.me réel)_ — ou
-l'onglet **Soutenir** dans l'application.
+➡️ **[paypal.me/sharkadeFR](https://paypal.me/sharkadeFR)** — ou l'onglet **Soutenir** dans l'application.
 
 ## Fonctionnalités
 
