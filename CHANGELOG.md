@@ -2,6 +2,14 @@
 
 Toutes les versions notables de TraceZero. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/).
 
+## [0.1.1] — 2026-08-17
+
+### Corrigé
+- **Langue au premier lancement** : l'application suit désormais la **langue de Windows**
+  (fr/de/es/en, repli anglais pour les autres langues) au lieu de démarrer systématiquement en français.
+  Tant qu'aucune langue n'est choisie explicitement dans les Paramètres, l'app continue de suivre l'OS ;
+  un choix manuel reste persistant.
+
 ## [0.1.0] — 2026-08-17
 
 Première version publique. Distribution **portable** (aucune installation), **hors-Store**, gratuite et
@@ -41,4 +49,5 @@ open source (MIT).
 - **Auto-update désactivé** dans cette version (mises à jour via winget ou téléchargement manuel).
 - Installeur MSI/EXE et validation en VM propre : à venir.
 
+[0.1.1]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.0
