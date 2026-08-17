@@ -155,6 +155,27 @@
     <s:String x:Key="Mem.XmpInactive">No se detectó perfil de rendimiento — la memoria funciona a la frecuencia JEDEC base.</s:String>
     <s:String x:Key="Mem.XmpUnknown">Perfil de rendimiento indeterminado (tipo de memoria desconocido).</s:String>
 
+    <!-- Monitor del sistema en vivo -->
+    <s:String x:Key="SystemHealth.LiveLoad">Actividad en vivo</s:String>
+    <s:String x:Key="SystemHealth.TopProcesses">Programas que más consumen</s:String>
+    <s:String x:Key="SystemHealth.PerfIndex">Índice de rendimiento de Windows</s:String>
+    <s:String x:Key="Load.NoData">Carga del sistema no disponible en este equipo.</s:String>
+    <s:String x:Key="Load.CpuLabel">Procesador</s:String>
+    <s:String x:Key="Load.MemoryLabel">Memoria</s:String>
+    <s:String x:Key="Load.Cpu">{0}%</s:String>
+    <s:String x:Key="Load.MemoryUsed">{0} usados de {1} ({2}%)</s:String>
+    <s:String x:Key="Load.TopProcessesHint">Ordenado por memoria realmente en uso. Suele ser lo que ralentiza el PC — cierra lo que no necesites.</s:String>
+    <s:String x:Key="Load.NoProcesses">Ningún programa legible (permisos insuficientes).</s:String>
+    <s:String x:Key="Load.ProcessCount">{0} procesos</s:String>
+    <s:String x:Key="Perf.Note">Puntuaciones calculadas por Windows (WinSAT / «Índice de experiencia»), no por TraceZero. De 1,0 a 9,9.</s:String>
+    <s:String x:Key="Perf.NotAssessed">Sin evaluación en caché. Ejecuta «winsat formal» en un símbolo del sistema como administrador.</s:String>
+    <s:String x:Key="Perf.Base">Puntuación base</s:String>
+    <s:String x:Key="Perf.Cpu">Procesador</s:String>
+    <s:String x:Key="Perf.Memory">Memoria (RAM)</s:String>
+    <s:String x:Key="Perf.Disk">Disco principal</s:String>
+    <s:String x:Key="Perf.Graphics">Gráficos</s:String>
+    <s:String x:Key="Perf.Gaming">Gráficos de juego</s:String>
+
     <s:String x:Key="Drivers.Subtitle">Inventario de solo lectura de sus controladores. TraceZero no instala ni descarga ningún controlador: las actualizaciones pasan por Windows Update, nunca por una base de terceros.</s:String>
     <s:String x:Key="Drivers.UpdateTitle">Actualización de controladores</s:String>
     <s:String x:Key="Drivers.UpdateBody">Para mantener la seguridad, la instalación de controladores se deja a Windows Update (controladores firmados, compatibles, reversibles).</s:String>

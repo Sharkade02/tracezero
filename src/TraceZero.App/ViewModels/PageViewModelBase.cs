@@ -32,6 +32,14 @@ public abstract partial class PageViewModelBase : ObservableObject
     }
 
     /// <summary>
+    /// Appelé par le shell quand la page cesse d'être active (permet d'arrêter un rafraîchissement live,
+    /// libérer un minuteur, etc.). Évite qu'un moniteur continue de sonder en arrière-plan.
+    /// </summary>
+    public virtual void OnDeactivated()
+    {
+    }
+
+    /// <summary>
     /// Appelé par le shell au changement de langue (§31). Réémet toutes les propriétés pour que les
     /// chaînes calculées (Title, messages) se relisent dans la nouvelle langue.
     /// </summary>

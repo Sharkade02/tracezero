@@ -30,6 +30,34 @@ public interface IMemoryInfoService
 }
 
 /// <summary>
+/// Charge système en direct (RAM utilisée + CPU), mesurée par Windows via WMI (read-only, sans admin).
+/// Renvoie un instantané ; l'UI le rafraîchit périodiquement. Jamais de valeur inventée.
+/// </summary>
+public interface ISystemLoadService
+{
+    SystemLoadSnapshot GetSnapshot();
+}
+
+/// <summary>
+/// Programmes qui consomment le plus de mémoire (« ce qui peut ralentir le PC »), en lecture seule.
+/// Agrège par nom de programme et trie par working set décroissant. Les process inaccessibles sont
+/// ignorés honnêtement (pas d'élévation).
+/// </summary>
+public interface IProcessUsageService
+{
+    IReadOnlyList<ProcessUsage> GetTopByMemory(int count = 8);
+}
+
+/// <summary>
+/// Indice de performance Windows (WinSAT), en lecture seule via WMI. Expose les scores calculés par
+/// Windows ; ne recalcule ni n'invente rien. Indisponible si aucune évaluation n'est en cache.
+/// </summary>
+public interface IPerformanceIndexService
+{
+    PerformanceIndex GetIndex();
+}
+
+/// <summary>
 /// Impact des programmes au démarrage, mesuré par Windows (Phase 28). Lit le journal
 /// « Diagnostics-Performance » (lecture seule) ; peut être vide si la donnée est indisponible
 /// (droits insuffisants ou aucun démarrage récent mesuré).

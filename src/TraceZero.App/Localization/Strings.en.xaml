@@ -155,6 +155,27 @@
     <s:String x:Key="Mem.XmpInactive">No performance profile detected — memory runs at base JEDEC frequency.</s:String>
     <s:String x:Key="Mem.XmpUnknown">Performance profile undetermined (unknown memory type).</s:String>
 
+    <!-- Live system monitor -->
+    <s:String x:Key="SystemHealth.LiveLoad">Live activity</s:String>
+    <s:String x:Key="SystemHealth.TopProcesses">Top memory consumers</s:String>
+    <s:String x:Key="SystemHealth.PerfIndex">Windows performance index</s:String>
+    <s:String x:Key="Load.NoData">System load is unavailable on this machine.</s:String>
+    <s:String x:Key="Load.CpuLabel">Processor</s:String>
+    <s:String x:Key="Load.MemoryLabel">Memory</s:String>
+    <s:String x:Key="Load.Cpu">{0}%</s:String>
+    <s:String x:Key="Load.MemoryUsed">{0} used of {1} ({2}%)</s:String>
+    <s:String x:Key="Load.TopProcessesHint">Sorted by memory actually in use. This is often what slows the PC down — close what you don't need.</s:String>
+    <s:String x:Key="Load.NoProcesses">No readable programs (insufficient rights).</s:String>
+    <s:String x:Key="Load.ProcessCount">{0} processes</s:String>
+    <s:String x:Key="Perf.Note">Scores computed by Windows (WinSAT / "Experience Index"), not by TraceZero. From 1.0 to 9.9.</s:String>
+    <s:String x:Key="Perf.NotAssessed">No cached assessment. Run "winsat formal" in an administrator command prompt to generate one.</s:String>
+    <s:String x:Key="Perf.Base">Base score</s:String>
+    <s:String x:Key="Perf.Cpu">Processor</s:String>
+    <s:String x:Key="Perf.Memory">Memory (RAM)</s:String>
+    <s:String x:Key="Perf.Disk">Primary disk</s:String>
+    <s:String x:Key="Perf.Graphics">Graphics</s:String>
+    <s:String x:Key="Perf.Gaming">Gaming graphics</s:String>
+
     <s:String x:Key="Drivers.Subtitle">Read-only inventory of your drivers. TraceZero installs and downloads no driver: updates go through Windows Update, never a third-party database.</s:String>
     <s:String x:Key="Drivers.UpdateTitle">Driver updates</s:String>
     <s:String x:Key="Drivers.UpdateBody">To stay safe, driver installation is left to Windows Update (signed, compatible, reversible drivers).</s:String>
