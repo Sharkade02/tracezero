@@ -18,6 +18,13 @@ public sealed record PrivacyTraceDefinition
 
     public required string DisplayName { get; init; }
 
+    /// <summary>Clés de ressources localisées (§31), repli sur les littéraux si absentes.</summary>
+    public string? NameKey { get; init; }
+
+    public string? ExplanationKey { get; init; }
+
+    public string? WhyKey { get; init; }
+
     /// <summary>Ce que Windows retient (langage humain).</summary>
     public required string Explanation { get; init; }
 

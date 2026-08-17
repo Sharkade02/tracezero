@@ -27,11 +27,11 @@ public partial class PrivacyTraceRowViewModel : ObservableObject
     [ObservableProperty]
     private bool _isSelected;
 
-    public string DisplayName => Result.Definition.DisplayName;
+    public string DisplayName => Result.Definition.NameKey is { } k ? Localizer.Get(k) : Result.Definition.DisplayName;
 
-    public string Explanation => Result.Definition.Explanation;
+    public string Explanation => Result.Definition.ExplanationKey is { } k ? Localizer.Get(k) : Result.Definition.Explanation;
 
-    public string Why => Result.Definition.Why;
+    public string Why => Result.Definition.WhyKey is { } k ? Localizer.Get(k) : Result.Definition.Why;
 
     public bool IsPresent => Result.IsPresent;
 
@@ -43,12 +43,12 @@ public partial class PrivacyTraceRowViewModel : ObservableObject
         {
             if (!Result.IsPresent)
             {
-                return "Aucune trace";
+                return Localizer.Get("Privacy.NoTrace");
             }
 
             return Result.SizeBytes > 0
-                ? $"{Result.EntryCount:N0} éléments · {ByteSize.Format(Result.SizeBytes)}"
-                : $"{Result.EntryCount:N0} trace(s)";
+                ? Localizer.Format("Privacy.ElementsSize", Result.EntryCount, ByteSize.Format(Result.SizeBytes))
+                : Localizer.Format("Privacy.TraceCount", Result.EntryCount);
         }
     }
 }

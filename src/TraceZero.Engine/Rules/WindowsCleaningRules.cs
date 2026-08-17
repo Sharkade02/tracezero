@@ -26,7 +26,9 @@ public static class WindowsCleaningRules
             {
                 Id = "windows.user-temp",
                 DisplayName = "Fichiers temporaires (session)",
+                NameKey = "Rule.UserTemp.Name",
                 Description = "Fichiers temporaires créés par vos applications dans le dossier TEMP de votre session.",
+                DescriptionKey = "Rule.UserTemp.Desc",
                 Category = Category.WindowsTemp,
                 Risk = RiskLevel.Safe,
                 Roots = [userTemp],
@@ -43,7 +45,9 @@ public static class WindowsCleaningRules
             {
                 Id = "windows.crash-dumps",
                 DisplayName = "Rapports de plantage",
+                NameKey = "Rule.CrashDumps.Name",
                 Description = "Vidages mémoire générés lorsqu'une application plante (CrashDumps).",
+                DescriptionKey = "Rule.CrashDumps.Desc",
                 Category = Category.CrashDumps,
                 Risk = RiskLevel.Safe,
                 Roots = [Path.Combine(localAppData, "CrashDumps")],
@@ -56,7 +60,9 @@ public static class WindowsCleaningRules
             {
                 Id = "windows.wer",
                 DisplayName = "Rapports d'erreurs Windows (WER)",
+                NameKey = "Rule.Wer.Name",
                 Description = "Archives de rapports d'erreurs Windows en attente d'envoi.",
+                DescriptionKey = "Rule.Wer.Desc",
                 Category = Category.SystemLogs,
                 Risk = RiskLevel.Safe,
                 Roots =
@@ -73,7 +79,9 @@ public static class WindowsCleaningRules
             {
                 Id = "windows.inetcache",
                 DisplayName = "Cache Internet hérité",
+                NameKey = "Rule.InetCache.Name",
                 Description = "Cache des composants Windows / Internet Explorer (INetCache).",
+                DescriptionKey = "Rule.InetCache.Desc",
                 Category = Category.WindowsCache,
                 Risk = RiskLevel.Safe,
                 Roots = [Path.Combine(localAppData, "Microsoft", "Windows", "INetCache")],
@@ -86,7 +94,9 @@ public static class WindowsCleaningRules
             {
                 Id = "windows.thumbnails",
                 DisplayName = "Miniatures et icônes en cache",
+                NameKey = "Rule.Thumbnails.Name",
                 Description = "Vignettes et icônes mises en cache par l'Explorateur. Régénérées automatiquement.",
+                DescriptionKey = "Rule.Thumbnails.Desc",
                 Category = Category.ThumbnailCache,
                 Risk = RiskLevel.Safe,
                 Roots = [Path.Combine(localAppData, "Microsoft", "Windows", "Explorer")],

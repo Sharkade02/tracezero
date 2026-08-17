@@ -16,6 +16,7 @@
     <s:String x:Key="Common.Open">Abrir</s:String>
     <s:String x:Key="Common.Loading">Cargando…</s:String>
     <s:String x:Key="Common.Analyzing">Analizando…</s:String>
+    <s:String x:Key="Common.Items">{0:N0} elemento(s)</s:String>
     <s:String x:Key="Action.Analyze">Analizar mi PC</s:String>
     <s:String x:Key="Action.Clean">Limpiar ahora</s:String>
 
@@ -117,6 +118,9 @@
     <s:String x:Key="Browsers.ProtectedBody">Solo se limpian los archivos de caché (regenerados automáticamente). Sus cookies, sesiones, contraseñas y favoritos nunca se tocan.</s:String>
     <s:String x:Key="Browsers.CleanCaches">Limpiar las cachés de navegadores</s:String>
     <s:String x:Key="Browsers.Empty">No se detectó ningún navegador compatible en este PC.</s:String>
+    <s:String x:Key="Browsers.Profiles">{0:N0} perfil(es)</s:String>
+    <s:String x:Key="Browsers.Running">En ejecución</s:String>
+    <s:String x:Key="Browsers.Closed">Cerrado</s:String>
 
     <s:String x:Key="Apps.Headline">Aplicaciones e inicio</s:String>
     <s:String x:Key="Apps.Subtitle">Aplicaciones instaladas y programas iniciados al arrancar. La desinstalación usa el mecanismo del editor.</s:String>
@@ -160,6 +164,45 @@
     <s:String x:Key="SecureErase.DriveName">Unidad cuyo espacio libre borrar</s:String>
     <s:String x:Key="SecureErase.WipeBtn">Borrar el espacio libre</s:String>
     <s:String x:Key="SecureErase.ProgressName">Progreso del borrado del espacio libre</s:String>
+
+    <s:String x:Key="Privacy.NoTrace">Sin rastro</s:String>
+    <s:String x:Key="Privacy.ElementsSize">{0:N0} elementos · {1}</s:String>
+    <s:String x:Key="Privacy.TraceCount">{0:N0} rastro(s)</s:String>
+    <s:String x:Key="Privacy.recentdocs.Name">Documentos abiertos recientemente</s:String>
+    <s:String x:Key="Privacy.recentdocs.Expl">Windows guarda la lista de los archivos que abrió recientemente, por tipo.</s:String>
+    <s:String x:Key="Privacy.recentdocs.Why">Para volver a ofrecérselos rápidamente en el Explorador y las aplicaciones.</s:String>
+    <s:String x:Key="Privacy.runmru.Name">Comandos «Ejecutar»</s:String>
+    <s:String x:Key="Privacy.runmru.Expl">Windows recuerda los comandos que escribió en el cuadro de diálogo Ejecutar (Win+R).</s:String>
+    <s:String x:Key="Privacy.runmru.Why">Para autocompletarlos la próxima vez.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Name">Rutas escritas en el Explorador</s:String>
+    <s:String x:Key="Privacy.typedpaths.Expl">Windows conserva las rutas y direcciones introducidas en la barra de direcciones del Explorador.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Why">Para el autocompletado de la barra de direcciones.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Name">Búsquedas en el Explorador</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Expl">Windows conserva el historial de sus búsquedas realizadas en el Explorador de archivos.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Why">Para volver a sugerirle sus búsquedas anteriores.</s:String>
+    <s:String x:Key="Privacy.userassist.Name">Programas iniciados</s:String>
+    <s:String x:Key="Privacy.userassist.Expl">Windows cuenta y fecha los inicios de los programas que usa (UserAssist).</s:String>
+    <s:String x:Key="Privacy.userassist.Why">Para clasificar sus aplicaciones más usadas en el menú Inicio.</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Name">Carpetas de los diálogos Abrir/Guardar</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Expl">Windows recuerda las últimas carpetas usadas en las ventanas «Abrir» y «Guardar como».</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Why">Para reabrir los diálogos en la última ubicación usada por aplicación.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Name">Archivos Abrir/Guardar</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Expl">Windows recuerda los archivos abiertos o guardados recientemente mediante los diálogos, por extensión.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Why">Para volver a ofrecérselos en las ventanas «Abrir» y «Guardar como».</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Name">Documentos recientes y Jump Lists</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Expl">Accesos directos a sus documentos recientes y listas de accesos rápidos (Jump Lists) de las aplicaciones de la barra de tareas.</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Why">Para mostrar sus archivos recientes en el Explorador y al hacer clic derecho en los iconos de la barra de tareas.</s:String>
+
+    <s:String x:Key="Rule.UserTemp.Name">Archivos temporales (sesión)</s:String>
+    <s:String x:Key="Rule.UserTemp.Desc">Archivos temporales creados por sus aplicaciones en la carpeta TEMP de su sesión.</s:String>
+    <s:String x:Key="Rule.CrashDumps.Name">Informes de fallos</s:String>
+    <s:String x:Key="Rule.CrashDumps.Desc">Volcados de memoria generados cuando una aplicación falla (CrashDumps).</s:String>
+    <s:String x:Key="Rule.Wer.Name">Informes de errores de Windows (WER)</s:String>
+    <s:String x:Key="Rule.Wer.Desc">Archivos de informes de errores de Windows pendientes de envío.</s:String>
+    <s:String x:Key="Rule.InetCache.Name">Caché de Internet heredada</s:String>
+    <s:String x:Key="Rule.InetCache.Desc">Caché de componentes de Windows / Internet Explorer (INetCache).</s:String>
+    <s:String x:Key="Rule.Thumbnails.Name">Miniaturas e iconos en caché</s:String>
+    <s:String x:Key="Rule.Thumbnails.Desc">Miniaturas e iconos almacenados en caché por el Explorador. Se regeneran automáticamente.</s:String>
 
     <s:String x:Key="Lang.French">Francés</s:String>
     <s:String x:Key="Lang.English">Inglés</s:String>

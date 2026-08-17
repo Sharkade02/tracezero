@@ -16,6 +16,7 @@
     <s:String x:Key="Common.Open">Open</s:String>
     <s:String x:Key="Common.Loading">Loading…</s:String>
     <s:String x:Key="Common.Analyzing">Analyzing…</s:String>
+    <s:String x:Key="Common.Items">{0:N0} item(s)</s:String>
     <s:String x:Key="Action.Analyze">Analyze my PC</s:String>
     <s:String x:Key="Action.Clean">Clean now</s:String>
 
@@ -117,6 +118,9 @@
     <s:String x:Key="Browsers.ProtectedBody">Only cache files (automatically regenerated) are cleaned. Your cookies, sessions, passwords and bookmarks are never touched.</s:String>
     <s:String x:Key="Browsers.CleanCaches">Clean browser caches</s:String>
     <s:String x:Key="Browsers.Empty">No supported browser was detected on this PC.</s:String>
+    <s:String x:Key="Browsers.Profiles">{0:N0} profile(s)</s:String>
+    <s:String x:Key="Browsers.Running">Running</s:String>
+    <s:String x:Key="Browsers.Closed">Closed</s:String>
 
     <s:String x:Key="Apps.Headline">Applications &amp; startup</s:String>
     <s:String x:Key="Apps.Subtitle">Installed applications and programs launched at startup. Uninstallation uses the publisher's mechanism.</s:String>
@@ -160,6 +164,45 @@
     <s:String x:Key="SecureErase.DriveName">Drive whose free space to wipe</s:String>
     <s:String x:Key="SecureErase.WipeBtn">Wipe free space</s:String>
     <s:String x:Key="SecureErase.ProgressName">Free-space wipe progress</s:String>
+
+    <s:String x:Key="Privacy.NoTrace">No trace</s:String>
+    <s:String x:Key="Privacy.ElementsSize">{0:N0} items · {1}</s:String>
+    <s:String x:Key="Privacy.TraceCount">{0:N0} trace(s)</s:String>
+    <s:String x:Key="Privacy.recentdocs.Name">Recently opened documents</s:String>
+    <s:String x:Key="Privacy.recentdocs.Expl">Windows keeps the list of files you recently opened, by type.</s:String>
+    <s:String x:Key="Privacy.recentdocs.Why">To offer them quickly again in Explorer and applications.</s:String>
+    <s:String x:Key="Privacy.runmru.Name">'Run' commands</s:String>
+    <s:String x:Key="Privacy.runmru.Expl">Windows remembers the commands you typed in the Run dialog (Win+R).</s:String>
+    <s:String x:Key="Privacy.runmru.Why">To auto-complete them next time.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Name">Paths typed in Explorer</s:String>
+    <s:String x:Key="Privacy.typedpaths.Expl">Windows keeps the paths and addresses entered in Explorer's address bar.</s:String>
+    <s:String x:Key="Privacy.typedpaths.Why">For address bar auto-completion.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Name">Explorer searches</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Expl">Windows keeps the history of your searches made in File Explorer.</s:String>
+    <s:String x:Key="Privacy.wordwheelquery.Why">To suggest your previous searches again.</s:String>
+    <s:String x:Key="Privacy.userassist.Name">Launched programs</s:String>
+    <s:String x:Key="Privacy.userassist.Expl">Windows counts and dates the launches of programs you use (UserAssist).</s:String>
+    <s:String x:Key="Privacy.userassist.Why">To rank your most-used apps in the Start menu.</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Name">Open/Save dialog folders</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Expl">Windows keeps the last folders used in 'Open' and 'Save as' windows.</s:String>
+    <s:String x:Key="Privacy.lastvisitedpidlmru.Why">To reopen dialogs at the last location used per application.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Name">Open/Save files</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Expl">Windows remembers files recently opened or saved via dialogs, by extension.</s:String>
+    <s:String x:Key="Privacy.opensavepidlmru.Why">To offer them again in 'Open' and 'Save as' windows.</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Name">Recent documents &amp; Jump Lists</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Expl">Shortcuts to your recent documents and Jump Lists of taskbar applications.</s:String>
+    <s:String x:Key="Privacy.recent-jumplists.Why">To show your recent files in Explorer and on right-click of taskbar icons.</s:String>
+
+    <s:String x:Key="Rule.UserTemp.Name">Temporary files (session)</s:String>
+    <s:String x:Key="Rule.UserTemp.Desc">Temporary files created by your applications in your session's TEMP folder.</s:String>
+    <s:String x:Key="Rule.CrashDumps.Name">Crash reports</s:String>
+    <s:String x:Key="Rule.CrashDumps.Desc">Memory dumps generated when an application crashes (CrashDumps).</s:String>
+    <s:String x:Key="Rule.Wer.Name">Windows Error Reports (WER)</s:String>
+    <s:String x:Key="Rule.Wer.Desc">Windows error report archives awaiting submission.</s:String>
+    <s:String x:Key="Rule.InetCache.Name">Legacy Internet cache</s:String>
+    <s:String x:Key="Rule.InetCache.Desc">Cache of Windows / Internet Explorer components (INetCache).</s:String>
+    <s:String x:Key="Rule.Thumbnails.Name">Cached thumbnails and icons</s:String>
+    <s:String x:Key="Rule.Thumbnails.Desc">Thumbnails and icons cached by Explorer. Automatically regenerated.</s:String>
 
     <s:String x:Key="Lang.French">French</s:String>
     <s:String x:Key="Lang.English">English</s:String>
