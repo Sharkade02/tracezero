@@ -11,7 +11,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 1 | UI Shell + Design System | DONE | — | Design system complet : Card/boutons/NavButton/RiskChip/Progress/empty+result states + **skeleton loader**, **toast** (superposition, auto-dismiss, couleur par nature) et **modale de confirmation** (thématisée, action destructive en rouge jamais présélectionnée). Composants **réellement câblés** : désinstallation Apps, vider coffre/historique → modale ; restauration/actions → toast ; chargement Apps → skeleton |
 | 2 | Scan Engine | DONE | 14 ✅ | Moteur async parallèle borné, progress, cancellation, erreurs isolées, tailles réelles |
 | 3 | Nettoyage Windows standard | DONE | ✅ | Règles user-scoped réelles (TEMP, CrashDumps, WER, INetCache, thumbnails) + Corbeille. Windows\Temp différé (voir KNOWN_LIMITATIONS) |
-| 4 | Navigateurs | IN_PROGRESS | 5 ✅ | Détection Chrome/Edge/Brave/Vivaldi/Chromium/Firefox + profils + état exécution ; **caches SAFE** nettoyés (connexions préservées). History/cookies/sessions + Opera différés |
+| 4 | Navigateurs | DONE | 19 ✅ | Détection Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX**/Firefox (disposition Local/Roaming scindée via `ContentPath`) ; **caches SAFE** + **traces confidentialité** (historique/cookies/sessions) **opt-in, jamais cochées par défaut**, suppression honnêtement irréversible. Historique Firefox = **suppression SQL ciblée** (`FirefoxHistoryCleaner`, favoris préservés). Mots de passe/favoris jamais touchés |
 | 5 | Privacy Inspector Windows | DONE | 2 ✅ | Page « Ce que Windows sait encore » : RecentDocs, RunMRU, TypedPaths, WordWheelQuery, UserAssist, ComDlg32 MRU + Documents récents/Jump Lists. Chaque trace expliquée, nettoyage registre allowlisté + fichiers validés |
 | 6 | Cleaning Plan + Safety layer | DONE | 3 ✅ | `CleaningPlan`/preview + **exclusions** (dossier/catégorie, JSON, appliquées au scan) + **journal d'historique** SQLite |
 | 7 | Protection / Backup / Restore | DONE | 8 ✅ | Classification Reversible/PartiallyReversible/Irreversible ; **sauvegarde des traces registre HKCU avant nettoyage réversible** (`IRegistryBackupService`, capture/restore récursif natif, tous types de valeurs) ; **coffre de restauration** SQLite (`IProtectionVault`) ; page **Restauration** (« Protection du nettoyage » + « Restaurer les éléments disponibles »). Jamais de promesse de restaurer un fichier effacé de façon sécurisée |
@@ -68,9 +68,28 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
     suppression + refus hors-racine + refus dossier protégé + fichier verrouillé + Corbeille) ;
     43 tests au total, Release 0 warning.
 
-- **Phase 4 — Navigateurs** — Détection Chrome/Edge/Brave/Vivaldi/Chromium/Firefox (profils, état
-  d'exécution) ; nettoyage des **caches SAFE** via le pipeline (multi-dossiers `SweepRoots`) ;
-  page Navigateurs ; connexions préservées par construction. 5 tests.
+- **Phase 4 — Navigateurs** — **DONE.** Détection Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX**/
+  Firefox (profils, état d'exécution) ; nettoyage des **caches SAFE** via le pipeline (multi-dossiers
+  `SweepRoots`) ; connexions préservées par construction.
+  - **Traces de confidentialité** (`BrowserPrivacyScanProvider`) : historique, cookies, sessions par
+    navigateur+profil, **jamais cochés par défaut** (§3.2), suppression **honnêtement irréversible**
+    (le moteur = `File.Delete`, pas de Corbeille), fichiers verrouillés d'un navigateur ouvert signalés
+    jamais forcés (§14). Ne cible **jamais** mots de passe (`Login Data`), favoris, données de formulaire.
+  - **Disposition Local/Roaming scindée** (Opera, Firefox) gérée par `BrowserProfileInfo.ContentPath` :
+    cache = Local (`Path`), contenu = Roaming (`ContentRoot`). Corrige des cibles Firefox introuvables
+    (places/cookies vivent en Roaming, pas dans le profil Local détecté pour le cache).
+  - **Historique Firefox = suppression SQL ciblée** (`FirefoxHistoryCleaner`, Microsoft.Data.Sqlite) :
+    `places.sqlite` mêle historique **et favoris** → jamais supprimé entier. Transaction : efface
+    `moz_historyvisits` + `moz_places WHERE foreign_count = 0` ; **annule** si un favori serait orphelin ;
+    no-op si la base est verrouillée. Nouveau `FileActionKind.ClearBrowserHistory` + `IBrowserHistoryCleaner`
+    câblé en dépendance optionnelle de `CleaningEngine`.
+  - **Messagerie UI corrigée** (§0) : l'ancien « ne nettoie que les caches / cookies jamais touchés »
+    (devenu faux) remplacé par une formulation honnête (fr/en/de/es).
+  - **Tests (19)** : détection Opera/Firefox split-root, provider (3 catégories, jamais coché, irréversible,
+    Firefox history = suppression ciblée, contenu lu depuis Roaming, navigateur ouvert verrouillé),
+    chirurgie SQLite réelle (favoris préservés / no-op fichier absent / schéma inattendu intact), et un
+    **end-to-end via `CleaningEngine`** (dispatch + refus hors racine autorisée). Reste PLANNED :
+    réversibilité via Corbeille/coffre (Phase 7), suppression Chromium par site/entrée.
 - **Phase 5 — Privacy Inspector** — Nouvelle primitive de **nettoyage registre allowlistée**
   (`IRegistryTraceCleaner`, HKCU uniquement, refus par défaut) + `FileActionKind.ClearRegistryKey`.
   Catalogue de traces expliquées (`WindowsPrivacyCatalog`) + `WindowsPrivacyInspector`. Page
@@ -355,7 +374,28 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
     opération read-only dans l'enum fermé de `TraceZero.Elevated.exe` (ADR-0006), app jamais admin.
   - Détail complet : `docs/phase-28-system-monitor.md`. Insertion recommandée après la Phase 7.
 
+- **Moniteur système en direct** (extension Phase 28) — DONE. Ajouté à la page **Santé système** :
+  RAM physique (`IMemoryInfoService`, modules DDR/MHz/tension + inférence XMP/EXPO), **charge en direct**
+  RAM+CPU (`ISystemLoadService`), **top consommateurs mémoire** (`IProcessUsageService`) et **indice de
+  performance Windows** (`IPerformanceIndexService`, WinSAT — scores Windows, jamais inventés).
+  Rafraîchissement live via `DispatcherTimer` arrêté hors page (nouveau hook `OnDeactivated()`). Read-only,
+  §42-safe. Bug corrigé : `Win32_PhysicalMemoryArray.MaxCapacityEx` lu en Ko (pas octets).
+
 ### Prochaine étape
-Backend/qualité : Phase 28 (moniteur système honnête), Phase 13 (Software Updater), Phase 18 (Updater
-signé), Phase 19 (installateur/portable/MSIX), Phase 21 (localisation). La Phase 4 (nettoyage PRIVACY des
-navigateurs) peut désormais s'appuyer sur l'infrastructure de sauvegarde/restauration de la Phase 7.
+Il ne reste que des phases **bloquées sur des assets externes** (non codables sans fourniture utilisateur) :
+Phase 18 (Updater — endpoint + **certificat**), Phase 19 (installateur MSI/EXE + **signature**), Phase 26
+(tests en **VM** Windows propre). Voir plus bas la note sur le **coût de la signature de code** et le
+**risque de refus sur le Microsoft Store** pour un logiciel de nettoyage.
+
+### ⚠️ Distribution : signature de code payante + risque Microsoft Store
+- **La signature de code Authenticode est payante et récurrente.** Un certificat OV coûte ~200–450 €/an,
+  un certificat **EV** (recommandé — réputation SmartScreen immédiate, exigé pour certains scénarios)
+  ~300–700 €/an, chez un AC reconnu (DigiCert, Sectigo…). Sans signature : SmartScreen/Defender affichent
+  « Éditeur inconnu », ce qui tue le taux d'installation. **Alternative** : Azure Trusted Signing (~9,99 $/mois)
+  mais éligibilité soumise à conditions (organisation ≥ 3 ans, vérification d'identité).
+- **Risque de refus / restrictions sur le Microsoft Store** pour un « nettoyeur/optimiseur » :
+  la **Policy 10.2.1** du Store restreint fortement les utilitaires « système/registry cleaner /
+  optimizer » ; historiquement Microsoft a **retiré ou refusé** ce type d'app (et les « registry cleaner »
+  sont explicitement mal vus). Positionnement local-first/honnête aide mais **ne garantit pas** l'admission.
+  **Distribution hors-Store** (téléchargement direct signé + winget) est le plan par défaut plus sûr ;
+  le Store reste un bonus incertain. À décider avec l'utilisateur avant d'investir dans l'empaquetage MSIX Store.
