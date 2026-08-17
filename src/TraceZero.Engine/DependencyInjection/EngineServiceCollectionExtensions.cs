@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using TraceZero.Application.Browsers;
 using TraceZero.Application.Cleaning;
 using TraceZero.Application.Disk;
 using TraceZero.Application.Duplicates;
@@ -59,6 +60,7 @@ public static class EngineServiceCollectionExtensions
             sp.GetRequiredService<ISafePathValidator>(),
             sp.GetService<IRecycleBinService>(),
             sp.GetService<IRegistryTraceCleaner>(),
+            sp.GetService<IBrowserHistoryCleaner>(),
             sp.GetService<ILogger<CleaningEngine>>()));
 
         return services;

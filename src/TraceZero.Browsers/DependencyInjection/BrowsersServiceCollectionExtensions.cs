@@ -14,6 +14,9 @@ public static class BrowsersServiceCollectionExtensions
 
         // Traces de confidentialité (historique, cookies, sessions), jamais cochées par défaut (§14).
         services.AddSingleton<IScanProvider, BrowserPrivacyScanProvider>();
+
+        // Suppression ciblée de l'historique Firefox (favoris préservés) — utilisée par le moteur de nettoyage.
+        services.AddSingleton<IBrowserHistoryCleaner, FirefoxHistoryCleaner>();
         return services;
     }
 }

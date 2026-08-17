@@ -39,6 +39,16 @@ internal static class BrowserCatalog
         @"Service Worker\ScriptCache",
     ];
 
+    /// <summary>
+    /// Navigateurs Opera (Chromium) à disposition Local/Roaming scindée : le profil (historique, cookies,
+    /// sessions) est sous Roaming, le cache sous Local. Détectés à part du flux Chromium générique.
+    /// </summary>
+    public static readonly IReadOnlyList<(string DisplayName, string RelativeDir, string ProcessName)> Opera =
+    [
+        ("Opera", @"Opera Software\Opera Stable", "opera"),
+        ("Opera GX", @"Opera Software\Opera GX Stable", "opera"),
+    ];
+
     public const string FirefoxProcessName = "firefox";
 
     /// <summary>Dossier de cache d'un profil Firefox, relatif au dossier du profil (dans LocalAppData).</summary>

@@ -56,6 +56,8 @@ public sealed class BrowserDetector : IBrowserDetector
             });
         }
 
+        browsers.AddRange(DetectOpera());
+
         var firefox = DetectFirefox();
         if (firefox is not null)
         {
@@ -63,6 +65,46 @@ public sealed class BrowserDetector : IBrowserDetector
         }
 
         return browsers;
+    }
+
+    /// <summary>
+    /// Détecte les variantes d'Opera (Chromium) dont le profil (Roaming) et le cache (Local) sont dans
+    /// des bases distinctes. Le profil unique porte les deux racines : <c>Path</c> = cache (Local),
+    /// <c>ContentPath</c> = données (Roaming).
+    /// </summary>
+    private IEnumerable<DetectedBrowser> DetectOpera()
+    {
+        foreach (var (displayName, relativeDir, processName) in BrowserCatalog.Opera)
+        {
+            var contentRoot = Path.Combine(_roamingAppData, relativeDir);
+            var cacheRoot = Path.Combine(_localAppData, relativeDir);
+
+            // Un profil Opera est marqué par « Preferences » (ou au moins un « History ») dans le Roaming.
+            if (!File.Exists(Path.Combine(contentRoot, "Preferences"))
+                && !File.Exists(Path.Combine(contentRoot, "History")))
+            {
+                continue;
+            }
+
+            yield return new DetectedBrowser
+            {
+                Kind = BrowserKind.Opera,
+                Engine = BrowserEngine.Chromium,
+                DisplayName = displayName,
+                DataRoot = contentRoot,
+                Profiles =
+                [
+                    new BrowserProfileInfo
+                    {
+                        Name = "Par défaut",
+                        Path = cacheRoot,
+                        ContentPath = contentRoot,
+                        IsDefault = true,
+                    },
+                ],
+                IsRunning = IsProcessRunning(processName),
+            };
+        }
     }
 
     private static List<BrowserProfileInfo> EnumerateChromiumProfiles(string userData)
@@ -133,8 +175,11 @@ public sealed class BrowserDetector : IBrowserDetector
                             || name.EndsWith(".default", StringComparison.OrdinalIgnoreCase);
             profiles.Add(new BrowserProfileInfo
             {
+                // Path = profil Local (cache2). Le contenu (places.sqlite, cookies.sqlite, sessions) est
+                // dans le profil de même nom sous Roaming — ContentPath pointe là.
                 Name = name,
                 Path = dir,
+                ContentPath = Path.Combine(_roamingAppData, "Mozilla", "Firefox", "Profiles", name),
                 IsDefault = isDefault,
             });
         }

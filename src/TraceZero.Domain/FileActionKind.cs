@@ -19,4 +19,10 @@ public enum FileActionKind
 
     /// <summary>Effacer les valeurs et sous-clés d'une clé de registre (trace de confidentialité).</summary>
     ClearRegistryKey = 4,
+
+    /// <summary>
+    /// Effacer l'historique de navigation d'une base mêlant historique et favoris (Firefox
+    /// <c>places.sqlite</c>) par suppression ciblée, en préservant les favoris.
+    /// </summary>
+    ClearBrowserHistory = 5,
 }

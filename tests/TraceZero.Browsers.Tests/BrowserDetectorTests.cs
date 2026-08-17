@@ -60,6 +60,40 @@ public sealed class BrowserDetectorTests : IDisposable
         Assert.Contains(firefox.Profiles, p => p.IsDefault);
     }
 
+    [Fact]
+    public void Firefox_content_root_points_to_roaming_profile()
+    {
+        // Le cache (Path) est en Local ; le contenu (ContentRoot) doit pointer vers le profil Roaming.
+        var name = "abcd1234.default-release";
+        Directory.CreateDirectory(Path.Combine(_local, "Mozilla", "Firefox", "Profiles", name));
+
+        var firefox = new BrowserDetector(_local, _roaming)
+            .DetectInstalledBrowsers()
+            .Single(b => b.Kind == BrowserKind.Firefox);
+
+        var profile = firefox.Profiles.Single();
+        Assert.StartsWith(_local, profile.Path);
+        Assert.Equal(Path.Combine(_roaming, "Mozilla", "Firefox", "Profiles", name), profile.ContentRoot);
+    }
+
+    [Fact]
+    public void Detects_opera_with_split_local_roaming_roots()
+    {
+        // Opera : profil (contenu) sous Roaming, cache sous Local.
+        var roamingOpera = Path.Combine(_roaming, "Opera Software", "Opera Stable");
+        Directory.CreateDirectory(roamingOpera);
+        File.WriteAllText(Path.Combine(roamingOpera, "Preferences"), "{}");
+
+        var opera = new BrowserDetector(_local, _roaming)
+            .DetectInstalledBrowsers()
+            .Single(b => b.Kind == BrowserKind.Opera && b.DisplayName == "Opera");
+
+        Assert.Equal(BrowserEngine.Chromium, opera.Engine);
+        var profile = opera.Profiles.Single();
+        Assert.Equal(roamingOpera, profile.ContentRoot);
+        Assert.Equal(Path.Combine(_local, "Opera Software", "Opera Stable"), profile.Path);
+    }
+
     public void Dispose()
     {
         try
