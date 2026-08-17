@@ -1,0 +1,74 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-test:
+    name: Build & test (Release)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build (Release, 0 warning)
+        run: dotnet build -c Release --no-restore
+
+      - name: Test (Release)
+        run: dotnet test -c Release --no-build
+
+  portable:
+    name: Portable artifact
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Build portable package
+        shell: pwsh
+        run: ./build/scripts/publish-portable.ps1
+
+      - name: Compute SHA-256
+        shell: pwsh
+        run: |
+          $zip = "artifacts/portable/TraceZero-portable.zip"
+          (Get-FileHash $zip -Algorithm SHA256).Hash + "  TraceZero-portable.zip" | Out-File artifacts/portable/SHA256SUMS.txt -Encoding ascii
+          Get-Content artifacts/portable/SHA256SUMS.txt
+
+      # --- SignPath signing goes here once the Foundation application is accepted ---
+      # - name: Sign with SignPath
+      #   uses: signpath/github-action-submit-signing-request@v1
+      #   with:
+      #     api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+      #     organization-id: ${{ vars.SIGNPATH_ORG_ID }}
+      #     project-slug: tracezero
+      #     signing-policy-slug: release-signing
+      #     artifact-configuration-slug: portable-zip
+      #     github-artifact-id: ${{ steps.upload.outputs.artifact-id }}
+      #     wait-for-completion: true
+
+      - name: Upload portable artifact
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: TraceZero-portable
+          path: |
+            artifacts/portable/TraceZero-portable.zip
+            artifacts/portable/SHA256SUMS.txt
