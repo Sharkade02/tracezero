@@ -61,13 +61,17 @@ façon fiable, est listée ici avec son état honnête.
 
 - **Infrastructure** — ✅ livrée : dictionnaires `fr/en/de/es` à chaud, service + persistance, accesseur
   `Localizer`, sélecteur de langue (Paramètres). Bascule live vérifiée sur la surface localisée.
-- **Couverture des chaînes** — **tout le texte statique des 16 pages est localisé (4 langues)** :
-  en-têtes, sous-titres, boutons, titres de section, libellés, états vides, badges. Bascule live vérifiée.
-  **Reste `PLANNED`** : (1) les **messages dynamiques générés dans les ViewModels** (StatusMessage,
-  ResultMessage, toasts, résumés) — encore construits en français dans le code, à router via
-  `Localizer.Format` ; (2) les **descriptions de règles de nettoyage** (`WindowsCleaningRules`, couche
-  Engine) ; (3) les **messages d'erreur**. La phase reste **IN_PROGRESS** tant que « aucun texte UI
-  hardcodé » (§31) n'est pas atteint — jamais marquée DONE prématurément (§0).
+- **Couverture des chaînes** — **tout le texte persistant visible est localisé (4 langues)** : les 16
+  pages (statique), les **descriptions de règles de nettoyage** (mécanisme clé+repli sur `ScanItem`/
+  `FileSweepRule`, résolu par l'UI — l'Engine reste portable), le **catalogue Confidentialité** (8 traces,
+  clés dérivées de l'id), les états navigateurs, et **tous les libellés calculés des lignes de listes**
+  (santé disque, pilotes, impact démarrage, réversibilité, NTFS, historique, éditeur inconnu). Bascule
+  live vérifiée.
+  **Reste `PLANNED`** : les **messages transitoires générés dans les ViewModels** — lignes de statut
+  (`StatusMessage`/`ResultMessage`), **toasts**, et **textes des confirmations modales** (titres/corps
+  passés à `ConfirmAsync`). Ils sont encore construits en français dans le code ; à router via
+  `Localizer.Get`/`Localizer.Format` avec des clés paramétrées. La phase reste **IN_PROGRESS** tant que
+  « aucun texte UI hardcodé » (§31) n'est pas strictement atteint — jamais marquée DONE prématurément (§0).
 - **Titres de navigation** — ✅ résolu : `Title` route par `Localizer.Get("Nav.*")` et le shell réémet
   toutes les pages au changement de langue (`RefreshLocalization`).
 
