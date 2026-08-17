@@ -59,7 +59,7 @@ Installer via `winget install --id Microsoft.DotNet.SDK.10 -e`.
 
 ```powershell
 dotnet build -c Release              # doit être 0 warning
-dotnet test                          # 136 tests au dernier point (2026-08)
+dotnet test                          # 138 tests au dernier point (2026-08)
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj   # lance l'appli WPF
 build\scripts\release.ps1            # pipeline release (Phase 27) : build/test Release + publish + SHA-256
 ```
@@ -81,6 +81,8 @@ Plus aucune page placeholder.
   Peut réutiliser l'infra backup/restore de la Phase 7.
 - **Phase 18 — Updater** : cœur `UpdateChecker` (manifeste signé RSA + décision) fait/testé ; reste
   téléchargement/Authenticode/endpoint + certificat (assets externes).
+- **Phase 19 — Installateur/Portable** : mode portable (`TraceZeroPaths` + marqueur) + `publish-portable.ps1`
+  + manifeste MSIX livrés/testés ; reste MSI/EXE + signature (WiX + certificat).
 - **Phase 24 — Tests de sécurité** : suite `SafetyTests` amorcée, à étoffer.
 
 **Localisation (Phase 21, DONE)** : toute l'UI en fr/en/de/es, bascule live. Ajouter une chaîne = clé dans
@@ -100,9 +102,7 @@ Réversibilité honnête via l'enum `Reversibility`.
 
 | Phase | Nom | Notes |
 |------:|-----|-------|
-| 13 | Software Updater | |
-| 18 | Updater signé | `TraceZero.Updater` |
-| 19 | Installateur / Portable / MSIX | Distribution signée + Microsoft Store |
+| 13 | Software Updater | Détection d'apps obsolètes ; risqué sans catalogue de versions |
 | 25 | Golden dataset | |
 | 26 | Tests VM | |
 

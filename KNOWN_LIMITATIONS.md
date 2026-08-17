@@ -72,6 +72,17 @@ façon fiable, est listée ici avec son état honnête.
 - **Restant hors périmètre §31** : audit humain des traductions DE/ES par un locuteur natif avant release
   (les traductions actuelles sont fonctionnelles et cohérentes).
 
+## Phase 19 — Installateur / Portable / Distribution
+
+- **Mode portable** — ✅ livré et testé : données à côté de l'exe via marqueur `tracezero.portable`,
+  aucune écriture cachée. Script `build/scripts/publish-portable.ps1` validé.
+- **Manifeste MSIX** — ✅ fourni (`build/msix/Package.appxmanifest`), non signé.
+- **Reste `PLANNED`** (dépend d'assets externes) : installateur direct **MSI/EXE** (WiX ou équivalent,
+  installation dans Program Files + désinstallation propre), **assets visuels MSIX** aux dimensions du
+  Store, et **signature de code** de tous les exécutables sensibles (app, updater, installer, helper
+  elevated) avec **timestamp** — nécessite un **certificat de signature**. `Publisher` du manifeste MSIX
+  à aligner sur le sujet du certificat.
+
 ## Phase 18 — Updater
 
 - **Cœur** — ✅ livré : `UpdateChecker` valide un manifeste **signé RSA-SHA256** et décide s'il faut

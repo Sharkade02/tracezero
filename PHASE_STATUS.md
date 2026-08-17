@@ -26,7 +26,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 16 | Historique & Statistiques | DONE | ✅ | Page Historique réelle : total libéré, nb nettoyages, dernier, journal. Local, sans chemins personnels |
 | 17 | Supporter / PWYW | DONE | 4 ✅ | Page Soutenir (PWYW 10/19/29/49 + autre), `ILicenseService` validation RSA-SHA256 locale hors ligne, activation/désactivation, clé privée jamais embarquée |
 | 18 | Updater | IN_PROGRESS | 7 ✅ | **Cœur vérifiable livré** : `UpdateChecker` (`TraceZero.Updater`) valide un **manifeste signé RSA-SHA256** (clé publique embarquée) et décide UpToDate / UpdateAvailable / BelowMinimum / ManifestInvalid / ChannelMismatch. Un manifeste dont la signature échoue n'est **jamais** accepté (§28). Canaux stable/beta. **Reste** : téléchargement HTTPS + vérif SHA-256 + **Authenticode** + éditeur attendu + exécution + endpoint réel + **certificat de signature** (assets externes) → `KNOWN_LIMITATIONS.md` |
-| 19 | Installateur / Portable | NOT_STARTED | — | |
+| 19 | Installateur / Portable | IN_PROGRESS | 2 ✅ | **Mode portable** livré et testé : marqueur `tracezero.portable` → données dans `<exe>\Data` (aucune écriture cachée), `TraceZeroPaths` portable-aware (langue/db/exclusions/licence). **`build/scripts/publish-portable.ps1`** validé (App+Elevated self-contained + marqueur + .zip). **Manifeste MSIX** `build/msix/Package.appxmanifest` (multi-langue). **Reste** : installateur MSI/EXE (WiX), assets + **signature** MSIX/exe (certificat requis) → `KNOWN_LIMITATIONS.md` |
 | 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
 | 21 | Localisation | DONE | — | **fr/en/de/es** avec bascule live (infra type thème : `ILocalizationService`, `Localizer`, sélecteur Paramètres, culture du thread, persistance). **Aucun texte UI codé en dur** (§31) : 16 pages, descriptions de **règles** (clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), navigateurs, tous les **libellés de lignes**, **messages dynamiques des VM** (status/toasts/confirmations modales/titres de dialogues) et libellés de démarrage. Seuls restent non traduits les endonymes de langues et les clés de catégorie stockées en base (mappées à l'affichage) |
 | 22 | Accessibilité | DONE | — | **Focus clavier visible** (bordure) ajouté aux templates boutons/nav qui le masquaient ; `AutomationProperties.Name` sur les contrôles sans libellé (recherches, sélecteur de lecteur, barre de progression, fermeture toast) ; modale : Entrée=confirmer / Échap=annuler (`IsDefault`/`IsCancel`) ; aucun statut par la couleur seule (toasts glyphe+texte, états disque/pilote libellés). Résiduels (gestion du focus lecteur d'écran sur modale, DPI per-monitor, mise à l'échelle du texte) dans `KNOWN_LIMITATIONS.md` |
@@ -178,6 +178,19 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 19 — Installateur / Portable / Distribution** (§29) — IN_PROGRESS (portable + MSIX manifest livrés).
+  - **Mode portable** : `TraceZeroPaths` détecte le marqueur `tracezero.portable` à côté de l'exe et
+    stocke toutes les données locales (db, exclusions, licence, langue) dans `<exe>\Data` — **aucune
+    écriture cachée** ailleurs. Résolution pure/testable (`ResolveDataDirectory`). `LocalizationManager`
+    utilise désormais `TraceZeroPaths.LanguageFile` (portable-aware).
+  - **`build/scripts/publish-portable.ps1`** (validé) : publie App + Elevated en **self-contained win-x64**
+    dans un dossier unique, dépose le marqueur portable, empaquette en `.zip`. Aucune installation.
+  - **Manifeste MSIX** `build/msix/Package.appxmanifest` : identité, dépendances Windows.Desktop,
+    ressources fr/en/de/es, `runFullTrust`. Signale que la build Store ne doit pas activer l'updater maison.
+  - **Reste (assets externes, différé)** : installateur MSI/EXE (WiX ou équivalent), assets visuels MSIX
+    aux dimensions requises, et **signature de code** (app/updater/installer/helper elevated) avec
+    **timestamp** — nécessite un certificat. **138 tests au total.**
 
 - **Phase 18 — Updater** (§28) — IN_PROGRESS (cœur vérifiable livré et testé).
   - `UpdateChecker` (`TraceZero.Updater`, `IUpdateChecker`) : désérialise un manifeste JSON, **vérifie sa

@@ -2,16 +2,17 @@ using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows;
+using TraceZero.Persistence;
 
 namespace TraceZero.App.Services;
 
 /// <summary>
-/// Bascule le dictionnaire de chaînes actif et la culture du thread (§31). Persiste le choix localement.
+/// Bascule le dictionnaire de chaînes actif et la culture du thread (§31). Persiste le choix localement
+/// (emplacement portable-aware via <see cref="TraceZeroPaths"/>).
 /// </summary>
 public sealed class LocalizationManager : ILocalizationService
 {
-    private static readonly string StateFile = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "TraceZero", "language.txt");
+    private static readonly string StateFile = TraceZeroPaths.LanguageFile;
 
     private ResourceDictionary? _activeDictionary;
 

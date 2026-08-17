@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Manifeste MSIX pour la distribution Microsoft Store (Phase 19, §29).
+  NON SIGNÉ / valeurs à finaliser avant publication :
+   - Identity/Publisher DOIT correspondre au sujet (CN=...) du certificat de signature de code.
+   - Les assets visuels (Square150x150Logo, Square44x44Logo, StoreLogo) doivent être fournis aux
+     dimensions requises par le Store dans build/msix/Assets/.
+   - La build Store ne doit pas activer l'updater maison (mises à jour gérées par le Store).
+-->
+<Package
+  xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+  xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+  xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+  IgnorableNamespaces="uap rescap">
+
+  <Identity
+    Name="TraceZero.TraceZero"
+    Publisher="CN=REMPLACER-PAR-LE-SUJET-DU-CERTIFICAT"
+    Version="0.1.0.0" />
+
+  <Properties>
+    <DisplayName>TraceZero</DisplayName>
+    <PublisherDisplayName>TraceZero</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+    <Description>Nettoyage, confidentialité et maintenance Windows — local-first, sans publicité.</Description>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.19041.0" MaxVersionTested="10.0.26200.0" />
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="fr-FR" />
+    <Resource Language="en-US" />
+    <Resource Language="de-DE" />
+    <Resource Language="es-ES" />
+  </Resources>
+
+  <Applications>
+    <Application Id="TraceZero" Executable="TraceZero.App.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements
+        DisplayName="TraceZero"
+        Description="Voyez ce qui reste. Nettoyez ce que vous choisissez."
+        BackgroundColor="transparent"
+        Square150x150Logo="Assets\Square150x150Logo.png"
+        Square44x44Logo="Assets\Square44x44Logo.png">
+        <uap:DefaultTile ShortName="TraceZero" />
+      </uap:VisualElements>
+    </Application>
+  </Applications>
+
+  <Capabilities>
+    <!-- Application de bureau à confiance totale (WPF). Aucune capacité réseau déclarée : local-first. -->
+    <rescap:Capability Name="runFullTrust" />
+  </Capabilities>
+</Package>
