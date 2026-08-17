@@ -58,6 +58,6 @@ TraceZero est **gratuit, open source (licence MIT)** et sans publicité. Si vous
 pouvez soutenir son développement — **au prix que vous voulez** — via l'onglet **Soutenir** dans
 l'application ou directement :
 
-- **[paypal.me/CHANGEME](https://paypal.me/CHANGEME)** _(remplacer par le lien PayPal.me réel)_
+- **[paypal.me/sharkadeFR](https://paypal.me/sharkadeFR)**
 
 Aucune fonctionnalité n'est bloquée derrière un paiement.

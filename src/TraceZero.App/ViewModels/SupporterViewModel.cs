@@ -14,9 +14,8 @@ public sealed record SupporterTier(string Label, int Amount, bool Recommended);
 /// </summary>
 public sealed partial class SupporterViewModel : PageViewModelBase
 {
-    // Dons via PayPal.me. REMPLACER "CHANGEME" par votre identifiant PayPal.me réel avant distribution
-    // (ex. si votre lien est https://paypal.me/monpseudo → PayPalUser = "monpseudo").
-    private const string PayPalUser = "CHANGEME";
+    // Dons via PayPal.me (https://paypal.me/sharkadeFR).
+    private const string PayPalUser = "sharkadeFR";
     private const string SupportBaseUrl = "https://paypal.me/" + PayPalUser;
 
     private readonly ILicenseService _licenseService;
