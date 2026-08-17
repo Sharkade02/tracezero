@@ -51,6 +51,11 @@
     <s:String x:Key="Home.Card.WinTemp">Windows temporary</s:String>
     <s:String x:Key="Home.Card.RecycleBin">Recycle Bin</s:String>
     <s:String x:Key="Home.Card.WinTraces">Windows traces</s:String>
+    <s:String x:Key="Home.Checking">Quick scan in progress…</s:String>
+    <s:String x:Key="Home.CheckResult">Scan complete: {0} recoverable. Open 'Cleanup' to choose.</s:String>
+    <s:String x:Key="Home.CheckClean">Scan complete: nothing to clean for now. 👍</s:String>
+    <s:String x:Key="Home.CheckCanceled">Scan canceled.</s:String>
+    <s:String x:Key="Home.DriveSummary">{0} free of {1}</s:String>
     <s:String x:Key="Home.Privacy.Title">Privacy first</s:String>
     <s:String x:Key="Home.Privacy.Body">Everything runs locally on your PC. No data is sent, and no displayed value is faked: figures only appear after a real scan.</s:String>
 

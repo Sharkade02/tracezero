@@ -51,6 +51,11 @@
     <s:String x:Key="Home.Card.WinTemp">Temporales de Windows</s:String>
     <s:String x:Key="Home.Card.RecycleBin">Papelera</s:String>
     <s:String x:Key="Home.Card.WinTraces">Rastros de Windows</s:String>
+    <s:String x:Key="Home.Checking">Análisis rápido en curso…</s:String>
+    <s:String x:Key="Home.CheckResult">Análisis completado: {0} recuperables. Abra «Limpieza» para elegir.</s:String>
+    <s:String x:Key="Home.CheckClean">Análisis completado: nada que limpiar por ahora. 👍</s:String>
+    <s:String x:Key="Home.CheckCanceled">Análisis cancelado.</s:String>
+    <s:String x:Key="Home.DriveSummary">{0} libres de {1}</s:String>
     <s:String x:Key="Home.Privacy.Title">Privacidad primero</s:String>
     <s:String x:Key="Home.Privacy.Body">Todo ocurre localmente en su PC. No se envía ningún dato y ningún valor mostrado es simulado: las cifras solo aparecen tras un análisis real.</s:String>
 
