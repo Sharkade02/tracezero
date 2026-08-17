@@ -30,7 +30,7 @@ Source de vérité de l'avancement. Statuts : `NOT_STARTED`, `IN_PROGRESS`, `BLO
 | 20 | Élévation de privilèges | DONE | 8 ✅ | `TraceZero.Elevated.exe` (manifeste requireAdministrator, surface minimale, single-shot). IPC par fichiers request/response JSON, commande **structurée** uniquement, revalidation via `ElevatedSafePathValidator` (liste d'autorisation dédiée), journal `%ProgramData%\TraceZero\logs`. Débloque le nettoyage de `C:\Windows\Temp` (Paramètres → Nettoyage avancé). App jamais admin par défaut |
 | 21 | Localisation | DONE | — | **fr/en/de/es** avec bascule live (infra type thème : `ILocalizationService`, `Localizer`, sélecteur Paramètres, culture du thread, persistance). **Aucun texte UI codé en dur** (§31) : 16 pages, descriptions de **règles** (clé+repli ScanItem/FileSweepRule), **catalogue Confidentialité** (8 traces), navigateurs, tous les **libellés de lignes**, **messages dynamiques des VM** (status/toasts/confirmations modales/titres de dialogues) et libellés de démarrage. Seuls restent non traduits les endonymes de langues et les clés de catégorie stockées en base (mappées à l'affichage) |
 | 22 | Accessibilité | DONE | — | **Focus clavier visible** (bordure) ajouté aux templates boutons/nav qui le masquaient ; `AutomationProperties.Name` sur les contrôles sans libellé (recherches, sélecteur de lecteur, barre de progression, fermeture toast) ; modale : Entrée=confirmer / Échap=annuler (`IsDefault`/`IsCancel`) ; aucun statut par la couleur seule (toasts glyphe+texte, états disque/pilote libellés). Résiduels (gestion du focus lecteur d'écran sur modale, DPI per-monitor, mise à l'échelle du texte) dans `KNOWN_LIMITATIONS.md` |
-| 23 | Performance | NOT_STARTED | — | |
+| 23 | Performance | DONE | 5 ✅ | Objectifs §23 satisfaits par l'architecture (scan async annulable, `Parallel.ForEachAsync` borné cœurs/2, énumération **streaming** sans `stat` par fichier, hashing doublons 3 passes, résultats plafonnés). **Benchmarks** `TraceZero.PerformanceTests` : énumération 6000 fichiers, **annulation prompte**, filtrage par seuil, hashing doublons correct à l'échelle + benchmark 100k **opt-in** (`TZ_BIGBENCH=1`). **Virtualisation UI** (`VirtualizingStackPanel` + `CanContentScroll`) sur les listes longues non plafonnées (Applications, Pilotes) |
 | 24 | Tests de sécurité | IN_PROGRESS | — | `TraceZero.SafetyTests` amorcé en Phase 0 |
 | 25 | Golden dataset | NOT_STARTED | — | |
 | 26 | Tests VM | NOT_STARTED | — | |
@@ -178,6 +178,18 @@ Automatisation · Historique · Paramètres · Soutenir. Plus aucune page placeh
   - **Tests** : 4 round-trips sauvegarde/restauration registre (tous types de valeurs + sous-clé, clé
     absente, sérialisation, garde-fou allow-list) + 4 coffre SQLite (ajout/liste plus récent d'abord,
     marquage restauré, effacement, persistance/réversibilité). **101 tests au total.**
+
+- **Phase 23 — Performance** (§23) — DONE. La plupart des objectifs étaient déjà tenus par l'architecture
+  (scan `Task.Run` non bloquant, `IProgress` immédiat, annulation par `CancellationToken`, parallélisme
+  borné à cœurs/2 dans `ScanEngine`, `SafeFileEnumerator` en streaming lisant taille/date depuis les
+  données Win32 sans `stat`, pipeline doublons taille→hash partiel→SHA-256, gros fichiers plafonnés à 500).
+  - **Benchmarks** (`TraceZero.PerformanceTests`) : énumération de 6000 fichiers dans le budget,
+    **annulation prompte** (jeton annulé → arrêt immédiat), filtrage par seuil du `LargeFileScanner`,
+    détection de doublons correcte à l'échelle (contenu identique regroupé, même-taille-contenu-différent
+    jamais groupé). Benchmark **100k fichiers opt-in** via `TZ_BIGBENCH=1` (honnête : jamais en CI par défaut).
+  - **Virtualisation UI** : `VirtualizingStackPanel` + `ScrollViewer.CanContentScroll` sur les listes
+    potentiellement longues et non plafonnées (Applications, Pilotes) pour ne pas matérialiser toutes les
+    lignes d'un coup. **129 tests au total.**
 
 - **Phase 21 — Localisation** (§31) — **DONE**. **Aucun texte UI codé en dur** : toute l'interface est
   traduite en **fr/en/de/es** avec bascule live.

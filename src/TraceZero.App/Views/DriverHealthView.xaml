@@ -82,9 +82,22 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
 
-                <ScrollViewer VerticalScrollBarVisibility="Auto"
-                              Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVis}}">
-                    <ItemsControl ItemsSource="{Binding Drivers}">
+                <ItemsControl ItemsSource="{Binding Drivers}"
+                              Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVis}}"
+                              VirtualizingPanel.IsVirtualizing="True" VirtualizingPanel.VirtualizationMode="Recycling"
+                              ScrollViewer.CanContentScroll="True">
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="ItemsControl">
+                                <ScrollViewer CanContentScroll="True" VerticalScrollBarVisibility="Auto" Focusable="False">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Grid Margin="10,7">
@@ -135,7 +148,6 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </ScrollViewer>
             </Grid>
         </Border>
     </Grid>
