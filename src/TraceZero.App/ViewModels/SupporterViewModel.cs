@@ -14,8 +14,10 @@ public sealed record SupporterTier(string Label, int Amount, bool Recommended);
 /// </summary>
 public sealed partial class SupporterViewModel : PageViewModelBase
 {
-    // À remplacer par l'URL réelle de la page de soutien lors du déploiement.
-    private const string SupportBaseUrl = "https://tracezero.app/soutenir";
+    // Dons via PayPal.me. REMPLACER "CHANGEME" par votre identifiant PayPal.me réel avant distribution
+    // (ex. si votre lien est https://paypal.me/monpseudo → PayPalUser = "monpseudo").
+    private const string PayPalUser = "CHANGEME";
+    private const string SupportBaseUrl = "https://paypal.me/" + PayPalUser;
 
     private readonly ILicenseService _licenseService;
 
@@ -63,7 +65,10 @@ public sealed partial class SupporterViewModel : PageViewModelBase
     private void Contribute(SupporterTier? tier)
     {
         var amount = tier?.Amount ?? 0;
-        OpenUrl(amount > 0 ? $"{SupportBaseUrl}?montant={amount}" : SupportBaseUrl);
+        // PayPal.me : un montant préréglé se passe en segment d'URL (ex. paypal.me/user/19EUR).
+        OpenUrl(amount > 0
+            ? $"{SupportBaseUrl}/{amount.ToString(System.Globalization.CultureInfo.InvariantCulture)}EUR"
+            : SupportBaseUrl);
     }
 
     [RelayCommand]

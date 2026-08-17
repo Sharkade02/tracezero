@@ -54,6 +54,10 @@ Vous pouvez aussi analyser le fichier sur [VirusTotal](https://www.virustotal.co
 
 ## Soutenir le projet
 
-TraceZero est gratuit et sans publicité. Si vous le trouvez utile, vous pouvez soutenir son développement
-via l'onglet **Soutenir** dans l'application (paiement au prix que vous voulez). Aucune fonctionnalité n'est
-bloquée derrière un paiement.
+TraceZero est **gratuit, open source (licence MIT)** et sans publicité. Si vous le trouvez utile, vous
+pouvez soutenir son développement — **au prix que vous voulez** — via l'onglet **Soutenir** dans
+l'application ou directement :
+
+- **[paypal.me/CHANGEME](https://paypal.me/CHANGEME)** _(remplacer par le lien PayPal.me réel)_
+
+Aucune fonctionnalité n'est bloquée derrière un paiement.
