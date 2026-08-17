@@ -4,142 +4,142 @@
 
 <h1 align="center">TraceZero</h1>
 
-<p align="center"><em>Voyez ce qui reste. Nettoyez ce que vous choisissez.</em></p>
+<p align="center"><em>See what's left. Clean what you choose.</em></p>
 
 <p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/Licence-MIT-green.svg" alt="Licence MIT" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="MIT License" /></a>
   <img src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows" alt="Windows 10/11" />
   <img src="https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet" alt=".NET 10" />
-  <a href="https://github.com/Sharkade02/tracezero/releases"><img src="https://img.shields.io/github/v/release/Sharkade02/tracezero?label=version" alt="Dernière version" /></a>
+  <a href="https://github.com/Sharkade02/tracezero/releases"><img src="https://img.shields.io/github/v/release/Sharkade02/tracezero?label=version" alt="Latest release" /></a>
 </p>
 
-TraceZero est un logiciel Windows de **nettoyage, confidentialité, gestion d'espace disque et
-maintenance**, conçu pour rivaliser réellement avec CCleaner et PrivaZer — mais **local-first,
-privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**.
+<p align="center"><strong>English</strong> · <a href="README.fr.md">Français</a></p>
 
-> **Philosophie :** aucune valeur affichée n'est simulée ; les chiffres n'apparaissent qu'après une
-> analyse réelle. Aucune suppression n'a lieu sans passer par une couche de sécurité qui refuse par
-> défaut. L'application ne démarre **jamais** en administrateur.
+TraceZero is a Windows **cleaning, privacy, disk-space and maintenance** tool, built to genuinely
+compete with CCleaner and PrivaZer — but **local-first, privacy-first, with no ads, no dark patterns
+and no misleading claims**.
 
-## Télécharger
+> **Philosophy:** no displayed value is faked; numbers appear only after a real scan. No deletion happens
+> without going through a safety layer that refuses by default. The app **never** runs as administrator.
 
-- **Version portable (aucune installation)** :
-  [dernière release](https://github.com/Sharkade02/tracezero/releases/latest) → décompressez
-  `TraceZero-portable.zip`, lancez `TraceZero.App.exe`.
-- **Via winget** : `winget install TraceZero.TraceZero`
+## Download
 
-> **« Éditeur inconnu » au premier lancement ?** C'est normal : TraceZero est distribué directement
-> (hors Store) et n'est pas encore signé par un certificat payant. Vérifiez l'empreinte **SHA-256**
-> publiée avec chaque release, puis *Informations complémentaires → Exécuter quand même*. Détails et
-> raisons : [`docs/download.md`](docs/download.md).
+- **Portable (no installation):**
+  [latest release](https://github.com/Sharkade02/tracezero/releases/latest) → unzip
+  `TraceZero-portable.zip`, run `TraceZero.App.exe`.
+- **Via winget:** `winget install TraceZero.TraceZero`
 
-## Soutenir le projet
+> **"Unknown publisher" on first launch?** That's expected: TraceZero is distributed directly (outside the
+> Store) and is not yet signed with a paid certificate. Verify the **SHA-256** hash published with each
+> release, then *More info → Run anyway*. Details and reasons: [`docs/download.md`](docs/download.md).
 
-TraceZero est **gratuit, open source (MIT)**, sans publicité. Le soutien est **volontaire, au prix que
-vous voulez** — aucune fonctionnalité n'est bloquée derrière un paiement.
+## Support the project
 
-➡️ **[paypal.me/sharkadeFR](https://paypal.me/sharkadeFR)** — ou l'onglet **Soutenir** dans l'application.
+TraceZero is **free, open source (MIT)**, and ad-free. Support is **voluntary, pay what you want** — no
+feature is locked behind a payment.
 
-## Fonctionnalités
+➡️ **[paypal.me/sharkadeFR](https://paypal.me/sharkadeFR)** — or the **Support** tab inside the app.
 
-- **Nettoyage Windows** — fichiers temporaires, rapports de plantage, WER, caches, Corbeille (règles
-  user-scoped, tailles réelles, prévisualisation par risque).
-- **Confidentialité** — « ce que Windows sait encore de votre activité » : documents récents, RunMRU,
-  chemins tapés, recherches, UserAssist… chaque trace expliquée, nettoyage registre allowlisté.
-- **Navigateurs** — Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX**/Firefox : nettoyage des
-  **caches SAFE** + **historique/cookies/sessions** en option (jamais cochés par défaut). L'historique
-  Firefox est supprimé de façon **ciblée** (favoris préservés). Mots de passe et favoris jamais touchés.
-- **Espace disque** — occupation des lecteurs, recherche de gros fichiers, envoi à la Corbeille
-  (réversible).
-- **Doublons** — détection fiable (taille → hash partiel → SHA-256), stratégie « garder le plus récent ».
-- **Applications & démarrage** — désinstallation via l'éditeur, gestion réversible du démarrage.
-- **Mises à jour logicielles** — via **winget** (source officielle signée), jamais de scraping.
-- **Santé système** — santé disque (SMART/WMI) + impact au démarrage mesuré par Windows.
-- **Pilotes** — inventaire lecture seule ; mises à jour déléguées à Windows Update.
-- **Effacement sécurisé** — fichiers et espace libre, avec avertissement honnête SSD/NVMe.
-- **Protection / Restauration** — sauvegarde des traces registre avant nettoyage, restauration réversible.
-- **Analyse NTFS (Expert)** — traces expliquées, en lecture seule.
-- **Automatisation** — profils Sûr/Confidentialité via le Planificateur de tâches, mode headless.
-- **Multilingue** — interface complète en **français, anglais, allemand, espagnol** (bascule à chaud).
-- **Accessibilité** — focus clavier visible, `AutomationProperties`, aucun statut par la couleur seule.
+## Features
 
-## Sécurité — non négociable
+- **Windows cleanup** — temp files, crash dumps, WER, caches, Recycle Bin (user-scoped rules, real sizes,
+  risk-based preview).
+- **Privacy** — "what Windows still knows about your activity": recent documents, RunMRU, typed paths,
+  searches, UserAssist… each trace explained, registry cleanup allow-listed.
+- **Browsers** — Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX**/Firefox: cleans **SAFE caches** +
+  **history/cookies/sessions** opt-in (never checked by default). Firefox history is removed with a
+  **targeted** delete (bookmarks preserved). Passwords and bookmarks are never touched.
+- **Disk space** — drive usage, large-file search, send to Recycle Bin (reversible).
+- **Duplicates** — reliable detection (size → partial hash → SHA-256), "keep the newest" strategy.
+- **Apps & startup** — uninstall via the publisher, reversible startup management.
+- **Software updates** — via **winget** (official, signed source), never scraping.
+- **System health** — disk health (SMART/WMI) + startup impact measured by Windows, live CPU/RAM,
+  top memory consumers, Windows performance index (WinSAT).
+- **Drivers** — read-only inventory; updates delegated to Windows Update.
+- **Secure erase** — files and free space, with an honest SSD/NVMe warning.
+- **Protection / Restore** — back up registry traces before cleaning, reversible restore.
+- **NTFS analysis (Expert)** — explained traces, read-only.
+- **Automation** — Safe/Privacy profiles via Task Scheduler, headless mode.
+- **Multilingual** — full UI in **French, English, German, Spanish** (live switch; on first launch the
+  Windows display language is followed automatically).
+- **Accessibility** — visible keyboard focus, `AutomationProperties`, never status by color alone.
 
-- Toute suppression passe par `ISafePathValidator` (refus prouvé de `C:\`, profil, dossiers
-  système/personnels, wildcard, traversal, UNC, jonctions/reparse points) — cf. `TraceZero.SafetyTests`.
-- L'énumération ne suit jamais les jonctions/liens ; les fichiers verrouillés sont signalés, jamais forcés.
-- Suppressions réversibles (Corbeille) quand possible ; jamais auto-sélectionnées.
-- **L'app n'est jamais admin.** L'élévation passe par un helper séparé (`TraceZero.Elevated.exe`,
-  manifeste `requireAdministrator`, single-shot, vocabulaire fermé) qui ne fait jamais confiance à l'UI.
+## Safety — non-negotiable
+
+- Every deletion goes through `ISafePathValidator` (proven refusal of `C:\`, the user profile,
+  system/personal folders, wildcards, traversal, UNC, junctions/reparse points) — see `TraceZero.SafetyTests`.
+- Enumeration never follows junctions/links; locked files are reported, never forced.
+- Reversible deletions (Recycle Bin) where possible; never auto-selected.
+- **The app is never admin.** Elevation goes through a separate helper (`TraceZero.Elevated.exe`,
+  `requireAdministrator` manifest, single-shot, closed vocabulary) that never trusts the UI.
 
 ## Stack & architecture
 
-**.NET 10 · WPF · MVVM** (CommunityToolkit.Mvvm) · Generic Host (DI/logging). Code en anglais, UI en
-français par défaut. Découpage en couches (voir `DECISIONS.md`) :
+**.NET 10 · WPF · MVVM** (CommunityToolkit.Mvvm) · Generic Host (DI/logging). Code in English, UI in
+French by default. Layered design (see `DECISIONS.md`):
 
 ```
-Domain       modèles purs, aucune dépendance
-Application  interfaces de services
+Domain       pure models, no dependencies
+Application  service interfaces
 Engine       scan/clean, ISafePathValidator (portable, testable)
-Windows      providers Windows (registre, WMI, EventLog)
-Storage      lecteurs, santé disque (WMI)
-Browsers     détection navigateurs
-Persistence  SQLite (historique, coffre de restauration, licence)
-Updater      vérification de manifeste signé
-Elevated     helper admin séparé
-App          WPF (composition root uniquement)
+Windows      Windows providers (registry, WMI, EventLog)
+Storage      drives, disk health (WMI)
+Browsers     browser detection
+Persistence  SQLite (history, restore vault, license)
+Updater      signed-manifest verification
+Elevated     separate admin helper
+App          WPF (composition root only)
 ```
 
-## Prérequis
+## Requirements
 
 - Windows 10 (19041+) / Windows 11, x64.
-- **SDK .NET 10** (`winget install --id Microsoft.DotNet.SDK.10 -e`).
+- **.NET 10 SDK** (`winget install --id Microsoft.DotNet.SDK.10 -e`).
 
-## Compiler & lancer
+## Build & run
 
 ```powershell
-dotnet build -c Release              # doit être 0 warning
-dotnet test                          # suite complète
+dotnet build -c Release              # must be 0 warnings
+dotnet test                          # full suite
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj
 ```
 
-### Build portable
+### Portable build
 
 ```powershell
-build\scripts\publish-portable.ps1   # produit artifacts\portable\TraceZero-portable.zip
+build\scripts\publish-portable.ps1   # produces artifacts\portable\TraceZero-portable.zip
 ```
 
-En mode portable, un marqueur `tracezero.portable` à côté de l'exe fait stocker toutes les données dans
-`<dossier>\Data` — aucune écriture cachée ailleurs.
+In portable mode, a `tracezero.portable` marker next to the exe makes all data live in `<folder>\Data` —
+no hidden writes elsewhere.
 
-### Pipeline release
+### Release pipeline
 
 ```powershell
-build\scripts\release.ps1            # restore + build/test Release + publish + SHA-256
+build\scripts\release.ps1            # restore + Release build/test + publish + SHA-256
 ```
 
-Les portes externes (signature Authenticode, scan antivirus, tests VM) sont listées comme manuelles —
-jamais simulées. Voir `docs/testing/VM_TEST_MATRIX.md`.
+External gates (Authenticode signing, antivirus scan, VM tests) are listed as manual — never simulated.
+See `docs/testing/VM_TEST_MATRIX.md`.
 
 ## Tests
 
-`dotnet test` couvre : sécurité (`SafetyTests`, refus par défaut prouvé), moteur, Windows, navigateurs,
-intégration (SQLite, updater, golden dataset §35) et performance (streaming, annulation, hashing).
+`dotnet test` covers: safety (`SafetyTests`, proven refuse-by-default), engine, Windows, browsers,
+integration (SQLite, updater, golden dataset), and performance (streaming, cancellation, hashing).
 
-## État du projet
+## Project status
 
-Voir **`PHASE_STATUS.md`** (source de vérité de l'avancement), **`DECISIONS.md`** (ADR),
-**`KNOWN_LIMITATIONS.md`** (limites honnêtes) et **`CLAUDE.md`** (guide de contexte). Toutes les
-fonctionnalités sont livrées ; ne restent que des étapes dépendant d'**assets externes** (certificat de
-signature, endpoint de mise à jour, validation en VM).
+See **`PHASE_STATUS.md`** (source of truth for progress), **`DECISIONS.md`** (ADRs),
+**`KNOWN_LIMITATIONS.md`** (honest limits), and **`CLAUDE.md`** (context guide). All features are shipped;
+what remains depends on **external assets** (signing certificate, update endpoint, VM validation).
 
-## Licence & distribution
+## License & distribution
 
-Sous licence **[MIT](LICENSE)** (open source). Local-first, zéro télémétrie, zéro publicité. Le soutien
-(PWYW) est **volontaire** : le nettoyage et la sécurité sont complets dans la version gratuite.
+Licensed under **[MIT](LICENSE)** (open source). Local-first, zero telemetry, zero ads. Support (PWYW) is
+**voluntary**: cleaning and safety are complete in the free version.
 
-- Avertissement / non-garantie : [`DISCLAIMER.md`](DISCLAIMER.md)
-- Confidentialité : [`PRIVACY.md`](PRIVACY.md)
-- Notices tierces : [`THIRD-PARTY-NOTICES.txt`](THIRD-PARTY-NOTICES.txt)
-- Stratégie de distribution (signature, winget, dons) : [`docs/distribution-strategy.md`](docs/distribution-strategy.md)
-  et [`docs/RELEASE.md`](docs/RELEASE.md)
+- Disclaimer / no warranty: [`DISCLAIMER.md`](DISCLAIMER.md)
+- Privacy: [`PRIVACY.md`](PRIVACY.md)
+- Third-party notices: [`THIRD-PARTY-NOTICES.txt`](THIRD-PARTY-NOTICES.txt)
+- Distribution strategy (signing, winget, donations): [`docs/distribution-strategy.md`](docs/distribution-strategy.md)
+  and [`docs/RELEASE.md`](docs/RELEASE.md)
