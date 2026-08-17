@@ -6,8 +6,11 @@ using TraceZero.App.Services;
 using TraceZero.Application.Cleaning;
 using TraceZero.Application.History;
 using TraceZero.Application.Privacy;
+using TraceZero.Application.Protection;
+using TraceZero.Domain;
 using TraceZero.Domain.Common;
 using TraceZero.Domain.History;
+using TraceZero.Domain.Protection;
 
 namespace TraceZero.App.ViewModels;
 
@@ -59,13 +62,22 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
     private readonly IPrivacyInspector _inspector;
     private readonly ICleaningEngine _cleaningEngine;
     private readonly ICleanupHistoryStore _historyStore;
+    private readonly IRegistryBackupService _registryBackup;
+    private readonly IProtectionVault _vault;
     private CancellationTokenSource? _cts;
 
-    public PrivacyViewModel(IPrivacyInspector inspector, ICleaningEngine cleaningEngine, ICleanupHistoryStore historyStore)
+    public PrivacyViewModel(
+        IPrivacyInspector inspector,
+        ICleaningEngine cleaningEngine,
+        ICleanupHistoryStore historyStore,
+        IRegistryBackupService registryBackup,
+        IProtectionVault vault)
     {
         _inspector = inspector;
         _cleaningEngine = cleaningEngine;
         _historyStore = historyStore;
+        _registryBackup = registryBackup;
+        _vault = vault;
     }
 
     public override string Title => "Confidentialité";
@@ -147,12 +159,17 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
         _cts?.Dispose();
         _cts = new CancellationTokenSource();
 
-        var selected = Traces.Where(t => t.IsSelected).Select(t => t.Result.CleanTarget).ToList();
+        var selectedRows = Traces.Where(t => t.IsSelected).ToList();
+        var selected = selectedRows.Select(t => t.Result.CleanTarget).ToList();
         var plan = _cleaningEngine.BuildPlan(selected);
 
         IsCleaning = true;
         try
         {
+            // Protection du nettoyage (§17) : sauvegarder les traces registre AVANT de les effacer,
+            // pour pouvoir les restaurer. Rien n'est transmis — la sauvegarde reste locale.
+            var backups = await Task.Run(() => CaptureRegistryBackups(selectedRows));
+
             var result = await _cleaningEngine.CleanAsync(plan, progress: null, _cts.Token);
 
             try
@@ -173,6 +190,8 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
                 // L'historique ne doit jamais faire échouer un nettoyage réussi.
             }
 
+            await PersistBackupsAsync(backups);
+
             ResultMessage = result.HasFailures
                 ? $"{result.ActionsSucceeded} type(s) de trace nettoyé(s). {result.Failures.Count} élément(s) verrouillé(s) ignoré(s)."
                 : $"{result.ActionsSucceeded} type(s) de trace nettoyé(s).";
@@ -189,6 +208,57 @@ public sealed partial class PrivacyViewModel : PageViewModelBase, IDisposable
         {
             IsCleaning = false;
             RaiseSummary();
+        }
+    }
+
+    /// <summary>Capture (hors UI) une sauvegarde de chaque trace registre sélectionnée, avant nettoyage.</summary>
+    private List<(PrivacyTraceRowViewModel Row, RegistryKeySnapshot Snapshot)> CaptureRegistryBackups(
+        IReadOnlyList<PrivacyTraceRowViewModel> rows)
+    {
+        var backups = new List<(PrivacyTraceRowViewModel, RegistryKeySnapshot)>();
+
+        foreach (var row in rows)
+        {
+            var definition = row.Result.Definition;
+            if (definition.Kind != PrivacyTraceKind.Registry || string.IsNullOrEmpty(definition.RegistrySubKey))
+            {
+                continue;
+            }
+
+            var snapshot = _registryBackup.Capture(definition.RegistrySubKey);
+            if (snapshot is { IsEmpty: false })
+            {
+                backups.Add((row, snapshot));
+            }
+        }
+
+        return backups;
+    }
+
+    /// <summary>Persiste les sauvegardes capturées dans le coffre de restauration (jamais bloquant pour le nettoyage).</summary>
+    private async Task PersistBackupsAsync(
+        IReadOnlyList<(PrivacyTraceRowViewModel Row, RegistryKeySnapshot Snapshot)> backups)
+    {
+        foreach (var (row, snapshot) in backups)
+        {
+            var definition = row.Result.Definition;
+            try
+            {
+                await _vault.AddAsync(new RestoreRecord
+                {
+                    TimestampUtc = DateTimeOffset.UtcNow,
+                    Description = definition.DisplayName,
+                    Source = "Confidentialité",
+                    Kind = RestoreItemKind.RegistryBackup,
+                    Reversibility = Reversibility.Reversible,
+                    Target = definition.RegistrySubKey!,
+                    Payload = RegistrySnapshotCodec.Serialize(snapshot),
+                });
+            }
+            catch (Exception)
+            {
+                // La sauvegarde de restauration ne doit jamais faire échouer un nettoyage réussi.
+            }
         }
     }
 

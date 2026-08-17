@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.History;
 using TraceZero.Domain.Common;
 using TraceZero.Domain.History;
@@ -39,10 +40,14 @@ public sealed class HistoryRowViewModel
 public sealed partial class HistoryViewModel : PageViewModelBase
 {
     private readonly ICleanupHistoryStore _store;
+    private readonly IDialogService _dialog;
+    private readonly IToastService _toasts;
 
-    public HistoryViewModel(ICleanupHistoryStore store)
+    public HistoryViewModel(ICleanupHistoryStore store, IDialogService dialog, IToastService toasts)
     {
         _store = store;
+        _dialog = dialog;
+        _toasts = toasts;
     }
 
     public override string Title => "Historique";
@@ -90,7 +95,25 @@ public sealed partial class HistoryViewModel : PageViewModelBase
     [RelayCommand]
     private async Task ClearAsync()
     {
+        if (!HasEntries)
+        {
+            return;
+        }
+
+        var confirmed = await _dialog.ConfirmAsync(
+            "Effacer l'historique",
+            "L'ensemble du journal local de vos nettoyages sera supprimé. Continuer ?",
+            confirmText: "Effacer",
+            cancelText: "Annuler",
+            destructive: true);
+
+        if (!confirmed)
+        {
+            return;
+        }
+
         await _store.ClearAsync();
+        _toasts.Show("Historique effacé.", ToastKind.Info);
         await RefreshAsync();
     }
 }

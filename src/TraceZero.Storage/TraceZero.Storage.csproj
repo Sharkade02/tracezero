@@ -5,6 +5,11 @@
     <ProjectReference Include="..\TraceZero.Application\TraceZero.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- WMI (santé disque, Phase 28). -->
+    <PackageReference Include="System.Management" Version="10.0.0" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net10.0-windows</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>

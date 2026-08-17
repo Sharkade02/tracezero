@@ -11,9 +11,16 @@ public partial class ShellViewModel : ObservableObject
 {
     private readonly IThemeService _themeService;
 
-    public ShellViewModel(IEnumerable<PageViewModelBase> pages, IThemeService themeService, INavigationService navigation)
+    public ShellViewModel(
+        IEnumerable<PageViewModelBase> pages,
+        IThemeService themeService,
+        INavigationService navigation,
+        IToastService toasts,
+        IDialogService dialog)
     {
         _themeService = themeService;
+        Toasts = toasts;
+        Dialog = dialog;
         _themeService.ThemeChanged += (_, _) => OnPropertyChanged(nameof(IsDarkTheme));
         navigation.NavigationRequested += Navigate;
 
@@ -27,6 +34,12 @@ public partial class ShellViewModel : ObservableObject
     public IReadOnlyList<PageViewModelBase> PrimaryPages { get; }
 
     public IReadOnlyList<PageViewModelBase> FooterPages { get; }
+
+    /// <summary>Notifications transitoires (superposition, coin bas-droit).</summary>
+    public IToastService Toasts { get; }
+
+    /// <summary>Confirmations modales (superposition centrée).</summary>
+    public IDialogService Dialog { get; }
 
     [ObservableProperty]
     private PageViewModelBase? _current;

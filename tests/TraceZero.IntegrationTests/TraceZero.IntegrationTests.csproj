@@ -23,6 +23,7 @@
     <ProjectReference Include="..\..\src\TraceZero.Windows\TraceZero.Windows.csproj" />
     <ProjectReference Include="..\..\src\TraceZero.Browsers\TraceZero.Browsers.csproj" />
     <ProjectReference Include="..\..\src\TraceZero.Persistence\TraceZero.Persistence.csproj" />
+    <ProjectReference Include="..\..\src\TraceZero.Storage\TraceZero.Storage.csproj" />
   </ItemGroup>
 
 </Project>

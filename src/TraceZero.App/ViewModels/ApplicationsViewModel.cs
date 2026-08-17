@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using TraceZero.App.Services;
 using TraceZero.Application.Apps;
 using TraceZero.Domain.Apps;
 using TraceZero.Domain.Common;
@@ -47,13 +47,21 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
 {
     private readonly IInstalledAppService _appService;
     private readonly IStartupService _startupService;
+    private readonly IDialogService _dialog;
+    private readonly IToastService _toasts;
     private readonly List<AppRowViewModel> _allApps = [];
     private bool _loaded;
 
-    public ApplicationsViewModel(IInstalledAppService appService, IStartupService startupService)
+    public ApplicationsViewModel(
+        IInstalledAppService appService,
+        IStartupService startupService,
+        IDialogService dialog,
+        IToastService toasts)
     {
         _appService = appService;
         _startupService = startupService;
+        _dialog = dialog;
+        _toasts = toasts;
     }
 
     public override string Title => "Applications";
@@ -151,22 +159,32 @@ public sealed partial class ApplicationsViewModel : PageViewModelBase
     }
 
     [RelayCommand]
-    private void Uninstall(AppRowViewModel? row)
+    private async Task UninstallAsync(AppRowViewModel? row)
     {
         if (row is null || !row.CanUninstall)
         {
             return;
         }
 
-        var confirm = MessageBox.Show(
+        var confirmed = await _dialog.ConfirmAsync(
+            "Désinstaller l'application",
             $"Lancer la désinstallation de « {row.Name} » ? TraceZero exécute le désinstallateur fourni par l'éditeur ; il ne supprime jamais un logiciel manuellement.",
-            "Désinstaller",
-            MessageBoxButton.YesNo,
-            MessageBoxImage.Question);
+            confirmText: "Désinstaller",
+            cancelText: "Annuler",
+            destructive: true);
 
-        if (confirm == MessageBoxResult.Yes)
+        if (!confirmed)
         {
-            _appService.LaunchUninstaller(row.Model);
+            return;
+        }
+
+        if (_appService.LaunchUninstaller(row.Model))
+        {
+            _toasts.Show($"Désinstallateur de « {row.Name} » lancé.", ToastKind.Info);
+        }
+        else
+        {
+            _toasts.Show($"Impossible de lancer le désinstallateur de « {row.Name} ».", ToastKind.Error);
         }
     }
 

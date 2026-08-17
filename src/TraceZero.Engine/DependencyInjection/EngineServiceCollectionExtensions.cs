@@ -3,12 +3,16 @@ using Microsoft.Extensions.Logging;
 using TraceZero.Application.Cleaning;
 using TraceZero.Application.Disk;
 using TraceZero.Application.Duplicates;
+using TraceZero.Application.Erasure;
+using TraceZero.Application.Ntfs;
 using TraceZero.Application.Privacy;
 using TraceZero.Application.Safety;
 using TraceZero.Application.Scanning;
 using TraceZero.Engine.Cleaning;
 using TraceZero.Engine.Disk;
 using TraceZero.Engine.Duplicates;
+using TraceZero.Engine.Erasure;
+using TraceZero.Engine.Ntfs;
 using TraceZero.Engine.Rules;
 using TraceZero.Engine.Safety;
 using TraceZero.Engine.Scanning;
@@ -40,6 +44,14 @@ public static class EngineServiceCollectionExtensions
         // Recherche de gros fichiers (§20) et de doublons (§21).
         services.AddSingleton<ILargeFileScanner, LargeFileScanner>();
         services.AddSingleton<IDuplicateFinder, DuplicateFinder>();
+
+        // Effacement sécurisé (§19) : fichier (garde-fou dédié) + espace libre.
+        services.AddSingleton<ISecureFileEraser>(sp =>
+            new SecureEraser(sp.GetRequiredService<IKnownFolders>()));
+        services.AddSingleton<IFreeSpaceWiper, FreeSpaceWiper>();
+
+        // Analyse NTFS avancée en lecture seule (Phase 8, §18) — Mode Expert, jamais destructive.
+        services.AddSingleton<INtfsAnalyzer, NtfsAnalyzer>();
 
         // Moteurs.
         services.AddSingleton<IScanEngine, ScanEngine>();

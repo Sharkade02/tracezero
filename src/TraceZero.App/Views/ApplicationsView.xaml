@@ -4,12 +4,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:TraceZero.App.ViewModels"
+             xmlns:conv="clr-namespace:TraceZero.App.Converters"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1000"
              d:DataContext="{d:DesignInstance vm:ApplicationsViewModel}">
 
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <conv:InverseBooleanToVisibilityConverter x:Key="InvBoolToVis" />
     </UserControl.Resources>
 
     <Grid Margin="32">
@@ -29,7 +32,7 @@
         <Border Grid.Row="1" Style="{StaticResource Card}" Margin="0,0,0,12" Padding="14,10">
             <StackPanel Orientation="Horizontal">
                 <TextBox Width="260" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                         ToolTip="Rechercher une application" />
+                         ToolTip="Rechercher une application" AutomationProperties.Name="Rechercher une application" />
                 <Button Content="Actualiser" Style="{StaticResource SecondaryButton}" Command="{Binding RefreshCommand}" Margin="10,0,0,0" />
                 <TextBlock Text="{Binding AppCountText}" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="16,0,0,0" />
                 <TextBlock Text="Chargement…" Style="{StaticResource Text.Subtle}" VerticalAlignment="Center" Margin="12,0,0,0"
@@ -39,7 +42,34 @@
 
         <!-- Applications installées -->
         <Border Grid.Row="2" Style="{StaticResource Card}" Padding="8">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <!-- Squelette de chargement (Phase 1), pendant la lecture du registre. -->
+                <ItemsControl Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}"
+                              Focusable="False" Margin="10,7">
+                    <ItemsControl.ItemsSource>
+                        <x:Array Type="{x:Type sys:Double}">
+                            <sys:Double>320</sys:Double>
+                            <sys:Double>260</sys:Double>
+                            <sys:Double>300</sys:Double>
+                            <sys:Double>230</sys:Double>
+                            <sys:Double>290</sys:Double>
+                            <sys:Double>250</sys:Double>
+                        </x:Array>
+                    </ItemsControl.ItemsSource>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,9">
+                                <Border Style="{StaticResource Skeleton}" Width="{Binding}"
+                                        HorizontalAlignment="Left" />
+                                <Border Style="{StaticResource Skeleton}" Width="140" Height="10"
+                                        HorizontalAlignment="Left" Margin="0,6,0,0" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              Visibility="{Binding IsLoading, Converter={StaticResource InvBoolToVis}}">
                 <ItemsControl ItemsSource="{Binding Apps}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -72,7 +102,8 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
-            </ScrollViewer>
+                </ScrollViewer>
+            </Grid>
         </Border>
 
         <!-- Démarrage -->
