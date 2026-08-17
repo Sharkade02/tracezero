@@ -28,10 +28,10 @@ Get-FileHash .\TraceZero-portable.zip -Algorithm SHA256
 Le résultat doit être **exactement** :
 
 ```
-2B6AC5A1C613BE5406FB081BA359E42183C7AD893DD1EBC0ED44F6D6BD5CAA81
+DAEBDB8D40DBC8EFA941EB342FECFD1B9CF0D9C64DD2798625FD9EE1E7C02604
 ```
 
-_(SHA-256 de `TraceZero-portable.zip` v0.1.1)_
+_(SHA-256 de `TraceZero-portable.zip` v0.1.2)_
 
 > Pour l'**installeur**, comparez avec l'empreinte publiée à côté de `TraceZeroSetup-<version>.exe` dans la
 > release (`Get-FileHash .\TraceZeroSetup-<version>.exe -Algorithm SHA256`).

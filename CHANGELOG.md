@@ -2,6 +2,15 @@
 
 Toutes les versions notables de TraceZero. Format inspiré de [Keep a Changelog](https://keepachangelog.com/fr/).
 
+## [0.1.2] — 2026-08-17
+
+### Ajouté
+- **Installeur `.exe`** (Inno Setup) : `TraceZeroSetup-<version>.exe` — installation par utilisateur sans
+  admin (choix « pour tous » possible), raccourci menu Démarrer, désinstallation propre. En plus du
+  portable et de winget.
+- **Icône de l'application** : le logo TraceZero est désormais l'icône de l'exe, du raccourci, de la barre
+  des tâches et de l'installeur (fini l'icône .NET générique).
+
 ## [0.1.1] — 2026-08-17
 
 ### Corrigé
@@ -49,5 +58,6 @@ open source (MIT).
 - **Auto-update désactivé** dans cette version (mises à jour via winget ou téléchargement manuel).
 - Installeur MSI/EXE et validation en VM propre : à venir.
 
+[0.1.2]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.2
 [0.1.1]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.1
 [0.1.0]: https://github.com/Sharkade02/tracezero/releases/tag/v0.1.0
