@@ -40,6 +40,23 @@
     <s:String x:Key="Nav.Restore">Restore</s:String>
     <s:String x:Key="Nav.Settings">Settings</s:String>
     <s:String x:Key="Nav.Supporter">Support</s:String>
+    <s:String x:Key="Nav.About">About</s:String>
+
+    <!-- About / Legal -->
+    <s:String x:Key="About.Subtitle">TraceZero version, license and legal documents.</s:String>
+    <s:String x:Key="About.Tagline">See what's left. Clean what you choose. Local-first, no ads, no dark patterns.</s:String>
+    <s:String x:Key="About.Version">Version {0}</s:String>
+    <s:String x:Key="About.License">Open source — MIT License</s:String>
+    <s:String x:Key="About.DisclaimerTitle">Disclaimer</s:String>
+    <s:String x:Key="About.DisclaimerBody">Provided "as is", without warranty. Some operations (secure erase, free-space wipe) are irreversible. Nothing sensitive is removed without your choice. Back up important data before any deletion.</s:String>
+    <s:String x:Key="About.PrivacyTitle">Privacy</s:String>
+    <s:String x:Key="About.PrivacyBody">No telemetry, no ads, no data sent. Everything is local. The only possible network connection is the update check (HTTPS), disabled by default.</s:String>
+    <s:String x:Key="About.LegalTitle">Documents</s:String>
+    <s:String x:Key="About.OpenRepo">Source code</s:String>
+    <s:String x:Key="About.OpenLicense">License</s:String>
+    <s:String x:Key="About.OpenPrivacy">Privacy</s:String>
+    <s:String x:Key="About.OpenDisclaimer">Disclaimer</s:String>
+    <s:String x:Key="About.OpenNotices">Third-party notices</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Toggle theme</s:String>
 

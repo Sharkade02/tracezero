@@ -6,6 +6,13 @@
 
 <p align="center"><em>Voyez ce qui reste. Nettoyez ce que vous choisissez.</em></p>
 
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/Licence-MIT-green.svg" alt="Licence MIT" /></a>
+  <img src="https://img.shields.io/badge/Windows-10%20%2F%2011-0078D6?logo=windows" alt="Windows 10/11" />
+  <img src="https://img.shields.io/badge/.NET-10-512BD4?logo=dotnet" alt=".NET 10" />
+  <a href="https://github.com/Sharkade02/tracezero/releases"><img src="https://img.shields.io/github/v/release/Sharkade02/tracezero?label=version" alt="Dernière version" /></a>
+</p>
+
 TraceZero est un logiciel Windows de **nettoyage, confidentialité, gestion d'espace disque et
 maintenance**, conçu pour rivaliser réellement avec CCleaner et PrivaZer — mais **local-first,
 privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**.
@@ -14,14 +21,35 @@ privacy-first, sans publicité, sans dark pattern et sans promesse mensongère**
 > analyse réelle. Aucune suppression n'a lieu sans passer par une couche de sécurité qui refuse par
 > défaut. L'application ne démarre **jamais** en administrateur.
 
+## Télécharger
+
+- **Version portable (aucune installation)** :
+  [dernière release](https://github.com/Sharkade02/tracezero/releases/latest) → décompressez
+  `TraceZero-portable.zip`, lancez `TraceZero.App.exe`.
+- **Via winget** : `winget install TraceZero.TraceZero`
+
+> **« Éditeur inconnu » au premier lancement ?** C'est normal : TraceZero est distribué directement
+> (hors Store) et n'est pas encore signé par un certificat payant. Vérifiez l'empreinte **SHA-256**
+> publiée avec chaque release, puis *Informations complémentaires → Exécuter quand même*. Détails et
+> raisons : [`docs/download.md`](docs/download.md).
+
+## Soutenir le projet
+
+TraceZero est **gratuit, open source (MIT)**, sans publicité. Le soutien est **volontaire, au prix que
+vous voulez** — aucune fonctionnalité n'est bloquée derrière un paiement.
+
+➡️ **[paypal.me/CHANGEME](https://paypal.me/CHANGEME)** _(remplacer par le lien PayPal.me réel)_ — ou
+l'onglet **Soutenir** dans l'application.
+
 ## Fonctionnalités
 
 - **Nettoyage Windows** — fichiers temporaires, rapports de plantage, WER, caches, Corbeille (règles
   user-scoped, tailles réelles, prévisualisation par risque).
 - **Confidentialité** — « ce que Windows sait encore de votre activité » : documents récents, RunMRU,
   chemins tapés, recherches, UserAssist… chaque trace expliquée, nettoyage registre allowlisté.
-- **Navigateurs** — détection Chrome/Edge/Brave/Vivaldi/Chromium/Firefox (profils, état d'exécution),
-  nettoyage des **caches SAFE** (connexions/cookies/mots de passe/favoris jamais touchés).
+- **Navigateurs** — Chrome/Edge/Brave/Vivaldi/Chromium/**Opera/Opera GX**/Firefox : nettoyage des
+  **caches SAFE** + **historique/cookies/sessions** en option (jamais cochés par défaut). L'historique
+  Firefox est supprimé de façon **ciblée** (favoris préservés). Mots de passe et favoris jamais touchés.
 - **Espace disque** — occupation des lecteurs, recherche de gros fichiers, envoi à la Corbeille
   (réversible).
 - **Doublons** — détection fiable (taille → hash partiel → SHA-256), stratégie « garder le plus récent ».
@@ -72,7 +100,7 @@ App          WPF (composition root uniquement)
 
 ```powershell
 dotnet build -c Release              # doit être 0 warning
-dotnet test                          # suite complète (147 tests)
+dotnet test                          # suite complète
 dotnet run --project src\TraceZero.App\TraceZero.App.csproj
 ```
 
@@ -102,10 +130,17 @@ intégration (SQLite, updater, golden dataset §35) et performance (streaming, a
 ## État du projet
 
 Voir **`PHASE_STATUS.md`** (source de vérité de l'avancement), **`DECISIONS.md`** (ADR),
-**`KNOWN_LIMITATIONS.md`** (limites honnêtes) et **`CLAUDE.md`** (guide de contexte). 25 phases livrées ;
-le reste dépend d'assets externes (certificat de signature, endpoint de mise à jour, validation VM).
+**`KNOWN_LIMITATIONS.md`** (limites honnêtes) et **`CLAUDE.md`** (guide de contexte). Toutes les
+fonctionnalités sont livrées ; ne restent que des étapes dépendant d'**assets externes** (certificat de
+signature, endpoint de mise à jour, validation en VM).
 
 ## Licence & distribution
 
-Local-first, zéro télémétrie, zéro publicité. Le soutien (PWYW) est **volontaire** : le nettoyage et la
-sécurité sont complets dans la version gratuite. La clé privée de licence n'est jamais livrée (gitignore).
+Sous licence **[MIT](LICENSE)** (open source). Local-first, zéro télémétrie, zéro publicité. Le soutien
+(PWYW) est **volontaire** : le nettoyage et la sécurité sont complets dans la version gratuite.
+
+- Avertissement / non-garantie : [`DISCLAIMER.md`](DISCLAIMER.md)
+- Confidentialité : [`PRIVACY.md`](PRIVACY.md)
+- Notices tierces : [`THIRD-PARTY-NOTICES.txt`](THIRD-PARTY-NOTICES.txt)
+- Stratégie de distribution (signature, winget, dons) : [`docs/distribution-strategy.md`](docs/distribution-strategy.md)
+  et [`docs/RELEASE.md`](docs/RELEASE.md)

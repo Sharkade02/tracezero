@@ -40,6 +40,23 @@
     <s:String x:Key="Nav.Restore">Restauración</s:String>
     <s:String x:Key="Nav.Settings">Ajustes</s:String>
     <s:String x:Key="Nav.Supporter">Apoyar</s:String>
+    <s:String x:Key="Nav.About">Acerca de</s:String>
+
+    <!-- Acerca de / Legal -->
+    <s:String x:Key="About.Subtitle">Versión, licencia y documentos legales de TraceZero.</s:String>
+    <s:String x:Key="About.Tagline">Vea lo que queda. Limpie lo que elija. Local-first, sin publicidad, sin dark patterns.</s:String>
+    <s:String x:Key="About.Version">Versión {0}</s:String>
+    <s:String x:Key="About.License">Código abierto — Licencia MIT</s:String>
+    <s:String x:Key="About.DisclaimerTitle">Aviso</s:String>
+    <s:String x:Key="About.DisclaimerBody">Se proporciona «tal cual», sin garantía. Algunas operaciones (borrado seguro, borrado del espacio libre) son irreversibles. Nada sensible se elimina sin su elección. Haga copia de seguridad de sus datos importantes antes de cualquier eliminación.</s:String>
+    <s:String x:Key="About.PrivacyTitle">Privacidad</s:String>
+    <s:String x:Key="About.PrivacyBody">Sin telemetría, sin publicidad, sin envío de datos. Todo es local. La única conexión de red posible es la comprobación de actualizaciones (HTTPS), desactivada por defecto.</s:String>
+    <s:String x:Key="About.LegalTitle">Documentos</s:String>
+    <s:String x:Key="About.OpenRepo">Código fuente</s:String>
+    <s:String x:Key="About.OpenLicense">Licencia</s:String>
+    <s:String x:Key="About.OpenPrivacy">Privacidad</s:String>
+    <s:String x:Key="About.OpenDisclaimer">Aviso</s:String>
+    <s:String x:Key="About.OpenNotices">Avisos de terceros</s:String>
 
     <s:String x:Key="Shell.ToggleTheme">Cambiar tema</s:String>
 
