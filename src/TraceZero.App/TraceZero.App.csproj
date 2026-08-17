@@ -30,6 +30,8 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+    <!-- Icône embarquée dans l'exe : Explorateur, raccourci menu Démarrer, barre des tâches. -->
+    <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
   </PropertyGroup>
 
 </Project>
