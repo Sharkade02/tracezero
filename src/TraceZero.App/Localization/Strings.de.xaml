@@ -146,6 +146,14 @@
     <s:String x:Key="SystemHealth.DiskHealth">Laufwerkszustand</s:String>
     <s:String x:Key="SystemHealth.NoDisks">Der Laufwerkszustand ist auf diesem Gerät nicht verfügbar.</s:String>
     <s:String x:Key="SystemHealth.StartupImpact">Startauswirkung</s:String>
+    <s:String x:Key="SystemHealth.Memory">Arbeitsspeicher (RAM)</s:String>
+    <s:String x:Key="SystemHealth.NoMemory">Speicherinformationen auf diesem Gerät nicht verfügbar.</s:String>
+    <s:String x:Key="Mem.Summary">{0} · {1}/{2} Steckplätze belegt · max. {3}</s:String>
+    <s:String x:Key="Mem.SpeedWithRated">{0} MHz (nominal {1})</s:String>
+    <s:String x:Key="Mem.UnknownModel">Unbekanntes Modul</s:String>
+    <s:String x:Key="Mem.XmpActive">Leistungsprofil (XMP/EXPO) wahrscheinlich aktiv — aus der Frequenz abgeleitet, nicht aus dem SPD gelesen.</s:String>
+    <s:String x:Key="Mem.XmpInactive">Kein Leistungsprofil erkannt — Speicher läuft mit JEDEC-Basisfrequenz.</s:String>
+    <s:String x:Key="Mem.XmpUnknown">Leistungsprofil unbestimmt (unbekannter Speichertyp).</s:String>
 
     <s:String x:Key="Drivers.Subtitle">Schreibgeschützte Übersicht Ihrer Treiber. TraceZero installiert und lädt keinen Treiber herunter: Updates laufen über Windows Update, nie über eine Drittanbieter-Datenbank.</s:String>
     <s:String x:Key="Drivers.UpdateTitle">Treiber-Updates</s:String>

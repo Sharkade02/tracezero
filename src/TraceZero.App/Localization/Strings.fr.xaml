@@ -161,6 +161,14 @@
     <s:String x:Key="SystemHealth.DiskHealth">Santé des disques</s:String>
     <s:String x:Key="SystemHealth.NoDisks">État de santé des disques indisponible sur cette machine.</s:String>
     <s:String x:Key="SystemHealth.StartupImpact">Impact au démarrage</s:String>
+    <s:String x:Key="SystemHealth.Memory">Mémoire (RAM)</s:String>
+    <s:String x:Key="SystemHealth.NoMemory">Informations mémoire indisponibles sur cette machine.</s:String>
+    <s:String x:Key="Mem.Summary">{0} · {1}/{2} emplacements utilisés · max {3}</s:String>
+    <s:String x:Key="Mem.SpeedWithRated">{0} MHz (nominal {1})</s:String>
+    <s:String x:Key="Mem.UnknownModel">Module inconnu</s:String>
+    <s:String x:Key="Mem.XmpActive">Profil de performance (XMP/EXPO) probablement actif — déduit de la fréquence, pas lu du SPD.</s:String>
+    <s:String x:Key="Mem.XmpInactive">Aucun profil de performance détecté — la mémoire tourne à la fréquence JEDEC de base.</s:String>
+    <s:String x:Key="Mem.XmpUnknown">Profil de performance indéterminé (type de mémoire inconnu).</s:String>
 
     <!-- Pilotes -->
     <s:String x:Key="Drivers.Subtitle">Inventaire en lecture seule de vos pilotes. TraceZero n'installe ni ne télécharge aucun pilote : les mises à jour passent par Windows Update, jamais par une base tierce.</s:String>
